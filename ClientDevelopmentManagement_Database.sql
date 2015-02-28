@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Feb 27, 2015 at 07:40 PM
+-- Generation Time: Feb 28, 2015 at 09:45 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -67,7 +67,7 @@ CREATE TABLE `ClientPurchases` (
 
 CREATE TABLE `Contact` (
   `Username` varchar(30) NOT NULL,
-  `Firstame` varchar(15) DEFAULT NULL,
+  `Firstname` varchar(15) DEFAULT NULL,
   `Lastname` varchar(15) DEFAULT NULL,
   `Phone` varchar(15) DEFAULT NULL,
   `Email` varchar(40) DEFAULT NULL,
