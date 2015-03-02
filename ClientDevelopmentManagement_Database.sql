@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Feb 28, 2015 at 09:45 PM
+-- Generation Time: Mar 02, 2015 at 04:44 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -34,7 +34,7 @@ CREATE TABLE `Client` (
 
 CREATE TABLE `ClientContact` (
   `ClientName` varchar(30) NOT NULL,
-  `Firstame` varchar(15) DEFAULT NULL,
+  `Firstname` varchar(15) DEFAULT NULL,
   `Lastname` varchar(15) DEFAULT NULL,
   `Phone` varchar(15) DEFAULT NULL,
   `Email` varchar(40) DEFAULT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `ClientPurchases` (
   `PurchaseDate` date DEFAULT NULL,
   PRIMARY KEY (`PurchaseID`),
   KEY `ClientName` (`ClientName`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
