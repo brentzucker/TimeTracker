@@ -73,12 +73,34 @@ function testClient()
 	test("SELECT * FROM Client c, ClientPurchases cp, ClientContact cc WHERE (c.ClientName=cp.ClientName)");	
 }
 
+function testProject()
+{	
+	//Create client to associate with Project
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+	createProject('The Business', 'Build Website', 'Build a website for the Business.');
+	createProject('The Business', 'Fix CSS', 'Restyle the website');
+
+	createClient('Mountain Dew', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+	createProject('Mountain Dew', 'Make App', 'Build an app for Mountain Dew.');
+
+	echo "<h3>Projects</h3>";
+	test("SELECT * FROM Projects");
+
+	deleteProject('Mountain Dew', 'Make App');
+	deleteProject('The Business', 'Fix CSS');
+	deleteProject('The Business', 'Build Website');
+	deleteClient('The Business');
+	deleteClient('Mountain Dew');
+	test("SELECT * FROM Projects");
+}
+
 /* Call Operations to test Database
  *
  */
 
 testEmployee();
 testClient();
+testProject();
 echo 'done';
 
 ?>
