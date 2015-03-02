@@ -72,6 +72,22 @@ function deleteTask($ClientName, $ProjectName, $TaskName)
 	removeTasks($ClientName, $ProjectName, $TaskName);
 }
 
+function createTimeSheet($Username, $ClientName, $ProjectName, $TaskName, $TimeIn, $TimeOut)
+{
+	$ProjectID = returnProjectID($ClientName, $ProjectName);
+	$TaskID = returnTaskID($ClientName, $ProjectName, $TaskName);
+
+	newTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $TimeOut);
+}
+
+function deleteTimeSheet($Username, $ClientName, $ProjectName, $TaskName, $TimeIn, $TimeOut)
+{
+	$ProjectID = returnProjectID($ClientName, $ProjectName);
+	$TaskID = returnTaskID($ClientName, $ProjectName, $TaskName);
+
+	removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $TimeOut);
+}
+
 /* The following functions directly query the database. 
  *
  */
@@ -174,9 +190,15 @@ function removeTasks($ClientName, $ProjectName, $TaskName)
 	db_query($sql);
 }
 
-function newTimeSheet($TimeLogID, $Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $TimeOut)
+function newTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $TimeOut)
 {
-	$sql = "INSERT INTO TimeSheet(TimeLogID, Username, ClientName, ProjectID, TaskID, TimeIn, TimeOut) VALUES ('$TimeLogID', '$Username', '$ClientName', $'ProjectID', '$TaskID', '$TimeIn', '$TimeOut')";
+	$sql = "INSERT INTO TimeSheet(Username, ClientName, ProjectID, TaskID, TimeIn, TimeOut) VALUES ('$Username', '$ClientName', '$ProjectID', '$TaskID', '$TimeIn', '$TimeOut')";
+	db_query($sql);
+}
+
+function removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $TimeOut)
+{
+	$sql = "DELETE FROM TimeSheet WHERE Username='$Username' AND ClientName='$ClientName' AND ProjectID=$ProjectID AND TaskID=$TaskID AND TimeIn='$TimeIn' AND TimeOut='$TimeOut'";
 	db_query($sql);
 }
 

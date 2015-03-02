@@ -18,6 +18,7 @@ function test($query)
 			echo '</tr>';
 		}
 	}
+	mysqli_free_result($result);
 	echo '</table>';
 }
 
@@ -121,14 +122,52 @@ function testTasks()
 	deleteClient('The Business');
 }
 
+function testTimeSheet()
+{
+	//Create client to assign task
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+
+	//Create Project to assign task
+	createProject('The Business', 'Build Website', 'Build a website for the Business.');
+	createProject('The Business', 'Fix CSS', 'Restyle the website');
+
+	//Create Tasks
+	createTask('The Business', 'Build Website', 'Start the Project', 'This is the first task for Build Website.');
+	createTask('The Business', 'Build Website', 'Register domain name', 'Reserach webservices and make a good url');
+	createTask('The Business', 'Fix CSS', 'Start the Project', 'Dont be lazy');
+
+	//Create Developer to record time
+	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
+
+	//Create TimeSheet Entry
+	createTimeSheet('b.zucker', 'The Business', 'Build Website', 'Start the Project', '2015-03-02 10-30-00', '2015-03-02 15-30-00');
+	
+	echo "<h3>TimeSheet</h3>";
+	test("SELECT * FROM TimeSheet");
+
+	deleteTimeSheet('b.zucker', 'The Business', 'Build Website', 'Start the Project', '2015-03-02 10-30-00', '2015-03-02 15-30-00');
+
+	deleteTask('The Business', 'Build Website', 'Start the Project');
+	deleteTask('The Business', 'Build Website', 'Register domain name');
+	deleteTask('The Business', 'Fix CSS', 'Start the Project');
+
+	deleteProject('The Business', 'Fix CSS');
+	deleteProject('The Business', 'Build Website');
+	
+	deleteClient('The Business');
+
+	deleteEmployee('b.zucker');
+}
+
 /* Call Operations to test Database
  *
  */
 
-//testEmployee();
-//testClient();
-//testProject();
+testEmployee();
+testClient();
+testProject();
 testTasks();
+testTimeSheet();
 echo 'done';
 
 ?>
