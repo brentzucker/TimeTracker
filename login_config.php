@@ -2,7 +2,7 @@
 $host = 'localhost';
 $username = 'System';
 $password = 'system';
-$database = 'ClientDevelopmentManagement_Database';
+$database = 'clientdevelopmentmanagement_database';
 
 //$con = mysqli_connect($host, $username, $password, $database);
 $con = mysqli_connect("localhost", "root", "root", "ClientDevelopmentManagement_Database");
