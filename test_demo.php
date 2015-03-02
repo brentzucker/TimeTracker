@@ -94,13 +94,41 @@ function testProject()
 	test("SELECT * FROM Projects");
 }
 
+function testTasks()
+{
+	//Create client to assign task
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+
+	//Create Project to assign task
+	createProject('The Business', 'Build Website', 'Build a website for the Business.');
+	createProject('The Business', 'Fix CSS', 'Restyle the website');
+
+	//Create Tasks
+	createTask('The Business', 'Build Website', 'Start the Project', 'This is the first task for Build Website.');
+	createTask('The Business', 'Build Website', 'Register domain name', 'Reserach webservices and make a good url');
+	createTask('The Business', 'Fix CSS', 'Start the Project', 'Dont be lazy');
+
+	echo "<h3>Tasks</h3>";
+	test("SELECT TaskID, Tasks.ClientName, ProjectName, TaskName, Tasks.Description FROM Tasks, Projects WHERE Projects.ProjectID=Tasks.ProjectID");
+
+	deleteTask('The Business', 'Build Website', 'Start the Project');
+	deleteTask('The Business', 'Build Website', 'Register domain name');
+	deleteTask('The Business', 'Fix CSS', 'Start the Project');
+
+	deleteProject('The Business', 'Fix CSS');
+	deleteProject('The Business', 'Build Website');
+	
+	deleteClient('The Business');
+}
+
 /* Call Operations to test Database
  *
  */
 
-testEmployee();
-testClient();
-testProject();
+//testEmployee();
+//testClient();
+//testProject();
+testTasks();
 echo 'done';
 
 ?>

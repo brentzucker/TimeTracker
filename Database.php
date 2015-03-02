@@ -64,11 +64,12 @@ function createTask($ClientName, $ProjectName, $TaskName, $Description)
 {
 	//Select the ProjectID to the corresponding ProjectName
 	$ProjectID = returnProjectID($ClientName, $ProjectName);
+	newTasks($ClientName, $ProjectID, $TaskName, $Description);
 }
 
 function deleteTask($ClientName, $ProjectName, $TaskName)
 {
-	$TaskID = returnTaskID($ClientName, $ProjectName, $TaskName);
+	removeTasks($ClientName, $ProjectName, $TaskName);
 }
 
 /* The following functions directly query the database. 
@@ -159,9 +160,17 @@ function removeProjects($ClientName, $ProjectName)
 	db_query($sql);
 }
 
-function newTasks($TaskID, $ClientName, $ProjectID, $TaskName, $Description)
+function newTasks($ClientName, $ProjectID, $TaskName, $Description)
 {
-	$sql = "INSERT INTO Tasks(TaskID, ClientName, ProjectID, TaskName, Description) VALUES ('$TaskID', '$ClientName', '$ProjectID', '$TaskName', '$Description')";
+	$sql = "INSERT INTO Tasks(ClientName, ProjectID, TaskName, Description) VALUES ('$ClientName', '$ProjectID', '$TaskName', '$Description')";
+	db_query($sql);
+}
+
+function removeTasks($ClientName, $ProjectName, $TaskName)
+{
+	$ProjectID = returnProjectID($ClientName, $ProjectName);
+
+	$sql = "DELETE FROM Tasks WHERE ClientName='$ClientName' AND ProjectID=$ProjectID AND TaskName='$TaskName'";
 	db_query($sql);
 }
 
@@ -171,47 +180,53 @@ function newTimeSheet($TimeLogID, $Username, $ClientName, $ProjectID, $TaskID, $
 	db_query($sql);
 }
 
-/* Get Project Name from ProjectID
+/* Get Name from ID or get ID from Name functions. 
  *
  */
 
 function returnProjectID($ClientName, $ProjectName)
 {
-	$sql = "SELECT ProjectID FROM Projects WHERE ProjectID='$ProjectID' AND ClientName='$ClientName'";
-	db_query($sql);
+	$sql = "SELECT ProjectID FROM Projects WHERE ProjectName='$ProjectName' AND ClientName='$ClientName'";
+	$result = db_query($sql);
 
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	mysqli_free_result($result);
 
-	return $row['ProjectID'];
+	return "$row[ProjectID]";
 }
 
 function returnTaskID($ClientName, $ProjectName, $TaskName)
 {
-	$sql = "SELECT TaskID FROM Tasks WHERE TaskID='$TaskID' AND ProjectName='$ProjectName' AND $ClientName='$ClientName'";
-	db_query($sql);
+	$ProjectID = returnProjectID($ClientName, $ProjectName);
+
+	$sql = "SELECT TaskID FROM Tasks WHERE TaskName='$TaskName' AND ProjectID='$ProjectID' AND ClientName='$ClientName'";
+	$result = db_query($sql);
 
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	mysqli_free_result($result);
 
-	return $row['TaskID'];
+	return "$row[TaskID]";
 }
 
 function returnProjectName($ProjectID)
 {
 	$sql = "SELECT ProjectName FROM Projects WHERE ProjectID='$ProjectID'";
-	db_query($sql);
+	$result = db_query($sql);
 
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	mysqli_free_result($result);
 
-	return $row['ProjectName'];
+	return "$row[ProjectName]";
 }
 
 function returnTaskName($TaskID)
 {
 	$sql = "SELECT TaskName FROM Tasks WHERE TaskID='$TaskID'";
-	db_query($sql);
+	$result = db_query($sql);
 
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	mysqli_free_result($result);
 
-	return $row['TaskName'];
+	return "$row[TaskName]";
 }
 ?>
