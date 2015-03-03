@@ -1,10 +1,12 @@
 <?php
 class Contact
 {
+	private $Username;
 	private $Info = array("Firstname"=>"", "Lastname"=>"", "Phone"=>"", "Email"=>"", "Address"=>"", "City"=>"", "State"=>"");
 
-	function __construct($Firstname_, $Lastname_, $Phone_, $Email_, $Address_, $City_, $State_)
+	function __construct($Username_, $Firstname_, $Lastname_, $Phone_, $Email_, $Address_, $City_, $State_)
 	{
+		$this->Username = $Username_;
 		$this->Info['Firstname'] = $Firstname_;
 	 	$this->Info['Lastname'] = $Lastname_;
 	 	$this->Info['Phone'] = $Phone_;
@@ -27,6 +29,7 @@ class Contact
 	function setFirstname($s)
 	{
 		$this->Info['Firstname'] = $s;
+		updateTable('Contact', 'Firstname', $s, $this->Username);
 	}
 
 	function getLastname()
@@ -37,6 +40,7 @@ class Contact
 	function setLastname($s)
 	{
 		$this->Info['Lastname'] = $s;
+		updateTable('Contact', 'Lastname', $s, $this->Username);
 	}
 
 	function getPhone()
@@ -47,6 +51,7 @@ class Contact
 	function setPhone($s)
 	{
 		$this->Info['Phone'] = $s;
+		updateTable('Contact', 'Phone', $s, $this->Username);
 	}
 
 	function getEmail()
@@ -57,6 +62,7 @@ class Contact
 	function setEmail($s)
 	{
 		$this->Info['Email'] = $s;
+		updateTable('Contact', 'Email', $s, $this->Username);
 	}
 
 	function getAddress()
@@ -67,6 +73,7 @@ class Contact
 	function setAddress($s)
 	{
 		$this->Info['Address'] = $s;
+		updateTable('Contact', 'Address', $s, $this->Username);
 	}
 
 	function getCity()
@@ -77,6 +84,7 @@ class Contact
 	function setCity($s)
 	{
 		$this->Info['City'] = $s;
+		updateTable('Contact', 'City', $s, $this->Username);
 	}
 
 	function getState()
@@ -87,7 +95,7 @@ class Contact
 	function setState($s)
 	{
 		$this->Info['State'] = $s;
+		updateTable('Contact', 'State', $s, $this->Username);
 	}
-
 }
 ?>

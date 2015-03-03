@@ -202,14 +202,14 @@ function removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $
 	db_query($sql);
 }
 
-/* Return info about Developer.
+/* Return rows for Tables for a sepcific User.
  *
  */
 
-function returnDeveloperTable($Username)
+function returnRow($Tablename, $Username)
 {
 	//Returns Team, Username, Position
-	$sql = "SELECT * FROM Developer WHERE Username='$Username'";
+	$sql = "SELECT * FROM $Tablename WHERE Username='$Username'";
 	$result = db_query($sql);
 
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -218,16 +218,13 @@ function returnDeveloperTable($Username)
 	return $row;
 }
 
-function returnContactTable($Username)
+/* The following functions update the database.
+ *
+ */
+function updateTable($TableName, $Column, $Value, $Username)
 {
-	//Returns Username, Firstname, Lastname, Phone, Email, Address, City, State
-	$sql = "SELECT * FROM Contact WHERE Username='$Username'";
-	$result = db_query($sql);
-
-	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	mysqli_free_result($result);
-
-	return $row;
+	$sql = "Update $TableName SET $Column='$Value' WHERE Username='$Username'";
+	db_query($sql);
 }
 
 /* Get Name from ID or get ID from Name functions. 
