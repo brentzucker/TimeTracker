@@ -202,6 +202,34 @@ function removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $
 	db_query($sql);
 }
 
+/* Return info about Developer.
+ *
+ */
+
+function returnDeveloperTable($Username)
+{
+	//Returns Team, Username, Position
+	$sql = "SELECT * FROM Developer WHERE Username='$Username'";
+	$result = db_query($sql);
+
+	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	mysqli_free_result($result);
+
+	return $row;
+}
+
+function returnContactTable($Username)
+{
+	//Returns Username, Firstname, Lastname, Phone, Email, Address, City, State
+	$sql = "SELECT * FROM Contact WHERE Username='$Username'";
+	$result = db_query($sql);
+
+	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	mysqli_free_result($result);
+
+	return $row;
+}
+
 /* Get Name from ID or get ID from Name functions. 
  *
  */
