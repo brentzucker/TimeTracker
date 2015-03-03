@@ -16,7 +16,17 @@
 	input {
 		display: block;
 		width: 375px;
+		margin: 0 auto;
 	}
+	
+	.form_wrap {
+		text-align: center;
+	}
+	
+	.submit {
+		width: 25%;
+	}
+	
 
 </style>
 </head>
@@ -31,6 +41,7 @@ $date = date("Y-m-d");
 
 echo<<< _END
 	<form class="client_form" method="post" action="clientTest.php">
+	<div class="form_wrap">
 		Client Name<input type="text" name="client_name" />
 		First Name<input type="text" name="first_name" />
 		Last Name<input type="text" name="last_name" />
@@ -39,8 +50,9 @@ echo<<< _END
 		Address<input type="text" name="address" />
 		City<input type="text" name="city" />
 		State<input type="text" name="state" />
-		<input type="hidden" name="start_date" value="$date" />
-		<input type="submit" />
+		<input type="hidden" name="start_date" value="$date" /><br />
+		<input class="submit" type="submit" />
+	</div>
 	</form>
 _END;
 ?>
