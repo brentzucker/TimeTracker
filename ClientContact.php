@@ -1,12 +1,12 @@
 <?php
-class Contact
+class ClientContact
 {
-	private $Username;
+	private $Clientname;
 	private $Info = array("Firstname"=>"", "Lastname"=>"", "Phone"=>"", "Email"=>"", "Address"=>"", "City"=>"", "State"=>"");
 
-	function __construct($Username_, $Firstname_, $Lastname_, $Phone_, $Email_, $Address_, $City_, $State_)
+	function __construct($Clientname_, $Firstname_, $Lastname_, $Phone_, $Email_, $Address_, $City_, $State_)
 	{
-		$this->Username = $Username_;
+		$this->Clientname = $Clientname_;
 		$this->Info['Firstname'] = $Firstname_;
 	 	$this->Info['Lastname'] = $Lastname_;
 	 	$this->Info['Phone'] = $Phone_;
@@ -29,7 +29,7 @@ class Contact
 	function setFirstname($s)
 	{
 		$this->Info['Firstname'] = $s;
-		updateTableByUser('Contact', 'Firstname', $s, $this->Username);
+		updateTableByClient('ClientContact', 'Firstname', $s, $this->Clientname);
 	}
 
 	function getLastname()
@@ -40,7 +40,7 @@ class Contact
 	function setLastname($s)
 	{
 		$this->Info['Lastname'] = $s;
-		updateTableByUser('Contact', 'Lastname', $s, $this->Username);
+		updateTableByClient('ClientContact', 'Lastname', $s, $this->Clientname);
 	}
 
 	function getPhone()
@@ -51,7 +51,7 @@ class Contact
 	function setPhone($s)
 	{
 		$this->Info['Phone'] = $s;
-		updateTableByUser('Contact', 'Phone', $s, $this->Username);
+		updateTableByClient('ClientContact', 'Phone', $s, $this->Clientname);
 	}
 
 	function getEmail()
@@ -62,7 +62,7 @@ class Contact
 	function setEmail($s)
 	{
 		$this->Info['Email'] = $s;
-		updateTableByUser('Contact', 'Email', $s, $this->Username);
+		updateTableByClient('ClientContact', 'Email', $s, $this->Clientname);
 	}
 
 	function getAddress()
@@ -73,7 +73,7 @@ class Contact
 	function setAddress($s)
 	{
 		$this->Info['Address'] = $s;
-		updateTableByUser('Contact', 'Address', $s, $this->Username);
+		updateTableByClient('ClientContact', 'Address', $s, $this->Clientname);
 	}
 
 	function getCity()
@@ -84,7 +84,7 @@ class Contact
 	function setCity($s)
 	{
 		$this->Info['City'] = $s;
-		updateTableByUser('Contact', 'City', $s, $this->Username);
+		updateTableByClient('ClientContact', 'City', $s, $this->Clientname);
 	}
 
 	function getState()
@@ -95,7 +95,7 @@ class Contact
 	function setState($s)
 	{
 		$this->Info['State'] = $s;
-		updateTableByUser('Contact', 'State', $s, $this->Username);
+		updateTableByClient('ClientContact', 'State', $s, $this->Clientname);
 	}
 }
 ?>

@@ -3,6 +3,8 @@ require_once 'Contact.php';
 require_once 'Time.php';
 require_once 'Developer.php';
 require_once 'Database.php';
+require_once 'Client.php';
+require_once 'ClientContact.php';
 
 function test($query)
 {
@@ -70,7 +72,7 @@ function testDeveloper()
 	foreach($Developer_Info as $k=>$d)
 		echo "$k => $d<br>";
 
-	echo "<br><h5>Update Firstname and Lastname</h5>";
+	echo "<br><h5>Update Developer's Firstname and Lastname</h5>";
 	//Update Contact Object
 	$Developer_Demo->getContact()->setFirstname("Max");
 	$Developer_Demo->getContact()->setLastname("Graessle");
@@ -86,7 +88,31 @@ function testDeveloper()
 	echo "done";
 }
 
-//testContact();
-//testTime();
+function testClient()
+{
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+
+	echo "<h3>Creating Client: The Business</h3>";
+
+	$Client_Demo = new Client("The Business");
+	
+	$Client_Info = $Client_Demo->getInfo();
+	
+	foreach($Client_Info as $k=>$d)
+		echo "$k => $d<br>";
+
+	echo "<br><h5>Update Client's Firstname and Lastname</h5>";
+	//Update Contact Object
+	$Client_Demo->getContact()->setFirstname("Max");
+	$Client_Demo->getContact()->setLastname("Graessle");
+
+	test("SELECT * FROM ClientContact");
+
+	deleteClient('The Business');
+}
+
+testContact();
+testTime();
 testDeveloper();
+testClient();
 ?>

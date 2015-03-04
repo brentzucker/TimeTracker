@@ -206,6 +206,7 @@ function removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $
  *
  */
 
+/*
 function returnRow($Tablename, $Username)
 {
 	//Returns Team, Username, Position
@@ -217,14 +218,49 @@ function returnRow($Tablename, $Username)
 
 	return $row;
 }
+*/
+function returnRow($Tablename, $WhereColumn, $WhereValue)
+{
+	//Returns Team, Username, Position
+	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn='$WhereValue'";
+	$result = db_query($sql);
+
+	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	mysqli_free_result($result);
+
+	return $row;
+}
+
+function returnRowByUser($Tablename, $Username)
+{
+	//Returns Team, Username, Position
+	return returnRow($Tablename, 'Username', $Username);
+}
+
+function returnRowByClient($Tablename, $Clientname)
+{
+	//Returns ClientName, StartDate
+	return returnRow($Tablename, 'ClientName', $Clientname);;
+}
 
 /* The following functions update the database.
  *
  */
-function updateTable($TableName, $Column, $Value, $Username)
+
+function updateTable($TableName, $Column, $Value, $WhereColumn, $WhereValue)
 {
-	$sql = "Update $TableName SET $Column='$Value' WHERE Username='$Username'";
+	$sql = "Update $TableName SET $Column='$Value' WHERE $WhereColumn='$WhereValue'";
 	db_query($sql);
+}
+
+function updateTableByUser($TableName, $Column, $Value, $Username)
+{
+	updateTable($TableName, $Column, $Value, 'Username', $Username);
+}
+
+function updateTableByClient($TableName, $Column, $Value, $Clientname)
+{
+	updateTable($TableName, $Column, $Value, 'ClientName', $Clientname);
 }
 
 /* Get Name from ID or get ID from Name functions. 

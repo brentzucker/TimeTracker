@@ -14,13 +14,13 @@ class Developer
 
 	function __construct($Username)
 	{
-		$db_entry_Developer = returnRow("Developer", $Username);
+		$db_entry_Developer = returnRowByUser("Developer", $Username);
 
 		$this->Info['Team'] = $db_entry_Developer['Team'];
 		$this->Info['Username'] = $db_entry_Developer['Username'];
 		$this->Info['Position'] = $db_entry_Developer['Position'];
 
-		$db_entry_Contact = returnRow("Contact", $Username);
+		$db_entry_Contact = returnRowByUser("Contact", $Username);
 
 		$this->Info['Contact'] = new Contact(
 			 $db_entry_Contact['Username'],
@@ -57,7 +57,7 @@ class Developer
 	function setTeam($s)
 	{
 		$this->Info['Team'] = $s;
-		updateTable('Developer', 'Team', $s, $this->Username);
+		updateTableByUser('Developer', 'Team', $s, $this->Username);
 	}
 
 	function getUsername()
@@ -68,7 +68,7 @@ class Developer
 	function setUsername($s)
 	{
 		$this->Info['Username'] = $s;
-		updateTable('Developer', 'Username', $s, $this->Username);
+		updateTableByUser('Developer', 'Username', $s, $this->Username);
 	}
 
 	function getPosition()
@@ -79,7 +79,7 @@ class Developer
 	function setPosition($s)
 	{
 		$this->Info['Position'] = $s;
-		updateTable('Developer', 'Position', $s, $this->Username);
+		updateTableByUser('Developer', 'Position', $s, $this->Username);
 	}
 }
 ?>
