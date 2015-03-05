@@ -2,6 +2,7 @@
 require_once 'Database.php';
 require_once 'Contact.php';
 require_once 'ClientContact.php';
+require_once 'ClientPurchase.php';
 
 class Client
 {
@@ -9,8 +10,9 @@ class Client
 		"ClientName"=>"",
 		"StartDate"=>"",
 		"Contact"=>"",
-		"Purchases"=>"",
+		"PurchasedHours"=>"",
 		);
+	private $Purchases = array();
 
 	function __construct($Clientname)
 	{
@@ -20,8 +22,6 @@ class Client
 		$this->Info['StartDate'] = $db_entry_Client['StartDate'];
 
 		$db_entry_Contact = returnRowByClient("ClientContact", $Clientname);
-
-		
 
 		$this->Info['Contact'] = new ClientContact(
 			 $db_entry_Contact['ClientName'],
@@ -70,6 +70,35 @@ class Client
 	{
 		$this->Info['StartDate'] = $s;
 		updateTableByClient('Client', 'StartDate', $s, $this->Clientname);
+	}
+
+	function getPurchasedHours()
+	{
+		$hours = $this->Info['PurchasedHours']/3600;
+		$minutes = ($this->Info['PurchasedHours']%3600)/60;
+		$seconds = (($this->Info['PurchasedHours']%3600)%60)/60;
+		return "$hours:$minutes:$seconds";
+	}
+
+	function PurchaseHours($PurchaseID, $HoursPurchased, $PurchaseDate)
+	{	
+		//Store each purchase in a ClientPurchase Object
+		$Client_Purchase = new ClientPurchase($this->getClientname(), $PurchaseID, $HoursPurchased, $PurchaseDate);
+
+		//Push each ClientPurchase object to the Purchases array
+		array_push($this->Purchases, $Client_Purchase);
+	}
+
+	function calculateTotalPurchasedHours()
+	{
+		//Reset total hours count
+		$this->Info['PurchasedHours'] = 0;
+		
+		foreach($this->Purchases as $Purchase)
+		{
+			//echo "p ".$Purchase->getHoursPurchased()->format('Y-m-d H:i:s') . " hours<br>";
+			$this->Info['PurchasedHours'] += $Purchase->getHoursPurchased();
+		}
 	}
 }
 ?>

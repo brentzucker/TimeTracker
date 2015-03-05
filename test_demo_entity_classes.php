@@ -108,6 +108,27 @@ function testClient()
 
 	test("SELECT * FROM ClientContact");
 
+	//Test ClientPurchase
+	echo "<h4>Testing ClientPurchase</h4>";
+
+	createClientPurchase('The Business','36000', '2015-02-14');
+	createClientPurchase('The Business','360000', '2015-03-04');
+
+	test("SELECT * FROM ClientPurchases");
+
+	$client_purchase_rows = returnRowsByClient('ClientPurchases', 'The Business');
+
+	foreach($client_purchase_rows as $row)
+	{
+		$Client_Demo->PurchaseHours($row['PurchaseID'], $row['HoursPurchased'], $row['PurchaseDate']);
+	}
+
+	$Client_Demo->calculateTotalPurchasedHours();
+
+	echo "Purchased Hours" . $Client_Demo->getPurchasedHours();
+
+	deleteClientPurchase('The Business');
+
 	deleteClient('The Business');
 }
 

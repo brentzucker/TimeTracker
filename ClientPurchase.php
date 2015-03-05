@@ -7,12 +7,17 @@ class ClientPurchase
 		"PurchaseDate"=>"",
 		"PurchaseID"=>"");
 
-	function __construct($Clientname, $HoursPurchased, $PurchaseDate, $PurchaseID)
+	function __construct($Clientname, $PurchaseID, $HoursPurchased, $PurchaseDate)
 	{
 		$this->Clientname = $Clientname;
+		$this->PurchaseInfo['PurchaseID'] = $PurchaseID;
 		$this->PurchaseInfo['HoursPurchased'] = $HoursPurchased;
 		$this->PurchaseInfo['PurchaseDate'] = $PurchaseDate;
-		$this->PurchaseInfo['PurchaseID'] = $PurchaseID;
+	}
+
+	function getHoursPurchased()
+	{
+		return $this->PurchaseInfo['HoursPurchased'];
 	}
 }
 ?>
