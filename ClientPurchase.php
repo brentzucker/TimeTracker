@@ -26,7 +26,8 @@ class ClientPurchase
 	}
 
 	function setPurchaseID($s)
-	{
+	{	
+		updateTableByClient('ClientPurchases', 'PurchaseID', $s, $ClientName);
 		$this->PurchaseInfo['PurchaseID'] = $s;
 	}
 
@@ -37,6 +38,7 @@ class ClientPurchase
 
 	function setHoursPurchased($s)
 	{
+		updateTableByClient('ClientPurchases', 'HoursPurchased', $s, $ClientName);
 		$this->PurchaseInfo['HoursPurchased'] = $s;
 	}
 
@@ -47,6 +49,7 @@ class ClientPurchase
 
 	function setPurchaseDate($s)
 	{
+		updateTableByClient('ClientPurchases', 'PurchaseDate', $s, $ClientName);
 		$this->PurchaseInfo['PurchaseDate'] = $s;
 	}
 }
