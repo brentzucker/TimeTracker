@@ -2,6 +2,7 @@
 require_once 'Database.php';
 require_once 'Contact.php';
 require_once 'Time.php';
+require_once 'Client.php';
 
 class Developer
 {
@@ -11,6 +12,7 @@ class Developer
 		"Position"=>"",
 		"Contact"=>"",
 		);
+	private $Client_List = array();
 
 	function __construct($Username)
 	{
@@ -42,6 +44,11 @@ class Developer
 	{
 		$developer_info = array("Team"=>$this->Info['Team'], "Username"=>$this->Info['Username'], "Position"=>$this->Info['Position']);
 		return $developer_info;
+	}
+
+	function getClientList()
+	{
+		return $this->Client_List;
 	}
 
 	function getContact()
@@ -80,6 +87,11 @@ class Developer
 	{
 		$this->Info['Position'] = $s;
 		updateTableByUser('Developer', 'Position', $s, $this->Username);
+	}
+
+	function assignClient($c)
+	{
+		array_push($this->Client_List, $c);
 	}
 }
 ?>

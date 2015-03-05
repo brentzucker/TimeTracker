@@ -132,8 +132,41 @@ function testClient()
 	deleteClient('The Business');
 }
 
+function testDeveloperAndClient()
+{
+	//Create Developer
+	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
+	$Developer_Demo = new Developer("b.zucker");
+
+	//Create Clients
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+	$Client_Demo = new Client("The Business");
+	createClient('Codec', '1993-06-20', 'Caroline', 'Collier', '1234567890', 'collier@gcsu.edu', 'The streets', 'Milledgeville', 'GA');
+	$Client_Demo2 = new Client("Codec");
+
+	echo "<h3>Assigning Client to Developer</h3>";
+
+	//Assign Client to Developer
+	$Developer_Demo->assignClient($Client_Demo);
+	$Developer_Demo->assignClient($Client_Demo2);
+
+	//View the Developers client list
+	$Developer_Demo_Client_List = $Developer_Demo->getClientList();
+
+	echo $Developer_Demo->getUsername() . "'s Clients: <br>";
+
+	foreach($Developer_Demo_Client_List as $ddcl)
+		echo $ddcl->getClientname() . "<br>";
+
+	deleteClient('Codec');
+	deleteClient('The Business');
+
+	deleteEmployee('b.zucker');
+}
+
 testContact();
 testTime();
 testDeveloper();
 testClient();
+testDeveloperAndClient();
 ?>
