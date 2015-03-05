@@ -202,23 +202,10 @@ function removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $
 	db_query($sql);
 }
 
-/* Return rows for Tables for a sepcific User.
+/* Returns a row for a Table.
  *
  */
 
-/*
-function returnRow($Tablename, $Username)
-{
-	//Returns Team, Username, Position
-	$sql = "SELECT * FROM $Tablename WHERE Username='$Username'";
-	$result = db_query($sql);
-
-	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	mysqli_free_result($result);
-
-	return $row;
-}
-*/
 function returnRow($Tablename, $WhereColumn, $WhereValue)
 {
 	//Returns Team, Username, Position
@@ -241,6 +228,36 @@ function returnRowByClient($Tablename, $Clientname)
 {
 	//Returns ClientName, StartDate
 	return returnRow($Tablename, 'ClientName', $Clientname);;
+}
+
+/* Returns all rows for a Table.
+ *
+ */
+
+function returnRows($Tablename, $WhereColumn, $WhereValue)
+{
+	//Returns Team, Username, Position
+	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn='$WhereValue'";
+	$result = db_query($sql);
+
+	$rows = array();
+	
+	while($row = $result->fetch_assoc())
+		array_push($rows, $row);
+
+	return $rows;
+}
+
+function returnRowsByUser($Tablename, $Username)
+{
+	//Returns Team, Username, Position
+	return returnRows($Tablename, 'Username', $Username);
+}
+
+function returnRowsByClient($Tablename, $Clientname)
+{
+	//Returns ClientName, StartDate
+	return returnRows($Tablename, 'ClientName', $Clientname);;
 }
 
 /* The following functions update the database.
