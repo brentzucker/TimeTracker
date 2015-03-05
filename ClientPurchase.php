@@ -15,9 +15,39 @@ class ClientPurchase
 		$this->PurchaseInfo['PurchaseDate'] = $PurchaseDate;
 	}
 
+	function getPurchaseInfo()
+	{
+		return $this->PurchaseInfo;
+	}
+
+	function getPurchaseID()
+	{
+		return $this->PurchaseInfo['PurchaseID'];
+	}
+
+	function setPurchaseID($s)
+	{
+		$this->PurchaseInfo['PurchaseID'] = $s;
+	}
+
 	function getHoursPurchased()
 	{
 		return $this->PurchaseInfo['HoursPurchased'];
+	}
+
+	function setHoursPurchased($s)
+	{
+		$this->PurchaseInfo['HoursPurchased'] = $s;
+	}
+
+	function getPurchaseDate()
+	{
+		return $this->PurchaseInfo['PurchaseDate'];
+	}
+
+	function setPurchaseDate($s)
+	{
+		$this->PurchaseInfo['PurchaseDate'] = $s;
 	}
 }
 ?>
