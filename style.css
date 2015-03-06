@@ -1,0 +1,24 @@
+.client_form {
+	margin: auto;
+	position: relative;
+	width:550px;
+	height:450px;
+	padding:10px;
+	border: 1px solid #999;
+	line-height: 24px;
+	border-radius: 5px;
+}
+	
+input {
+	display: block;
+	width: 375px;
+	margin: 0 auto;
+}
+	
+.form_wrap {
+	text-align: center;
+}
+	
+.submit {
+	width: 25%;
+}
