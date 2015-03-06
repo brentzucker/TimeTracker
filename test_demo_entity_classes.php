@@ -169,8 +169,7 @@ function testProjects()
 {
 	echo "<h3>Testing Projects</h3>";
 	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
-
-	
+  
 	$project_demo = new Projects('The Business', 'First Project', 'This is the first project.');
 
 	echo print_r($project_demo->getInfo());
@@ -214,6 +213,34 @@ function testClientAndProjects()
 	deleteClient('The Business');
 }
 
+function testDeveloperAndProjects()
+{
+	echo "<h3>Assigning Projects to Developers and Clients</h3>";
+	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
+	$Developer_Demo = new Developer("b.zucker");
+
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+	$Client_Demo = new Client("The Business");
+
+	$Client_Demo->newProject('Second Project', 'Creating this project for the business');
+
+	//Assign Projects to developer
+	$project = $Client_Demo->getProjectByName('Second Project');
+
+	$Developer_Demo->assignProject($project);
+	
+	echo $Developer_Demo->getUsername() . "'s Projects<br>";
+	
+	$project_list = $Developer_Demo->getProjectList();
+
+	foreach($project_list as $p)
+		echo $p->getProjectName() . "<br>";
+
+	removeProjects('The Business', 'Second Project');
+	deleteClient('The Business');
+	deleteEmployee('b.zucker');
+}
+
 testContact();
 testTime();
 testDeveloper();
@@ -221,6 +248,7 @@ testClient();
 testDeveloperAndClient();
 testProjects();
 testClientAndProjects();
+testDeveloperAndProjects();
 
 echo "<br><br>done";
 ?>

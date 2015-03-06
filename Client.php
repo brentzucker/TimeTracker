@@ -87,6 +87,13 @@ class Client
 		return $this->Projects;
 	}
 
+	function getProjectByName($ProjectName_)
+	{
+		foreach($this->Projects as $p)
+			if(strcmp($p->getProjectName(), $ProjectName_) == 0)
+				return $p;
+	}
+
 	function addProject($Project)
 	{
 		array_push($this->Projects, $Project);
@@ -94,7 +101,7 @@ class Client
 
 	function newProject($ProjectName_, $Description_)
 	{
-		$Project = new Projects($this->Info['ClientName'], $ProjectName_, $Description_);
+		$Project = new Projects($this->getClientname(), $ProjectName_, $Description_);
 		array_push($this->Projects, $Project);
 	}
 

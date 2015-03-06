@@ -13,6 +13,9 @@ class Developer
 		"Contact"=>"",
 		);
 	private $Client_List = array();
+	private $Project_List = array();
+	private $Time_Log = array();
+	private $Current_TimeLog;
 
 	function __construct($Username)
 	{
@@ -49,6 +52,16 @@ class Developer
 	function getClientList()
 	{
 		return $this->Client_List;
+	}
+
+	function getProjectList()
+	{
+		return $this->Project_List;
+	}
+
+	function getTimeLog()
+	{
+		return $this->Time_Log;
 	}
 
 	function getContact()
@@ -92,6 +105,21 @@ class Developer
 	function assignClient($c)
 	{
 		array_push($this->Client_List, $c);
+	}
+
+	function assignProject($p)
+	{
+		array_push($this->Project_List, $p);
+	}
+
+	function clockIn()
+	{
+		//$this->Current_TimeLog();
+	}
+
+	function newTimeLog()
+	{
+		//array_push($this->Time_Log, )
 	}
 }
 ?>
