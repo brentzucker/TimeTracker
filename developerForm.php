@@ -16,13 +16,14 @@
 	}
 </style>
 </head>
+<body>
 <!-- PHP Starts -->
 <?php
 require_once 'Database.php';
-?>
+echo<<<_END
 <br>
 <h3><center>New Employee</center></h3>
-<div class = "developerform"  method="post" action="developerTest.php">
+<form class="developerform" method="post" action="developerTest.php">
 <form>
 <br>
 Team Name:<br>
@@ -71,5 +72,8 @@ State:<br>
 <br>
 <input type="submit" value="Submit">
 </form>
+_END;
+?>
+</body>
 </div>
 </html>
