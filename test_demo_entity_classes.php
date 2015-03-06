@@ -5,6 +5,7 @@ require_once 'Developer.php';
 require_once 'Database.php';
 require_once 'Client.php';
 require_once 'ClientContact.php';
+require_once 'Projects.php';
 
 function test($query)
 {
@@ -164,9 +165,25 @@ function testDeveloperAndClient()
 	deleteEmployee('b.zucker');
 }
 
+function testProjects()
+{
+	echo "<h3>Testing Projects</h3>";
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+
+	
+	$project_demo = new Projects('The Business', 'First Project', 'This is the first project.');
+
+
+	removeProjects('The Business', 'First Project');
+	deleteClient('The Business');
+}
+
 testContact();
 testTime();
 testDeveloper();
 testClient();
 testDeveloperAndClient();
+testProjects();
+
+echo "<br><br>done";
 ?>

@@ -168,6 +168,7 @@ function newProjects($ClientName, $ProjectName, $Description)
 {
 	$sql = "INSERT INTO Projects(ClientName, ProjectName, Description) VALUES ('$ClientName', '$ProjectName', '$Description')";
 	db_query($sql);
+	return mysqli_insert_id(getConnection());
 }
 
 function removeProjects($ClientName, $ProjectName)
