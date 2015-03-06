@@ -173,8 +173,17 @@ function testProjects()
 	
 	$project_demo = new Projects('The Business', 'First Project', 'This is the first project.');
 
+	echo print_r($project_demo->getInfo());
 
-	removeProjects('The Business', 'First Project');
+	echo "<h6>change project name</h6>";
+
+	$project_demo->setProjectName('Maxs Project');
+
+	echo print_r($project_demo->getInfo());
+
+	test("SELECT * FROM Projects");
+
+	removeProjects('The Business', 'Maxs Project');
 	deleteClient('The Business');
 }
 

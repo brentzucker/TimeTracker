@@ -14,7 +14,50 @@ class Projects
 		$this->ProjectName = $ProjectName_;
 		$this->Description = $Description_;
 		$this->ProjectID = newProjects($this->ClientName, $this->ProjectName, $this->Description);
-		echo "$this->ProjectID";
 	}
+
+	function getInfo()
+	{
+		return array("ProjectID"=>$this->ProjectID, "ClientName"=>$this->ClientName, "ProjectName"=>$this->ProjectName, "Description"=>$this->Description);
+	}
+
+
+	function getProjectID()
+	{
+		return $this->ProjectID;
+	}
+
+	function getClientName()
+	{
+		return $this->ClientName;
+	}
+
+	function setClientName($s)
+	{
+		updateTableByProjectID('Projects', 'ClientName', $s, $this->ProjectID);
+		$this->ClientName = $s;
+	}	
+
+	function getProjectName()
+	{
+		return $this->ProjectName;
+	}
+
+	function setProjectName($s)
+	{
+		updateTableByProjectID('Projects', 'ProjectName', $s, $this->ProjectID);
+		$this->ProjectName = $s;
+	}	
+
+	function getDescription()
+	{
+		return $this->Description;
+	}
+
+	function setDescription($s)
+	{
+		updateTableByProjectID('Projects', 'Description', $s, $this->ProjectID);
+		$this->Description = $s;
+	}	
 }
 ?>

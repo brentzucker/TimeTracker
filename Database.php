@@ -281,6 +281,11 @@ function updateTableByClient($TableName, $Column, $Value, $Clientname)
 	updateTable($TableName, $Column, $Value, 'ClientName', $Clientname);
 }
 
+function updateTableByProjectID($TableName, $Column, $Value, $ProjectID)
+{
+	updateTable($TableName, $Column, $Value, 'ProjectID', $ProjectID);
+}
+
 /* Get Name from ID or get ID from Name functions. 
  *
  */
