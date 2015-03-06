@@ -6,6 +6,7 @@ require_once 'Database.php';
 require_once 'Client.php';
 require_once 'ClientContact.php';
 require_once 'Projects.php';
+require_once 'Tasks.php';
 
 function test($query)
 {
@@ -241,6 +242,27 @@ function testDeveloperAndProjects()
 	deleteEmployee('b.zucker');
 }
 
+function testTasks()
+{
+	echo "<h3>Testing Tasks</h3>";
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+  	$Client_Demo = new Client("The Business");
+
+	$project_demo = new Projects($Client_Demo->getClientname(), 'First Project', 'This is the first project.');
+	$project_id = $project_demo->getProjectID();
+
+	//Create Task
+	$task_demo = new Tasks($Client_Demo->getClientname(), $project_demo->getProjectID(), 'First Task', 'This is the first task.');
+	
+	print_r($task_demo->getInfo());
+
+	test("SELECT * FROM Tasks");
+
+	removeTasks('The Business', 'First Project', 'First Task');
+	removeProjects('The Business', 'First Project');
+	deleteClient('The Business');
+}
+
 testContact();
 testTime();
 testDeveloper();
@@ -249,6 +271,7 @@ testDeveloperAndClient();
 testProjects();
 testClientAndProjects();
 testDeveloperAndProjects();
+testTasks();
 
 echo "<br><br>done";
 ?>

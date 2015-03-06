@@ -181,6 +181,7 @@ function newTasks($ClientName, $ProjectID, $TaskName, $Description)
 {
 	$sql = "INSERT INTO Tasks(ClientName, ProjectID, TaskName, Description) VALUES ('$ClientName', '$ProjectID', '$TaskName', '$Description')";
 	db_query($sql);
+	return mysqli_insert_id(getConnection());
 }
 
 function removeTasks($ClientName, $ProjectName, $TaskName)
