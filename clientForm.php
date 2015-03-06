@@ -1,34 +1,7 @@
 <html>
 <head>
 <title>Client Form</title>
-<style>
-	.client_form {
-		margin: auto;
-		position: relative;
-		width:550px;
-		height:450px;
-		padding:10px;
-		border: 1px solid #999;
-		line-height: 24px;
-		border-radius: 5px;
-	}
-	
-	input {
-		display: block;
-		width: 375px;
-		margin: 0 auto;
-	}
-	
-	.form_wrap {
-		text-align: center;
-	}
-	
-	.submit {
-		width: 25%;
-	}
-	
-
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
@@ -36,11 +9,12 @@
 
 <?php
 require_once 'Database.php';
+require_once 'clientTest.php';
 
 $date = date("Y-m-d");
 
 echo<<< _END
-	<form class="client_form" method="post" action="clientTest.php">
+	<form class="client_form" method="post" action="clientForm.php">
 	<div class="form_wrap">
 		Client Name<input type="text" name="client_name" />
 		First Name<input type="text" name="first_name" />
@@ -54,7 +28,38 @@ echo<<< _END
 		<input class="submit" type="submit" />
 	</div>
 	</form>
+	
+	<div class="clientEntry">
+	
+	</div>
 _END;
+
+	if(!empty($_POST['client_name']))
+	{
+			createClient($_POST['client_name'], $_POST['start_date'], $_POST['first_name'], $_POST['last_name'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+			
+			test("SELECT * 
+			FROM ClientContact 
+			LEFT JOIN Client 
+			ON Client.ClientName = ClientContact.ClientName
+			");
+			
+			deleteClient($_POST['client_name']);
+			
+			test("SELECT * 
+			FROM ClientContact 
+			LEFT JOIN Client 
+			ON Client.ClientName = ClientContact.ClientName
+			");
+			
+echo<<< _END
+	<form class="client_form" method="post" action="clientForm.php">
+		"<button class='deleteButton'>Delete</button>";
+	</form>
+_END;
+
+	}
+
 ?>
 
 
