@@ -19,11 +19,5 @@
 		}
 		echo '</table>';
 	}
-	
-	test("SELECT * FROM Client");
-	
-	removeClient("Murica");
-	
-	test("SELECT * FROM Client");
 ?>
 

@@ -44,20 +44,6 @@ _END;
 			ON Client.ClientName = ClientContact.ClientName
 			");
 			
-			deleteClient($_POST['client_name']);
-			
-			test("SELECT * 
-			FROM ClientContact 
-			LEFT JOIN Client 
-			ON Client.ClientName = ClientContact.ClientName
-			");
-			
-echo<<< _END
-	<form class="client_form" method="post" action="clientForm.php">
-		"<button class='deleteButton'>Delete</button>";
-	</form>
-_END;
-
 	}
 
 ?>
