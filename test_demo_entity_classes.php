@@ -187,12 +187,40 @@ function testProjects()
 	deleteClient('The Business');
 }
 
+function testClientAndProjects()
+{
+	echo "<h3>Creating new Project for Client</h3>";
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+	
+	$Client_Demo = new Client("The Business");
+
+	$Client_Demo->newProject('Second Project', 'Creating this project for the business');
+
+	$Project = new Projects('The Business', 'Third Project Project', 'This is the third project.');
+
+	$Client_Demo->addProject($Project);
+
+	echo $Client_Demo->getClientname() . "'s Projects: <br>";
+
+	$projects = $Client_Demo->getProjects();
+
+	foreach($projects as $p)
+		echo $p->getProjectName() . "<br>";
+
+	test("SELECT * FROM Projects");
+
+	removeProjects('The Business', 'Third Project Project');
+	removeProjects('The Business', 'Second Project');
+	deleteClient('The Business');
+}
+
 testContact();
 testTime();
 testDeveloper();
 testClient();
 testDeveloperAndClient();
 testProjects();
+testClientAndProjects();
 
 echo "<br><br>done";
 ?>

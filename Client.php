@@ -3,6 +3,7 @@ require_once 'Database.php';
 require_once 'Contact.php';
 require_once 'ClientContact.php';
 require_once 'ClientPurchase.php';
+require_once 'Projects.php';
 
 class Client
 {
@@ -13,6 +14,7 @@ class Client
 		"PurchasedHours"=>"",
 		);
 	private $Purchases = array();
+	private $Projects = array();
 
 	function __construct($Clientname)
 	{
@@ -78,6 +80,22 @@ class Client
 		$minutes = ($this->Info['PurchasedHours']%3600)/60;
 		$seconds = (($this->Info['PurchasedHours']%3600)%60)/60;
 		return "$hours:$minutes:$seconds";
+	}
+
+	function getProjects()
+	{
+		return $this->Projects;
+	}
+
+	function addProject($Project)
+	{
+		array_push($this->Projects, $Project);
+	}
+
+	function newProject($ProjectName_, $Description_)
+	{
+		$Project = new Projects($this->Info['ClientName'], $ProjectName_, $Description_);
+		array_push($this->Projects, $Project);
 	}
 
 	function PurchaseHours($PurchaseID, $HoursPurchased, $PurchaseDate)
