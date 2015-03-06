@@ -5,7 +5,7 @@ $password = 'system';
 $database = 'clientdevelopmentmanagement_database';
 
 //$con = mysqli_connect($host, $username, $password, $database);
-$con = mysqli_connect("localhost", "root", "root", "ClientDevelopmentManagement_Database");
+$con = mysqli_connect("localhost", "root", "root", "clientdevelopmentmanagement_database");
 
 //Check connection
 if(mysqli_connect_errno())
