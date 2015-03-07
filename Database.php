@@ -287,6 +287,11 @@ function updateTableByProjectID($TableName, $Column, $Value, $ProjectID)
 	updateTable($TableName, $Column, $Value, 'ProjectID', $ProjectID);
 }
 
+function updateTableByTaskID($TableName, $Column, $Value, $TaskID)
+{
+	updateTable($TableName, $Column, $Value, 'TaskID', $TaskID);
+}
+
 /* Get Name from ID or get ID from Name functions. 
  *
  */

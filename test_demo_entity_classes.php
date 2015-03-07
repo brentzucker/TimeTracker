@@ -254,6 +254,7 @@ function testTasks()
 	//Create Task
 	$task_demo = new Tasks($Client_Demo->getClientname(), $project_demo->getProjectID(), 'First Task', 'This is the first task.');
 	
+	$task_demo->setDescription("I just changed the description");
 	print_r($task_demo->getInfo());
 
 	test("SELECT * FROM Tasks");

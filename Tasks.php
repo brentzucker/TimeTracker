@@ -22,5 +22,55 @@ class Tasks
 	{
 		return array("TaskID"=>$this->TaskID, "ClientName"=>$this->ClientName, "ProjectID"=>$this->ProjectID, "TaskName"=>$this->TaskName, "Description"=>$this->Description);
 	}
+
+	function getTaskID()
+	{
+		return $this->TaskID;
+	}
+
+	function getClientName()
+	{
+		return $this->ClientName;
+	}
+
+	function setClientName($s)
+	{
+		updateTableByTaskID('Tasks', 'ClientName', $s, $this->getTaskID());
+		$this->ClientName = $s;
+	}
+
+	function getProjectID()
+	{
+		return $this->ProjectID;
+	}
+
+	function setProjectID($s)
+	{
+		updateTableByTaskID('Tasks', 'ProjectID', $s, $this->getTaskID());
+		$this->ProjectID = $s;
+	}
+
+	function getTaskName()
+	{
+		return $this->TaskName;
+	}
+
+	function setTaskName($s)
+	{
+		updateTableByTaskID('Tasks', 'TaskName', $s, $this->getTaskID());
+		$this->TaskName = $s;
+	}
+
+	function getDescription()
+	{
+		return $this->Description;
+	}
+
+	function setDescription($s)
+	{
+		updateTableByTaskID('Tasks', 'Description', $s, $this->getTaskID());
+		$this->Description = $s;
+		
+	}
 }
 ?>
