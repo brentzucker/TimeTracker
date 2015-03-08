@@ -9,20 +9,20 @@ $password = stripslashes($password);
 $username = mysql_real_escape_string($username);
 $password = mysql_real_escape_string($password);
 $sql="SELECT * FROM credentials WHERE Username='$username' and Password='$password'";
-$result=mysql_query($sql);
+$result=db_query($sql);
 
 // Mysql_num_row is counting table row
-//$count=mysql_num_row($result);
+$count=mysqli_num_rows($result);
 
-// If result matched $myusername and $mypassword, table row must be 1 row
-//if($count==1){
-
-	// Register $myusername, $mypassword and redirect to file "login_success.php"
-	//session_register("Username");
-	//session_register("Password");
-	//header("location:home.php");
-//}
-//else {
-	//echo "Wrong Username or Password";
-//}
+//If result matched $myusername and $mypassword, table row must be 1 row
+if($count==1)
+{
+	$_SESSION['Username'];
+	$_SESSION['Password'];
+	header("Location:login_success.php");
+}
+else
+{
+	echo "Wrong Username or Password";
+}
 ?>
