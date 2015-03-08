@@ -14,12 +14,16 @@ $result=db_query($sql);
 // Mysql_num_row is counting table row
 $count=mysqli_num_rows($result);
 
-//If result matched $myusername and $mypassword, table row must be 1 row
 if($count==1)
 {
-	$_SESSION['Username'];
-	$_SESSION['Password'];
+	session_start();
+	$un = $_SESSION['login'][$username]['username']=$username;
+	$pw = $_SESSION['login'][$username]['password']=$password;
+	
+	print_r($_SESSION['login']);
+	
 	header("Location:login_success.php");
+	
 }
 else
 {
