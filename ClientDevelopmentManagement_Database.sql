@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Mar 05, 2015 at 03:02 AM
+-- Generation Time: Mar 09, 2015 at 02:40 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -105,6 +105,19 @@ CREATE TABLE `Developer` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `DeveloperAssignments`
+--
+
+CREATE TABLE `DeveloperAssignments` (
+  `Username` varchar(30) DEFAULT NULL,
+  `ClientProjectTask` varchar(30) DEFAULT NULL,
+  `Type` char(7) DEFAULT NULL,
+  KEY `Username` (`Username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Projects`
 --
 
@@ -115,7 +128,7 @@ CREATE TABLE `Projects` (
   `Description` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`ProjectID`),
   KEY `ClientName` (`ClientName`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -132,7 +145,7 @@ CREATE TABLE `Tasks` (
   PRIMARY KEY (`TaskID`),
   KEY `ClientName` (`ClientName`),
   KEY `ProjectID` (`ProjectID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -153,7 +166,7 @@ CREATE TABLE `TimeSheet` (
   KEY `ClientName` (`ClientName`),
   KEY `ProjectID` (`ProjectID`),
   KEY `TaskID` (`TaskID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
@@ -182,6 +195,12 @@ ALTER TABLE `Contact`
 --
 ALTER TABLE `Credentials`
   ADD CONSTRAINT `credentials_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `Developer` (`Username`);
+
+--
+-- Constraints for table `DeveloperAssignments`
+--
+ALTER TABLE `DeveloperAssignments`
+  ADD CONSTRAINT `developerassignments_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `Developer` (`Username`);
 
 --
 -- Constraints for table `Projects`
