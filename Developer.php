@@ -18,6 +18,9 @@ class Developer
 	private $Time_Log = array();
 	private $Current_TimeLog;
 
+	//If False Clock In, if True Clock out
+	private $TimeSet_Flag = False;
+
 	function __construct($Username)
 	{
 		$db_entry_Developer = returnRowByUser("Developer", $Username);
@@ -37,6 +40,11 @@ class Developer
 			 $db_entry_Contact['Address'],
 			 $db_entry_Contact['City'],
 			 $db_entry_Contact['State']);
+
+		//Loads the TimeLogs
+		$TimeSheet_Rows = returnRowsByUser('TimeSheet', $this->Info['Username']);
+		foreach($TimeSheet_Rows as $row)
+			array_push($this->Time_Log, new Time( $row['TimeLogID'] ));
 	}
 
 	function getInfo()
@@ -67,6 +75,12 @@ class Developer
 
 	function getTimeLog()
 	{
+		if($this->getTimeSetFlag() == True)
+		{
+			$temp = $this->Time_Log;
+			array_push($temp, $this->getCurrentTimeLog());
+			return $temp;
+		}	
 		return $this->Time_Log;
 	}
 
@@ -108,6 +122,32 @@ class Developer
 		updateTableByUser('Developer', 'Position', $s, $this->Username);
 	}
 
+	function getTimeSetFlag()
+	{
+		return $this->TimeSet_Flag;
+	}
+
+	function setTimeSetFlag($boolean)
+	{
+		$this->TimeSet_Flag = $boolean;
+	}
+
+	function getCurrentTimeLog()
+	{
+		return $this->Current_TimeLog;
+	}
+
+	function setCurrentTimeLog($TimeObject)
+	{
+		$this->Current_TimeLog = $TimeObject;
+	}
+
+	function pushCurrentTimeLog()
+	{
+		array_push($this->Time_Log, $this->Current_TimeLog);
+		$this->setCurrentTimeLog(NULL);
+	}
+
 	function assignClient($ClientObject)
 	{
 		newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client');
@@ -126,14 +166,26 @@ class Developer
 		array_push($this->Task_List, $TaskObject);
 	}
 
-	function clockIn()
+	function clockIn($ClientName, $ProjectID, $TaskID)
 	{
-		//$this->Current_TimeLog();
+		if($this->getTimeSetFlag() == False)
+		{
+			$TimeIn = date('Y-m-d H:i:s', time());
+			$TimeLogID = newTimeSheet($this->getUsername(), $ClientName, $ProjectID, $TaskID, $TimeIn, '0000-00-00 00:00:00', 0);
+			$this->setCurrentTimeLog(new Time($TimeLogID));
+			$this->setTimeSetFlag(True);
+		}
 	}
-
-	function newTimeLog()
+	
+	function clockOut()
 	{
-		//array_push($this->Time_Log, )
+		if($this->getTimeSetFlag() == True)
+		{
+			$TimeOut = date('Y-m-d H:i:s', time());
+			$this->getCurrentTimeLog()->setTimeStampOut($TimeOut);
+			$this->pushCurrentTimeLog();
+			$this->setTimeSetFlag(False);
+		}
 	}
 }
 ?>

@@ -325,6 +325,66 @@ function testTimeSheet()
 	deleteEmployee('b.zucker');
 }
 
+function testDeveloperClockIn()
+{
+
+	//Create Client
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+  	$Client_Demo = new Client("The Business");
+
+  	//Create Project
+	$project_demo = new Projects($Client_Demo->getClientname(), 'First Project', 'This is the first project.');
+	$project_id = $project_demo->getProjectID();
+
+	//Create Task
+	$task_demo = new Tasks($Client_Demo->getClientname(), $project_demo->getProjectID(), 'First Task', 'This is the first task.');
+	
+	//Assign Task to Developer
+	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
+	$Developer_Demo = new Developer("b.zucker");
+
+	echo '<br><br>';
+	echo '<div style="text-align:center;width:80%;margin-left:10%;">';
+	echo '<h3>Test Developer ClockIn</h3>';
+	
+	
+	//YYYY-MM-DD HH-MM-SS
+	$Developer_Demo->clockIn($Client_Demo->getClientname(), $project_demo->getProjectID(), $task_demo->getTaskID());
+	
+	//This Clockin will do nothing because you are already clocked in
+	$Developer_Demo->clockIn($Client_Demo->getClientname(), $project_demo->getProjectID(), $task_demo->getTaskID());
+
+	test("SELECT * FROM TimeSheet");
+	$t_id = $Developer_Demo->getCurrentTimeLog()->getTimeLogID();
+
+	$Developer_Demo->clockOut();
+	
+	//Clockin again after you previously clocked out
+	$Developer_Demo->clockIn($Client_Demo->getClientname(), $project_demo->getProjectID(), $task_demo->getTaskID());
+	$t_id2 = $Developer_Demo->getCurrentTimeLog()->getTimeLogID();
+
+	echo '<h3>Updated Table</h3>';
+	test("SELECT * FROM TimeSheet");
+
+	//Print all TimeLogs
+	echo '<br>TimeLogs:';
+	$logs = $Developer_Demo->getTimeLog();
+	foreach($logs as $t)
+	{
+		echo "<br>";
+		echo "<br>";
+		print_r($t->getInfo());
+	}
+	echo '</div>';
+
+	removeTimeSheet($t_id);
+	removeTimeSheet($t_id2);
+	removeTasks('The Business', 'First Project', 'First Task');
+	removeProjects('The Business', 'First Project');
+	deleteClient('The Business');
+	deleteEmployee('b.zucker');
+}
+
 //testContact();
 //testDeveloper();
 //testClient();
@@ -334,7 +394,8 @@ function testTimeSheet()
 //testDeveloperAndProjects();
 //testTasks();
 //testTasksAssignments();
-testTimeSheet();
+//testTimeSheet();
+testDeveloperClockIn();
 
 echo "<br><br>done";
 ?>

@@ -1,6 +1,9 @@
 <?php
 require_once 'login_config.php';
 
+//Sets Default timezone.
+date_default_timezone_set('America/New_York');
+
 /* The following functions can be called to replace redundant tasks.
  *
  */
