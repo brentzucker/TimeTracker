@@ -385,6 +385,23 @@ function testDeveloperClockIn()
 	deleteEmployee('b.zucker');
 }
 
+function testClientHoursLeft()
+{
+	//Create Client
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+  	
+	//Create Client Purchase
+  	createClientPurchase('The Business','360000', '2015-03-04');
+  	$Client_Demo = new Client("The Business");
+
+  	$Client_Demo->PurchaseHours(3600, '2015-03-09');
+
+  	echo $Client_Demo->getHoursLeft();
+
+  	deleteClientPurchase('The Business');
+  	deleteClient('The Business');
+}
+
 //testContact();
 //testDeveloper();
 //testClient();
@@ -395,7 +412,8 @@ function testDeveloperClockIn()
 //testTasks();
 //testTasksAssignments();
 //testTimeSheet();
-testDeveloperClockIn();
+//testDeveloperClockIn();
+testClientHoursLeft();
 
 echo "<br><br>done";
 ?>

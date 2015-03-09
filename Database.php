@@ -159,6 +159,8 @@ function newClientPurchases($ClientName, $HoursPurchased, $PurchaseDate)
 {
 	$sql = "INSERT INTO ClientPurchases(ClientName, HoursPurchased, PurchaseDate) VALUES ('$ClientName', '$HoursPurchased', '$PurchaseDate')";
 	db_query($sql);
+	//Return PurchaseID
+	return mysqli_insert_id(getConnection());
 }
 
 function removeClientPurchases($ClientName)
@@ -253,6 +255,12 @@ function returnRowByTimeLogID($TimeLogID)
 	return returnRow('TimeSheet', 'TimeLogID', $TimeLogID);
 }
 
+function returnRowByPurchaseID($PurchaseID)
+{	
+	//Returns PurchaseID, ClientName, HoursPurchased, PurchaseDate
+	return returnRow('ClientPurchases', 'PurchaseID', $PurchaseID);
+}
+
 /* Returns all rows for a Table.
  *
  */
@@ -262,7 +270,6 @@ function returnRows($Tablename, $WhereColumn, $WhereValue)
 	//Returns Team, Username, Position
 	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn='$WhereValue'";
 	$result = db_query($sql);
-
 	$rows = array();
 	
 	while($row = $result->fetch_assoc())
