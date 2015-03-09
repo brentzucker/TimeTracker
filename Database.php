@@ -206,7 +206,7 @@ function removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $
 
 function newDeveloperAssignments($Username, $ClientProjectTask, $Type)
 {
-	$sql = "INSERT INTO DeveloperAssignments(Username, ClientProjectTask, Type) VALUES ('$Username', '$ClientProjectTask', '$Task')";
+	$sql = "INSERT INTO DeveloperAssignments(Username, ClientProjectTask, Type) VALUES ('$Username', '$ClientProjectTask', '$Type')";
 	db_query($sql);
 }
 
@@ -353,4 +353,14 @@ function returnTaskName($TaskID)
 
 	return "$row[TaskName]";
 }
+
+/* Load table rows into objects. Constructor will call these methods. 
+ *
+ */
+
+function returnDeveloperAssignments($Username)
+{
+	returnRowsByUser('DeveloperAssignments', $Username);
+}
+
 ?>

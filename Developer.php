@@ -14,6 +14,7 @@ class Developer
 		);
 	private $Client_List = array();
 	private $Project_List = array();
+	private $Task_List = array();
 	private $Time_Log = array();
 	private $Current_TimeLog;
 
@@ -59,6 +60,11 @@ class Developer
 		return $this->Project_List;
 	}
 
+	function getTaskList()
+	{
+		return $this->Task_List;
+	}
+
 	function getTimeLog()
 	{
 		return $this->Time_Log;
@@ -102,14 +108,20 @@ class Developer
 		updateTableByUser('Developer', 'Position', $s, $this->Username);
 	}
 
-	function assignClient($c)
+	function assignClient($ClientObject)
 	{
-		array_push($this->Client_List, $c);
+		array_push($this->Client_List, $ClientObject);
 	}
 
-	function assignProject($p)
+	function assignProject($ProjectObject)
 	{
-		array_push($this->Project_List, $p);
+		array_push($this->Project_List, $ProjectObject);
+	}
+
+	function assignTask($TaskObject)
+	{
+		newDeveloperAssignments($this->getUsername(), $TaskObject->getTaskID(), 'Task');
+		array_push($this->Task_List, $TaskObject);
 	}
 
 	function clockIn()

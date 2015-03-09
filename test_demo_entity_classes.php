@@ -264,6 +264,33 @@ function testTasks()
 	deleteClient('The Business');
 }
 
+function testTasksAssignments()
+{
+	echo "<h3>Testing Task Assignments</h3>";
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+  	$Client_Demo = new Client("The Business");
+
+	$project_demo = new Projects($Client_Demo->getClientname(), 'First Project', 'This is the first project.');
+	$project_id = $project_demo->getProjectID();
+
+	//Create Task
+	$task_demo = new Tasks($Client_Demo->getClientname(), $project_demo->getProjectID(), 'First Task', 'This is the first task.');
+	
+	//Assign Task to Developer
+	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
+	$Developer_Demo = new Developer("b.zucker");
+
+	$Developer_Demo->assignTask($task_demo);
+
+	test("SELECT * FROM DeveloperAssignments");
+
+	removeDeveloperAssignments($task_demo->getTaskID(), 'Task');
+	removeTasks('The Business', 'First Project', 'First Task');
+	removeProjects('The Business', 'First Project');
+	deleteClient('The Business');
+	deleteEmployee('b.zucker');
+}
+
 testContact();
 testTime();
 testDeveloper();
@@ -273,6 +300,7 @@ testProjects();
 testClientAndProjects();
 testDeveloperAndProjects();
 testTasks();
+testTasksAssignments();
 
 echo "<br><br>done";
 ?>
