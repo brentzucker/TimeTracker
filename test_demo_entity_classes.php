@@ -10,7 +10,7 @@ require_once 'Tasks.php';
 
 function test($query)
 {
-	echo '<table style="border:1px solid black; text-align:center; width:50%; margin-left:25%;">';
+	echo '<table style="border:1px solid black; text-align:center; width:80%; margin-left:25%;">';
 	if($result = db_query($query))
 	{
 		while($row = mysqli_fetch_row($result))
@@ -39,25 +39,6 @@ function testContact()
 	$ContactInfo->setFirstname("Max");
 
 	echo " ".$ContactInfo->getFirstname();
-	echo '</div>';
-}
-
-function testTime()
-{
-	echo '<br><br>';
-	echo '<div style="text-align:center;width:50%;margin-left:25%;">';
-	echo '<h3>Time</h3>';
-	
-	//YYYY-MM-DD HH-MM-SS
-	$TimeLog = new Time('2015-03-02 17:00:00', '2015-03-02 17:40:00');
-
-	//Stores results in $TimeLog->Info['TimeLogged'];
-	$TimeLog->calculateTimeLogged();
-
-	echo "The time In: ". $TimeLog->getTimeIn() . "<br>";
-	echo "The time Out: ". $TimeLog->getTimeOut() . "<br>";
-	echo "The time Logged: ". $TimeLog->getTimeLogged() . "<br>";
-
 	echo '</div>';
 }
 
@@ -293,16 +274,67 @@ function testTasksAssignments()
 	deleteEmployee('b.zucker');
 }
 
-testContact();
-testTime();
-testDeveloper();
-testClient();
+function testTimeSheet()
+{
+
+	//Create Client
+	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
+  	$Client_Demo = new Client("The Business");
+
+  	//Create Project
+	$project_demo = new Projects($Client_Demo->getClientname(), 'First Project', 'This is the first project.');
+	$project_id = $project_demo->getProjectID();
+
+	//Create Task
+	$task_demo = new Tasks($Client_Demo->getClientname(), $project_demo->getProjectID(), 'First Task', 'This is the first task.');
+	
+	//Assign Task to Developer
+	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
+	$Developer_Demo = new Developer("b.zucker");
+
+	echo '<br><br>';
+	echo '<div style="text-align:center;width:80%;margin-left:10%;">';
+	echo '<h3>Time</h3>';
+	
+	
+	//YYYY-MM-DD HH-MM-SS
+	$t1_id = newTimeSheet($Developer_Demo->getUsername(), $Client_Demo->getClientname(), $project_demo->getProjectID(), $task_demo->getTaskID(), '2015-03-09 10:00:00', '0000-00-00 00:00:00', 0);
+	$t2_id = newTimeSheet($Developer_Demo->getUsername(), $Client_Demo->getClientname(), $project_demo->getProjectID(), $task_demo->getTaskID(), '2015-03-05 17:00:00', '2015-03-05 17:40:00', 0);
+	$t3_id = newTimeSheet($Developer_Demo->getUsername(), $Client_Demo->getClientname(), $project_demo->getProjectID(), $task_demo->getTaskID(), '2015-03-09 17:00:00', '2015-03-09 17:40:00', 2400);
+
+	test("SELECT * FROM TimeSheet");
+
+	$t1 = new Time($t1_id);
+	$t2 = new Time($t2_id);
+	$t3 = new Time($t3_id);
+
+	$current_time = date('Y-m-d H:i:s', time());
+	$t1->setTimeStampOut($current_time);
+
+	echo '<h3>Updated Table</h3>';
+	test("SELECT * FROM TimeSheet");
+	echo '</div>';
+
+	removeTimeSheet($t1_id);
+	removeTimeSheet($t2_id);
+	removeTimeSheet($t3_id);
+	
+	removeTasks('The Business', 'First Project', 'First Task');
+	removeProjects('The Business', 'First Project');
+	deleteClient('The Business');
+	deleteEmployee('b.zucker');
+}
+
+//testContact();
+//testDeveloper();
+//testClient();
 //testDeveloperAndClient();
-testProjects();
-testClientAndProjects();
+//testProjects();
+//testClientAndProjects();
 //testDeveloperAndProjects();
-testTasks();
-testTasksAssignments();
+//testTasks();
+//testTasksAssignments();
+testTimeSheet();
 
 echo "<br><br>done";
 ?>

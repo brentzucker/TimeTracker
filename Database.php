@@ -181,6 +181,7 @@ function newTasks($ClientName, $ProjectID, $TaskName, $Description)
 {
 	$sql = "INSERT INTO Tasks(ClientName, ProjectID, TaskName, Description) VALUES ('$ClientName', '$ProjectID', '$TaskName', '$Description')";
 	db_query($sql);
+	//Returns TaskID
 	return mysqli_insert_id(getConnection());
 }
 
@@ -192,15 +193,17 @@ function removeTasks($ClientName, $ProjectName, $TaskName)
 	db_query($sql);
 }
 
-function newTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $TimeOut)
+function newTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $TimeOut, $TimeSpent)
 {
-	$sql = "INSERT INTO TimeSheet(Username, ClientName, ProjectID, TaskID, TimeIn, TimeOut) VALUES ('$Username', '$ClientName', '$ProjectID', '$TaskID', '$TimeIn', '$TimeOut')";
+	$sql = "INSERT INTO TimeSheet(Username, ClientName, ProjectID, TaskID, TimeIn, TimeOut, TimeSpent) VALUES ('$Username', '$ClientName', '$ProjectID', '$TaskID', '$TimeIn', '$TimeOut', $TimeSpent)";
 	db_query($sql);
+	//Returns TimeLogID
+	return mysqli_insert_id(getConnection());
 }
 
-function removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $TimeOut)
+function removeTimeSheet($TimeLogID)
 {
-	$sql = "DELETE FROM TimeSheet WHERE Username='$Username' AND ClientName='$ClientName' AND ProjectID=$ProjectID AND TaskID=$TaskID AND TimeIn='$TimeIn' AND TimeOut='$TimeOut'";
+	$sql = "DELETE FROM TimeSheet WHERE TimeLogID=$TimeLogID";
 	db_query($sql);
 }
 
@@ -222,7 +225,6 @@ function removeDeveloperAssignments($ClientProjectTask, $Type)
 
 function returnRow($Tablename, $WhereColumn, $WhereValue)
 {
-	//Returns Team, Username, Position
 	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn='$WhereValue'";
 	$result = db_query($sql);
 
@@ -234,14 +236,18 @@ function returnRow($Tablename, $WhereColumn, $WhereValue)
 
 function returnRowByUser($Tablename, $Username)
 {
-	//Returns Team, Username, Position
 	return returnRow($Tablename, 'Username', $Username);
 }
 
 function returnRowByClient($Tablename, $Clientname)
 {
-	//Returns ClientName, StartDate
 	return returnRow($Tablename, 'ClientName', $Clientname);;
+}
+
+function returnRowByTimeLogID($TimeLogID)
+{
+	//Returns TimeLogID, Username, ClientName, ProjectID, TaskID, TimeIn, TimeOut, TimeSpent
+	return returnRow('TimeSheet', 'TimeLogID', $TimeLogID);
 }
 
 /* Returns all rows for a Table.
@@ -264,19 +270,28 @@ function returnRows($Tablename, $WhereColumn, $WhereValue)
 
 function returnRowsByUser($Tablename, $Username)
 {
-	//Returns Team, Username, Position
 	return returnRows($Tablename, 'Username', $Username);
 }
 
 function returnRowsByClient($Tablename, $Clientname)
 {
-	//Returns ClientName, StartDate
-	return returnRows($Tablename, 'ClientName', $Clientname);;
+	return returnRows($Tablename, 'ClientName', $Clientname);
+}
+
+function returnRowsByTimeLogID($TimeLogID)
+{
+	//Returns TimeLogID, Username, ClientName, ProjectID, TaskID, TimeIn, TimeOut, TimeSpent
+	return returnRows('TimeSheet', 'TimeLogID', $TimeLogID);
 }
 
 /* The following functions update the database.
  *
  */
+function updateTable_NumberValue($TableName, $Column, $Value, $WhereColumn, $WhereValue)
+{
+	$sql = "Update $TableName SET $Column=$Value WHERE $WhereColumn='$WhereValue'";
+	db_query($sql);
+}
 
 function updateTable($TableName, $Column, $Value, $WhereColumn, $WhereValue)
 {
@@ -302,6 +317,16 @@ function updateTableByProjectID($TableName, $Column, $Value, $ProjectID)
 function updateTableByTaskID($TableName, $Column, $Value, $TaskID)
 {
 	updateTable($TableName, $Column, $Value, 'TaskID', $TaskID);
+}
+
+function updateTableByTimeLogID($Column, $Value, $TimeLogID)
+{
+	updateTable('TimeSheet', $Column, $Value, 'TimeLogID', $TimeLogID);
+}
+
+function updateTableByTimeLogID_NumberValue($Column, $Value, $TimeLogID)
+{
+	updateTable_NumberValue('TimeSheet', $Column, $Value, 'TimeLogID', $TimeLogID);
 }
 
 /* Get Name from ID or get ID from Name functions. 

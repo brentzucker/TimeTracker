@@ -1,7 +1,16 @@
 <?php
 class Time
 {
-	private $Info = array("TimeStampIn"=>"", "TimeStampOut"=>"", "TimeLogged"=>"");
+	private $Info = array(
+		"TimeLogID"=>"",
+		"TimeStampIn"=>"",
+		"TimeStampOut"=>"", 
+		"TimeSpent"=>""
+						  );
+	private $Username;
+	private $ClientName;
+	private $ProjectID;
+	private $TaskID;
 	
 	function __construct()
 	{
@@ -15,28 +24,63 @@ class Time
         } 
 	}
 
-	function __construct1($TimeStampIn)
+	function __construct1($TimeLogID)
 	{
+		$row = returnRowByTimeLogID($TimeLogID);
+
+		$this->Info['TimeLogID'] = $TimeLogID;
+		$this->Username = $row['Username'];
+		$this->ClientName = $row['ClientName'];
+		$this->ProjectID = $row['ProjectID'];
+		$this->TaskID = $row['TaskID'];
+		$this->Info['TimeStampIn'] = new DateTime($row['TimeIn']);
+		$this->Info['TimeStampOut'] = new DateTime($row['TimeOut']);
+		$this->Info['TimeSpent'] = $row['TimeSpent'];
+
+		if($this->Info['TimeSpent'] == 0 && $this->Info['TimeStampOut'] != new DateTime('0000-00-00 00:00:00'))
+				$this->calculateTimeSpent();
+	}
+
+	function __construct5($Username, $ClientName, $ProjectID, $TaskID, $TimeStampIn)
+	{
+		$this->Username = $Username;
+		$this->ClientName = $ClientName;
+		$this->ProjectID = $ProjectID;
+		$this->TaskID = $TaskID;
 		$this->Info['TimeStampIn'] = new DateTime($TimeStampIn);
 	}
 
-	function __construct2($TimeStampIn, $TimeStampOut)
+	function __construct6($Username, $ClientName, $ProjectID, $TaskID, $TimeStampIn, $TimeStampOut)
 	{
+		$this->Username = $Username;
+		$this->ClientName = $ClientName;
+		$this->ProjectID = $ProjectID;
+		$this->TaskID = $TaskID;
 		$this->Info['TimeStampIn'] = new DateTime($TimeStampIn);
 		$this->Info['TimeStampOut'] = new DateTime($TimeStampOut);
-		$this->calculateTimeLogged();
+		$this->calculateTimeSpent();
 	}
 
-	function __construct3($TimeStampIn, $TimeStampOut, $TimeLogged)
+	function __construct7($Username, $ClientName, $ProjectID, $TaskID, $TimeStampIn, $TimeStampOut, $TimeSpent)
 	{
-		$this->Info['TimeStampIn'] = $TimeStampIn;
-		$this->Info['TimeStampOut'] = $TimeStampOut;
-		$this->Info['TimeLogged'] = $TimeLogged;
+		$this->Username = $Username;
+		$this->ClientName = $ClientName;
+		$this->ProjectID = $ProjectID;
+		$this->TaskID = $TaskID;
+		$this->Info['TimeStampIn'] = new DateTime($TimeStampIn);
+		$this->Info['TimeStampOut'] = new DateTime($TimeStampOut);
+		$this->Info['TimeSpent'] = $TimeSpent;
 	}
 
 	function getInfo()
 	{
-		return $this->Info;
+		return array_merge($this->Info, array("Username"=>$this->Username,"ClientName"=>$this->ClientName,"ProjectID"=>$this->ProjectID,"TaskID"=>$this->TaskID));
+		//return $this->Info;
+	}
+
+	function getTimeLogID()
+	{
+		return $this->Info['TimeLogID'];
 	}
 
 	function getTimeIn()
@@ -56,6 +100,7 @@ class Time
 
 	function setTimeStampIn($s)
 	{
+		updateTableByTimeLogID('TimeIn', $s, $this->getTimeLogID());
 		$this->Info['TimeStampIn'] = new DateTime($s);
 	}
 
@@ -66,34 +111,79 @@ class Time
 
 	function setTimeStampOut($s)
 	{
+		updateTableByTimeLogID('TimeOut', $s, $this->getTimeLogID());
 		$this->Info['TimeStampOut'] = new DateTime($s);
-		$this->calculateTimeLogged();
+		$this->calculateTimeSpent();
 	}
 
-	function getTimeLogged()
+	function getTimeSpent()
 	{
-		return $this->Info['TimeLogged'];
+		return $this->Info['TimeSpent'];
 	}
 
-	function setTimeLogged($s)
+	function setTimeSpent($s)
 	{
-		$this->Info['TimeLogged'] = $s;
+		updateTableByTimeLogID_NumberValue('TimeSpent', $s, $this->getTimeLogID());
+		$this->Info['TimeSpent'] = $s;
 	}
 
+	function getUsername()
+	{
+		return $this->Username;
+	}
 
-	function calculateTimeLogged()
+	function setUsername($s)
+	{
+		updateTableByTimeLogID('Username', $s, $this->getTimeLogID());
+		$this->Username = $s;
+	}
+
+	function getClientName()
+	{
+		return $this->ClientName;
+	}
+
+	function setClientName($s)
+	{
+		updateTableByTimeLogID('ClientName', $s, $this->getTimeLogID());
+		$this->ClientName = $s;
+	}
+
+	function getProjectID()
+	{
+		return $this->ProjectID;
+	}
+
+	function setProjectID($s)
+	{
+		updateTableByTimeLogID_NumberValue('ProjectID', $s, $this->getTimeLogID());
+		$this->ProjectID = $s;
+	}
+
+	function getTaskID()
+	{
+		return $this->TaskID;
+	}
+
+	function setTaskID($s)
+	{
+		updateTableByTimeLogID_NumberValue('TaskID', $s, $this->getTimeLogID());
+		$this->TaskID = $s;
+	}
+
+	function calculateTimeSpent()
 	{
 		$DateTimeIn = $this->Info['TimeStampIn']; /*= new DateTime($this->Info['TimeStampIn']);*/
 		$DateTimeOut = $this->Info['TimeStampOut'];/*= new DateTime($this->Info['TimeStampOut']);*/
 
 		$Difference = $DateTimeIn->diff($DateTimeOut);
 
-		$this->Info['TimeLogged'] = $this->formatTime($Difference);
+		$timeSpent = $this->dateTimeToSeconds($Difference);
 
-		return $this->Info['TimeLogged'];
+		$this->setTimeSpent($timeSpent);
 	}
 
-	private static function formatTime($Difference)
+	private static function dateTimeToSeconds($Difference)
 	{
 		$year = $Difference->y;
 		$month = $Difference->m;
@@ -102,38 +192,21 @@ class Time
 		$minute = $Difference->i;
 		$second = $Difference->s;
 
-		while(strlen($year) < 4)
-		{
-			$year = substr_replace($year, '0', 0, 0);
-		}
+		$sum = 0;
 
-		while(strlen($month) < 2)
-		{
-			$month = substr_replace($month, '0', 0, 0);
-		}
+		$sum += ($year*365*24*60*60);
 
-		while(strlen($day) < 2)
-		{
-			$day = substr_replace($day, '0', 0, 0);
-		}
+		$sum += ($month*30*24*60*60);
 
-		while(strlen($hour) < 2)
-		{
-			$hour = substr_replace($hour, '0', 0, 0);
-		}
+		$sum += ($day*24*60*60);
 
-		while(strlen($minute) < 2)
-		{
-			$minute = substr_replace($minute, '0', 0, 0);
-		}
-		while(strlen($second) < 2)
-		{
-			$second = substr_replace($second, '0', 0, 0);
-		}
+		$sum += ($hour*60*60);
 
-		$TimeBetween =  $year ."-". $month ."-". $day ." ". $hour .":". $minute .":". $second;
+		$sum += ($minute*60);
 
-		return $TimeBetween;
+		$sum += ($second);
+
+		return $sum;
 	}
 }
 ?>
