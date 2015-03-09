@@ -204,6 +204,18 @@ function removeTimeSheet($Username, $ClientName, $ProjectID, $TaskID, $TimeIn, $
 	db_query($sql);
 }
 
+function newDeveloperAssignments($Username, $ClientProjectTask, $Type)
+{
+	$sql = "INSERT INTO DeveloperAssignments(Username, ClientProjectTask, Type) VALUES ('$Username', '$ClientProjectTask', '$Task')";
+	db_query($sql);
+}
+
+function removeDeveloperAssignments($ClientProjectTask, $Type)
+{
+	$sql = "DELETE FROM DeveloperAssignments WHERE ClientProjectTask='$ClientProjectTask' AND Type='$Type'";
+	db_query($sql);
+}
+
 /* Returns a row for a Table.
  *
  */
