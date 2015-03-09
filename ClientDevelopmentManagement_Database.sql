@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Mar 09, 2015 at 05:09 PM
+-- Generation Time: Mar 10, 2015 at 12:31 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -23,6 +23,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `Client` (
   `ClientName` varchar(30) NOT NULL,
   `StartDate` date DEFAULT NULL,
+  `HoursLeft` bigint(20) NOT NULL,
   PRIMARY KEY (`ClientName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
