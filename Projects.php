@@ -6,6 +6,7 @@ class Projects
 	private $ClientName;
 	private $ProjectName;
 	private $Description;
+	private $Task_List = array();
 
 	//This constructor creates and entry into the database.
 	function __construct($ClientName_, $ProjectName_, $Description_)
@@ -20,7 +21,6 @@ class Projects
 	{
 		return array("ProjectID"=>$this->ProjectID, "ClientName"=>$this->ClientName, "ProjectName"=>$this->ProjectName, "Description"=>$this->Description);
 	}
-
 
 	function getProjectID()
 	{
@@ -58,6 +58,11 @@ class Projects
 	{
 		updateTableByProjectID('Projects', 'Description', $s, $this->ProjectID);
 		$this->Description = $s;
+	}
+
+	function assignTask($TaskObject)
+	{
+		array_push($this->Task_List, $TaskObject);
 	}	
 }
 ?>

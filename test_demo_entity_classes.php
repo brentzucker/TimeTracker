@@ -284,6 +284,8 @@ function testTasksAssignments()
 
 	test("SELECT * FROM DeveloperAssignments");
 
+	removeDeveloperAssignments($project_demo->getClientname(), 'Client');
+	removeDeveloperAssignments($project_demo->getProjectID(), 'Project');
 	removeDeveloperAssignments($task_demo->getTaskID(), 'Task');
 	removeTasks('The Business', 'First Project', 'First Task');
 	removeProjects('The Business', 'First Project');
@@ -295,10 +297,10 @@ testContact();
 testTime();
 testDeveloper();
 testClient();
-testDeveloperAndClient();
+//testDeveloperAndClient();
 testProjects();
 testClientAndProjects();
-testDeveloperAndProjects();
+//testDeveloperAndProjects();
 testTasks();
 testTasksAssignments();
 

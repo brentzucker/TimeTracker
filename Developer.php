@@ -110,11 +110,13 @@ class Developer
 
 	function assignClient($ClientObject)
 	{
+		newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client');
 		array_push($this->Client_List, $ClientObject);
 	}
 
 	function assignProject($ProjectObject)
 	{
+		newDeveloperAssignments($this->getUsername(), $ProjectObject->getProjectID(), 'Project');
 		array_push($this->Project_List, $ProjectObject);
 	}
 
