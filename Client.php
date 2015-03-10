@@ -98,7 +98,9 @@ class Client
 	}
 
 	function getHoursLeft()
-	{
+	{	
+		//Make sure HoursLeft is up to date
+		$this->HoursLeft = returnRowByClient('Client', $this->getClientname())['HoursLeft'];
 		return $this->HoursLeft;
 	}
 

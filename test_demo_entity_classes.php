@@ -396,10 +396,51 @@ function testClientHoursLeft()
 
   	$Client_Demo->PurchaseHours(3600, '2015-03-09');
 
-  	echo $Client_Demo->getHoursLeft();
+  	echo $Client_Demo->getHoursLeft() . "<br>";
 
+  	//Create Project
+	$project_demo = new Projects($Client_Demo->getClientname(), 'First Project', 'This is the first project.');
+	$project_id = $project_demo->getProjectID();
+
+	//Create Task
+	$task_demo = new Tasks($Client_Demo->getClientname(), $project_demo->getProjectID(), 'First Task', 'This is the first task.');
+	
+	//Assign Task to Developer
+	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
+	$Developer_Demo = new Developer("b.zucker");
+
+	echo '<br><br>';
+	echo '<div style="text-align:center;width:80%;margin-left:10%;">';
+	echo '<h3>Subtract ClockIn Hours from Client</h3>';
+	
+	test("SELECT * FROM Client");
+
+	$Developer_Demo->clockIn($Client_Demo->getClientname(), $project_demo->getProjectID(), $task_demo->getTaskID());
+
+	$t_id = $Developer_Demo->getCurrentTimeLog()->getTimeLogID();
+	
+	//Takes 10 seconds to clock out
+	for($i=0; $i<99999999; $i++)
+		echo "";
+
+	$Developer_Demo->clockOut();
+
+	echo '<h3>Updated Table</h3>';
+	test("SELECT * FROM TimeSheet");
+	
+	test("SELECT * FROM Client");
+
+	echo '</div>';
+
+	
+  	echo "<br><br>" . $Client_Demo->getHoursLeft();
+
+  	removeTimeSheet($t_id);
+  	removeTasks('The Business', 'First Project', 'First Task');
+	removeProjects('The Business', 'First Project');
   	deleteClientPurchase('The Business');
   	deleteClient('The Business');
+  	deleteEmployee('b.zucker');
 }
 
 //testContact();

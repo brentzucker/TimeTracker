@@ -232,7 +232,6 @@ function returnRow($Tablename, $WhereColumn, $WhereValue)
 {
 	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn='$WhereValue'";
 	$result = db_query($sql);
-
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 	mysqli_free_result($result);
 
@@ -337,6 +336,11 @@ function updateTableByTimeLogID($Column, $Value, $TimeLogID)
 function updateTableByTimeLogID_NumberValue($Column, $Value, $TimeLogID)
 {
 	updateTable_NumberValue('TimeSheet', $Column, $Value, 'TimeLogID', $TimeLogID);
+}
+
+function updateTableByClient_NumberValue($TableName, $Column, $Value, $Clientname)
+{
+	updateTable_NumberValue($TableName, $Column, $Value, 'ClientName', $Clientname);
 }
 
 /* Get Name from ID or get ID from Name functions. 

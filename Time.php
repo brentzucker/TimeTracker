@@ -1,4 +1,5 @@
 <?php
+require_once 'Database.php';
 class Time
 {
 	private $Info = array(
@@ -113,7 +114,24 @@ class Time
 	{
 		updateTableByTimeLogID('TimeOut', $s, $this->getTimeLogID());
 		$this->Info['TimeStampOut'] = new DateTime($s);
+		
+		//Calculate time spent
 		$this->calculateTimeSpent();
+
+		//Subtract Time spent from Client
+		$this->subtractTimeSpentFromClient();
+	}
+
+	function subtractTimeSpentFromClient()
+	{
+		//Get Client Hours Spent
+		$Client_HoursLeft_row = returnRowByClient('Client', $this->getClientName())['HoursLeft'];
+
+		//SubtractTimeSpent
+		$Client_HoursLeft_row -= $this->getTimeSpent();
+
+		//Update Database
+		updateTableByClient_NumberValue('Client', 'HoursLeft', $Client_HoursLeft_row, $this->getClientName());
 	}
 
 	function getTimeSpent()
@@ -173,8 +191,8 @@ class Time
 
 	function calculateTimeSpent()
 	{
-		$DateTimeIn = $this->Info['TimeStampIn']; /*= new DateTime($this->Info['TimeStampIn']);*/
-		$DateTimeOut = $this->Info['TimeStampOut'];/*= new DateTime($this->Info['TimeStampOut']);*/
+		$DateTimeIn = $this->Info['TimeStampIn']; 
+		$DateTimeOut = $this->Info['TimeStampOut'];
 
 		$Difference = $DateTimeIn->diff($DateTimeOut);
 
