@@ -325,9 +325,6 @@ function returnRowsForTwoValues($Tablename, $WhereColumn1, $WhereValue1, $WhereC
 	
 	while($row = $result->fetch_assoc())
 		array_push($rows, $row);
-	echo "Database: ";
-	print_r($rows);
-	echo "<br>";
 	return $rows;
 }
 

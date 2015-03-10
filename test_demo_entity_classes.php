@@ -454,14 +454,17 @@ function testDeveloperClientProjectTasksLoads()
 
 	//Create Assignments
 	newDeveloperAssignments('b.zucker', 'The Business', 'Client');
+	newDeveloperAssignments('b.zucker', $p_id, 'Project');
+	newDeveloperAssignments('b.zucker', $t_id, 'Task');
 
 	test("SELECT * FROM DeveloperAssignments");
 
 	$Developer_Demo = new Developer('b.zucker');
 
-	echo "<br>Demo: <br>";
 	print_r($Developer_Demo->getAssignments());
 
+	removeDeveloperAssignments($t_id, 'Task');
+	removeDeveloperAssignments($p_id, 'Project');
 	removeDeveloperAssignments('The Business', 'Client');
 	removeTasks('The Business', 'Loaded Project', 'Loaded Task');
 	removeProjects('The Business', 'Loaded Project');

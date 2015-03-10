@@ -47,8 +47,14 @@ class Developer
 			array_push( $this->Client_List , new Client( $assigned_client['ClientProjectTask'] ));
 
 		//Load Assigned Project List
+		$assigned_projects_rows = returnRowsDeveloperAssignments($this->Info['Username'], 'Project');
+		foreach($assigned_projects_rows as $assigned_project)
+			array_push( $this->Project_List , new Projects( $assigned_project['ClientProjectTask'] ));
 
 		//Load Assigned Task List
+		$assigned_tasks_rows = returnRowsDeveloperAssignments($this->Info['Username'], 'Task');
+		foreach($assigned_tasks_rows as $assigned_task)
+			array_push( $this->Task_List , new Tasks( $assigned_task['ClientProjectTask'] )); 
 
 		//Loads the Time Logs
 		$TimeSheet_Rows = returnRowsByUser('TimeSheet', $this->Info['Username']);
