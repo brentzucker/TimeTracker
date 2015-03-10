@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once './ControlClass/Database.php';
 class Tasks
 {
 	private $TaskID;
@@ -10,7 +10,6 @@ class Tasks
 
 	function __construct($ClientName_, $ProjectID_, $TaskName_, $Description_)
 	{
-		echo "$ClientName_";
 		$this->ClientName = $ClientName_;
 		$this->ProjectID = $ProjectID_;
 		$this->TaskName = $TaskName_;
@@ -70,7 +69,6 @@ class Tasks
 	{
 		updateTableByTaskID('Tasks', 'Description', $s, $this->getTaskID());
 		$this->Description = $s;
-		
 	}
 }
 ?>

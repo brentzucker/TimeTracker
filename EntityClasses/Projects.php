@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once './ControlClass/Database.php';
 class Projects
 {
 	private $ProjectID;

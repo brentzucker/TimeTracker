@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once './ControlClass/Database.php';
 require_once 'Contact.php';
 require_once 'Time.php';
 require_once 'Client.php';

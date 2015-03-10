@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once 'config_loader.php';
 
 /* Testing Functions to print database functions
  *
