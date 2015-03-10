@@ -260,6 +260,12 @@ function returnRowByPurchaseID($PurchaseID)
 	return returnRow('ClientPurchases', 'PurchaseID', $PurchaseID);
 }
 
+function returnRowByProjectID($ProjectID)
+{
+	//Returns ProjectID, ClientName, ProjectName, Description
+	return returnRow('Projects', 'ProjectID', $ProjectID);
+}
+
 /* Returns all rows for a Table.
  *
  */

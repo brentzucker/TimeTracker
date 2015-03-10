@@ -8,8 +8,29 @@ class Projects
 	private $Description;
 	private $Task_List = array();
 
+	function __construct()
+	{
+        $a = func_get_args(); 
+        $i = func_num_args(); 
+
+        //Calls the constructor with the corresponding number of arguments.
+        if (method_exists($this,$f='__construct'.$i)) 
+        { 
+            call_user_func_array(array($this,$f),$a); 
+        } 
+	}
+
+	function __construct1($ProjectID)
+	{
+		$project_row = returnRowByProjectID($ProjectID);
+
+		$this->ClientName = $project_row['ClientName'];
+		$this->ProjectName = $project_row['ProjectName'];
+		$this->Description = $project_row['Description'];
+	}
+
 	//This constructor creates and entry into the database.
-	function __construct($ClientName_, $ProjectName_, $Description_)
+	function __construct3($ClientName_, $ProjectName_, $Description_)
 	{
 		$this->ClientName = $ClientName_;
 		$this->ProjectName = $ProjectName_;

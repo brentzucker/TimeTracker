@@ -44,6 +44,11 @@ class Client
 			array_push( $this->Purchases , new ClientPurchase( $purchase['PurchaseID'] ));
 
 		$this->calculateTotalPurchasedHours();
+
+		//Load Client's Projects
+		$project_rows = returnRowsByClient('Projects', $this->getClientname() );
+		foreach($project_rows as $project)
+			array_push( $this->Projects, new Projects( $project['ProjectID'] ));
 	}
 
 	function getInfo()
