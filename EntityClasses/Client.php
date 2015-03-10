@@ -14,10 +14,10 @@ class Client
 		"Contact"=>"",
 		"PurchasedHours"=>""
 		);
+	private $HoursLeft;
 	private $Purchases = array();
 	private $Projects = array();
-	private $HoursLeft;
-
+	
 	function __construct($Clientname)
 	{
 		$db_entry_Client = returnRowByClient("Client", $Clientname);

@@ -41,10 +41,24 @@ class Developer
 			 $db_entry_Contact['City'],
 			 $db_entry_Contact['State']);
 
-		//Loads the TimeLogs
+		//Load Assigned Client List
+		$assigned_clients_rows = returnRowsDeveloperAssignments($this->Info['Username'], 'Client');
+		foreach($assigned_clients_rows as $assigned_client)
+			array_push( $this->Client_List , new Client( $assigned_client['ClientProjectTask'] ));
+
+		//Load Assigned Project List
+
+		//Load Assigned Task List
+
+		//Loads the Time Logs
 		$TimeSheet_Rows = returnRowsByUser('TimeSheet', $this->Info['Username']);
 		foreach($TimeSheet_Rows as $row)
 			array_push($this->Time_Log, new Time( $row['TimeLogID'] ));
+	}
+
+	function getAssignments()
+	{
+		return array("Clients"=>$this->Client_List, "Projects"=>$this->Project_List, "Tasks"=>$this->Task_List);
 	}
 
 	function getInfo()

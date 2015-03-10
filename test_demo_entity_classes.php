@@ -436,9 +436,12 @@ function testClientHoursLeft()
   	deleteEmployee('b.zucker');
 }
 
-function testClientProjectTasksLoads()
+function testDeveloperClientProjectTasksLoads()
 {
-	echo '<h1>Loading Projects into Client</h1>';
+	echo '<h1>Loading Clients into Developer</h1>';
+	
+	//Create Developer
+	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
 
 	//Create Client
 	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
@@ -449,13 +452,21 @@ function testClientProjectTasksLoads()
 	//Create Task
 	$t_id = newTasks('The Business', $p_id, 'Loaded Task', 'This task was stored in the databse before the Client object was created.');
 
-	$Client_Demo = new Client("The Business");
-		
-	print_r($Client_Demo);
+	//Create Assignments
+	newDeveloperAssignments('b.zucker', 'The Business', 'Client');
 
+	test("SELECT * FROM DeveloperAssignments");
+
+	$Developer_Demo = new Developer('b.zucker');
+
+	echo "<br>Demo: <br>";
+	print_r($Developer_Demo->getAssignments());
+
+	removeDeveloperAssignments('The Business', 'Client');
 	removeTasks('The Business', 'Loaded Project', 'Loaded Task');
 	removeProjects('The Business', 'Loaded Project');
 	deleteClient('The Business');
+	deleteEmployee('b.zucker');
 }
 
 //testContact();
@@ -470,7 +481,7 @@ function testClientProjectTasksLoads()
 //testTimeSheet();
 //testDeveloperClockIn();
 //testClientHoursLeft();
-testClientProjectTasksLoads();
+testDeveloperClientProjectTasksLoads();
 
 echo "<br><br>done";
 ?>

@@ -273,7 +273,7 @@ function returnRowByTaskID($TaskID)
 	return returnRow('Tasks', 'TaskID', $TaskID);
 }
 
-/* Returns all rows for a Table.
+/* Returns all rows for a Table based off one Where value.
  *
  */
 
@@ -310,6 +310,30 @@ function returnRowsByProjectID($ProjectID)
 {
 	//Returns TaskID, ClientName, ProjectID, TaskName, Description
 	return returnRows('Tasks', 'ProjectID', $ProjectID);
+}
+
+/* Returns all rows for a Table based off one Where value.
+ *
+ */
+
+function returnRowsForTwoValues($Tablename, $WhereColumn1, $WhereValue1, $WhereColumn2, $WhereValue2)
+{
+	//Returns Team, Username, Position
+	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn1='$WhereValue1' AND $WhereColumn2='$WhereValue2'";
+	$result = db_query($sql);
+	$rows = array();
+	
+	while($row = $result->fetch_assoc())
+		array_push($rows, $row);
+	echo "Database: ";
+	print_r($rows);
+	echo "<br>";
+	return $rows;
+}
+
+function returnRowsDeveloperAssignments($WhereValue1, $WhereValue2)
+{
+	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2);
 }
 
 /* The following functions update the database.
