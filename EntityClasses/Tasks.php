@@ -8,7 +8,31 @@ class Tasks
 	private $TaskName;
 	private $Description;
 
-	function __construct($ClientName_, $ProjectID_, $TaskName_, $Description_)
+	function __construct()
+	{
+        $a = func_get_args(); 
+        $i = func_num_args(); 
+
+        //Calls the constructor with the corresponding number of arguments.
+        if (method_exists($this,$f='__construct'.$i)) 
+        { 
+            call_user_func_array(array($this,$f),$a); 
+        } 
+	}
+
+	function __construct1($TaskID)
+	{
+		$task_row = returnRowByTaskID($TaskID);
+		
+		$this->TaskID = $task_row['TaskID'];
+		$this->ClientName = $task_row['ClientName'];
+		$this->ProjectID = $task_row['ProjectID'];
+		$this->TaskName = $task_row['TaskName'];
+		$this->Description = $task_row['Description'];
+	}
+
+	//This constructor creates a new record in the database.
+	function __construct4($ClientName_, $ProjectID_, $TaskName_, $Description_)
 	{
 		$this->ClientName = $ClientName_;
 		$this->ProjectID = $ProjectID_;

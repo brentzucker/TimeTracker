@@ -1,5 +1,6 @@
 <?php
 require_once './ControlClass/Database.php';
+require_once 'Tasks.php';
 class Projects
 {
 	private $ProjectID;
@@ -24,9 +25,15 @@ class Projects
 	{
 		$project_row = returnRowByProjectID($ProjectID);
 
+		$this->ProjectID = $project_row['ProjectID'];
 		$this->ClientName = $project_row['ClientName'];
 		$this->ProjectName = $project_row['ProjectName'];
 		$this->Description = $project_row['Description'];
+
+		//Load Tasks into Task_List
+		$tasks_rows = returnRowsByProjectID($this->ProjectID);
+		foreach($tasks_rows as $task)
+			array_push( $this->Task_List, new Tasks($task['TaskID']) );
 	}
 
 	//This constructor creates and entry into the database.
@@ -84,6 +91,11 @@ class Projects
 	function assignTask($TaskObject)
 	{
 		array_push($this->Task_List, $TaskObject);
-	}	
+	}
+
+	function getTaskList()
+	{
+		return $this->Task_List;
+	}
 }
 ?>

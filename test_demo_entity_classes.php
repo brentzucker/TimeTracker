@@ -436,7 +436,7 @@ function testClientHoursLeft()
   	deleteEmployee('b.zucker');
 }
 
-function testClientProjectLoads()
+function testClientProjectTasksLoads()
 {
 	echo '<h1>Loading Projects into Client</h1>';
 
@@ -444,11 +444,16 @@ function testClientProjectLoads()
 	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');
 	
 	//Create Project
-	createProject('The Business', 'Loaded Project', 'This project was stored in the database before the Client object was created.');
+	$p_id = newProjects('The Business', 'Loaded Project', 'This project was stored in the database before the Client object was created.');
+
+	//Create Task
+	$t_id = newTasks('The Business', $p_id, 'Loaded Task', 'This task was stored in the databse before the Client object was created.');
 
 	$Client_Demo = new Client("The Business");
-	print_r($Client_Demo->getProjects());
+		
+	print_r($Client_Demo);
 
+	removeTasks('The Business', 'Loaded Project', 'Loaded Task');
 	removeProjects('The Business', 'Loaded Project');
 	deleteClient('The Business');
 }
@@ -465,7 +470,7 @@ function testClientProjectLoads()
 //testTimeSheet();
 //testDeveloperClockIn();
 //testClientHoursLeft();
-testClientProjectLoads();
+testClientProjectTasksLoads();
 
 echo "<br><br>done";
 ?>

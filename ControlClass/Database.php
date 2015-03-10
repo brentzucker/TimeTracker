@@ -173,6 +173,7 @@ function newProjects($ClientName, $ProjectName, $Description)
 {
 	$sql = "INSERT INTO Projects(ClientName, ProjectName, Description) VALUES ('$ClientName', '$ProjectName', '$Description')";
 	db_query($sql);
+	//Returns ProjectID
 	return mysqli_insert_id(getConnection());
 }
 
@@ -266,6 +267,12 @@ function returnRowByProjectID($ProjectID)
 	return returnRow('Projects', 'ProjectID', $ProjectID);
 }
 
+function returnRowByTaskID($TaskID)
+{
+	//Returns TaskID, ClientName, ProjectID, TaskName, Description
+	return returnRow('Tasks', 'TaskID', $TaskID);
+}
+
 /* Returns all rows for a Table.
  *
  */
@@ -297,6 +304,12 @@ function returnRowsByTimeLogID($TimeLogID)
 {
 	//Returns TimeLogID, Username, ClientName, ProjectID, TaskID, TimeIn, TimeOut, TimeSpent
 	return returnRows('TimeSheet', 'TimeLogID', $TimeLogID);
+}
+
+function returnRowsByProjectID($ProjectID)
+{
+	//Returns TaskID, ClientName, ProjectID, TaskName, Description
+	return returnRows('Tasks', 'ProjectID', $ProjectID);
 }
 
 /* The following functions update the database.
