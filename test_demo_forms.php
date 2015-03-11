@@ -103,8 +103,11 @@ function testDeveloperClockInForm()
 
 	$Developer_Demo = new Developer('b.zucker');
 
+	$_SESSION['Developer'] = $Developer_Demo;
+
 	form($Developer_Demo);
 
+	/*
 	removeDeveloperAssignments($t_id, 'Task');
 	removeDeveloperAssignments($p_id4, 'Project');
 	removeDeveloperAssignments($p_id3, 'Project');
@@ -119,11 +122,43 @@ function testDeveloperClockInForm()
 	deleteClient('CocaCola');
 	deleteClient('The Business');
 	deleteEmployee('b.zucker');
+	*/
+}
+
+function beforeHTML()
+{
+	session_start();
+
+	echo '<h1>' . $_SESSION['Developer']->getUsername() . " is logged in</h1>";
+
+	print_r($_POST);
+
+	if(isset($_POST['ClockIn']))
+	{
+		if($_SESSION['Developer']->getTimeSetFlag() == False)
+		{
+			echo "clocked in";
+			$_SESSION['Developer']->clockIn($_POST['Task_Selected']);
+			$_SESSION['Developer']->setTimeSetFlag(True);
+		}
+	}
+			
+
+	if(isset($_POST['ClockOut']))
+	{
+		echo "clocked out";	
+		$_SESSION['Developer']->clockOut();
+	}
+		
+
+	test("SELECT * FROM TimeSheet");
+
+	unset($_POST);
 }
 
 function form($Developer)
 {
-	echo '<form>';
+	echo '<form action="" method="POST">';
 
 	echo 'Select a Client:<br>';
 	echo '<select name="Client_Selected">';
@@ -143,13 +178,16 @@ function form($Developer)
 	echo '<select name="Task_Selected">';
 
 	foreach($Developer->getTaskList() as $task)
-		echo '<option value="' . $task->getTaskName() . '">' . $task->getTaskName() . '</option>';
+		echo '<option value="' . $task->getTaskID() . '">' . $task->getTaskName() . '</option>';
 
 	echo '</select>';
-
+	echo '<br>';
+	echo '<input type="submit" name="ClockIn" value="Clock In">';
+	echo '<input type="submit" name="ClockOut" value="Clock Out">';
 	echo '</form>';
 }
 
+beforeHTML();
 testDeveloperClockInForm();
 
 echo 'done';

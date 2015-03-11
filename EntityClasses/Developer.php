@@ -54,7 +54,7 @@ class Developer
 		//Load Assigned Task List
 		$assigned_tasks_rows = returnRowsDeveloperAssignments($this->Info['Username'], 'Task');
 		foreach($assigned_tasks_rows as $assigned_task)
-			array_push( $this->Task_List , new Tasks( $assigned_task['ClientProjectTask'] )); 
+			array_push( $this->Task_List , new Tasks( $assigned_task['ClientProjectTask'] ));
 
 		//Loads the Time Logs
 		$TimeSheet_Rows = returnRowsByUser('TimeSheet', $this->Info['Username']);
@@ -186,10 +186,14 @@ class Developer
 		array_push($this->Task_List, $TaskObject);
 	}
 
-	function clockIn($ClientName, $ProjectID, $TaskID)
+	function clockIn($TaskID)
 	{
 		if($this->getTimeSetFlag() == False)
 		{
+			$task_row = returnRowByTaskID($TaskID);
+			$ClientName = $task_row['ClientName'];
+			$ProjectID = $task_row['ProjectID'];
+
 			$TimeIn = date('Y-m-d H:i:s', time());
 			$TimeLogID = newTimeSheet($this->getUsername(), $ClientName, $ProjectID, $TaskID, $TimeIn, '0000-00-00 00:00:00', 0);
 			$this->setCurrentTimeLog(new Time($TimeLogID));
@@ -201,6 +205,7 @@ class Developer
 	{
 		if($this->getTimeSetFlag() == True)
 		{
+			echo "<br>called: clock out";
 			$TimeOut = date('Y-m-d H:i:s', time());
 			$this->getCurrentTimeLog()->setTimeStampOut($TimeOut);
 			$this->pushCurrentTimeLog();

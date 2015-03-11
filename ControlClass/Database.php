@@ -239,6 +239,15 @@ function returnRow($Tablename, $WhereColumn, $WhereValue)
 	return $row;
 }
 
+function returnRowByNumber($Tablename, $WhereColumn, $WhereValue)
+{
+	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn=$WhereValue";
+	$result = db_query($sql);
+	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	mysqli_free_result($result);
+	return $row;
+}
+
 function returnRowByUser($Tablename, $Username)
 {
 	return returnRow($Tablename, 'Username', $Username);
@@ -270,7 +279,7 @@ function returnRowByProjectID($ProjectID)
 function returnRowByTaskID($TaskID)
 {
 	//Returns TaskID, ClientName, ProjectID, TaskName, Description
-	return returnRow('Tasks', 'TaskID', $TaskID);
+	return returnRowByNumber('Tasks', 'TaskID', $TaskID);
 }
 
 /* Returns all rows for a Table based off one Where value.
