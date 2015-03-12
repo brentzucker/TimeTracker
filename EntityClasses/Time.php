@@ -1,5 +1,6 @@
 <?php
-require_once './ControlClass/Database.php';
+require_once(__DIR__.'/../include.php');
+
 class Time
 {
 	private $Info = array(

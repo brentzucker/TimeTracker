@@ -1,5 +1,6 @@
 <?php
-require_once './ControlClass/Database.php';
+require_once(__DIR__.'/../include.php');
+
 class Tasks
 {
 	private $TaskID;
@@ -23,7 +24,7 @@ class Tasks
 	function __construct1($TaskID)
 	{
 		$task_row = returnRowByTaskID($TaskID);
-		
+
 		$this->TaskID = $task_row['TaskID'];
 		$this->ClientName = $task_row['ClientName'];
 		$this->ProjectID = $task_row['ProjectID'];

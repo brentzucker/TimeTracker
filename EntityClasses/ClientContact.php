@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__.'/../include.php');
+
 class ClientContact
 {
 	private $Clientname;

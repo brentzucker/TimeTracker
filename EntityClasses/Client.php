@@ -1,10 +1,5 @@
 <?php
-require_once './ControlClass/Database.php';
-require_once 'Contact.php';
-require_once 'ClientContact.php';
-require_once 'ClientPurchase.php';
-require_once 'Projects.php';
-require_once 'Tasks.php';
+require_once(__DIR__.'/../include.php');
 
 class Client
 {

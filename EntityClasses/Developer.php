@@ -1,8 +1,5 @@
 <?php
-require_once './ControlClass/Database.php';
-require_once 'Contact.php';
-require_once 'Time.php';
-require_once 'Client.php';
+require_once(__DIR__.'/../include.php');
 
 class Developer
 {
