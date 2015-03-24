@@ -22,3 +22,16 @@ input {
 .submit {
 	width: 25%;
 }
+
+.header-wrap{
+	height: 400px;
+	background-color: #8585AD;
+}
+
+.logo {
+	position: relative;
+}
+
+.menu {
+	position: relative;
+}
