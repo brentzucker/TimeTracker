@@ -1,15 +1,8 @@
-<html>
-<head>
-<title>Client Form</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-
-<body>
-
-
 <?php
-require_once 'Database.php';
-require_once 'clientTest.php';
+require_once 'include.php';
+require_once 'page_functions.php';
+
+html_header("Client Form");
 
 $date = date("Y-m-d");
 
@@ -45,10 +38,7 @@ _END;
 			");
 			
 	}
+	
+html_footer();
 
 ?>
-
-
-</body>
-
-</html>

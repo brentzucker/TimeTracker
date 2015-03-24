@@ -2,7 +2,7 @@
 
 require_once 'include.php';
 
-function header($title); //Function to load the header of the webpage. Takes in the title of the page.
+function html_header($title) //Function to load the header of the webpage. Takes in the title of the page.
 {
 echo<<<_END
 
@@ -22,9 +22,10 @@ echo<<<_END
 			</div>
 		</div>
 _END;
+
 }
 
-function footer(); //Function to load the footer of the webpage and close out the HTML.
+function html_footer() //Function to load the footer of the webpage and close out the HTML.
 {
 echo<<<_END
 

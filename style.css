@@ -1,12 +1,15 @@
+body {
+	margin: 0;
+}
+
 .client_form {
 	margin: auto;
-	position: relative;
 	width:550px;
 	height:450px;
-	padding:10px;
 	border: 1px solid #999;
 	line-height: 24px;
 	border-radius: 5px;
+	position: relative;
 }
 	
 input {
@@ -24,14 +27,15 @@ input {
 }
 
 .header-wrap{
-	height: 400px;
+	height: 200px;
 	background-color: #8585AD;
+	position: relative;
 }
 
 .logo {
-	position: relative;
+
 }
 
 .menu {
-	position: relative;
+
 }
