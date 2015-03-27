@@ -24,9 +24,7 @@ class testDeveloper extends UnitTestCase
 		
 		sort($dev_clients);
 
-		if($this->assertEqual($expected_list, $dev_clients))
-			echo "success";
-		else echo "fail";
+		$this->assertEqual($expected_list, $dev_clients);
 	}
 }
 ?>
