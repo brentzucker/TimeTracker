@@ -1,5 +1,11 @@
 body {
 	margin: 0;
+	background-color: gray;
+	height: 800px;
+}
+
+.body {
+	height:68%;
 }
 
 .client_form {
@@ -27,9 +33,10 @@ input {
 }
 
 .header-wrap{
-	height: 200px;
-	background-color: #8585AD;
+	height: auto;
+	background-color: #006633;
 	position: relative;
+	border-bottom: 5px solid #003399;
 }
 
 .logo {
@@ -37,11 +44,22 @@ input {
 }
 
 .menu {
-
+	text-align: center;
+	position: relative;
 }
 
 #accordion-1 {
 	width: 50%;
 	margin: 0 auto;
-	margin-top: 50px;
+	top: 80%;
+  	-webkit-transform: translateY(-80%);
+  	-ms-transform: translateY(-80%);
+  	transform: translateY(-80%);
+}
+
+.footer {
+	height: 150px;
+	background-color: #006633;
+	border-top: 5px solid #003399;
+	text-align: center;
 }
