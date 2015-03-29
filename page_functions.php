@@ -35,11 +35,14 @@ _END;
 
 function html_footer() //Function to load the footer of the webpage and close out the HTML.
 {
+
+$year = date("Y");
+
 echo<<<_END
 	<br />
 	
 	<div class="footer">
-		<p>Footer Test &copy; 2015</p>
+		<p>Footer Test &copy; $year</p>
 	</div>
 
 	</body>
