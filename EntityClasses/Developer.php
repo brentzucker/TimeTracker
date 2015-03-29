@@ -16,7 +16,7 @@ class Developer
 	private $Current_TimeLog;
 
 	//If False Clock In, if True Clock out
-	private $TimeSet_Flag = False;
+	private $TimeSet_Flag;
 
 	function __construct($Username)
 	{
@@ -57,6 +57,8 @@ class Developer
 		$TimeSheet_Rows = returnRowsByUser('TimeSheet', $this->Info['Username']);
 		foreach($TimeSheet_Rows as $row)
 			array_push($this->Time_Log, new Time( $row['TimeLogID'] ));
+
+		$this->TimeSet_Flag = False;
 	}
 
 	function getAssignments()
@@ -202,12 +204,58 @@ class Developer
 	{
 		if($this->getTimeSetFlag() == True)
 		{
-			echo "<br>called: clock out";
 			$TimeOut = date('Y-m-d H:i:s', time());
 			$this->getCurrentTimeLog()->setTimeStampOut($TimeOut);
 			$this->pushCurrentTimeLog();
 			$this->setTimeSetFlag(False);
 		}
+	}
+
+	function getClient($ClientName)
+	{
+		foreach($this->Client_List as $Client)
+			if(strcmp($Client->getClientname(), $ClientName) == 0)
+				return $Client;
+	}
+
+	function getProject($projectid)
+	{
+		foreach($this->Project_List as $project)
+			if($project->getProjectID() == $projectid)
+				return $project;
+	}
+
+	function getClientsProjectsAssigned($clientname)
+	{
+		$ret = array();
+		$client = $this->getClient($clientname);
+		$dev_projects = $this->getProjectList();
+
+		foreach($dev_projects as $dev_project)
+			foreach($client->getProjects() as $project)
+				if($dev_project->getProjectID() == $project->getProjectID())
+					array_push($ret, $project);
+
+		return $ret;
+	}
+
+	function getProjectsTasksAssigned($projectid)
+	{
+		$ret = array();
+		$project = $this->getProject($projectid);
+		$dev_tasks = $this->getTaskList();
+
+		foreach($dev_tasks as $dev_task)
+		{
+			foreach($project->getTaskList() as $task)
+			{
+				if($dev_task->getTaskID() == $task->getTaskID())
+					array_push($ret, $task);
+			}
+				
+		}
+			
+		return $ret;
 	}
 }
 ?>
