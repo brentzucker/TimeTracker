@@ -13,22 +13,22 @@ echo<<<_END
 		<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-		<script>
-			$(function() {
-				$( "#accordion-1" ).accordion();
-			});
-		</script>
+		<script type="text/javascript" src="jsfunctions.js"></script>
 	</head>
 	
-	<body>
+	<div class="body">
 		<div class="header-wrap">
 			<div class="logo">
 				<a><img src="http://placehold.it/350x150"></a>
-			<div>
+			</div>
 			<div class="menu">
-				<p>//**If we want a menu it will go here**//</p>
+
 			</div>
 		</div>
+		
+		<br />
+	</div>
+	<body>
 _END;
 
 }
@@ -36,6 +36,11 @@ _END;
 function html_footer() //Function to load the footer of the webpage and close out the HTML.
 {
 echo<<<_END
+	<br />
+	
+	<div class="footer">
+		<p>Footer Test &copy; 2015</p>
+	</div>
 
 	</body>
 </html>
