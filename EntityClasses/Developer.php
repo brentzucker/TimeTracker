@@ -246,16 +246,26 @@ class Developer
 		$dev_tasks = $this->getTaskList();
 
 		foreach($dev_tasks as $dev_task)
-		{
 			foreach($project->getTaskList() as $task)
-			{
 				if($dev_task->getTaskID() == $task->getTaskID())
 					array_push($ret, $task);
-			}
-				
-		}
 			
 		return $ret;
+	}
+
+	function getDevelopers()
+	{
+		$ret = array();
+
+		//query database for developers with same team name
+		$developers = returnRowsByTeam($this->getTeam());
+
+		//create list of developer objects
+		foreach($developers as $dev)
+			array_push( $ret, new Developer( $dev['Username'] ));
+
+		//return list
+		return $ret; 
 	}
 }
 ?>

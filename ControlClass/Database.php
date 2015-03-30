@@ -321,6 +321,11 @@ function returnRowsByProjectID($ProjectID)
 	return returnRows('Tasks', 'ProjectID', $ProjectID);
 }
 
+function returnRowsByTeam($team)
+{
+	return returnRows('Developer', 'Team', $team);
+}
+
 /* Returns all rows for a Table based off one Where value.
  *
  */
