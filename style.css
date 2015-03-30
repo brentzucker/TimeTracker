@@ -68,3 +68,50 @@ input {
 	border-top: 5px solid #003399;
 	text-align: center;
 }
+
+.button {
+	width: 200px;
+	height: 100px;
+	border: 3px solid #003399;
+	margin: 0 auto;
+	text-align: center;
+	margin-bottom: 50px;
+	border-radius: 10px;
+	background-color: #006633;
+	color: #fff;
+}
+
+.home-1 {
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+
+    -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
+	
+	
+}
+
+.home-2 {
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+
+    -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
+}
+
+.main {
+	width: 70%;
+	margin: 0 auto;
+  	-webkit-transform: translateY(-50%);
+  	-ms-transform: translateY(-50%);
+  	transform: translateY(-50%);
+}
+
+a {
+	width: 200px;
+	height: 100px;
+}
