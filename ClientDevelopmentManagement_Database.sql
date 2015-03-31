@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Mar 10, 2015 at 12:31 AM
+-- Generation Time: Mar 31, 2015 at 10:33 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -58,7 +58,7 @@ CREATE TABLE `ClientPurchases` (
   `PurchaseDate` date DEFAULT NULL,
   PRIMARY KEY (`PurchaseID`),
   KEY `ClientName` (`ClientName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -160,7 +160,7 @@ CREATE TABLE `TimeSheet` (
   `ClientName` varchar(30) DEFAULT NULL,
   `ProjectID` int(11) DEFAULT NULL,
   `TaskID` int(11) DEFAULT NULL,
-  `TimeIn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `TimeIn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `TimeOut` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `TimeSpent` bigint(20) NOT NULL,
   PRIMARY KEY (`TimeLogID`),
