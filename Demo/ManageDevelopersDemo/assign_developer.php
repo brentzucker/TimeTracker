@@ -1,8 +1,6 @@
 <?php
 require_once(__DIR__.'/../../include.php');
 
-//createEmployee('SE', 'm.graessle', 'Developer', 'pass', 'Max', 'graessle', '1234567890', 'max@fatstacks.com', '15 main st', 'College Park', 'GA');
-
 function developerDropDown()
 {
 	$developers = $_SESSION['Developer']->getDevelopers();
@@ -15,6 +13,8 @@ function developerDropDown()
 }
 
 session_start();
+
+echo '<a href="create_developer.php"><h2>Create Developer</h2></a>';
 
 //Select Developer
 echo "<h2>Manage Developers</h2><h4>Select a Developer</h4>";
