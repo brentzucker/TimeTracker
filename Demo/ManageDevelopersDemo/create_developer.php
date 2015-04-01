@@ -49,11 +49,6 @@ END;*/
 END;
 }
 
-if(isset($_POST['Submit']))
-{
-	//createEmployee($team, $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state)
-}
-
 session_start();
 
 echo '<h2>Create Developer</h2>';

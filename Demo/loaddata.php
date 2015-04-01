@@ -36,7 +36,7 @@ function loadData()
 loadData();
 
 echo<<<END
-<form action="login.php" method="POST">
+<form action="demo_login.php" method="POST">
 <input type="submit" value="Log in">
 </form>
 END;
