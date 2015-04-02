@@ -83,4 +83,42 @@ function clockForm($developer, $taskid)
 	echo '<input type="submit" name="clockout" value="Clock Out">';
 	echo '</form>';
 }
+
+//This function echos the contact input fields for a form.
+function echoContactInput()
+{
+	echo<<<END
+	<br>Firstname:<br>
+	<input type="text" name="firstname">
+	<br>Lastname:<br>
+	<input type="text" name="lastname">
+	<br>Phone:<br>
+	<input type="text" name="phone">
+	<br>Email:<br>
+	<input type="text" name="email">
+	<br>Address:<br>
+	<input type="text" name="address">
+	<br>City:<br>
+	<input type="text" name="city">
+	<br>State:<br>
+	<input type="text" name="state">
+	<br>
+END;
+}
+
+//This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
+function newClientForm()
+{
+	if(isset($_POST['Submit']))
+		createClient($_POST['clientname'], $_POST['startdate'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+
+	echo '<form id="developer_form" action="" method="POST">';
+	echo '<br>Client Name:<br>';
+	echo '<input type="text" name="clientname">';
+	echo '<br>StartDate:<br>';
+	echo '<input type="date" name="startdate">';
+	echoContactInput();
+	echo '<input type="submit" name="Submit" value="Create Client">';
+	echo '</form>';
+}
 ?>
