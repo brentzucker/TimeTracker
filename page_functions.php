@@ -13,6 +13,9 @@ echo<<<_END
 		<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<script type="text/javascript" src="jsfunctions.js"></script>
 	</head>
 	
@@ -22,7 +25,12 @@ echo<<<_END
 				<a><img src="http://placehold.it/350x150"></a>
 			</div>
 			<div class="menu">
-
+				<ul>
+					<li><a href="#">Page1</a></li>
+					<li><a href="#">Page2</a></li>
+					<li><a href="#">Page3</a></li>
+					<li><a href="#">Page4</a></li>
+				</ul>
 			</div>
 		</div>
 		
