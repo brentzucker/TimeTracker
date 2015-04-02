@@ -26,10 +26,11 @@ echo<<<_END
 			</div>
 			<div class="menu">
 				<ul>
-					<li><a href="#">Page1</a></li>
-					<li><a href="#">Page2</a></li>
-					<li><a href="#">Page3</a></li>
-					<li><a href="#">Page4</a></li>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Clock In</a></li>
+					<li><a href="#">Reports</a></li>
+					<li><a href="#">Manage Developers</a></li>
+					<li><a href="#">Manage Clients</a></li>
 				</ul>
 			</div>
 		</div>
