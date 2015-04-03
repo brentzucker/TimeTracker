@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__.'/../../include.php');
 
+<<<<<<< HEAD
 function createDeveloperForm()
 {
 	/*
@@ -201,9 +202,16 @@ END;
 END;
 }
 
+=======
+>>>>>>> origin/master
 session_start();
 
 echo '<h2>Create Developer</h2>';
 
+<<<<<<< HEAD
 createDeveloperForm();
 ?>
+=======
+newDeveloperForm();
+?>
+>>>>>>> origin/master

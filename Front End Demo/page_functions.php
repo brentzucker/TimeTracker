@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__.'/include.php');
+require_once(__DIR__.'/../include.php');
 
 function html_header($title) //Function to load the header of the webpage. Takes in the title of the page.
 {
@@ -24,9 +24,6 @@ echo<<<_END
 			<div class="logo">
 				<a><img src="http://placehold.it/350x150"></a>
 			</div>
-			
-			<br /><br />
-			
 			<div class="menu">
 				<ul>
 					<li><a href="demo_login.php">Home</a></li>
@@ -45,20 +42,6 @@ _END;
 
 }
 
-function open_sidebar()
-{
-echo<<<_END
-<div class="sidebar-widget">
-_END;
-}
-
-function close_sidebar()
-{
-echo<<<_END
-</div>
-_END;
-}
-
 function html_footer() //Function to load the footer of the webpage and close out the HTML.
 {
 
@@ -68,7 +51,7 @@ echo<<<_END
 	<br />
 	
 	<div class="footer">
-		<p>Development Management System &copy; $year</p>
+		<p>Footer Test &copy; $year</p>
 	</div>
 
 	</body>

@@ -4,22 +4,10 @@ require_once(__DIR__.'/../include.php');
 //This function echos the links on the home page
 function echoHomePageLinks()
 {
-	echo '<ul>';
-	echo '<li><h3><a href="ClockinDemo/select_client.php">Clock Into Work</a></li>';
-	echo '<li><h3><a href="ReportsDemo/select_report.php">View Reports</a></li>';
-	echo '<li><h3><a href="ManageDevelopersDemo/assign_developer.php">Manage Developers</a></li>';
-	echo '<li><h3><a href="ManageClientsDemo/manage_clients.php">Manage Clients</a></li>';
-	echo '</ul>';
-}
-
-//This function echos the links on the manage clients page
-function echoManageClientsLinks()
-{
-	echo '<ul>';
-	echo '<li><h3><a href="new_client.php">New Client</a></li>';
-	echo '<li><h3><a href="new_project.php">New Project</a></li>';
-	echo '<li><h3><a href="new_task.php">New Task</a></li>';
-	echo '</ul>';
+	echo '<h3><a href="select_client.php">Clock Into Work</a>';
+	echo '<h3><a href="select_report.php">View Reports</a>';
+	echo '<h3><a href="assign_developer.php">Manage Developers</a>';
+	echo '<h3><a href="manage_clients.php">Manage Clients</a>';
 }
 
 //This function gets passed a Developer and echos a dropdwon selector for the Developer's Client List
@@ -93,64 +81,6 @@ function clockForm($developer, $taskid)
 	echo '<form action="" method="POST">';
 	echo '<input type="submit" name="clockin" value="Clock In">';
 	echo '<input type="submit" name="clockout" value="Clock Out">';
-	echo '</form>';
-}
-
-//This function echos the contact input fields for a form.
-function echoContactInput()
-{
-	echo<<<END
-	<br>Firstname:<br>
-	<input type="text" name="firstname">
-	<br>Lastname:<br>
-	<input type="text" name="lastname">
-	<br>Phone:<br>
-	<input type="text" name="phone">
-	<br>Email:<br>
-	<input type="text" name="email">
-	<br>Address:<br>
-	<input type="text" name="address">
-	<br>City:<br>
-	<input type="text" name="city">
-	<br>State:<br>
-	<input type="text" name="state">
-	<br>
-END;
-}
-
-//This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
-function newClientForm()
-{
-	if(isset($_POST['Submit']))
-		createClient($_POST['clientname'], $_POST['startdate'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
-
-	echo '<form id="developer_form" action="" method="POST">';
-	echo '<br>Client Name:<br>';
-	echo '<input type="text" name="clientname">';
-	echo '<br>StartDate:<br>';
-	echo '<input type="date" name="startdate">';
-	echoContactInput();
-	echo '<input type="submit" name="Submit" value="Create Client">';
-	echo '</form>';
-}
-
-//This function echos a form to create a new Developer and calls the createEmployee method which stores the info in the database.
-function newDeveloperForm()
-{
-	if(isset($_POST['Submit']))
-		createEmployee($_POST['team'], $_POST['username'], $_POST['position'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
-
-	echo '<form id="developer_form" action="" method="POST">';
-	echo '<br>Team:<br>';
-	echo '<input type="text" name="team">';
-	echo '<br>Username:<br>';
-	echo '<input type="text" name="username">';
-	echo '<br>Password:<br>';
-	echo '<input type="password" name="password">';
-	echo '<br>Position:<br>';
-	echo '<input type="text" name="position">';
-	echoContactInput();
-	echo '<br><input type="submit" name="Submit" value="Create Developer">';
 	echo '</form>';
 }
 ?>
