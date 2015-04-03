@@ -8,18 +8,12 @@ echo<<<_END
 
 <div id="tabs">
 	<ul>
-		<li><a href="#tabs-1">Login</a></li>
-		<li><a href="#tabs-2">Information</a></li>
+		<li><a href="#tabs-1">Nunc tincidunt</a></li>
+		<li><a href="#tabs-2">Proin dolor</a></li>
 		<li><a href="#tabs-3">Aenean lacinia</a></li>
 	</ul>
 <div id="tabs-1">
-	<form id="account-form" method="POST">
-		<p>Change Username:</p><input type="text" id="username" /><br><br>
-		<p>Change Password:</p><input type="text" id="password" /><br><br>
-		<p>Type Password Again:</p><input type="text" id="password2" /><br><br>
-		<label id="update-label"></label><br><br>
-		<input type="submit" value="Update User Information"/>
-	</form>
+	<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
 </div>
 
 <div id="tabs-2">
@@ -33,9 +27,6 @@ echo<<<_END
 </div>
 
 _END;
-
-open_sidebar();
-close_sidebar();
 
 html_footer();
 
