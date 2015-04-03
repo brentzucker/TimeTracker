@@ -28,6 +28,9 @@ echo<<<_END
 
 _END;
 
+open_sidebar();
+close_sidebar();
+
 html_footer();
 
 ?>

@@ -176,7 +176,7 @@ input {
 }
 
 .menu {
-	width: 50%;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -257,7 +257,8 @@ input {
 
 #tabs {
 	width: 50%;
-	margin: 0 auto;
+	margin-right: 10%;
+	float: right;
 }
 
 #box {
@@ -269,5 +270,28 @@ input {
 	border-radius: 10px;
 	background-color: #fff;
 	border: 3px solid #003399;
+}
+
+.sidebar-widget {
+    background-color: #fff;
+    height: 650px;
+    margin-left: 10%;
+    position: relative;
+    width: 25%;
+	border-radius: 10px;
+	border: 3px solid #003399;
+}
+
+@media screen and (min-width: 980px) {
+  .sidebar-widget {
+	margin-left: 5%;
+	width: 30%;
+  }
+  
+  #tabs {
+	margin-right: 5%;
+	width: 55%;
+  }
+  
 }
 
