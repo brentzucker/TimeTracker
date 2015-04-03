@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__.'/../../include.php');
 
+/*
 function taskDropDown($developer, $projectid)
 {
 	$tasks = $developer->getProjectsTasksAssigned($projectid);
@@ -10,10 +11,11 @@ function taskDropDown($developer, $projectid)
 		echo '<option value="' . $t->getTaskID() . '">' . $t->getTaskName() . '</option>';
 	echo '</select>';
 	echo '<input type="submit" value="Submit">';
-}
+}*/
 
 session_start();
 
+//Stores the project selected in the 'assign' session variable
 $_SESSION['assign']['project'] = $_POST['Project_Selected'];
 
 //Select Developer
