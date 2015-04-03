@@ -282,6 +282,22 @@ input {
 	border: 3px solid #003399;
 }
 
+#username {
+	float: left;
+}
+
+#password {
+	float: left;
+}
+
+#password2 {
+	float: left;
+}
+
+/*
+------------------------------------------------MEDIA QUERIES-------------------------------------------------
+*/
+
 @media screen and (min-width: 980px) {
   .sidebar-widget {
 	margin-left: 5%;

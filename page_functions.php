@@ -24,6 +24,9 @@ echo<<<_END
 			<div class="logo">
 				<a><img src="http://placehold.it/350x150"></a>
 			</div>
+			
+			<br /><br />
+			
 			<div class="menu">
 				<ul>
 					<li><a href="demo_login.php">Home</a></li>
@@ -65,7 +68,7 @@ echo<<<_END
 	<br />
 	
 	<div class="footer">
-		<p>Footer Test &copy; $year</p>
+		<p>Development Management System &copy; $year</p>
 	</div>
 
 	</body>
