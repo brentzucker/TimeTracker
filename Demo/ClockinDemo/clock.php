@@ -14,5 +14,5 @@ echo '<h3>Clock In</h3>';
 
 clockForm($_SESSION['Developer'], $_SESSION['currentLog']['task']);
 
-printTimeLogTable($_SESSION['currentLog']['task']);
+printTimeLogTableByTask($_SESSION['currentLog']['task']);
 ?>
