@@ -113,13 +113,13 @@ function printTimeLogTableByDeveloper($developer)
 	echo '</table>';
 }
 
-//This function consumes a developer username and echos an Assignment table for the specific developer
-function printAssignmentsTable($developer)
+//This function consumes a developer username and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
+function printAggregatedTimeLogTableByDeveloper($developer)
 {
-	$query = "SELECT * FROM DeveloperAssignments WHERE Username='" . $developer ."'";
+	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.Username='" . $developer ."'GROUP BY t.ClientName";
 	echo '<table style="border:1px solid black; text-align:center;">';
 
-	echo '<tr><th>Username</th><th>ClientProjectTask</th><th>Type</th></tr>';
+	echo '<tr><th>Username</th><th>Client</th><th>Time Spent</th></tr>';
 
 	if($result = db_query($query))
 	{
@@ -135,13 +135,57 @@ function printAssignmentsTable($developer)
 	echo '</table>';
 }
 
-//This function consumes a developer username and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
-function printAggregatedTimeLogTableByDeveloper($developer)
+//This function consumes a client name and echos the timeLog table for the specific developer
+function printTimeLogTableByClient($client)
+{
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t WHERE  t.ClientName='" . $client ."'";
+	echo '<table style="border:1px solid black; text-align:center;">';
+
+	echo '<tr><th>TimeLogID</th><th>Username</th><th>Client</th><th>Time In</th><th>Time Out</th><th>Time Spent</th></tr>';
+
+	if($result = db_query($query))
+	{
+		while($row = mysqli_fetch_row($result))
+		{
+			echo '<tr>';
+			foreach($row as $r)
+				echo "<td style=\"border:1px solid black;padding:5px;\">$r</td>";
+			echo '</tr>';
+		}
+	}
+	mysqli_free_result($result);
+	echo '</table>';
+}
+
+//This function consumes a client name and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
+function printAggregatedTimeLogTableByClient($client)
 {
 	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.Username='" . $developer ."'GROUP BY t.ClientName";
 	echo '<table style="border:1px solid black; text-align:center;">';
 
 	echo '<tr><th>Username</th><th>Client</th><th>Time Spent</th></tr>';
+
+	if($result = db_query($query))
+	{
+		while($row = mysqli_fetch_row($result))
+		{
+			echo '<tr>';
+			foreach($row as $r)
+				echo "<td style=\"border:1px solid black;padding:5px;\">$r</td>";
+			echo '</tr>';
+		}
+	}
+	mysqli_free_result($result);
+	echo '</table>';
+}
+
+//This function consumes a developer username and echos an Assignment table for the specific developer
+function printAssignmentsTable($developer)
+{
+	$query = "SELECT * FROM DeveloperAssignments WHERE Username='" . $developer ."'";
+	echo '<table style="border:1px solid black; text-align:center;">';
+
+	echo '<tr><th>Username</th><th>ClientProjectTask</th><th>Type</th></tr>';
 
 	if($result = db_query($query))
 	{
