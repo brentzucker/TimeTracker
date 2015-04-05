@@ -160,10 +160,32 @@ function printTimeLogTableByClient($client)
 //This function consumes a client name and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
 function printAggregatedTimeLogTableByClient($client)
 {
-	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.Username='" . $developer ."'GROUP BY t.ClientName";
+	$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.ClientName='" . $client ."'GROUP BY t.Username";
 	echo '<table style="border:1px solid black; text-align:center;">';
 
-	echo '<tr><th>Username</th><th>Client</th><th>Time Spent</th></tr>';
+	echo '<tr><th>Client</th><th>Username</th><th>Time Spent</th></tr>';
+
+	if($result = db_query($query))
+	{
+		while($row = mysqli_fetch_row($result))
+		{
+			echo '<tr>';
+			foreach($row as $r)
+				echo "<td style=\"border:1px solid black;padding:5px;\">$r</td>";
+			echo '</tr>';
+		}
+	}
+	mysqli_free_result($result);
+	echo '</table>';
+}
+
+//This function consumes a client name and echos a view of the ClientPurchases table 
+function printHoursLeftTable($client)
+{
+	$query = 'SELECT p.ClientName, p.HoursPurchased, p.PurchaseDate, c.HoursLeft FROM ClientPurchases p, Client c WHERE (c.ClientName = p.ClientName) AND c.ClientName="' . $client . '"';
+	echo '<table style="border:1px solid black; text-align:center;">';
+
+	echo '<tr><th>Client</th><th>Hours Purchased</th><th>Purchase Date</th><th>Hours Left</th></tr>';
 
 	if($result = db_query($query))
 	{
