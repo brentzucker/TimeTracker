@@ -179,6 +179,50 @@ function printAggregatedTimeLogTableByClient($client)
 	echo '</table>';
 }
 
+//This function consumes a projectid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
+function printAggregatedTimeLogTableByProject($project)
+{
+	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
+	echo '<table style="border:1px solid black; text-align:center;">';
+
+	echo '<tr><th>Client</th><th>Project Name</th><th>Username</th><th>Time Spent</th></tr>';
+
+	if($result = db_query($query))
+	{
+		while($row = mysqli_fetch_row($result))
+		{
+			echo '<tr>';
+			foreach($row as $r)
+				echo "<td style=\"border:1px solid black;padding:5px;\">$r</td>";
+			echo '</tr>';
+		}
+	}
+	mysqli_free_result($result);
+	echo '</table>';
+}
+
+//This function consumes a client name and echos the timeLog table for the specific developer
+function printTimeLogTableByProject($project)
+{
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
+	echo '<table style="border:1px solid black; text-align:center;">';
+
+	echo '<tr><th>TimeLogID</th><th>Username</th><th>Client</th><th>Time In</th><th>Time Out</th><th>Time Spent</th></tr>';
+
+	if($result = db_query($query))
+	{
+		while($row = mysqli_fetch_row($result))
+		{
+			echo '<tr>';
+			foreach($row as $r)
+				echo "<td style=\"border:1px solid black;padding:5px;\">$r</td>";
+			echo '</tr>';
+		}
+	}
+	mysqli_free_result($result);
+	echo '</table>';
+}
+
 //This function consumes a client name and echos a view of the ClientPurchases table 
 function printHoursLeftTable($client)
 {

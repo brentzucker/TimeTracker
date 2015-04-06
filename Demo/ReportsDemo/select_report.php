@@ -3,6 +3,9 @@ require_once(__DIR__.'/../../include.php');
 
 session_start();
 
+//Clear the report session
+$_SESSION['report'] = null;
+
 echo "<h1>Select a Report</h1>";
 
 echo '<h3><a href="developer_reports.php">Developer Reports</a></h3>';
