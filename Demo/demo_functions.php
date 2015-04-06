@@ -41,7 +41,7 @@ function clientDropDown($Developer)
 
 	foreach($Developer->getClientList() as $client)
 		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
-
+	
 	echo '</select>';
 	echo '<input type="submit" value="Submit">';
 
@@ -78,7 +78,7 @@ function printTable($query, $table_headers)
 	foreach($table_headers as $t_h)
 		echo '<th>' . $t_h . '</th>';
 	echo '</tr>';
-
+	
 	if($result = db_query($query))
 	{
 		while($row = mysqli_fetch_row($result))
@@ -93,11 +93,12 @@ function printTable($query, $table_headers)
 	mysqli_free_result($result);
 }
 
+
 //This function consumes a taskid and echos the timeLog table for the specific task
-function printTimeLogTableByTask($task)
+function printTimeSheetTableByTask($task)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.TaskID=" . $task;
-
+	
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'TaskName', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -107,7 +108,7 @@ function printTimeLogTableByTask($task)
 function printTimeLogTableByDeveloper($developer)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
-
+	
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'Task Name', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -117,7 +118,7 @@ function printTimeLogTableByDeveloper($developer)
 function printAggregatedTimeLogTableByDeveloper($developer)
 {
 	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.Username='" . $developer ."'GROUP BY t.ClientName";
-
+	
 	$table_headers = array('Username', 'Client', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -147,27 +148,47 @@ function printAggregatedTimeLogTableByClient($client)
 function printAggregatedTimeLogTableByProject($project)
 {
 	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
-
+	
 	$table_headers = array('Client', 'Project Name', 'Username', 'Time Spent');
 
 	printTable($query, $table_headers);
 }
 
-//This function consumes a client name and echos the timeLog table for the specific developer
+//This function consumes a projectid and echos the timeLog table for the specific project
 function printTimeLogTableByProject($project)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
-
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'Tiem In', 'Time Out', 'Time Spent');
+	
+	$table_headers = array('TimeLogID', 'Username', 'Client', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
 }
 
-//This function consumes a client name and echos a view of the ClientPurchases table
+//This function consumes a taskid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
+function printAggregatedTimeLogTableByTask($task)
+{
+	$query = "SELECT t.ClientName, p.ProjectName, a.TaskName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p, Tasks a WHERE (t.ProjectID = p.ProjectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."' GROUP BY t.Username";
+	
+	$table_headers = array('Client', 'Project Name', 'Task Name', 'Username', 'Time Spent');
+
+	printTable($query, $table_headers);
+}
+
+//This function consumes a taskid and echos the timeLog table for the specific task
+function printTimeLogTableByTask($task)
+{
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, a.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks a WHERE (t.ProjectID = p.projectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."'";
+	
+	$table_headers = array('TimeLogID', 'Username', 'Client', 'Time In', 'Time Out', 'Time Spent');
+
+	printTable($query, $table_headers);
+}
+
+//This function consumes a client name and echos a view of the ClientPurchases table 
 function printHoursLeftTable($client)
 {
 	$query = 'SELECT p.ClientName, p.HoursPurchased, p.PurchaseDate, c.HoursLeft FROM ClientPurchases p, Client c WHERE (c.ClientName = p.ClientName) AND c.ClientName="' . $client . '"';
-
+		
 	$table_headers = array('Client', 'Hours Purchased', 'Purchase Date', 'Hours Left');
 
 	printTable($query, $table_headers);
@@ -177,7 +198,7 @@ function printHoursLeftTable($client)
 function printAssignmentsTable($developer)
 {
 	$query = "SELECT * FROM DeveloperAssignments WHERE Username='" . $developer ."'";
-
+	
 	$table_headers = array('Username', 'Client/Project/Task', 'Type');
 
 	printTable($query, $table_headers);
