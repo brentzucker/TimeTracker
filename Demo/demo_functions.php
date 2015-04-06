@@ -281,6 +281,35 @@ function printAssignmentsTable($developer)
 	printTable($query, $table_headers);
 }
 
+//This function consumes a developer username and echos their client Assignment table for the specific developer
+function printAssignmentsTableClient($developer)
+{
+	$query = "SELECT Username, ClientProjectTask FROM DeveloperAssignments WHERE Type='Client' AND Username='" . $developer ."'";
+	$table_headers = array('Username', 'Clients');
+
+	printTable($query, $table_headers);
+}
+
+//This function consumes a developer username and echos their Project Assignment table for the specific developer
+function printAssignmentsTableProject($developer)
+{
+	$query = "SELECT Username, ProjectName FROM DeveloperAssignments, Projects WHERE ClientProjectTask=ProjectID AND Type='Project' AND Username='" . $developer ."'";
+	
+	$table_headers = array('Username', 'Projects');
+
+	printTable($query, $table_headers);
+}
+
+//This function consumes a developer username and echos their Task Assignment table for the specific developer
+function printAssignmentsTableTask($developer)
+{
+	$query = "SELECT Username, TaskName FROM DeveloperAssignments, Tasks WHERE ClientProjectTask=TaskID AND Type='Task' AND Username='" . $developer ."'";
+	
+	$table_headers = array('Username', 'Tasks');
+
+	printTable($query, $table_headers);
+}
+
 //This function consumes a developer and a taskid, echos a clockin/clockout form and handles the forms action (recording the developer's clockin/clockout)
 function clockForm($developer, $taskid)
 {
