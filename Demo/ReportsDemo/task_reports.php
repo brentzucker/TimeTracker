@@ -17,6 +17,4 @@ if(isset($_POST['Task_Selected']) || isset($_SESSION['report']['task']))
 	echo '<h3>Detailed Time Sheet</h3>';
 	printTimeLogTableByTask($_SESSION['report']['task']);
 }
-
-
 ?>

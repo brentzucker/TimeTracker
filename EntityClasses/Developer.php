@@ -181,7 +181,15 @@ class Developer
 
 	function assignTask($TaskObject)
 	{
-		newDeveloperAssignments($this->getUsername(), $TaskObject->getTaskID(), 'Task');
+		//Don't assign the same task twice! 
+		$already_assigned = false; 
+
+		foreach($this->Task_List as $task)
+			if($task->equals($TaskObject))
+				$already_assigned = true;
+
+		if(!$already_assigned)
+			newDeveloperAssignments($this->getUsername(), $TaskObject->getTaskID(), 'Task');
 		array_push($this->Task_List, $TaskObject);
 	}
 

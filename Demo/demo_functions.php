@@ -7,7 +7,7 @@ function echoHomePageLinks()
 	echo '<ul>';
 	echo '<li><h3><a href="ClockinDemo/clock.php">Clock Into Work</a></li>';
 	echo '<li><h3><a href="ReportsDemo/select_report.php">View Reports</a></li>';
-	echo '<li><h3><a href="ManageDevelopersDemo/assign_developer.php">Manage Developers</a></li>';
+	echo '<li><h3><a href="ManageDevelopersDemo/manage_developers.php">Manage Developers</a></li>';
 	echo '<li><h3><a href="ManageClientsDemo/manage_clients.php">Manage Clients</a></li>';
 	echo '</ul>';
 }
@@ -20,6 +20,18 @@ function echoManageClientsLinks()
 	echo '<li><h3><a href="new_client.php">New Client</a></li>';
 	echo '<li><h3><a href="new_project.php">New Project</a></li>';
 	echo '<li><h3><a href="new_task.php">New Task</a></li>';
+	echo '</ul>';
+}
+
+//This function echos the links on the manage developers page
+function echoManageDevelopersLinks()
+{
+	echo '<ul>';
+	echo '<li><h3><a href="create_developer.php">Create Developer</a></li>';
+	echo '<li><h3><a href="assign_task.php">Assign Task</a></li>';
+	echo '<li><h3><a href="assign_project.php">Assign Projects</a></li>';
+	echo '<li><h3><a href="assign_client.php">Assign Client</a></li>';
+	echo '<li><h3><a href="view_all_assignments.php">View All Assignments</a></li>';
 	echo '</ul>';
 }
 

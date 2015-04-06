@@ -95,5 +95,13 @@ class Tasks
 		updateTableByTaskID('Tasks', 'Description', $s, $this->getTaskID());
 		$this->Description = $s;
 	}
+
+	//Boolean function to compare 2 Tasks
+	function equals($task2)
+	{
+		if(($this->TaskID == $task2->getTaskID()) && ($this->ClientName == $task2->getClientName()) && ($this->ProjectID == $task2->getProjectID()) && ($this->TaskName == $task2->getTaskName()) && ($this->Description == $task2->getDescription()))
+			return true; 
+		else return false;
+	}
 }
 ?>
