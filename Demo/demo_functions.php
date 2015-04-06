@@ -5,7 +5,7 @@ require_once(__DIR__.'/../include.php');
 function echoHomePageLinks()
 {
 	echo '<ul>';
-	echo '<li><h3><a href="ClockinDemo/select_client.php">Clock Into Work</a></li>';
+	echo '<li><h3><a href="ClockinDemo/clock.php">Clock Into Work</a></li>';
 	echo '<li><h3><a href="ReportsDemo/select_report.php">View Reports</a></li>';
 	echo '<li><h3><a href="ManageDevelopersDemo/assign_developer.php">Manage Developers</a></li>';
 	echo '<li><h3><a href="ManageClientsDemo/manage_clients.php">Manage Clients</a></li>';
@@ -73,6 +73,7 @@ function taskDropDown($developer, $projectid)
 //This function consumes a session variable to store values in and echos forms based on preceding selections.
 function clientProjectTaskDropdownForm($session_variable)
 {
+	echo '<h3>Select a Client</h3>';
 	echo '<form action="" method="POST">';
 	clientDropDown($_SESSION['Developer']);
 	echo "</form>";
@@ -92,6 +93,7 @@ function clientProjectTaskDropdownForm($session_variable)
 
 		echo '<h2>' . $_SESSION["$session_variable"]['client'] . ' was selected</h2>';
 
+		echo '<h3>Select a Project</h3>';
 		echo '<form action="" method="POST">';
 		projectDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['client']);
 		echo "</form>";
@@ -108,6 +110,7 @@ function clientProjectTaskDropdownForm($session_variable)
 
 			echo '<h2>' . $_SESSION["$session_variable"]['project']  . ' was selected</h2>';
 
+			echo '<h3>Select a Task</h3>';
 			echo '<form action="" method="POST">';
 			taskDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['project']);
 			echo '</form>';

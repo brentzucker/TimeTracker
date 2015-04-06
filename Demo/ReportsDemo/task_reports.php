@@ -5,8 +5,6 @@ session_start();
 
 echo '<h1>Task Reports</h1>';
 
-
-
 clientProjectTaskDropdownForm('report');
 
 if(isset($_POST['Task_Selected']) || isset($_SESSION['report']['task']))
@@ -19,4 +17,6 @@ if(isset($_POST['Task_Selected']) || isset($_SESSION['report']['task']))
 	echo '<h3>Detailed Time Sheet</h3>';
 	printTimeLogTableByTask($_SESSION['report']['task']);
 }
+
+
 ?>
