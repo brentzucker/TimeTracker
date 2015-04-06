@@ -16,6 +16,7 @@ function echoHomePageLinks()
 function echoManageClientsLinks()
 {
 	echo '<ul>';
+	echo '<li><h3><a href="purchase_hours.php">Add Purchased Hours</a></li>';
 	echo '<li><h3><a href="new_client.php">New Client</a></li>';
 	echo '<li><h3><a href="new_project.php">New Project</a></li>';
 	echo '<li><h3><a href="new_task.php">New Task</a></li>';
@@ -67,6 +68,58 @@ function taskDropDown($developer, $projectid)
 		echo '<option value="' . $t->getTaskID() . '">' . $t->getTaskName() . '</option>';
 	echo '</select>';
 	echo '<input type="submit" value="Submit">';
+}
+
+//This function consumes a session variable to store values in and echos forms based on preceding selections.
+function clientProjectTaskDropdownForm($session_variable)
+{
+	echo '<form action="" method="POST">';
+	clientDropDown($_SESSION['Developer']);
+	echo "</form>";
+
+	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session_variable"]['client']))
+	{
+		//If the client selection is changed
+		if(isset($_POST['Client_Selected']) && $_POST['Client_Selected'] != $_SESSION["$session_variable"]['client']) 
+		{
+			unset($_SESSION["$session_variable"]['project']);
+			unset($_SESSION["$session_variable"]['task']);
+		}
+
+		//Store the Client selected in the report session
+		if(isset($_POST['Client_Selected']))
+			$_SESSION["$session_variable"]['client'] = $_POST['Client_Selected'];
+
+		echo '<h2>' . $_SESSION["$session_variable"]['client'] . ' was selected</h2>';
+
+		echo '<form action="" method="POST">';
+		projectDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['client']);
+		echo "</form>";
+
+		if(isset($_POST['Project_Selected']) || isset($_SESSION["$session_variable"]['project']))
+		{
+			//If the project selection is changed
+			if(isset($_POST['Project_Selected']) && $_POST['Project_Selected'] != $_SESSION["$session_variable"]['project']) 
+				unset($_SESSION["$session_variable"]['task']);
+
+			//Store the project selected in the report session
+			if(isset($_POST['Project_Selected']))
+				$_SESSION["$session_variable"]['project'] = $_POST['Project_Selected'];
+
+			echo '<h2>' . $_SESSION["$session_variable"]['project']  . ' was selected</h2>';
+
+			echo '<form action="" method="POST">';
+			taskDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['project']);
+			echo '</form>';
+
+			if(isset($_POST['Task_Selected']) || isset($_SESSION["$session_variable"]['task']))
+			{
+				//Store the project selected in the report session
+				if(isset($_POST['Task_Selected']))
+					$_SESSION["$session_variable"]['task'] = $_POST['Task_Selected'];
+			}
+		}
+	}
 }
 
 //This function consumes a query and table headers and prints out the results in a table
@@ -221,6 +274,7 @@ function clockForm($developer, $taskid)
 	echo '</form>';
 }
 
+
 //This function echos the contact input fields for a form.
 function echoContactInput()
 {
@@ -319,54 +373,63 @@ function newDeveloperForm()
 	if(isset($_POST['Submit']))
 		createEmployee($_POST['team'], $_POST['username'], $_POST['position'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
 	*/
+	
 	$teamError = $usernameError = $positionError = $passwordError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
 
+	
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-
-	    if ($_POST['team'] == "") {
+	    if ($_POST['team'] == "") 
+	    {
 	        $teamError = "Please Select the Team.";
 	    }
-	    else {
+	    else 
+	    {
 	        $team = $_POST['team'];
 	    }
 
-	    if (empty($_POST['username'])) {
+	    if (empty($_POST['username'])) 
+	    {
 	        $usernameError = "Missing";
 	    }
-			else if($_POST['username'] < 2) {
-					$usernameError = "Username needs to be at least 3 characters long";
-			}
-	    else {
+		else if($_POST['username'] < 2) 
+		{
+				$usernameError = "Username needs to be at least 3 characters long";
+		}
+	    else 
+	    {
 	        $username = $_POST['username'];
-			}
+		}
 
 	    if ($_POST['position'] == "")
-			{
+		{
 	        $positionError = "Please select your position.";
 	    }
-	    else {
+	    else 
+	    {
 	        $position = $_POST['position'];
 	    }
 
-			if (empty($_POST['password']))
-			{
-	        $passwordError = "Missing";
-	    }
-			else if($_POST['password'] < 4)
-			{
-					$passwordError = "Password needs to be at least 5 characters long";
-			}
-	    else {
+		if (empty($_POST['password']))
+		{
+        	$passwordError = "Missing";
+    	}
+		else if($_POST['password'] < 4)
+		{
+			$passwordError = "Password needs to be at least 5 characters long";
+		}
+	    else 
+	    {
 	        $password = $_POST['password'];
 	    }
-		if(!empty($_POST['team'] && $_POST['username'] && $_POST['position'] && $_POST['password'])
+
+		if(!empty($_POST['team']) && !empty($_POST['username']) && !empty($_POST['position']) && !empty($_POST['password']))
 		{
 			createEmployee($team, $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state);
 		}
-			//$_POST['team'], $_POST['username'], $_POST['position'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
-		}
-	echo <<<_END
+	}
+
+	echo <<<END
 	<form id="developer_form" action="" method="POST">
 	<br>Team: <font color="red">*</font><br>
 	<select name="team">
@@ -388,12 +451,15 @@ function newDeveloperForm()
 	</select>
 	<font color="red">$positionError</font>
 	<br>
-_END;
+END;
+
 	echoContactInput();
-	echo <<<_END
+	
+	echo <<<END
 	<br><input type="submit" name="Submit" value="Create Developer">
 	<br><font color="red">* Required fields.</font>
 	</form>;
-_END;
+END;
+	
 }
 ?>
