@@ -1,3 +1,19 @@
+<!--
+Name: clientForm.php
+Description: user inputs information about the new client
+Programmers: Ryan Graessle
+Dates: (3/2/15, 
+Names of files accessed: page_functions.php, include.php
+Names of files changed:
+Input: Client Name(String), First Name(String), Last Name(String), Phone(String), Email(String), Address(String), City(String), State(String)
+Output:
+Error Handling: the client name cannot be empty
+Modification List:
+3/2/15-Initial code up & styled form
+3/6/15-Updated form
+3/23/15-Created page functions
+-->
+
 <?php
 require_once 'include.php';
 require_once 'page_functions.php';
@@ -5,7 +21,6 @@ require_once 'page_functions.php';
 html_header("Client Form");
 
 $date = date("Y-m-d");
-
 echo<<< _END
 	<form class="client_form" method="post" action="clientForm.php">
 	<div class="form_wrap">
@@ -26,6 +41,8 @@ echo<<< _END
 	
 	</div>
 _END;
+
+//if there is a client name make a new client with the input information
 
 	if(!empty($_POST['client_name']))
 	{

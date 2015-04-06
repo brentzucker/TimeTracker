@@ -1,3 +1,17 @@
+<!--
+Name: testDeveloper.php
+Description: we showed how to use unit testing on our project
+Programmers: Brent Zucker
+Dates: (3/27/15, 
+Names of files accessed: include.php, autorun.php
+Names of files changed:
+Input: 
+Output:
+Error Handling:
+Modification List:
+3/27/15-Initial code up 
+-->
+
 <?php
 require_once(__DIR__.'/include.php');
 require_once(__DIR__.'/simpletest/autorun.php');
@@ -23,7 +37,8 @@ class testDeveloper extends UnitTestCase
 			array_push($dev_clients, $client->getClientname());
 		
 		sort($dev_clients);
-
+		
+		//checks if the expected list is the same as the example list
 		$this->assertEqual($expected_list, $dev_clients);
 	}
 }

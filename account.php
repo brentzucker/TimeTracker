@@ -1,3 +1,19 @@
+<!--
+Name: account.php
+Description: let's the user update their information
+Programmers: Ryan Graessle
+Dates: (3/29/15, 
+Names of files accessed: page_functions.php
+Names of files changed:
+Input: Username(String), Password(String), Password(String)
+Output: text
+Error Handling:
+Modification List:
+3/29/15-Initial code up
+4/1/15-Created nav
+4/2/15-Created sidebar
+-->
+
 <?php
 
 require_once 'page_functions.php';

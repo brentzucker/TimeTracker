@@ -1,3 +1,17 @@
+<!--
+Name: main.php
+Description: main page where user can access different pages of the website
+Programmers: Ryan Graessle
+Dates: (3/30/15, 
+Names of files accessed: include.php, page_functions.php
+Names of files changed:
+Input: 
+Output:
+Error Handling:
+Modification List: 
+3/30/15-Initial code up
+-->
+
 <?php
 require_once 'include.php';
 require_once 'page_functions.php';

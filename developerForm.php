@@ -1,3 +1,17 @@
+<!--
+Name: developerForm.php
+Description: user inputs information about the new developer
+Programmers: Delaney Rhodes
+Dates: (3/6/15, 
+Names of files accessed: Database.php
+Names of files changed:
+Input: Team Name(String), Username(String), Position(String), Password(String), First Name(String), Last Name(String), Phone Number(String), Email(String), Address(String), City(String), State(String)
+Output:
+Error Handling:
+Modification List:
+3/6/15-Initial code up & styled
+-->
+
 <html>
 <head>
 <meta charset="ISO-8859-1">

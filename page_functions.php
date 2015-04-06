@@ -1,7 +1,25 @@
+<!--
+Name: page_functions.php
+Description: sets the style for the different parts of the web application
+Programmers: Ryan Graessle
+Dates: (3/23/15, 
+Names of files accessed: include.php
+Names of files changed:
+Input: 
+Output:
+Error Handling:
+Modification List: 
+3/23/15-Initial code up
+3/29/15-Created footer, JQuery scripts, and changed styles
+4/2/15-Styled sidebar, fixed bugs
+-->
+
 <?php
 
 require_once(__DIR__.'/include.php');
 
+
+//makes the header for each page
 function html_header($title) //Function to load the header of the webpage. Takes in the title of the page.
 {
 echo<<<_END
@@ -45,6 +63,7 @@ _END;
 
 }
 
+//creates sidebar
 function open_sidebar()
 {
 echo<<<_END
@@ -52,6 +71,7 @@ echo<<<_END
 _END;
 }
 
+//closes sidebar
 function close_sidebar()
 {
 echo<<<_END
@@ -59,6 +79,8 @@ echo<<<_END
 _END;
 }
 
+
+//creates footer
 function html_footer() //Function to load the footer of the webpage and close out the HTML.
 {
 

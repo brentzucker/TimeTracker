@@ -1,6 +1,29 @@
+<!--
+Name: test_demo_entity_classes.php
+Description: testing the entity classes
+Programmers: Brent Zucker
+Dates: (3/2/15, 
+Names of files accessed: config_loader.php
+Names of files changed:
+Input: 
+Output: text
+Error Handling:
+Modification List:
+3/2/15-Initial code up 
+3/3/15-Created ClientContact class and Client class
+3/4/15-Prints out total hours purchased
+3/5/15-Assign Clients to Developer
+3/6/15-Created Projects Class
+3/7/15-Added Time accessor/modifer methods
+3/9/15-Added Time features
+3/10/15-Updates folder hierarchy
+-->
+
 <?php
 require_once 'config_loader.php';
 
+
+//creates the table
 function test($query)
 {
 	echo '<table style="border:1px solid black; text-align:center; width:80%; margin-left:25%;">';
@@ -18,6 +41,7 @@ function test($query)
 	echo '</table>';
 }
 
+//adds contact and changes first name
 function testContact()
 {
 	echo '<div style="text-align:center;width:50%;margin-left:25%;">';
@@ -35,6 +59,7 @@ function testContact()
 	echo '</div>';
 }
 
+//adds employee and get's their info
 function testDeveloper()
 {
 	createEmployee('SE', 'b.zucker', 'Developer', 'bz', 'Brent', 'Zucker', '4045801384', 'brentzucker@gmail.com', 'Columbia St', 'Milledgeville', 'GA');
@@ -64,6 +89,7 @@ function testDeveloper()
 	echo "done";
 }
 
+//adds client and gets their information
 function testClient()
 {
 	createClient('The Business', '1993-06-20', 'LeRoy', 'Jenkins', '1234567890', 'leeroy@gmail.com', 'The streets', 'Las Vegas', 'NV');

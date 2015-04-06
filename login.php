@@ -1,6 +1,26 @@
+<!--
+Name: login.php
+Description: let's the user log in
+Programmers:Ryan Graessle, Tyler Land
+Dates: (3/6/15, 
+Names of files accessed: Database.php
+Names of files changed:
+Input: Username(String), Password(String)
+Output: text
+Error Handling: the username/password must not be empty, makes sure the query has been submitted, make sure the login credenitials match
+Modification List:
+3/6/15-Initial code up
+3/7/15-Fixed session bug
+3/9/15-Fixed html output
+-->
+
 <?php
 require_once 'Database.php';
 
+/* two initial instructions:
+1.	if the user is already signed in, they can sign out
+2.	let the user sign in
+*/
 if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true)
 {
 	echo 'You are already signed in. Click<a href="logout.php">here</a> if you want to log out.';
@@ -9,8 +29,6 @@ else
 {
 	if($_SERVER['REQUEST_METHOD'] != 'POST')
 	{
-		/*the form hasn't been posted yet, display it
-		 note that the action="" will cause the form to post to the same page it is on */
 		echo <<<_END
 <br>
 	<form name="Login" method="post" action="login_confirm.php">
@@ -29,13 +47,13 @@ _END;
 	}
 	else
 	{
-		/* so, the form has been posted, we'll process the data in three steps:
+		/* process the data in three steps:
 			1.	Check the data
 			2.	Let the user refill the wrong fields (if necessary)
 			3.	Varify if the data is correct and return the correct response
 			*/
 		$errors = array(); /* declare the array for later use */
-
+		//makes sure the username/password isn't empty
 		if(!isset($_POST['Username']) || !isset($_POST['Password']))
 		{
 			echo 'The username/password field is empty.';
@@ -53,7 +71,6 @@ _END;
 						Username = '" . ($_POST['Username']) . "'
 					AND
 						Password = '" . ($_POST['Password']) . "'";
-
 			$result = mysql_query($query);
 			if(!$result)
 			{
@@ -74,19 +91,15 @@ _END;
 				{
 					//set the $_SESSION['signed_in'] variable to TRUE
 					$_SESSION['signed_in'] = true;
-
 					//we also put the user_id and user_name values in the $_SESSION, so we can use it at various pages
 					while($row = mysql_fetch_assoc($result))
 					{
 						$_SESSION['Username'] 	= $row['Username'];
 					}
-
 					echo 'Welcome ' . $_SESSION['Username'] . '. <br /><a href="login_success.php"></a>.';
 				}
 			}
 		}
 	}
 }
-
-
 ?>
