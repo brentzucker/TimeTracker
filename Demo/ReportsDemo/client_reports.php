@@ -18,6 +18,9 @@ if(isset($_POST['Client_Selected']))
 	echo '<h3>Hours Left</h3>';
 	printHoursLeftTable($_POST['Client_Selected']);
 
+	echo '<h3>Client\'s Purchases</h3>';
+	printClientsPurchasesTable($_POST['Client_Selected']);
+
 	echo '<h3>Developers Hours</h3>';
 	printAggregatedTimeLogTableByClient($_POST['Client_Selected']);
 

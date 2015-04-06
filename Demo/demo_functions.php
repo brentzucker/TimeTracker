@@ -243,9 +243,18 @@ function printTimeLogTableByTask($task)
 //This function consumes a client name and echos a view of the ClientPurchases table 
 function printHoursLeftTable($client)
 {
-	$query = 'SELECT p.ClientName, p.HoursPurchased, p.PurchaseDate, c.HoursLeft FROM ClientPurchases p, Client c WHERE (c.ClientName = p.ClientName) AND c.ClientName="' . $client . '"';
+	$query = 'SELECT p.ClientName, c.StartDate, SUM(p.HoursPurchased), COUNT(p.PurchaseDate), c.HoursLeft FROM ClientPurchases p, Client c WHERE (c.ClientName = p.ClientName) AND c.ClientName="' . $client . '"';
 		
-	$table_headers = array('Client', 'Hours Purchased', 'Purchase Date', 'Hours Left');
+	$table_headers = array('Client', 'Start Date', 'Hours Purchased', 'Purchases', 'Hours Left');
+
+	printTable($query, $table_headers);
+}
+
+function printClientsPurchasesTable($client)
+{
+	$query = 'SELECT p.ClientName, p.HoursPurchased, p.PurchaseDate FROM ClientPurchases p WHERE p.ClientName="' . $client . '"';
+		
+	$table_headers = array('Client', 'Hours Purchased', 'Purchase Date');
 
 	printTable($query, $table_headers);
 }
