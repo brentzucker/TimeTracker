@@ -41,7 +41,7 @@ function clientDropDown($Developer)
 
 	foreach($Developer->getClientList() as $client)
 		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
-	
+
 	echo '</select>';
 	echo '<input type="submit" value="Submit">';
 
@@ -78,7 +78,7 @@ function printTable($query, $table_headers)
 	foreach($table_headers as $t_h)
 		echo '<th>' . $t_h . '</th>';
 	echo '</tr>';
-	
+
 	if($result = db_query($query))
 	{
 		while($row = mysqli_fetch_row($result))
@@ -97,7 +97,7 @@ function printTable($query, $table_headers)
 function printTimeLogTableByTask($task)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.TaskID=" . $task;
-	
+
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'TaskName', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -107,7 +107,7 @@ function printTimeLogTableByTask($task)
 function printTimeLogTableByDeveloper($developer)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
-	
+
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'Task Name', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -117,7 +117,7 @@ function printTimeLogTableByDeveloper($developer)
 function printAggregatedTimeLogTableByDeveloper($developer)
 {
 	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.Username='" . $developer ."'GROUP BY t.ClientName";
-	
+
 	$table_headers = array('Username', 'Client', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -147,7 +147,7 @@ function printAggregatedTimeLogTableByClient($client)
 function printAggregatedTimeLogTableByProject($project)
 {
 	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
-	
+
 	$table_headers = array('Client', 'Project Name', 'Username', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -157,17 +157,17 @@ function printAggregatedTimeLogTableByProject($project)
 function printTimeLogTableByProject($project)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
-	
+
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Tiem In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
 }
 
-//This function consumes a client name and echos a view of the ClientPurchases table 
+//This function consumes a client name and echos a view of the ClientPurchases table
 function printHoursLeftTable($client)
 {
 	$query = 'SELECT p.ClientName, p.HoursPurchased, p.PurchaseDate, c.HoursLeft FROM ClientPurchases p, Client c WHERE (c.ClientName = p.ClientName) AND c.ClientName="' . $client . '"';
-		
+
 	$table_headers = array('Client', 'Hours Purchased', 'Purchase Date', 'Hours Left');
 
 	printTable($query, $table_headers);
@@ -177,7 +177,7 @@ function printHoursLeftTable($client)
 function printAssignmentsTable($developer)
 {
 	$query = "SELECT * FROM DeveloperAssignments WHERE Username='" . $developer ."'";
-	
+
 	$table_headers = array('Username', 'Client/Project/Task', 'Type');
 
 	printTable($query, $table_headers);
@@ -217,7 +217,60 @@ function echoContactInput()
 	<br>City:<br>
 	<input type="text" name="city">
 	<br>State:<br>
-	<input type="text" name="state">
+	<select name="state">
+<option value="">Select your state</option>
+<option value="AL">Alabama</option>
+<option value="AK">Alaska</option>
+<option value="AZ">Arizona</option>
+<option value="AR">Arkansas</option>
+<option value="CA">California</option>
+<option value="CO">Colorado</option>
+<option value="CT">Connecticut</option>
+<option value="DE">Delaware</option>
+<option value="DC">District of Columbia</option>
+<option value="FL">Florida</option>
+<option value="GA">Georgia</option>
+<option value="HI">Hawaii</option>
+<option value="ID">Idaho</option>
+<option value="IL">Illinois</option>
+<option value="IN">Indiana</option>
+<option value="IA">Iowa</option>
+<option value="KS">Kansas</option>
+<option value="KY">Kentucky</option>
+<option value="LA">Louisiana</option>
+<option value="ME">Maine</option>
+<option value="MD">Maryland</option>
+<option value="MA">Massachusetts</option>
+<option value="MI">Michigan</option>
+<option value="MN">Minnesota</option>
+<option value="MS">Mississippi</option>
+<option value="MO">Missouri</option>
+<option value="MT">Montana</option>
+<option value="NE">Nebraska</option>
+<option value="NV">Nevada</option>
+<option value="NH">New Hampshire</option>
+<option value="NJ">New Jersey</option>
+<option value="NM">New Mexico</option>
+<option value="NY">New York</option>
+<option value="NC">North Carolina</option>
+<option value="ND">North Dakota</option>
+<option value="OH">Ohio</option>
+<option value="OK">Oklahoma</option>
+<option value="OR">Oregon</option>
+<option value="PA">Pennsylvania</option>
+<option value="RI">Rhode Island</option>
+<option value="SC">South Carolina</option>
+<option value="SD">South Dakota</option>
+<option value="TN">Tennessee</option>
+<option value="TX">Texas</option>
+<option value="UT">Utah</option>
+<option value="VT">Vermont</option>
+<option value="VA">Virginia</option>
+<option value="WA">Washington</option>
+<option value="WV">West Virginia</option>
+<option value="WI">Wisconsin</option>
+<option value="WY">Wyoming</option>
+</select>
 	<br>
 END;
 }
@@ -241,20 +294,85 @@ function newClientForm()
 //This function echos a form to create a new Developer and calls the createEmployee method which stores the info in the database.
 function newDeveloperForm()
 {
+	/*
 	if(isset($_POST['Submit']))
 		createEmployee($_POST['team'], $_POST['username'], $_POST['position'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+	*/
+	$teamError = $usernameError = $positionError = $passwordError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
 
-	echo '<form id="developer_form" action="" method="POST">';
-	echo '<br>Team:<br>';
-	echo '<input type="text" name="team">';
-	echo '<br>Username:<br>';
-	echo '<input type="text" name="username">';
-	echo '<br>Password:<br>';
-	echo '<input type="password" name="password">';
-	echo '<br>Position:<br>';
-	echo '<input type="text" name="position">';
+	if ($_SERVER["REQUEST_METHOD"] == "POST")
+	{
+
+	    if ($_POST['team'] == "") {
+	        $teamError = "Please Select the Team.";
+	    }
+	    else {
+	        $team = $_POST['team'];
+	    }
+
+	    if (empty($_POST['username'])) {
+	        $usernameError = "Missing";
+	    }
+			else if($_POST['username'] < 2) {
+					$usernameError = "Username needs to be at least 3 characters long";
+			}
+	    else {
+	        $username = $_POST['username'];
+			}
+
+	    if ($_POST['position'] == "")
+			{
+	        $positionError = "Please select your position.";
+	    }
+	    else {
+	        $position = $_POST['position'];
+	    }
+
+			if (empty($_POST['password']))
+			{
+	        $passwordError = "Missing";
+	    }
+			else if($_POST['password'] < 4)
+			{
+					$passwordError = "Password needs to be at least 5 characters long";
+			}
+	    else {
+	        $password = $_POST['password'];
+	    }
+		if(!empty($_POST['team'] && $_POST['username'] && $_POST['position'] && $_POST['password'])
+		{
+			createEmployee($team, $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state);
+		}
+			//$_POST['team'], $_POST['username'], $_POST['position'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+		}
+	echo <<<_END
+	<form id="developer_form" action="" method="POST">
+	<br>Team: <font color="red">*</font><br>
+	<select name="team">
+		<option value="">Select the team</option>
+		<option value="Team 1">Team 1</option>
+		<option value="Team 2">Team 2</option>
+		<option value="Team 3">Team 3</option>
+	</select>
+	<font color="red">$teamError</font>
+	<br>Username: <font color="red">*</font><br>
+	<input type="text" name="username"> <font color="red">$usernameError</font>
+	<br>Password: <font color="red">*</font><br>
+	<input type="password" name="password"> <font color="red">$passwordError</font>
+	<br>Position: <font color="red">*</font><br>
+	<select name="position">
+		<option value="">Select your position</option>
+		<option value="Project Manager">Project Manager</option>
+		<option value="Developer">Developer</option>
+	</select>
+	<font color="red">$positionError</font>
+	<br>
+_END;
 	echoContactInput();
-	echo '<br><input type="submit" name="Submit" value="Create Developer">';
-	echo '</form>';
+	echo <<<_END
+	<br><input type="submit" name="Submit" value="Create Developer">
+	<br><font color="red">* Required fields.</font>
+	</form>;
+_END;
 }
 ?>
