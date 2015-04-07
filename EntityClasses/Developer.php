@@ -169,7 +169,15 @@ class Developer
 
 	function assignClient($ClientObject)
 	{
-		newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client');
+		//Don't assign the same client twice!
+		$already_assigned = false;
+
+		foreach($this->Client_List as $client)
+			if($client->equals($ClientObject))
+				$already_assigned = true;
+			
+		if(!$already_assigned)	
+			newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client');
 		array_push($this->Client_List, $ClientObject);
 	}
 

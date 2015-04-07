@@ -83,6 +83,63 @@ function taskDropDown($developer, $projectid)
 }
 
 //This function consumes a session variable to store values in and echos forms based on preceding selections.
+function developerClientDropdownForm($session_variable)
+{
+	echo '<h2>Select a Developer</h2>';
+
+	echo '<form action="" method="POST">';
+	developerDropDown($_SESSION['Developer']);
+	echo '</form>';
+	
+	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
+	{
+		//Check if Developer selected has been changed
+		if(isset($_POST['Developer_Selected']) && $_SESSION["$session_variable"]['developer'] != $_POST['Developer_Selected'])
+		{
+			unset($_SESSION["$session_variable"]['client']);
+		}
+
+		if(isset($_POST['Developer_Selected']))
+			$_SESSION["$session_variable"]['developer'] = $_POST['Developer_Selected'];
+
+		echo '<h4>' . $_SESSION["$session_variable"]['developer'] . ' was selected</h4>';
+
+		echo '<h2>Select a Client</h2>';
+
+		echo '<form action="" method="POST">';
+		//Select a Client that the Developer logged in has permission to assign
+		clientDropDown($_SESSION['Developer']);
+		echo '</form>';
+
+		if(isset($_POST['Client_Selected']))
+			$_SESSION["$session_variable"]['client'] = $_POST['Client_Selected'];
+	}
+}
+
+//This function consumes a session variable to store values in and echos forms based on preceding selections.
+function developerClientProjectTaskDropdownForm($session_variable)
+{
+	//If a Developer has been selected Load the next Drop Down
+	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
+	{
+		//If the developer selection is changed
+		if(isset($_POST['Developer_Selected']) && $_POST['Developer_Selected'] != $_SESSION["$session_variable"]['developer']) 
+		{
+			unset($_SESSION["$session_variable"]['client']);
+			unset($_SESSION["$session_variable"]['project']);
+			unset($_SESSION["$session_variable"]['task']);
+		}
+
+		if(isset($_POST['Developer_Selected']))
+			$_SESSION["$session_variable"]['developer'] = $_POST['Developer_Selected'];
+
+		echo '<h2>' . $_SESSION['$session_variable']['developer'] . ' was selected.</h2>';
+
+		clientProjectTaskDropdownForm('assign');
+	}
+}
+
+//This function consumes a session variable to store values in and echos forms based on preceding selections.
 function clientProjectTaskDropdownForm($session_variable)
 {
 	echo '<h3>Select a Client</h3>';

@@ -170,5 +170,12 @@ class Client
 			$this->Info['PurchasedHours'] += $Purchase->getHoursPurchased();
 		}
 	}
+
+	function equals($client2)
+	{
+		if($this->getClientname() == $client2->getClientname() && $this->getStartDate() == $client2->getStartDate())
+			return true;
+		else return false;
+	}
 }
 ?>
