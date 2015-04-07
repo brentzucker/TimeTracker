@@ -415,6 +415,7 @@ function echoContactInput()
 <option value="DC">District of Columbia</option>
 <option value="FL">Florida</option>
 <option value="GA">Georgia</option>
+<option value="GU">Guam</option>
 <option value="HI">Hawaii</option>
 <option value="ID">Idaho</option>
 <option value="IL">Illinois</option>
