@@ -1,3 +1,18 @@
+<!--
+Name: demo_functions.php
+Description: has all the functions needed for the demo in one place
+Programmers: Brent Zucker, Jon Self (editted)
+Dates: (3/12/15, 
+Names of files accessed: include.php
+Names of files changed:
+Input: 
+Output:
+Error Handling:
+Modification List:
+
+4/8/2015: Selective edits
+-->
+
 <?php
 require_once(__DIR__.'/../include.php');
 
@@ -284,7 +299,7 @@ function printTimeLogTableByProject($project)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
 	
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'Time In', 'Time Out', 'Time Spent');
+	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
 }
@@ -304,7 +319,7 @@ function printTimeLogTableByTask($task)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, a.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks a WHERE (t.ProjectID = p.projectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."'";
 	
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'Time In', 'Time Out', 'Time Spent');
+	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Task', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
 }
