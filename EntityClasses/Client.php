@@ -1,6 +1,22 @@
+<!--
+Name: client.php
+Description: 
+Programmers: Brent Zucker
+Dates: (3/10/15, 
+Names of files accessed: include.php
+Names of files changed:
+Input: 
+Output:
+Error Handling:
+Modification List:
+3/10/15-Initial code up 
+3/12/15-Updated path directories 
+-->
+
 <?php
 require_once(__DIR__.'/../include.php');
 
+//creates a array with the client's information
 class Client
 {
 	private $Info = array(
@@ -23,6 +39,7 @@ class Client
 
 		$db_entry_Contact = returnRowByClient("ClientContact", $Clientname);
 
+		//fills in the contact part of the array
 		$this->Info['Contact'] = new ClientContact(
 			 $db_entry_Contact['ClientName'],
 			 $db_entry_Contact['Firstname'], 
@@ -33,51 +50,58 @@ class Client
 			 $db_entry_Contact['City'],
 			 $db_entry_Contact['State']);
 
-		//Load Client Purchases
+		//load client's purchases
 		$purchase_rows = returnRowsByClient('ClientPurchases', $this->getClientname() );
 		foreach($purchase_rows as $purchase)
 			array_push( $this->Purchases , new ClientPurchase( $purchase['PurchaseID'] ));
 
 		$this->calculateTotalPurchasedHours();
 
-		//Load Client's Projects
+		//load client's projects
 		$project_rows = returnRowsByClient('Projects', $this->getClientname() );
 		foreach($project_rows as $project)
 			array_push( $this->Projects, new Projects( $project['ProjectID'] ));
 	}
-
+	
+	//returns all of the client's information
 	function getInfo()
 	{	
 		return array_merge($this->getClientInfo(), $this->getContact()->getInfo());
 	}
 
+	//returns the client's name and start date
 	function getClientInfo()
 	{
 		$client_info = array("ClientName"=>$this->Info['ClientName'], "StartDate"=>$this->Info['StartDate']);
 		return $client_info;
 	}
 
+	//gets the client's contact array which includes the client's name, first name, last name, phone number, email, physical address, city, state
 	function getContact()
 	{
 		return $this->Info['Contact'];
 	}
 
+	//return the client's name
 	function getClientname()
 	{
 		return $this->Info['ClientName'];
 	}
-
+	
+	//sets the client's name
 	function setClientname($s)
 	{
 		$this->Info['ClientName'] = $s;
 		updateTableByClient('Client', 'ClientName', $s, $this->Clientname);
 	}
 
+	//gets the date the client joined
 	function getStartDate()
 	{
 		return $this->Info['StartDate'];
 	}
 
+	//sets the date the client joined
 	function setStartDate($s)
 	{
 		$this->Info['StartDate'] = $s;
