@@ -1,5 +1,22 @@
+<!--
+Name: Tasks.php
+Description: creates an array with the task's information and creates get/set methods
+Programmers: Brent Zucker
+Dates: (3/10/15, 
+Names of files accessed: include.php
+Names of files changed:
+Input: 
+Output:
+Error Handling:
+Modification List:
+3/10/15-Initial code up 
+3/12/15-Updated path directories 
+4/6/15-Assign developers/task
+-->
+
 <?php
 require_once(__DIR__.'/../include.php');
+
 
 class Tasks
 {
@@ -21,6 +38,7 @@ class Tasks
         } 
 	}
 
+	//query the database for a task based on its ID
 	function __construct1($TaskID)
 	{
 		$task_row = returnRowByTaskID($TaskID);
@@ -42,54 +60,64 @@ class Tasks
 		$this->TaskID = newTasks($ClientName_, $ProjectID_, $TaskName_, $Description_);
 	}
 
+	//gets the information about the task
 	function getInfo()
 	{
 		return array("TaskID"=>$this->TaskID, "ClientName"=>$this->ClientName, "ProjectID"=>$this->ProjectID, "TaskName"=>$this->TaskName, "Description"=>$this->Description);
 	}
 
+	//gets the task ID
 	function getTaskID()
 	{
 		return $this->TaskID;
 	}
 
+	//gets the task's client's name
 	function getClientName()
 	{
 		return $this->ClientName;
 	}
 
+	//sets the task's client's name
 	function setClientName($s)
 	{
 		updateTableByTaskID('Tasks', 'ClientName', $s, $this->getTaskID());
 		$this->ClientName = $s;
 	}
 
+	//gets the projectID that is associated with the task
 	function getProjectID()
 	{
 		return $this->ProjectID;
 	}
 
+	//sets the projectID that is associated with the task
 	function setProjectID($s)
 	{
 		updateTableByTaskID('Tasks', 'ProjectID', $s, $this->getTaskID());
 		$this->ProjectID = $s;
 	}
 
+	//get's the task's name
 	function getTaskName()
 	{
 		return $this->TaskName;
 	}
 
+	//sets the task's name
 	function setTaskName($s)
 	{
 		updateTableByTaskID('Tasks', 'TaskName', $s, $this->getTaskID());
 		$this->TaskName = $s;
 	}
 
+	//gets the task's description
 	function getDescription()
 	{
 		return $this->Description;
 	}
 
+	//set the task's description
 	function setDescription($s)
 	{
 		updateTableByTaskID('Tasks', 'Description', $s, $this->getTaskID());

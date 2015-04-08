@@ -1,6 +1,6 @@
 <!--
-Name: client.php
-Description: 
+Name: Client.php
+Description: sets up the data for the Client class, with get/set methods to access data
 Programmers: Brent Zucker
 Dates: (3/10/15, 
 Names of files accessed: include.php
@@ -108,11 +108,13 @@ class Client
 		updateTableByClient('Client', 'StartDate', $s, $this->Clientname);
 	}
 
+	//gets the amount of purchased hours in seconds, to later be converted in hours
 	function getPurchasedSeconds()
 	{
 		return $this->Info['PurchasedHours'];
 	}
-
+	
+	//gets the purchased hours, buy dividing the seconds, in a specificed format
 	function getPurchasedHours()
 	{
 		$hours = $this->Info['PurchasedHours']/3600;
@@ -121,32 +123,37 @@ class Client
 		return "$hours:$minutes:$seconds";
 	}
 
+	//gets the hours lefs
 	function getHoursLeft()
 	{	
-		//Make sure HoursLeft is up to date
+		//make sure HoursLeft is up to date
 		$this->HoursLeft = returnRowByClient('Client', $this->getClientname())['HoursLeft'];
 		return $this->HoursLeft;
 	}
 
 
+	//add purchased hours in seconds
 	function addPurchasedHours($seconds)
 	{
 		$this->HoursLeft += $seconds;
 
-		//Update database
+		//update database
 		updateTableByClient('Client', 'HoursLeft', $this->HoursLeft, $this->getClientname());
 	}
 
+	//gets the purchase
 	function getPurchases()
 	{
 		return $this->Purchases;
 	}
 
+	//gets the projects
 	function getProjects()
 	{
 		return $this->Projects;
 	}
 
+	//gets the projects in alphabetical order
 	function getProjectByName($ProjectName_)
 	{
 		foreach($this->Projects as $p)
@@ -154,17 +161,20 @@ class Client
 				return $p;
 	}
 
+	//add a project
 	function addProject($Project)
 	{
 		array_push($this->Projects, $Project);
 	}
-
+	
+	//adds a new project's name and description
 	function newProject($ProjectName_, $Description_)
 	{
 		$Project = new Projects($this->getClientname(), $ProjectName_, $Description_);
 		array_push($this->Projects, $Project);
 	}
 
+	//
 	function PurchaseHours($HoursPurchased, $PurchaseDate)
 	{	
 		//Store in Database
@@ -183,6 +193,7 @@ class Client
 		$this->calculateTotalPurchasedHours();
 	}
 
+	//calculates purchased hours
 	function calculateTotalPurchasedHours()
 	{
 		//Reset total hours count
@@ -195,6 +206,7 @@ class Client
 		}
 	}
 
+	//checks to see if the client's are equal by name and start date
 	function equals($client2)
 	{
 		if($this->getClientname() == $client2->getClientname() && $this->getStartDate() == $client2->getStartDate())

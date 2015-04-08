@@ -1,8 +1,25 @@
+<!--
+Name: Time.php
+Description: functions used in calculating the time spent for developer, clients and the time stamp's information
+Programmers: Brent Zucker
+Dates: (3/10/15, 
+Names of files accessed: include.php
+Names of files changed:
+Input: 
+Output:
+Error Handling:
+Modification List:
+3/10/15-Initial code up 
+3/12/15-Updated path directories 
+-->
+
 <?php
 require_once(__DIR__.'/../include.php');
 
 class Time
 {
+	
+	//an array with information about the time the developer's clock in/out time
 	private $Info = array(
 		"TimeLogID"=>"",
 		"TimeStampIn"=>"",
@@ -26,6 +43,7 @@ class Time
         } 
 	}
 
+	//query the database for a for time based on the timelog ID
 	function __construct1($TimeLogID)
 	{
 		$row = returnRowByTimeLogID($TimeLogID);
@@ -39,10 +57,12 @@ class Time
 		$this->Info['TimeStampOut'] = new DateTime($row['TimeOut']);
 		$this->Info['TimeSpent'] = $row['TimeSpent'];
 
+		//if there is no time spent and the time of the stamp out is not 0 calculate the time spent
 		if($this->Info['TimeSpent'] == 0 && $this->Info['TimeStampOut'] != new DateTime('0000-00-00 00:00:00'))
 				$this->calculateTimeSpent();
 	}
 
+	//query the database for a for time based on the username, client name, project ID, task ID, time stamp in
 	function __construct5($Username, $ClientName, $ProjectID, $TaskID, $TimeStampIn)
 	{
 		$this->Username = $Username;
@@ -52,6 +72,7 @@ class Time
 		$this->Info['TimeStampIn'] = new DateTime($TimeStampIn);
 	}
 
+	//query the database for a for time based on the username, client name, project ID, task ID, time stamp in, and the time out
 	function __construct6($Username, $ClientName, $ProjectID, $TaskID, $TimeStampIn, $TimeStampOut)
 	{
 		$this->Username = $Username;
@@ -63,6 +84,7 @@ class Time
 		$this->calculateTimeSpent();
 	}
 
+	//query the database for a for time based on the username, client name, project ID, task ID, time stamp in, the time out, and the time spent
 	function __construct7($Username, $ClientName, $ProjectID, $TaskID, $TimeStampIn, $TimeStampOut, $TimeSpent)
 	{
 		$this->Username = $Username;
@@ -80,37 +102,44 @@ class Time
 		//return $this->Info;
 	}
 
+	//get the time log ID
 	function getTimeLogID()
 	{
 		return $this->Info['TimeLogID'];
 	}
 
+	//get the time in
 	function getTimeIn()
 	{
 		return $this->Info['TimeStampIn']->format('Y-m-d H:i:s');
 	}
 
+	//get the time out
 	function getTimeOut()
 	{
 		return $this->Info['TimeStampOut']->format('Y-m-d H:i:s');
 	}
 
+	//get the time stamp for logging in
 	function getTimeStampIn()
 	{
 		return $this->Info['TimeStampIn'];
 	}
 
+	//set the time stamp for logging in
 	function setTimeStampIn($s)
 	{
 		updateTableByTimeLogID('TimeIn', $s, $this->getTimeLogID());
 		$this->Info['TimeStampIn'] = new DateTime($s);
 	}
 
+	//get the time stamp for logging out
 	function getTimeStampOut()
 	{
 		return $this->Info['TimeStampOut'];
 	}
 
+	//set the time stamp for logging out
 	function setTimeStampOut($s)
 	{
 		updateTableByTimeLogID('TimeOut', $s, $this->getTimeLogID());
@@ -123,6 +152,7 @@ class Time
 		$this->subtractTimeSpentFromClient();
 	}
 
+	//subtract time spent from the client hours left
 	function subtractTimeSpentFromClient()
 	{
 		//Get Client Hours Spent
@@ -135,61 +165,72 @@ class Time
 		updateTableByClient_NumberValue('Client', 'HoursLeft', $Client_HoursLeft_row, $this->getClientName());
 	}
 
+	//get the time spent
 	function getTimeSpent()
 	{
 		return $this->Info['TimeSpent'];
 	}
 
+	//set the time spent
 	function setTimeSpent($s)
 	{
 		updateTableByTimeLogID_NumberValue('TimeSpent', $s, $this->getTimeLogID());
 		$this->Info['TimeSpent'] = $s;
 	}
 
+	//get the username
 	function getUsername()
 	{
 		return $this->Username;
 	}
 
+	//set the username
 	function setUsername($s)
 	{
 		updateTableByTimeLogID('Username', $s, $this->getTimeLogID());
 		$this->Username = $s;
 	}
 
+	//get the client's name
 	function getClientName()
 	{
 		return $this->ClientName;
 	}
 
+	//set the client's name
 	function setClientName($s)
 	{
 		updateTableByTimeLogID('ClientName', $s, $this->getTimeLogID());
 		$this->ClientName = $s;
 	}
 
+	//get the project ID
 	function getProjectID()
 	{
 		return $this->ProjectID;
 	}
 
+	//set the project ID
 	function setProjectID($s)
 	{
 		updateTableByTimeLogID_NumberValue('ProjectID', $s, $this->getTimeLogID());
 		$this->ProjectID = $s;
 	}
 
+	//gte the task ID
 	function getTaskID()
 	{
 		return $this->TaskID;
 	}
 
+	//set the task ID
 	function setTaskID($s)
 	{
 		updateTableByTimeLogID_NumberValue('TaskID', $s, $this->getTimeLogID());
 		$this->TaskID = $s;
 	}
-
+	
+	//time spent is the TimeStampIn-TimeStampOut converted into seconds using the dateTimeToSeconds
 	function calculateTimeSpent()
 	{
 		$DateTimeIn = $this->Info['TimeStampIn']; 
@@ -201,7 +242,8 @@ class Time
 
 		$this->setTimeSpent($timeSpent);
 	}
-
+	
+	//converts dateTime to seconds
 	private static function dateTimeToSeconds($Difference)
 	{
 		$year = $Difference->y;
