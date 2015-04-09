@@ -50,6 +50,18 @@ function echoManageDevelopersLinks()
 	echo '</ul>';
 }
 
+//This function consumes the superUser echos a dropdwon selector for the Teams in the Database
+function teamDropDown($superUser)
+{
+	$teams = $superUser->getTeams();
+
+	echo '<select name="Team_Selected">';
+	foreach($teams as $t)
+		echo '<option value="' . $t . '">' . $t . '</option>';
+	echo '</select>';
+	echo '<input type="submit" value="Submit">';
+}
+
 //This function gets passed a Developer and echos a dropdwon selector for the Developer's developer List
 function developerDropDown($developer)
 {
@@ -506,7 +518,7 @@ function newDeveloperForm()
 	
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-	    if ($_POST['team'] == "") 
+	    if ($_POST['Team_Selected'] == "") 
 	    {
 	        $teamError = "Please Select the Team.";
 	    }
@@ -559,12 +571,11 @@ function newDeveloperForm()
 	echo <<<END
 	<form id="developer_form" action="" method="POST">
 	<br>Team: <font color="red">*</font><br>
-	<select name="team">
-		<option value="">Select the team</option>
-		<option value="Team 1">Team 1</option>
-		<option value="Team 2">Team 2</option>
-		<option value="Team 3">Team 3</option>
-	</select>
+END;
+	
+	teamDropDown($_SESSION['SuperUser']);
+
+	echo <<<END
 	<font color="red">$teamError</font>
 	<br>Username: <font color="red">*</font><br>
 	<input type="text" name="username"> <font color="red">$usernameError</font>
