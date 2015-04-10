@@ -596,7 +596,7 @@ END;
 	echo <<<END
 	<br><input type="submit" name="Submit" value="Create Developer">
 	<br><font color="red">* Required fields.</font>
-	</form>;
+	</form>
 END;
 	
 }
