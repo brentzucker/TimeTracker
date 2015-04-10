@@ -537,7 +537,7 @@ function newClientForm($developer)
 }
 
 //This function echos a form to create a new Developer and calls the createEmployee method which stores the info in the database.
-function newDeveloperForm()
+function newDeveloperForm($developer)
 {
 	/*
 	if(isset($_POST['Submit']))
@@ -549,15 +549,6 @@ function newDeveloperForm()
 	
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-	    if ($_POST['Team_Selected'] == "") 
-	    {
-	        $teamError = "Please Select the Team.";
-	    }
-	    else 
-	    {
-	        $team = $_POST['team'];
-	    }
-
 	    if (empty($_POST['username'])) 
 	    {
 	        $usernameError = "Missing";
@@ -593,21 +584,17 @@ function newDeveloperForm()
 	        $password = $_POST['password'];
 	    }
 
-		if(isset($_POST['Team_Selected']) && isset($_POST['username']) && isset($_POST['position']) && isset($_POST['password']))
+		if(isset($_POST['username']) && isset($_POST['position']) && isset($_POST['password']))
 		{
-			createEmployee($team, $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state);
+			createEmployee($developer->getTeam(), $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state);
 		}
 	}
 
-	echo <<<END
-	<form id="developer_form" action="" method="POST">
-	<br>Team: <font color="red">*</font><br>
-END;
-	
-	teamDropDown($_SESSION['SuperUser']);
+	echo '<form id="developer_form" action="" method="POST"><br>';
+
+	//teamDropDown($_SESSION['SuperUser']);
 
 	echo <<<END
-	<font color="red">$teamError</font>
 	<br>Username: <font color="red">*</font><br>
 	<input type="text" name="username"> <font color="red">$usernameError</font>
 	<br>Password: <font color="red">*</font><br>

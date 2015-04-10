@@ -5,5 +5,5 @@ session_start();
 
 echo '<h2>Create Developer</h2>';
 
-newDeveloperForm();
+newDeveloperForm($_SESSION['Developer']);
 ?>
