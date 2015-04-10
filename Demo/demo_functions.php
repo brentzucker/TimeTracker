@@ -489,6 +489,38 @@ function echoContactInput()
 END;
 }
 
+//This function consumes the name of a session variable and a developer and echos a project form and assigns and inputs that project into the database
+function newProjectForm($session, $developer)
+{
+	echo '<form action="" method="POST">';
+	echo '<h2>Select a Client</h2>';
+	clientDropDown($developer);
+	echo '</form>';
+
+	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	{
+		if(isset($_POST['Client_Selected']))
+			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+
+		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
+
+		echo '<form action="" method="POST">';
+		echo 'Project Name: <br>';
+		echo '<input type="text" name="projectname">';
+		echo '<br>Description:<br>';
+		echo '<input type="textarea" name="description"><br>';
+		echo '<input type="Submit" name="newprojectsubmitted">';
+		echo '</form>';
+
+		if(isset($_POST['projectname']))
+		{
+			echo 'hello';
+			$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['Description']);
+			echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
+		}
+	}
+}
+
 //This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
 function newClientForm($developer)
 {

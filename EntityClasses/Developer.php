@@ -215,9 +215,11 @@ class Developer
 			if($client->equals($ClientObject))
 				$already_assigned = true;
 			
-		if(!$already_assigned)	
+		if(!$already_assigned)
+		{
 			newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client');
-		array_push($this->Client_List, $ClientObject);
+			array_push($this->Client_List, $ClientObject);
+		}	
 	}
 	
 	//assigns project to developer
@@ -343,6 +345,11 @@ class Developer
 	{
 		createClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
 		$this->assignClient( new Client($clientname) );
+	}
+
+	function newProject($ClientName, $ProjectName, $Description)
+	{
+		$this->assignProject(new Projects($ClientName, $ProjectName, $Description));
 	}
 }
 ?>
