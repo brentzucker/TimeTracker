@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: Tasks.php
 Description: creates an array with the task's information and creates get/set methods
 Programmers: Brent Zucker
@@ -12,9 +13,7 @@ Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories 
 4/6/15-Assign developers/task
--->
-
-<?php
+*/
 require_once(__DIR__.'/../include.php');
 
 

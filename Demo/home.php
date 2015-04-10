@@ -3,9 +3,6 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
-$_SESSION['SuperUser'] = new SuperUser();
-$_SESSION['Developer'] = new Developer('b.zucker');
-
 $_SESSION['currentLog'] = null;
 $_SESSION['reports'] = null;
 $_SESSION['assign'] = null;

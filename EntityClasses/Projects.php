@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: Projects.php
 Description: sets/gets the infromation about the project and assigns them to developers
 Programmers: Brent Zucker
@@ -11,9 +12,7 @@ Error Handling:
 Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories
--->
-
-<?php
+*/
 require_once(__DIR__.'/../include.php');
 
 

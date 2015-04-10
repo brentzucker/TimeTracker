@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: Contact.php
 Description: creates an array with the developer's contact information and creates get/set methods
 Programmers: Brent Zucker
@@ -11,9 +12,7 @@ Error Handling:
 Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories 
--->
-
-<?php
+*/
 require_once(__DIR__.'/../include.php');
 
 

@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: demo_functions.php
 Description: has all the functions needed for the demo in one place
 Programmers: Brent Zucker, Jon Self (editted)
@@ -11,9 +12,7 @@ Error Handling:
 Modification List:
 
 4/8/2015: Selective edits
--->
-
-<?php
+*/
 require_once(__DIR__.'/../include.php');
 
 //This function echos the links on the home page

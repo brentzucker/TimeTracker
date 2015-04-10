@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: ClientPurchase.php
 Description: creates an array with the client's purchase information, with get/set methods and constructors 
 Programmers: Brent Zucker
@@ -10,10 +11,8 @@ Output:
 Error Handling:
 Modification List:
 3/10/15-Initial code up 
-3/12/15-Updated path directories 
--->
-
-<?php
+3/12/15-Updated path directories
+*/
 require_once(__DIR__.'/../include.php');
 
 //creates an array with a client's purchase information

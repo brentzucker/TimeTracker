@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: Client.php
 Description: sets up the data for the Client class, with get/set methods to access data
 Programmers: Brent Zucker
@@ -11,9 +12,7 @@ Error Handling:
 Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories 
--->
-
-<?php
+*/
 require_once(__DIR__.'/../include.php');
 
 //creates a array with the client's information

@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: Time.php
 Description: functions used in calculating the time spent for developer, clients and the time stamp's information
 Programmers: Brent Zucker
@@ -11,9 +12,7 @@ Error Handling:
 Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories 
--->
-
-<?php
+*/
 require_once(__DIR__.'/../include.php');
 
 class Time

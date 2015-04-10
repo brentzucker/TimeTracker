@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: Developer.php
 Description: sets up the an array with the developer's work information as well as how to handle the clock in/out functions
 Programmers: Brent Zucker
@@ -13,9 +14,7 @@ Modification List:
 3/12/15-Updated path directories 
 3/29/15-Demo report and clock in/out
 4/6/15-Assign client/task
--->
-
-<?php
+*/
 require_once(__DIR__.'/../include.php');
 
 //creates an array with the developer's work informationa
