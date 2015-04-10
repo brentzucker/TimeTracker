@@ -3,10 +3,10 @@
 Name: demo_functions.php
 Description: has all the functions needed for the demo in one place
 Programmers: Brent Zucker, Jon Self (editted)
-Dates: (3/12/15, 
+Dates: (3/12/15,
 Names of files accessed: include.php
 Names of files changed:
-Input: 
+Input:
 Output:
 Error Handling:
 Modification List:
@@ -84,7 +84,7 @@ function clientDropDown($Developer)
 
 	foreach($Developer->getClientList() as $client)
 		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
-	
+
 	echo '</select>';
 	echo '<input type="submit" value="Submit">';
 
@@ -124,7 +124,7 @@ function developerClientDropdownForm($session_variable)
 	echo '<form action="" method="POST">';
 	developerDropDown($_SESSION['Developer']);
 	echo '</form>';
-	
+
 	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
 	{
 		//Check if Developer selected has been changed
@@ -163,7 +163,7 @@ function developerClientProjectDropdownForm($session_variable)
 	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
 	{
 		//If the developer selection is changed
-		if(isset($_POST['Developer_Selected']) && $_POST['Developer_Selected'] != $_SESSION["$session_variable"]['developer']) 
+		if(isset($_POST['Developer_Selected']) && $_POST['Developer_Selected'] != $_SESSION["$session_variable"]['developer'])
 		{
 			unset($_SESSION["$session_variable"]['Client_Selected']);
 			unset($_SESSION["$session_variable"]['Project_Selected']);
@@ -185,7 +185,7 @@ function developerClientProjectTaskDropdownForm($session_variable)
 	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
 	{
 		//If the developer selection is changed
-		if(isset($_POST['Developer_Selected']) && $_POST['Developer_Selected'] != $_SESSION["$session_variable"]['developer']) 
+		if(isset($_POST['Developer_Selected']) && $_POST['Developer_Selected'] != $_SESSION["$session_variable"]['developer'])
 		{
 			unset($_SESSION["$session_variable"]['client']);
 			unset($_SESSION["$session_variable"]['project']);
@@ -199,7 +199,7 @@ function developerClientProjectTaskDropdownForm($session_variable)
 
 		clientProjectTaskDropdownForm("$session_variable");
 	}
-} 
+}
 
 /* Forms dependent on Client Selection
  *
@@ -241,7 +241,7 @@ function clientProjectTaskDropdownForm($session_variable)
 	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session_variable"]['client']))
 	{
 		//If the client selection is changed
-		if(isset($_POST['Client_Selected']) && $_POST['Client_Selected'] != $_SESSION["$session_variable"]['client']) 
+		if(isset($_POST['Client_Selected']) && $_POST['Client_Selected'] != $_SESSION["$session_variable"]['client'])
 		{
 			unset($_SESSION["$session_variable"]['project']);
 			unset($_SESSION["$session_variable"]['task']);
@@ -261,7 +261,7 @@ function clientProjectTaskDropdownForm($session_variable)
 		if(isset($_POST['Project_Selected']) || isset($_SESSION["$session_variable"]['project']))
 		{
 			//If the project selection is changed
-			if(isset($_POST['Project_Selected']) && $_POST['Project_Selected'] != $_SESSION["$session_variable"]['project']) 
+			if(isset($_POST['Project_Selected']) && $_POST['Project_Selected'] != $_SESSION["$session_variable"]['project'])
 				unset($_SESSION["$session_variable"]['task']);
 
 			//Store the project selected in the report session
@@ -298,7 +298,7 @@ function printTable($query, $table_headers)
 	foreach($table_headers as $t_h)
 		echo '<th>' . $t_h . '</th>';
 	echo '</tr>';
-	
+
 	if($result = db_query($query))
 	{
 		while($row = mysqli_fetch_row($result))
@@ -318,7 +318,7 @@ function printTable($query, $table_headers)
 function printTimeSheetTableByTask($task)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.TaskID=" . $task;
-	
+
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'TaskName', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -328,7 +328,7 @@ function printTimeSheetTableByTask($task)
 function printTimeLogTableByDeveloper($developer)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
-	
+
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'Task Name', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -338,7 +338,7 @@ function printTimeLogTableByDeveloper($developer)
 function printAggregatedTimeLogTableByDeveloper($developer)
 {
 	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.Username='" . $developer ."'GROUP BY t.ClientName";
-	
+
 	$table_headers = array('Username', 'Client', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -368,7 +368,7 @@ function printAggregatedTimeLogTableByClient($client)
 function printAggregatedTimeLogTableByProject($project)
 {
 	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
-	
+
 	$table_headers = array('Client', 'Project Name', 'Username', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -378,7 +378,7 @@ function printAggregatedTimeLogTableByProject($project)
 function printTimeLogTableByProject($project)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
-	
+
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -388,7 +388,7 @@ function printTimeLogTableByProject($project)
 function printAggregatedTimeLogTableByTask($task)
 {
 	$query = "SELECT t.ClientName, p.ProjectName, a.TaskName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p, Tasks a WHERE (t.ProjectID = p.ProjectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."' GROUP BY t.Username";
-	
+
 	$table_headers = array('Client', 'Project Name', 'Task Name', 'Username', 'Time Spent');
 
 	printTable($query, $table_headers);
@@ -398,17 +398,17 @@ function printAggregatedTimeLogTableByTask($task)
 function printTimeLogTableByTask($task)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, a.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks a WHERE (t.ProjectID = p.projectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."'";
-	
+
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Task', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
 }
 
-//This function consumes a client name and echos a view of the ClientPurchases table 
+//This function consumes a client name and echos a view of the ClientPurchases table
 function printHoursLeftTable($client)
 {
 	$query = 'SELECT p.ClientName, c.StartDate, SUM(p.HoursPurchased), COUNT(p.PurchaseDate), c.HoursLeft FROM ClientPurchases p, Client c WHERE (c.ClientName = p.ClientName) AND c.ClientName="' . $client . '"';
-		
+
 	$table_headers = array('Client', 'Start Date', 'Hours Purchased', 'Purchases', 'Hours Left');
 
 	printTable($query, $table_headers);
@@ -417,7 +417,7 @@ function printHoursLeftTable($client)
 function printClientsPurchasesTable($client)
 {
 	$query = 'SELECT p.ClientName, p.HoursPurchased, p.PurchaseDate FROM ClientPurchases p WHERE p.ClientName="' . $client . '"';
-		
+
 	$table_headers = array('Client', 'Hours Purchased', 'Purchase Date');
 
 	printTable($query, $table_headers);
@@ -427,7 +427,7 @@ function printClientsPurchasesTable($client)
 function printAssignmentsTable($developer)
 {
 	$query = "SELECT * FROM DeveloperAssignments WHERE Username='" . $developer ."'";
-	
+
 	$table_headers = array('Username', 'Client/Project/Task', 'Type');
 
 	printTable($query, $table_headers);
@@ -446,7 +446,7 @@ function printAssignmentsTableClient($developer)
 function printAssignmentsTableProject($developer)
 {
 	$query = "SELECT Username, ProjectName FROM DeveloperAssignments, Projects WHERE ClientProjectTask=ProjectID AND Type='Project' AND Username='" . $developer ."'";
-	
+
 	$table_headers = array('Username', 'Projects');
 
 	printTable($query, $table_headers);
@@ -456,7 +456,7 @@ function printAssignmentsTableProject($developer)
 function printAssignmentsTableTask($developer)
 {
 	$query = "SELECT Username, TaskName FROM DeveloperAssignments, Tasks WHERE ClientProjectTask=TaskID AND Type='Task' AND Username='" . $developer ."'";
-	
+
 	$table_headers = array('Username', 'Tasks');
 
 	printTable($query, $table_headers);
@@ -627,21 +627,21 @@ function newDeveloperForm($developer)
 	if(isset($_POST['Submit']))
 		createEmployee($_POST['team'], $_POST['username'], $_POST['position'], $_POST['password'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
 	*/
-	
+
 	$teamError = $usernameError = $positionError = $passwordError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
 
-	
+	$username = $password = $position = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-	    if (empty($_POST['username'])) 
+	    if (empty($_POST['username']))
 	    {
 	        $usernameError = "Missing";
 	    }
-		else if(strlen($_POST['username']) < 2) 
+		else if(strlen($_POST['username']) < 3)
 		{
 			$usernameError = "Username needs to be at least 3 characters long";
 		}
-	    else 
+	    else
 	    {
 	        $username = $_POST['username'];
 		}
@@ -650,7 +650,7 @@ function newDeveloperForm($developer)
 		{
 	        $positionError = "Please select your position.";
 	    }
-	    else 
+	    else
 	    {
 	        $position = $_POST['position'];
 	    }
@@ -663,7 +663,7 @@ function newDeveloperForm($developer)
 		{
 			$passwordError = "Password needs to be at least 5 characters long";
 		}
-	    else 
+	    else
 	    {
 	        $password = $_POST['password'];
 	    }
@@ -694,12 +694,12 @@ function newDeveloperForm($developer)
 END;
 
 	echoContactInput();
-	
+
 	echo <<<END
 	<br><input type="submit" name="Submit" value="Create Developer">
 	<br><font color="red">* Required fields.</font>
 	</form>
 END;
-	
+
 }
 ?>
