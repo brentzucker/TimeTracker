@@ -514,7 +514,6 @@ function newProjectForm($session, $developer)
 
 		if(isset($_POST['projectname']))
 		{
-			echo 'hello';
 			$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['Description']);
 			echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
 		}
@@ -563,9 +562,9 @@ function newDeveloperForm()
 	    {
 	        $usernameError = "Missing";
 	    }
-		else if($_POST['username'] < 2) 
+		else if(strlen($_POST['username']) < 2) 
 		{
-				$usernameError = "Username needs to be at least 3 characters long";
+			$usernameError = "Username needs to be at least 3 characters long";
 		}
 	    else 
 	    {
@@ -585,7 +584,7 @@ function newDeveloperForm()
 		{
         	$passwordError = "Missing";
     	}
-		else if($_POST['password'] < 4)
+		else if(strlen($_POST['password']) < 4)
 		{
 			$passwordError = "Password needs to be at least 5 characters long";
 		}
@@ -594,7 +593,7 @@ function newDeveloperForm()
 	        $password = $_POST['password'];
 	    }
 
-		if(!empty($_POST['team']) && !empty($_POST['username']) && !empty($_POST['position']) && !empty($_POST['password']))
+		if(isset($_POST['Team_Selected']) && isset($_POST['username']) && isset($_POST['position']) && isset($_POST['password']))
 		{
 			createEmployee($team, $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state);
 		}
