@@ -375,7 +375,7 @@ function returnRowsDeveloperAssignments($WhereValue1, $WhereValue2)
 	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2);
 }
 
-function returnRowsDeveloperAssignmentsUnique($WhereValue1, $WhereValue2, $WheverValue3)
+function returnRowsDeveloperAssignmentsUnique($WhereValue1, $WhereValue2, $WhereValue3)
 {
 	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
 }

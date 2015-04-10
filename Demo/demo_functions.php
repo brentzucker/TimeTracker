@@ -496,6 +496,50 @@ function assignProject()
 	}
 }
 
+//This function creates a from that assigns a task to the developer and calls assignTask to load the data into the database
+function newTaskForm($session, $developer)
+{	
+	echo '<form action="" method="POST">';
+	echo "<h2>Select a Client</h2>";
+	clientDropDown($developer);
+	echo"</form>";
+	
+	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	{
+		if(isset($_POST['Client_Selected']))
+			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+		
+		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
+	
+		echo "Select a Project";
+		echo '<form action="" method="POST">';
+		projectDropDown($developer, $_SESSION[$session]['Client_Selected']);
+		echo "</form>";
+		
+		if(isset($_POST['Project_Selected']))
+		{
+			$_SESSION[$session]['Project_Selected'] = $_POST['Project_Selected'];
+			
+			echo '<h2>' . $_SESSION[$session]['Project_Selected'] . ' was selected.</h2>';
+
+			echo '<form action="" method="POST">';
+			echo 'Task Name: <br>';
+			echo '<input type="text" name="taskname">';
+			echo '<br>Description:<br>';
+			echo '<input type="textarea" name="description"><br>';
+			echo '<input type="Submit" name="newtasksubmitted">';
+			echo '</form>';
+		}
+		
+		if(isset($_POST['taskname']))
+		{
+			
+			echo '<h1>' . $_POST['taskname'] . ' was created!</h1>';
+			$_SESSION['Developer']->assignTask( new Tasks($_SESSION[$session]['Client_Selected'], $_SESSION[$session]['Project_Selected'], $_POST['taskname'], $_POST['description']) );
+		}
+	}
+}
+
 //This function echos the contact input fields for a form.
 function echoContactInput()
 {
