@@ -285,10 +285,20 @@ function returnRowByTaskID($TaskID)
 /* Returns all rows for a Table based off one Where value.
  *
  */
+function returnAllRows($Tablename)
+{
+	$sql = "SELECT * FROM $Tablename";
+	$result = db_query($sql);
+	$rows = array();
+	
+	while($row = $result->fetch_assoc())
+		array_push($rows, $row);
+
+	return $rows;
+}
 
 function returnRows($Tablename, $WhereColumn, $WhereValue)
 {
-	//Returns Team, Username, Position
 	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn='$WhereValue'";
 	$result = db_query($sql);
 	$rows = array();
