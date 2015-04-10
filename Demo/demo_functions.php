@@ -490,10 +490,10 @@ END;
 }
 
 //This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
-function newClientForm()
+function newClientForm($developer)
 {
 	if(isset($_POST['Submit']))
-		createClient($_POST['clientname'], $_POST['startdate'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+		$developer->newClient($_POST['clientname'], $_POST['startdate'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
 
 	echo '<form id="developer_form" action="" method="POST">';
 	echo '<br>Client Name:<br>';

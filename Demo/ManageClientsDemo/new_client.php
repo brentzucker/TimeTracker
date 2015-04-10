@@ -5,5 +5,5 @@ session_start();
 
 echo '<h1>New Client</h1>';
 
-newClientForm();
+newClientForm($_SESSION['Developer']);
 ?>

@@ -338,5 +338,11 @@ class Developer
 		//return list
 		return $ret; 
 	}
+
+	function newClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state)
+	{
+		createClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
+		$this->assignClient( new Client($clientname) );
+	}
 }
 ?>
