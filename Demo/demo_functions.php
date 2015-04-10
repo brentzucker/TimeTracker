@@ -498,28 +498,28 @@ function assignProject()
 
 //This function creates a from that assigns a task to the developer and calls assignTask to load the data into the database
 function newTaskForm($session, $developer)
-{	
+{
 	echo '<form action="" method="POST">';
 	echo "<h2>Select a Client</h2>";
 	clientDropDown($developer);
 	echo"</form>";
-	
+
 	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
 	{
 		if(isset($_POST['Client_Selected']))
 			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
-		
+
 		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
-	
+
 		echo "Select a Project";
 		echo '<form action="" method="POST">';
 		projectDropDown($developer, $_SESSION[$session]['Client_Selected']);
 		echo "</form>";
-		
+
 		if(isset($_POST['Project_Selected']))
 		{
 			$_SESSION[$session]['Project_Selected'] = $_POST['Project_Selected'];
-			
+
 			echo '<h2>' . $_SESSION[$session]['Project_Selected'] . ' was selected.</h2>';
 
 			echo '<form action="" method="POST">';
@@ -530,10 +530,10 @@ function newTaskForm($session, $developer)
 			echo '<input type="Submit" name="newtasksubmitted">';
 			echo '</form>';
 		}
-		
+
 		if(isset($_POST['taskname']))
 		{
-			
+
 			echo '<h1>' . $_POST['taskname'] . ' was created!</h1>';
 			$_SESSION['Developer']->assignTask( new Tasks($_SESSION[$session]['Client_Selected'], $_SESSION[$session]['Project_Selected'], $_POST['taskname'], $_POST['description']) );
 		}
@@ -651,16 +651,50 @@ function newProjectForm($session, $developer)
 //This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
 function newClientForm($developer)
 {
-	if(isset($_POST['Submit']))
-		$developer->newClient($_POST['clientname'], $_POST['startdate'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+	//if(isset($_POST['Submit']))
+		//$developer->newClient($_POST['clientname'], $_POST['startdate'], $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+
+		$teamError = $clientError = $dateError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
+
+		$client = $startdate = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
+
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+			if(empty($_POST['clientname']))
+				{
+					$clientError = "Missing";
+				}
+				else
+				{
+					$client = $_POST['clientname'];
+				}
+			if(empty($_POST['startdate']))
+			{
+				$dateError = "Please select a date.";
+			}
+			else
+			{
+				$startdate = $_POST['startdate'];
+			}
+
+			if(isset($_POST['clientname']) && isset($_POST['startdate']))
+			{
+				$developer->newClient($client, $startdate, $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+			}
+		}
+
+
 
 	echo '<form id="developer_form" action="" method="POST">';
-	echo '<br>Client Name:<br>';
+	echo '<br>Client Name: <font color="red">*</font><br>';
 	echo '<input type="text" name="clientname">';
-	echo '<br>StartDate:<br>';
+	echo "<font color='red'> $clientError</font>";
+	echo '<br>StartDate: <font color="red">*</font><br>';
 	echo '<input type="date" name="startdate">';
+	echo "<font color='red'> $dateError</font>";
 	echoContactInput();
 	echo '<input type="submit" name="Submit" value="Create Client">';
+	echo '<br><font color="red">* Required fields.</font>';
 	echo '</form>';
 }
 
