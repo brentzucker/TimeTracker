@@ -208,40 +208,22 @@ class Developer
 	//assigns client to developer
 	function assignClient($ClientObject)
 	{
-		//Don't assign the same client twice!
-		$already_assigned = false;
-
-		foreach($this->Client_List as $client)
-			if($client->equals($ClientObject))
-				$already_assigned = true;
-			
-		if(!$already_assigned)
-		{
-			newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client');
+		if(newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client'))
 			array_push($this->Client_List, $ClientObject);
-		}	
 	}
 	
 	//assigns project to developer
 	function assignProject($ProjectObject)
 	{
-		newDeveloperAssignments($this->getUsername(), $ProjectObject->getProjectID(), 'Project');
-		array_push($this->Project_List, $ProjectObject);
+		if(newDeveloperAssignments($this->getUsername(), $ProjectObject->getProjectID(), 'Project'))
+			array_push($this->Project_List, $ProjectObject);
 	}
 
 	//assigns task to developer
 	function assignTask($TaskObject)
 	{
-		//Don't assign the same task twice! 
-		$already_assigned = false; 
-
-		foreach($this->Task_List as $task)
-			if($task->equals($TaskObject))
-				$already_assigned = true;
-
-		if(!$already_assigned)
-			newDeveloperAssignments($this->getUsername(), $TaskObject->getTaskID(), 'Task');
-		array_push($this->Task_List, $TaskObject);
+		if(newDeveloperAssignments($this->getUsername(), $TaskObject->getTaskID(), 'Task'))
+			array_push($this->Task_List, $TaskObject);
 	}
 
 	//how to clock developer in

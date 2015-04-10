@@ -215,8 +215,14 @@ function removeTimeSheet($TimeLogID)
 
 function newDeveloperAssignments($Username, $ClientProjectTask, $Type)
 {
-	$sql = "INSERT INTO DeveloperAssignments(Username, ClientProjectTask, Type) VALUES ('$Username', '$ClientProjectTask', '$Type')";
-	db_query($sql);
+	//Only create the assignment if it doesn't exist
+	if(count(returnRowsDeveloperAssignmentsUnique($Username, $Type, $ClientProjectTask)) == 0)
+	{
+		$sql = "INSERT INTO DeveloperAssignments(Username, ClientProjectTask, Type) VALUES ('$Username', '$ClientProjectTask', '$Type')";
+		db_query($sql);
+		return true;
+	}
+	return false;	
 }
 
 function removeDeveloperAssignments($ClientProjectTask, $Type)
@@ -352,9 +358,26 @@ function returnRowsForTwoValues($Tablename, $WhereColumn1, $WhereValue1, $WhereC
 	return $rows;
 }
 
+function returnRowsForThreeValues($Tablename, $WhereColumn1, $WhereValue1, $WhereColumn2, $WhereValue2, $WhereColumn3, $WhereValue3)
+{
+	//Returns Team, Username, Position
+	$sql = "SELECT * FROM $Tablename WHERE $WhereColumn1='$WhereValue1' AND $WhereColumn2='$WhereValue2' AND $WhereColumn3='$WhereValue3'";
+	$result = db_query($sql);
+	$rows = array();
+	
+	while($row = $result->fetch_assoc())
+		array_push($rows, $row);
+	return $rows;
+}
+
 function returnRowsDeveloperAssignments($WhereValue1, $WhereValue2)
 {
 	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2);
+}
+
+function returnRowsDeveloperAssignmentsUnique($WhereValue1, $WhereValue2, $WheverValue3)
+{
+	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
 }
 
 /* The following functions update the database.
