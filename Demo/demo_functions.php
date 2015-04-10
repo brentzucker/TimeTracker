@@ -50,6 +50,10 @@ function echoManageDevelopersLinks()
 	echo '</ul>';
 }
 
+/* Functions that create dropdown selectors
+ *
+ */
+
 //This function consumes the superUser echos a dropdwon selector for the Teams in the Database
 function teamDropDown($superUser)
 {
@@ -109,6 +113,10 @@ function taskDropDown($developer, $projectid)
 	echo '<input type="submit" value="Submit">';
 }
 
+/* Forms dependent on Developer Selection
+ *
+ */
+
 //This function consumes a session variable to store values in and echos forms based on preceding selections.
 function developerClientDropdownForm($session_variable)
 {
@@ -144,6 +152,34 @@ function developerClientDropdownForm($session_variable)
 }
 
 //This function consumes a session variable to store values in and echos forms based on preceding selections.
+function developerClientProjectDropdownForm($session_variable)
+{
+	echo '<h2>Select a Developer</h2>';
+
+	echo '<form action="" method="POST">';
+	developerDropDown($_SESSION['Developer']);
+	echo '</form>';
+
+	//If a Developer has been selected Load the next Drop Down
+	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
+	{
+		//If the developer selection is changed
+		if(isset($_POST['Developer_Selected']) && $_POST['Developer_Selected'] != $_SESSION["$session_variable"]['developer']) 
+		{
+			unset($_SESSION["$session_variable"]['Client_Selected']);
+			unset($_SESSION["$session_variable"]['Project_Selected']);
+		}
+
+		if(isset($_POST['Developer_Selected']))
+			$_SESSION["$session_variable"]['developer'] = $_POST['Developer_Selected'];
+
+		echo '<h2>' . $_SESSION["$session_variable"]['developer'] . ' was selected.</h2>';
+
+		clientProjectDropdownForm($session_variable);
+	}
+}
+
+//This function consumes a session variable to store values in and echos forms based on preceding selections.
 function developerClientProjectTaskDropdownForm($session_variable)
 {
 	//If a Developer has been selected Load the next Drop Down
@@ -162,74 +198,35 @@ function developerClientProjectTaskDropdownForm($session_variable)
 
 		echo '<h2>' . $_SESSION['$session_variable']['developer'] . ' was selected.</h2>';
 
-		clientProjectTaskDropdownForm('assign');
+		clientProjectTaskDropdownForm("$session_variable");
 	}
-}
+} 
 
-//This function consumes a session variable to store values in and echos forms based on preceding selections.
-function developerClientProjectDropdownForm($session_variable)
-{
-	echo '<h2>Select a Developer</h2>';
-
-	echo '<form action="" method="POST">';
-	developerDropDown($_SESSION['Developer']);
-	echo '</form>';
-
-	//If a Developer has been selected Load the next Drop Down
-	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
-	{
-		//If the developer selection is changed
-		if(isset($_POST['Developer_Selected']) && $_POST['Developer_Selected'] != $_SESSION["$session_variable"]['developer']) 
-		{
-			unset($_SESSION["$session_variable"]['client']);
-			unset($_SESSION["$session_variable"]['project']);
-			unset($_SESSION["$session_variable"]['task']);
-		}
-
-		if(isset($_POST['Developer_Selected']))
-			$_SESSION["$session_variable"]['developer'] = $_POST['Developer_Selected'];
-
-		echo '<h2>' . $_SESSION['$session_variable']['developer'] . ' was selected.</h2>';
-
-		clientProjectDropdownForm($session_variable);
-	}
-}
-
-//This function calls developerClientProjectDropdownForm to select the projects to be displayed and assigns the project selected to the developer selected
-function assignProject()
-{
-	developerClientProjectDropdownForm('assign');
-
-	if(isset($_POST['Project_Selected']))
-	{
-		echo '<h3>' . $_POST['Project_Selected'] . ' was selected</h3>';
-
-		$developer = new Developer($_SESSION['assign']['developer']);
-
-		$developer->assignProject( new Projects($_POST['Project_Selected']) );
-
-		echo '<h1>Project: ' . $developer->getProject($_POST['Project_Selected'])->getProjectName() . ' was assigned </h1>';
-	}
-}
+/* Forms dependent on Client Selection
+ *
+ */
 
 //This function consumes a session name variable and a developer name and displays dropdowns for a client and a project
 function clientProjectDropDownForm($session)
 {
-	echo '<form action="" method="POST">';
-	echo '<h2>Select a Client</h2>';
-	clientDropDown($_SESSION['Developer']);
-	echo '</form>';
+	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
+	{
+		echo '<form action="" method="POST">';
+		echo '<h2>Select a Client</h2>';
+		clientDropDown($_SESSION['Developer']);
+		echo '</form>';
+	}
 
-	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session"]['Client_Selected']))
 	{
 		if(isset($_POST['Client_Selected']))
-			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+			$_SESSION["$session"]['Client_Selected'] = $_POST['Client_Selected'];
 
-		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
+		echo '<h2>' . $_SESSION["$session"]['Client_Selected'] . ' was selected.</h2>';
 
 		echo '<form action="" method="POST">';
 		echo '<h2>Select a Project</h2>';
-		projectDropDown($_SESSION['Developer'], $_SESSION[$session]['Client_Selected']);
+		projectDropDown($_SESSION['Developer'], $_SESSION["$session"]['Client_Selected']);
 		echo '</form>';
 	}
 }
@@ -288,6 +285,10 @@ function clientProjectTaskDropdownForm($session_variable)
 		}
 	}
 }
+
+/* Print table functions
+ *
+ */
 
 //This function consumes a query and table headers and prints out the results in a table
 function printTable($query, $table_headers)
@@ -479,6 +480,22 @@ function clockForm($developer, $taskid)
 	echo '</form>';
 }
 
+//This function calls developerClientProjectDropdownForm to select the projects to be displayed and assigns the project selected to the developer selected
+function assignProject()
+{
+	developerClientProjectDropdownForm('assign');
+
+	if(isset($_POST['Project_Selected']))
+	{
+		echo '<h3>' . $_POST['Project_Selected'] . ' was selected</h3>';
+
+		$developer = new Developer($_SESSION['assign']['developer']);
+
+		$developer->assignProject( new Projects($_POST['Project_Selected']) );
+
+		echo '<h1>Project: ' . $developer->getProject($_POST['Project_Selected'])->getProjectName() . ' was assigned </h1>';
+	}
+}
 
 //This function echos the contact input fields for a form.
 function echoContactInput()
@@ -498,61 +515,61 @@ function echoContactInput()
 	<input type="text" name="city">
 	<br>State:<br>
 	<select name="state">
-<option value="">Select your state</option>
-<option value="AL">Alabama</option>
-<option value="AK">Alaska</option>
-<option value="AZ">Arizona</option>
-<option value="AR">Arkansas</option>
-<option value="CA">California</option>
-<option value="CO">Colorado</option>
-<option value="CT">Connecticut</option>
-<option value="DE">Delaware</option>
-<option value="DC">District of Columbia</option>
-<option value="FL">Florida</option>
-<option value="GA">Georgia</option>
-<option value="GU">Guam</option>
-<option value="HI">Hawaii</option>
-<option value="ID">Idaho</option>
-<option value="IL">Illinois</option>
-<option value="IN">Indiana</option>
-<option value="IA">Iowa</option>
-<option value="KS">Kansas</option>
-<option value="KY">Kentucky</option>
-<option value="LA">Louisiana</option>
-<option value="ME">Maine</option>
-<option value="MD">Maryland</option>
-<option value="MA">Massachusetts</option>
-<option value="MI">Michigan</option>
-<option value="MN">Minnesota</option>
-<option value="MS">Mississippi</option>
-<option value="MO">Missouri</option>
-<option value="MT">Montana</option>
-<option value="NE">Nebraska</option>
-<option value="NV">Nevada</option>
-<option value="NH">New Hampshire</option>
-<option value="NJ">New Jersey</option>
-<option value="NM">New Mexico</option>
-<option value="NY">New York</option>
-<option value="NC">North Carolina</option>
-<option value="ND">North Dakota</option>
-<option value="OH">Ohio</option>
-<option value="OK">Oklahoma</option>
-<option value="OR">Oregon</option>
-<option value="PA">Pennsylvania</option>
-<option value="PR">Puerto Rico</option>
-<option value="RI">Rhode Island</option>
-<option value="SC">South Carolina</option>
-<option value="SD">South Dakota</option>
-<option value="TN">Tennessee</option>
-<option value="TX">Texas</option>
-<option value="UT">Utah</option>
-<option value="VT">Vermont</option>
-<option value="VA">Virginia</option>
-<option value="WA">Washington</option>
-<option value="WV">West Virginia</option>
-<option value="WI">Wisconsin</option>
-<option value="WY">Wyoming</option>
-</select>
+	<option value="">Select your state</option>
+	<option value="AL">Alabama</option>
+	<option value="AK">Alaska</option>
+	<option value="AZ">Arizona</option>
+	<option value="AR">Arkansas</option>
+	<option value="CA">California</option>
+	<option value="CO">Colorado</option>
+	<option value="CT">Connecticut</option>
+	<option value="DE">Delaware</option>
+	<option value="DC">District of Columbia</option>
+	<option value="FL">Florida</option>
+	<option value="GA">Georgia</option>
+	<option value="GU">Guam</option>
+	<option value="HI">Hawaii</option>
+	<option value="ID">Idaho</option>
+	<option value="IL">Illinois</option>
+	<option value="IN">Indiana</option>
+	<option value="IA">Iowa</option>
+	<option value="KS">Kansas</option>
+	<option value="KY">Kentucky</option>
+	<option value="LA">Louisiana</option>
+	<option value="ME">Maine</option>
+	<option value="MD">Maryland</option>
+	<option value="MA">Massachusetts</option>
+	<option value="MI">Michigan</option>
+	<option value="MN">Minnesota</option>
+	<option value="MS">Mississippi</option>
+	<option value="MO">Missouri</option>
+	<option value="MT">Montana</option>
+	<option value="NE">Nebraska</option>
+	<option value="NV">Nevada</option>
+	<option value="NH">New Hampshire</option>
+	<option value="NJ">New Jersey</option>
+	<option value="NM">New Mexico</option>
+	<option value="NY">New York</option>
+	<option value="NC">North Carolina</option>
+	<option value="ND">North Dakota</option>
+	<option value="OH">Ohio</option>
+	<option value="OK">Oklahoma</option>
+	<option value="OR">Oregon</option>
+	<option value="PA">Pennsylvania</option>
+	<option value="PR">Puerto Rico</option>
+	<option value="RI">Rhode Island</option>
+	<option value="SC">South Carolina</option>
+	<option value="SD">South Dakota</option>
+	<option value="TN">Tennessee</option>
+	<option value="TX">Texas</option>
+	<option value="UT">Utah</option>
+	<option value="VT">Vermont</option>
+	<option value="VA">Virginia</option>
+	<option value="WA">Washington</option>
+	<option value="WV">West Virginia</option>
+	<option value="WI">Wisconsin</option>
+	<option value="WY">Wyoming</option>
+	</select>
 	<br>
 END;
 }
