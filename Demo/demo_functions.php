@@ -625,6 +625,7 @@ function newProjectForm($session, $developer)
 	clientDropDown($developer);
 	echo '</form>';
 
+
 	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
 	{
 		if(isset($_POST['Client_Selected']))
@@ -632,19 +633,39 @@ function newProjectForm($session, $developer)
 
 		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
 
-		echo '<form action="" method="POST">';
-		echo 'Project Name: <br>';
-		echo '<input type="text" name="projectname">';
-		echo '<br>Description:<br>';
-		echo '<input type="textarea" name="description"><br>';
-		echo '<input type="Submit" name="newprojectsubmitted">';
-		echo '</form>';
+		$projectname = $projectError = "";
 
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+			if(empty($_POST['projectname']))
+				{
+					$projectError = "Missing";
+				}
+			else
+				{
+					$projectname = $_POST['projectname'];
+				}
+		}
 		if(isset($_POST['projectname']))
 		{
 			$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['Description']);
 			echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
 		}
+		echo '<form action="" method="POST">';
+		echo 'Project Name: <font color="red">*</font><br>';
+		echo '<input type="text" name="projectname">';
+		echo "<font color='red'> $projectError</font>";
+		echo '<br>Description:<br>';
+		echo '<input type="textarea" name="description"><br>';
+		echo '<input type="Submit" name="newprojectsubmitted">';
+		echo '<br><font color="red">* Required fields.</font>';
+		echo '</form>';
+
+		//if(isset($_POST['projectname']))
+		//{
+		//	$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['Description']);
+		//	echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
+		//}
 	}
 }
 
