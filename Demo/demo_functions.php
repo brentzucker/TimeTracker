@@ -23,6 +23,7 @@ function echoHomePageLinks()
 	echo '<li><h3><a href="ReportsDemo/select_report.php">View Reports</a></li>';
 	echo '<li><h3><a href="ManageDevelopersDemo/manage_developers.php">Manage Developers</a></li>';
 	echo '<li><h3><a href="ManageClientsDemo/manage_clients.php">Manage Clients</a></li>';
+	echo '<li><h3><a href="MyAccountDemo/MyAccount.php">My Account</a></li>';
 	echo '</ul>';
 }
 
@@ -34,6 +35,9 @@ function echoManageClientsLinks()
 	echo '<li><h3><a href="new_client.php">New Client</a></li>';
 	echo '<li><h3><a href="new_project.php">New Project</a></li>';
 	echo '<li><h3><a href="new_task.php">New Task</a></li>';
+	echo '<li><h3><a href="remove_client.php">Remove Client</a></li>';
+	echo '<li><h3><a href="remove_project.php">Remove Project</a></li>';
+	echo '<li><h3><a href="remove_task.php">Remove Task</a></li>';
 	echo '</ul>';
 	echo <<<END
 	<br>
@@ -61,6 +65,24 @@ echo <<<END
 END;
 }
 
+//This function echos the links on the my account page
+function echoMyAccountLinks()
+{
+	echo '<ul>';
+	echo '<li><h3><a href="info.php">Update info</a></li>';
+	echo '<li><h3><a href="email.php">Update email</a></li>';
+	echo '<li><h3><a href="password.php">Update password</a></li>';
+	echo '<li><h3><a href="avatar.php">Update avatar</a></li>';
+	echo '<li><h3><a href="alerts.php">Update alerts</a></li>';
+	echo '<li><h3><a href="delete_account.php">Delete account</a></li>';
+	echo '</ul>';
+	echo <<<END
+		<br>
+		<form action='../home.php'>
+		<input type='submit' value='Back to Home'>
+		</form>
+END;
+}
 /* Functions that create dropdown selectors
  *
  */
@@ -695,10 +717,27 @@ function newClientForm($developer)
 
 		$teamError = $clientError = $dateError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
 
-		$client = $startdate = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
+		//$client = $startdate = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
 
 		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
+			if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
+			{
+				$username = $_POST['username'];
+				$password = $_POST['password'];
+				$position = $_POST['position'];
+				$firstname = $_POST['firstname'];
+				$lastname = $_POST['lastname'];
+				$phone = $_POST['phone'];
+				$email = $_POST['email'];
+				$address = $_POST['address'];
+				$city = $_POST['city'];
+				$state = $_POST['state'];
+			}
+			else
+			{
+				$username = $password = $position = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
+			}
 			if(empty($_POST['clientname']))
 				{
 					$clientError = "Missing";
@@ -755,9 +794,27 @@ function newDeveloperForm($developer)
 
 	$teamError = $usernameError = $positionError = $passwordError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
 
-	$username = $password = $position = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
+	//$username = $password = $position = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
+
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
+			if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
+			{
+				$username = $_POST['username'];
+				$password = $_POST['password'];
+				$position = $_POST['position'];
+				$firstname = $_POST['firstname'];
+				$lastname = $_POST['lastname'];
+				$phone = $_POST['phone'];
+				$email = $_POST['email'];
+				$address = $_POST['address'];
+				$city = $_POST['city'];
+				$state = $_POST['state'];
+			}
+			else
+			{
+				$username = $password = $position = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
+			}
 	    if (empty($_POST['username']))
 	    {
 	        $usernameError = "Missing";
@@ -831,5 +888,37 @@ END;
 	</form>
 END;
 
+}
+//BELOW:
+//UNFINISHED -- NEEDS WORK
+function removeClientForm($developer)
+{
+
+}
+
+function removeProjectForm($session, $developer)
+{
+
+}
+function removeTaskForm($session, $developer)
+{
+	clientProjectTaskDropdownForm('report');
+
+	if(isset($_POST['Task_Selected']) || isset($_SESSION['remove']['task']))
+	{
+		if(isset($_POST['removetask']))
+		{
+			deleteTask($_SESSION['Client_selected'], $_SESSION['Project_selected'], $_SESSION['Task_selected']);
+		}
+		else
+		{
+			//unfinished
+			echo '<h2>' . $_SESSION['remove']['task']  . ' was selected</h2>';
+			echo '<h2>Do you want to delete this task?</h2>';
+			echo '<form action="" method="POST">';
+			echo '<input type="Submit" name="removetask" value="Delete">';
+			echo '</form>';
+		}
+	}
 }
 ?>
