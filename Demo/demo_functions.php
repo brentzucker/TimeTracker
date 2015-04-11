@@ -635,7 +635,8 @@ function newProjectForm($session, $developer)
 
 		$projectname = $projectError = "";
 
-		if($_SERVER["REQUEST_METHOD"] == "POST")
+		//$_SERVER["REQUEST_METHOD"] == "POST"
+		if(isset($_POST['newprojectsubmitted']))
 		{
 			if(empty($_POST['projectname']))
 				{
@@ -646,9 +647,9 @@ function newProjectForm($session, $developer)
 					$projectname = $_POST['projectname'];
 				}
 		}
-		if(isset($_POST['projectname']))
+		if($projectname != "")
 		{
-			$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['Description']);
+			$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['description']);
 			echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
 		}
 		echo '<form action="" method="POST">';
@@ -697,10 +698,11 @@ function newClientForm($developer)
 			{
 				$startdate = $_POST['startdate'];
 			}
-
-			if(isset($_POST['clientname']) && isset($_POST['startdate']))
+			//isset($_POST['clientname']) && isset($_POST['startdate'])
+			if($client != "" && $startdate != "")
 			{
 				$developer->newClient($client, $startdate, $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+				echo "<h1> $client was created!</h1>";
 			}
 		}
 
@@ -770,6 +772,7 @@ function newDeveloperForm($developer)
 		if(isset($_POST['username']) && isset($_POST['position']) && isset($_POST['password']))
 		{
 			createEmployee($developer->getTeam(), $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state);
+			echo "<h1> Developer created!</h1>";
 		}
 	}
 
