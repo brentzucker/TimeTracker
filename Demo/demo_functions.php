@@ -35,6 +35,12 @@ function echoManageClientsLinks()
 	echo '<li><h3><a href="new_project.php">New Project</a></li>';
 	echo '<li><h3><a href="new_task.php">New Task</a></li>';
 	echo '</ul>';
+	echo <<<END
+	<br>
+	<form action='../home.php'>
+	<input type='submit' value='Back to Home'>
+	</form>
+END;
 }
 
 //This function echos the links on the manage developers page
@@ -47,6 +53,12 @@ function echoManageDevelopersLinks()
 	echo '<li><h3><a href="assign_client.php">Assign Client</a></li>';
 	echo '<li><h3><a href="view_all_assignments.php">View All Assignments</a></li>';
 	echo '</ul>';
+echo <<<END
+	<br>
+	<form action='../home.php'>
+	<input type='submit' value='Back to Home'>
+	</form>
+END;
 }
 
 /* Functions that create dropdown selectors
@@ -652,16 +664,21 @@ function newProjectForm($session, $developer)
 			$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['description']);
 			echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
 		}
-		echo '<form action="" method="POST">';
-		echo 'Project Name: <font color="red">*</font><br>';
-		echo '<input type="text" name="projectname">';
-		echo "<font color='red'> $projectError</font>";
-		echo '<br>Description:<br>';
-		echo '<input type="textarea" name="description"><br>';
-		echo '<input type="Submit" name="newprojectsubmitted">';
-		echo '<br><font color="red">* Required fields.</font>';
-		echo '</form>';
-
+		echo <<<END
+		<form action="" method="POST">
+		Project Name: <font color="red">*</font><br>
+		<input type="text" name="projectname">
+		<font color='red'> $projectError</font>
+		<br>Description:<br>
+		<input type="textarea" name="description"><br>
+		<input type="Submit" name="newprojectsubmitted">
+		<br><font color="red">* Required fields.</font>
+		</form>
+		<br>
+		<form action='manage_clients.php'>
+		<input type='submit' value='Back to Manage Clients'>
+		</form>
+END;
 		//if(isset($_POST['projectname']))
 		//{
 		//	$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['Description']);
@@ -707,18 +724,25 @@ function newClientForm($developer)
 		}
 
 
-
-	echo '<form id="developer_form" action="" method="POST">';
-	echo '<br>Client Name: <font color="red">*</font><br>';
-	echo '<input type="text" name="clientname">';
-	echo "<font color='red'> $clientError</font>";
-	echo '<br>StartDate: <font color="red">*</font><br>';
-	echo '<input type="date" name="startdate">';
-	echo "<font color='red'> $dateError</font>";
+	echo <<<END
+	<form id="developer_form" action="" method="POST">
+	<br>Client Name: <font color="red">*</font><br>
+	<input type="text" name="clientname">
+	<font color='red'> $clientError</font>
+	<br>StartDate: <font color="red">*</font><br>
+	<input type="date" name="startdate">
+	<font color='red'> $dateError</font>
+END;
 	echoContactInput();
-	echo '<input type="submit" name="Submit" value="Create Client">';
-	echo '<br><font color="red">* Required fields.</font>';
-	echo '</form>';
+	echo <<<END
+	<input type="submit" name="Submit" value="Create Client">
+	<br><font color="red">* Required fields.</font>
+	</form>
+	<br>
+	<form action="manage_clients.php">
+	<input type="submit" value="Back to Manage Clients">
+	</form>
+END;
 }
 
 //This function echos a form to create a new Developer and calls the createEmployee method which stores the info in the database.
@@ -768,8 +792,8 @@ function newDeveloperForm($developer)
 	    {
 	        $password = $_POST['password'];
 	    }
-
-		if(isset($_POST['username']) && isset($_POST['position']) && isset($_POST['password']))
+		//isset($_POST['username']) && isset($_POST['position']) && isset($_POST['password'])
+		if($username != "" && $position != "" && $password)
 		{
 			createEmployee($developer->getTeam(), $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state);
 			echo "<h1> Developer created!</h1>";
@@ -800,6 +824,10 @@ END;
 	echo <<<END
 	<br><input type="submit" name="Submit" value="Create Developer">
 	<br><font color="red">* Required fields.</font>
+	</form>
+	<br>
+	<form action="manage_developers.php">
+	<input type="submit" value="Back to Manage Developers">
 	</form>
 END;
 
