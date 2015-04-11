@@ -2,7 +2,7 @@
 Name: login.php
 Description: let's the user log in
 Programmers:Ryan Graessle, Tyler Land
-Dates: (3/6/15, 
+Dates: (3/6/15,
 Names of files accessed: Database.php
 Names of files changed:
 Input: Username(String), Password(String)
@@ -15,7 +15,7 @@ Modification List:
 -->
 
 <?php
-require_once 'Database.php';
+require_once 'include.php';
 
 /* two initial instructions:
 1.	if the user is already signed in, they can sign out
@@ -43,7 +43,7 @@ else
   </p>
 </form>
 _END;
-		
+
 	}
 	else
 	{
@@ -63,14 +63,16 @@ _END;
 			//the form has been posted without errors, so save it
 			//notice the use of mysql_real_escape_string, keep everything safe!
 			//also notice the sha1 function which hashes the password
+			$username = $_POST['Username'];
+			$password = $_POST['Password'];
 			$query = "SELECT
-						Username,
+						Username
 					FROM
 						credentials
 					WHERE
-						Username = '" . ($_POST['Username']) . "'
+						Username = '$username'
 					AND
-						Password = '" . ($_POST['Password']) . "'";
+						Password = '$password'";
 			$result = mysql_query($query);
 			if(!$result)
 			{

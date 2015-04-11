@@ -2,19 +2,19 @@
 Name: login_confirm.php
 Description: protects from SQL injection, logs the user in and starts the session
 Programmers: Tyler Land, Ryan Graessle
-Dates: (3/6/15, 
+Dates: (3/6/15,
 Names of files accessed: Database.php
 Names of files changed:
-Input: 
+Input:
 Output: text
 Error Handling: checks to make sure the username/password combination is correct
-Modification List: 
+Modification List:
 3/6/15-Initial code up
 3/7/15-Fixed sessions
 -->
 
 <?php
-require_once 'Database.php';
+require_once 'include.php';
 
 //information comes from the login.php
 $username=$_POST['Username'];
@@ -38,11 +38,11 @@ if($count==1)
 	session_start();
 	$un = $_SESSION['login'][$username]['username']=$username;
 	$pw = $_SESSION['login'][$username]['password']=$password;
-	
+
 	print_r($_SESSION['login']);
-	
+
 	header("Location:login_success.php");
-	
+
 }
 else
 {
