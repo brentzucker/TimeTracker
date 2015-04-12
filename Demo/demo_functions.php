@@ -114,10 +114,18 @@ function developerDropDown($developer)
 //This function gets passed a Developer and echos a dropdwon selector for the Developer's Client List
 function clientDropDown($Developer)
 {
+	
 	echo '<select name="Client_Selected">';
 
-	foreach($Developer->getClientList() as $client)
-		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	if(!isset($_POST['Client_Selected']))
+		foreach($Developer->getClientList() as $client)
+			echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	else
+		foreach($Developer->getClientList() as $client)
+			if($_POST['Client_Selected'] == $client->getClientname())
+				echo '<option selected="selected" value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+			else
+				echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
 
 	echo '</select>';
 	echo '<input type="submit" value="Submit">';
@@ -379,7 +387,7 @@ function printAggregatedTimeLogTableByDeveloper($developer)
 }
 
 //This function consumes a client name and echos the timeLog table for the specific developer
-function printTimeLogTableByClient($client)
+function printTimeLogTableByClient($client)//, $startdate, $enddate)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t WHERE  t.ClientName='" . $client ."'";
 
