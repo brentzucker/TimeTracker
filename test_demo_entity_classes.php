@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: test_demo_entity_classes.php
 Description: testing the entity classes
 Programmers: Brent Zucker
@@ -17,9 +18,8 @@ Modification List:
 3/7/15-Added Time accessor/modifer methods
 3/9/15-Added Time features
 3/10/15-Updates folder hierarchy
--->
+*/
 
-<?php
 require_once 'config_loader.php';
 
 

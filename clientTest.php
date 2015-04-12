@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: clientTest.php
 Description: creates a client by getting their information from the form
 Programmers: Ryan Graessle
@@ -11,9 +12,7 @@ Error Handling:
 Modification List:
 3/2/15-Initial code up
 3/6/15-Updated form & styled form
--->
-
-<?php
+*/
 
 	require_once 'Database.php';
 	

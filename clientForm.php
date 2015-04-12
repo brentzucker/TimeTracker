@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: clientForm.php
 Description: user inputs information about the new client
 Programmers: Ryan Graessle
@@ -12,9 +13,8 @@ Modification List:
 3/2/15-Initial code up & styled form
 3/6/15-Updated form
 3/23/15-Created page functions
--->
+*/
 
-<?php
 require_once 'include.php';
 require_once 'page_functions.php';
 

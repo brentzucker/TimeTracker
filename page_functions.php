@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: page_functions.php
 Description: sets the style for the different parts of the web application
 Programmers: Ryan Graessle
@@ -12,9 +13,7 @@ Modification List:
 3/23/15-Initial code up
 3/29/15-Created footer, JQuery scripts, and changed styles
 4/2/15-Styled sidebar, fixed bugs
--->
-
-<?php
+*/
 
 require_once(__DIR__.'/include.php');
 

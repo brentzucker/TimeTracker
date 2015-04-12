@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: developerTest.php
 Description: creates a client by getting their information from the form
 Programmers: Delaney Rhodes
@@ -10,9 +11,8 @@ Output:
 Error Handling:
 Modification List:
 3/6/15-Initial code up & styled
--->
+*/
 
-<?php
 	require_once 'Database.php';
 	
 	//information comes from the developerForm.php

@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: test_demo_database.php
 Description: testing the database
 Programmers: Brent Zucker
@@ -11,9 +12,8 @@ Error Handling:
 Modification List:
 3/2/15-Initial code up 
 3/10/15-add the config_loader.php file
--->
+*/
 
-<?php
 require_once 'config_loader.php';
 
 /* Testing Functions to print database functions

@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: testDeveloper.php
 Description: we showed how to use unit testing on our project
 Programmers: Brent Zucker
@@ -10,9 +11,8 @@ Output:
 Error Handling:
 Modification List:
 3/27/15-Initial code up 
--->
+*/
 
-<?php
 require_once(__DIR__.'/include.php');
 require_once(__DIR__.'/simpletest/autorun.php');
 

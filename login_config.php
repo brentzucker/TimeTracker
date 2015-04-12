@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: login_config.php
 Description: connects to the database
 Programmers: Brent Zucker, Delaney Rhodes, Tyler Land, Ryan Graessle
@@ -12,9 +13,8 @@ Modification List:
 2/28/15-Initial code up
 3/2/15-Changed the database name
 3/6/15-Updates on the same page
--->
+*/ 
 
-<?php
 $host = 'localhost';
 $username = 'System';
 $password = 'system';

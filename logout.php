@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: logout.php
 Description: unsets variables if signed in, if not logged in the user is prompted to the login page
 Programmers: Tyler Land
@@ -10,9 +11,8 @@ Output: text
 Error Handling:
 Modification List: 
 3/9/15-Initial code up
--->
+*/
 
-<?php
 if($_SESSION['signed_in'] == true)
 {
 	//unset all variables

@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: login_confirm.php
 Description: protects from SQL injection, logs the user in and starts the session
 Programmers: Tyler Land, Ryan Graessle
@@ -11,9 +12,9 @@ Error Handling: checks to make sure the username/password combination is correct
 Modification List:
 3/6/15-Initial code up
 3/7/15-Fixed sessions
--->
+4/11/15-Fixed login username error
+*/
 
-<?php
 require_once 'include.php';
 
 //information comes from the login.php

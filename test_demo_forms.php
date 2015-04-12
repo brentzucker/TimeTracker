@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: test_demo_forms.php
 Description: testing forms for clients, projects, tasks
 Programmers: Brent Zucker
@@ -11,9 +12,8 @@ Error Handling:
 Modification List:
 3/10/15-Initial code up 
 3/11/15-Demo let's you clock in
--->
+*/
 
-<?php
 require_once 'config_loader.php';
 
 function test($query)

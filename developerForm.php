@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: developerForm.php
 Description: user inputs information about the new developer
 Programmers: Delaney Rhodes
@@ -10,7 +11,8 @@ Output:
 Error Handling:
 Modification List:
 3/6/15-Initial code up & styled
--->
+*/
+?>
 
 <html>
 <head>

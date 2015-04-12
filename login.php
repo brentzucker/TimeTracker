@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: login.php
 Description: let's the user log in
 Programmers:Ryan Graessle, Tyler Land
@@ -12,9 +13,9 @@ Modification List:
 3/6/15-Initial code up
 3/7/15-Fixed session bug
 3/9/15-Fixed html output
--->
+4/11/15-Fixed login username error
+*/
 
-<?php
 require_once 'include.php';
 
 /* two initial instructions:

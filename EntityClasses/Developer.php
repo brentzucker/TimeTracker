@@ -14,7 +14,9 @@ Modification List:
 3/12/15-Updated path directories 
 3/29/15-Demo report and clock in/out
 4/6/15-Assign client/task
+4/10/15-Developers set up
 */
+
 require_once(__DIR__.'/../include.php');
 
 //creates an array with the developer's work informationa

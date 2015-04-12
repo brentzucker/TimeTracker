@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: account.php
 Description: let's the user update their information
 Programmers: Ryan Graessle
@@ -12,9 +13,7 @@ Modification List:
 3/29/15-Initial code up
 4/1/15-Created nav
 4/2/15-Created sidebar
--->
-
-<?php
+*/
 
 require_once 'page_functions.php';
 

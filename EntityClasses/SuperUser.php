@@ -1,4 +1,18 @@
 <?php
+/*
+Name: SuperUser.php
+Description: returns all of the teams, developers, clients, projects, and tasks in the database
+Programmers: Brent Zucker
+Dates: (4/9/15, 
+Names of files accessed: include.php
+Names of files changed:
+Input: 
+Output:
+Error Handling:
+Modification List:
+4/9/15-Initial code up 
+*/
+
 require_once(__DIR__.'/../include.php');
 
 class SuperUser

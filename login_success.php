@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Name: login_success.php
 Description: session starts and let's user know they are logged in
 Programmers: Ryan Graessle
@@ -10,9 +11,7 @@ Output: text
 Error Handling:
 Modification List: 
 3/7/15-Initial code up
--->
-
-<?php
+*/
 
 session_start();
 
