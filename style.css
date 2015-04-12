@@ -1,3 +1,23 @@
+/*
+Name: style.css
+Description: CSS to use for our web application
+Programmers: Ryan Graessle
+Dates: (3/6/15, 
+Names of files accessed:
+Names of files changed:
+Input:
+Output: the styling of the objects, logo, menu, text, etc
+Error Handling:
+Modification List:
+3/6/15-Initial code up
+3/23/15-Fixed page functions
+3/29/15-Made account page style
+3/30/15-Made main page style
+4/1/15-Made nav style
+4/2/15-Include responsive queries
+4/5/15-Fixed bugs
+*/
+
 body {
 	margin: 0;
 	background-color: gray;
