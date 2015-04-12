@@ -154,6 +154,56 @@ function taskDropDown($developer, $projectid)
 	echo '<input type="submit" value="Submit">';
 }
 
+/* These functions query the date
+ *
+ */
+
+//This function echos 2 inputs for a form. A startdate and an enddate. 
+function dateSelector()
+{
+	$today = date('Y-m-d');
+
+	echo '<br>Start Date:<br>';
+
+	//Saves the date in the in selector view
+	if(!isset($_POST['startdate']))
+		echo '<input type="date" name="startdate" value="2015-01-01">';
+	else
+		echo '<input type="date" name="startdate" value="' . $_POST['startdate'] . '">';
+
+	echo '<br>End Date:<br>';
+
+	if(!isset($_POST['enddate']))
+		echo '<input type="date" name="enddate" value="' . $today. '">';
+	else
+		echo '<input type="date" name="enddate" value="' . $_POST['enddate'] . '">';
+}
+
+/* The following functions print different types of reports
+ *
+ */
+
+//This function prints out the client reports tables if a client has been selected
+function clientReport()
+{
+	if(isset($_POST['Client_Selected']))
+	{
+		echo '<h2>' . $_POST['Client_Selected'] . ' was selected</h2>';
+
+		echo '<h3>Hours Left</h3>';
+		printHoursLeftTable($_POST['Client_Selected']);
+
+		echo '<h3>Client\'s Purchases</h3>';
+		printClientsPurchasesTable($_POST['Client_Selected']);
+
+		echo '<h3>Developers Hours</h3>';
+		printAggregatedTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate']);
+
+		echo '<h3>Detailed Time Sheet</h3>';
+		printTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate']);
+	}
+}
+
 /* Forms dependent on Developer Selection
  *
  */
@@ -387,9 +437,9 @@ function printAggregatedTimeLogTableByDeveloper($developer)
 }
 
 //This function consumes a client name and echos the timeLog table for the specific developer
-function printTimeLogTableByClient($client)//, $startdate, $enddate)
+function printTimeLogTableByClient($client, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t WHERE  t.ClientName='" . $client ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'";
 
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Time in', 'Time Out', 'Time Spent');
 
@@ -397,9 +447,9 @@ function printTimeLogTableByClient($client)//, $startdate, $enddate)
 }
 
 //This function consumes a client name and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
-function printAggregatedTimeLogTableByClient($client)
+function printAggregatedTimeLogTableByClient($client, $startdate, $enddate)
 {
-	$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.ClientName='" . $client ."'GROUP BY t.Username";
+	$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'GROUP BY t.Username";
 
 	$table_headers = array('Client', 'Username', 'Time Spent');
 
