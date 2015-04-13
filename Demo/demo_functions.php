@@ -938,6 +938,11 @@ END;
 END;
 
 }
+function editClientForm($developer)
+{
+	
+	
+}
 //BELOW:
 //UNFINISHED -- NEEDS WORK
 function removeClientForm($developer)
