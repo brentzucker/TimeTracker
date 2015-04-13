@@ -37,12 +37,6 @@ function createClient($ClientName, $StartDate, $Firstname, $Lastname, $Phone, $E
 	newClientContact($ClientName, $Firstname, $Lastname, $Phone, $Email, $Address, $City, $State);
 }
 
-function edittingClient($newName, $ClientName, $StartDate, $hours, $Firstname, $Lastname, $Phone, $Email, $Address, $City, $State)
-{
-	editClient($ClientName, $StartDate, $hours, $newName);
-	editClientContact($newName, $ClientName, $Firstname, $Lastname, $Phone, $Email, $Address, $City, $State);
-}
-
 function deleteClient($ClientName)
 {
 	removeClientContact($ClientName);
@@ -143,12 +137,6 @@ function newClient($ClientName, $StartDate)
 	db_query($sql);
 }
 
-function editClient($ClientName, $StartDate, $HoursLeft, $NewName)
-{
-	$sql = "UPDATE Client SET 'ClientName'='$NewName', 'StartDate'='$StartDate', 'HoursLeft'= '$HoursLeft' WHERE 'ClientName'='$ClientName'";
-	db_query($sql);	
-}
-
 function removeClient($ClientName)
 {
 	$sql = "DELETE FROM Client WHERE ClientName='$ClientName'";
@@ -158,13 +146,6 @@ function removeClient($ClientName)
 function newClientContact($ClientName, $Firstname, $Lastname, $Phone, $Email, $Address, $City, $State)
 {
 	$sql = "INSERT INTO ClientContact(ClientName, Firstname, Lastname, Phone, Email, Address, City, State) VALUES ('$ClientName', '$Firstname', '$Lastname', '$Phone', '$Email', '$Address', '$City', '$State')";
-	db_query($sql);
-}
-
-function editClientContact($NewName, $ClientName, $Firstname, $Lastname, $Phone, $Email, $Address, $City, $State)
-{
-	$sql = "Update ClientContact SET ClientName='$NewName', Firstname='$Firstname', Lastname='$Lastname', Phone='$Phone', Email='$Email', 
-			Address='$Address', City='$City', State='$State' WHERE 'clientname'='$ClientName'"; 
 	db_query($sql);
 }
 
