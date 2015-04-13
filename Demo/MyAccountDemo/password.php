@@ -26,8 +26,6 @@ if(isset($_POST['Update']))
 }
 echo <<<END
 <br>
-<form action='MyAccount.php'>
-<input type='submit' value='Back to My Account Page'>
-</form>
+<a href='MyAccount.php'>Back To My Account Page</a>
 END;
 ?>

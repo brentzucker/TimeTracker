@@ -18,40 +18,15 @@ echo <<<END
 <br>
 <form action="" method="POST">
 First name:
-<input type="text" name="updatefirstname" value="$currentfirstname">
-<br>
-<br>
-<input type="Submit" name="UpdateFirstname" value="UpdateFirstname">
-<br>
-<br>
+<input type="text" name="updatefirstname" value="$currentfirstname"><br><br>
 Last name:
-<input type="text" name="updatelastname" value="$currentlastname">
-<br>
-<br>
-<input type="Submit" name="UpdateLastname" value="UpdateLastname">
-<br>
-<br>
+<input type="text" name="updatelastname" value="$currentlastname"><br><br>
 Phone:
-<input type="text" name="updatephone" value="$currentphone">
-<br>
-<br>
-<input type="Submit" name="UpdatePhone" value="UpdatePhone">
-<br>
-<br>
+<input type="text" name="updatephone" value="$currentphone"><br><br>
 Address:
-<input type="text" name="updateaddress" value="$currentaddress">
-<br>
-<br>
-<input type="Submit" name="UpdateAddress" value="UpdateAddress">
-<br>
-<br>
+<input type="text" name="updateaddress" value="$currentaddress"><br><br>
 City:
-<input type="text" name="updatecity" value="$currentcity">
-<br>
-<br>
-<input type="Submit" name="UpdateCity" value="UpdateCity">
-<br>
-<br>
+<input type="text" name="updatecity" value="$currentcity"><br><br>
 State:
 <select name="updatestate">
 <option value="">Select your state</option>
@@ -108,53 +83,25 @@ State:
 <option value="WV">West Virginia</option>
 <option value="WI">Wisconsin</option>
 <option value="WY">Wyoming</option>
-</select>
-<br>
-<br>
-<input type="Submit" name="UpdateState" value="UpdateState">
+</select><br><br>
+<input type="Submit" name="UpdateInfo" value="Update Info">
 </form>
 END;
 
-if(isset($_POST['UpdateFirstname']))
+if(isset($_POST['UpdateInfo']))
 {
   $_SESSION['Developer']->getContact()->setFirstname($_POST['updatefirstname']);
-  echo 'First Name successfully updated!';
-}
-
-if(isset($_POST['UpdateLastname']))
-{
   $_SESSION['Developer']->getContact()->setLastname($_POST['updatelastname']);
-  echo 'Last Name successfully updated!';
-}
-
-if(isset($_POST['UpdatePhone']))
-{
   $_SESSION['Developer']->getContact()->setPhone($_POST['updatephone']);
-  echo 'Phone successfully updated!';
-}
-
-if(isset($_POST['UpdateAddress']))
-{
   $_SESSION['Developer']->getContact()->setAddress($_POST['updateaddress']);
-  echo 'Address successfully updated!';
-}
-
-if(isset($_POST['UpdateCity']))
-{
   $_SESSION['Developer']->getContact()->setCity($_POST['updatecity']);
-  echo 'City successfully updated!';
+  $_SESSION['Developer']->getContact()->setState($_POST['updatestate']);
+  echo "<h2>Info Has Been Updated</h2>";
 }
 
-if(isset($_POST['UpdateState']))
-{
-  $_SESSION['Developer']->getContact()->setState($_POST['updatestate']);
-  echo 'State successfully updated!';
-}
 echo <<<END
 <br>
 <br>
-<form action='MyAccount.php'>
-<input type='submit' value='Back to My Account Page'>
-</form>
+<a href='MyAccount.php'>Back to My Account</a>
 END;
 ?>
