@@ -209,21 +209,21 @@ class Developer
 	//assigns client to developer
 	function assignClient($ClientObject)
 	{
-		if(newDeveloperAssignments($this->getUsername(), 'Client', $ClientObject->getClientname()))
+		if(newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client'))
 			array_push($this->Client_List, $ClientObject);
 	}
 	
 	//assigns project to developer
 	function assignProject($ProjectObject)
 	{
-		if(newDeveloperAssignments($this->getUsername(), 'Project', $ProjectObject->getProjectID()))
+		if(newDeveloperAssignments($this->getUsername(), $ProjectObject->getProjectID(), 'Project'))
 			array_push($this->Project_List, $ProjectObject);
 	}
 
 	//assigns task to developer
 	function assignTask($TaskObject)
 	{
-		if(newDeveloperAssignments($this->getUsername(), 'Task', $TaskObject->getTaskID()))
+		if(newDeveloperAssignments($this->getUsername(), $TaskObject->getTaskID(), 'Task'))
 			array_push($this->Task_List, $TaskObject);
 	}
 
