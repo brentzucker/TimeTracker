@@ -210,7 +210,7 @@ class Developer
 	function assignClient($ClientObject)
 	{
 		if(newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client'))
-			array_push($this->Client_List, $ClientObject);
+			array_push($this->Client_List, $ClientObject);	
 	}
 	
 	//assigns project to developer
