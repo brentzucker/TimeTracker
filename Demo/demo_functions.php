@@ -201,6 +201,35 @@ function clientReport()
 	}
 }
 
+//This function prints out the project reports tables if a client, project, and dates have been selected. 
+function projectReports()
+{
+	//If a project is selected print the reports
+	if(isset($_POST['Project_Selected']) || isset($_SESSION['report']['project']))
+	{
+		echo '<form action="" method="POST">';
+		dateSelector();
+		echo '<br>';
+		echo '<input type="submit" value="submit">';
+		echo '</form>';
+
+		//Store the project selected in the report session
+		if(isset($_POST['Project_Selected']))
+			$_SESSION['report']['project'] = $_POST['Project_Selected'];
+
+		if(isset($_POST['startdate']) && isset($_POST['enddate']))
+		{
+			echo '<h2>' . $_SESSION['report']['project']  . ' was selected</h2>';
+
+			echo '<h3>Developers Hours</h3>';
+			printAggregatedTimeLogTableByProject($_SESSION['report']['project'], $_POST['startdate'], $_POST['enddate']);
+
+			echo '<h3>Detailed Time Sheet</h3>';
+			printTimeLogTableByProject($_SESSION['report']['project'], $_POST['startdate'], $_POST['enddate']);
+		}
+	}
+}
+
 /* Forms dependent on Developer Selection
  *
  */
@@ -296,20 +325,20 @@ function developerClientProjectTaskDropdownForm($session_variable)
 
 //This function consumes a session name variable and a developer name and displays dropdowns for a client and a project
 function clientProjectDropDownForm($session)
-{
-	if(isset($_POST['Developer_Selected']) || isset($_SESSION["$session_variable"]['developer']))
-	{
-		echo '<form action="" method="POST">';
-		echo '<h2>Select a Client</h2>';
-		clientDropDown($_SESSION['Developer']);
-		echo '</form>';
-	}
+{	
+	echo '<form action="" method="POST">';
+	echo '<h2>Select a Client</h2>';
+	clientDropDown($_SESSION['Developer']);
+	echo '</form>';
 
 	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session"]['Client_Selected']))
 	{
 		if(isset($_POST['Client_Selected']))
+		{
 			$_SESSION["$session"]['Client_Selected'] = $_POST['Client_Selected'];
-
+			unset($_SESSION["$session"]['project']);
+		}
+			
 		echo '<h2>' . $_SESSION["$session"]['Client_Selected'] . ' was selected.</h2>';
 
 		echo '<form action="" method="POST">';
@@ -454,9 +483,9 @@ function printAggregatedTimeLogTableByClient($client, $startdate, $enddate)
 }
 
 //This function consumes a projectid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
-function printAggregatedTimeLogTableByProject($project)
+function printAggregatedTimeLogTableByProject($project, $startdate, $enddate)
 {
-	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
+	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
 
 	$table_headers = array('Client', 'Project Name', 'Username', 'Time Spent');
 
@@ -464,9 +493,9 @@ function printAggregatedTimeLogTableByProject($project)
 }
 
 //This function consumes a projectid and echos the timeLog table for the specific project
-function printTimeLogTableByProject($project)
+function printTimeLogTableByProject($project, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
 
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Time In', 'Time Out', 'Time Spent');
 
