@@ -41,9 +41,7 @@ function echoManageClientsLinks()
 	echo '</ul>';
 	echo <<<END
 	<br>
-	<form action='../home.php'>
-	<input type='submit' value='Back to Home'>
-	</form>
+	<a href='../home.php'>Back to Home</a>
 END;
 }
 
@@ -59,9 +57,7 @@ function echoManageDevelopersLinks()
 	echo '</ul>';
 echo <<<END
 	<br>
-	<form action='../home.php'>
-	<input type='submit' value='Back to Home'>
-	</form>
+	<a href='../home.php'>Back to Home</a>
 END;
 }
 
@@ -78,9 +74,7 @@ function echoMyAccountLinks()
 	echo '</ul>';
 	echo <<<END
 		<br>
-		<form action='../home.php'>
-		<input type='submit' value='Back to Home'>
-		</form>
+		<a href='../home.php'>Back to Home</a>
 END;
 }
 /* Functions that create dropdown selectors
@@ -755,9 +749,7 @@ function newProjectForm($session, $developer)
 		<br><font color="red">* Required fields.</font>
 		</form>
 		<br>
-		<form action='manage_clients.php'>
-		<input type='submit' value='Back to Manage Clients'>
-		</form>
+		<a href='manage_clients.php'>Back</a>
 END;
 		//if(isset($_POST['projectname']))
 		//{
@@ -836,9 +828,7 @@ END;
 	<br><font color="red">* Required fields.</font>
 	</form>
 	<br>
-	<form action="manage_clients.php">
-	<input type="submit" value="Back to Manage Clients">
-	</form>
+	<a href="manage_clients.php">Back</a>
 END;
 }
 
@@ -941,9 +931,7 @@ END;
 	<br><font color="red">* Required fields.</font>
 	</form>
 	<br>
-	<form action="manage_developers.php">
-	<input type="submit" value="Back to Manage Developers">
-	</form>
+	<a href="manage_developers.php">Back to Manage Developers</a>
 END;
 
 }
