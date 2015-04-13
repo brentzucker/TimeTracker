@@ -396,7 +396,7 @@ function returnRowsDeveloperAssignments($WhereValue1, $WhereValue2)
 
 function returnRowsDeveloperAssignmentsUnique($WhereValue1, $WhereValue2, $WhereValue3)
 {
-	return returnRowsForThreeValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
+	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
 }
 
 /* The following functions update the database.
