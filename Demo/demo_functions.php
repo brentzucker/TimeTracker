@@ -35,9 +35,9 @@ function echoManageClientsLinks()
 	echo '<li><h3><a href="new_client.php">New Client</a></li>';
 	echo '<li><h3><a href="new_project.php">New Project</a></li>';
 	echo '<li><h3><a href="new_task.php">New Task</a></li>';
-	echo '<li><h3><a href="edit_client.php">New Task</a></li>';
-	echo '<li><h3><a href="edit_project.php">New Task</a></li>';
-	echo '<li><h3><a href="edit_task.php">New Task</a></li>';
+	echo '<li><h3><a href="edit_client.php">Edit Client</a></li>';
+	echo '<li><h3><a href="edit_project.php">Edit Project</a></li>';
+	echo '<li><h3><a href="edit_task.php">Edit Task</a></li>';
 	echo '<li><h3><a href="remove_client.php">Remove Client</a></li>';
 	echo '<li><h3><a href="remove_project.php">Remove Project</a></li>';
 	echo '<li><h3><a href="remove_task.php">Remove Task</a></li>';
