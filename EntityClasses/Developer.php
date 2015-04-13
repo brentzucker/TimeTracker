@@ -329,6 +329,14 @@ class Developer
 		createClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
 		$this->assignClient( new Client($clientname) );
 	}
+	
+	function editClient($newName, $clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
+	{
+		edittingClient($newName, $clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
+		/*
+		 *will need help with adding to assigned developer list 
+		 */
+	}
 
 	function newProject($ClientName, $ProjectName, $Description)
 	{

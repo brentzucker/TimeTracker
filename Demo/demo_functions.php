@@ -2,7 +2,7 @@
 /*
 Name: demo_functions.php
 Description: has all the functions needed for the demo in one place
-Programmers: Brent Zucker, Jon Self (editted)
+Programmers: Brent Zucker, Jon Self
 Dates: (3/12/15,
 Names of files accessed: include.php
 Names of files changed:
@@ -967,10 +967,82 @@ END;
 END;
 
 }
-function editClientForm($developer)
+function editClientForm($developer, $client)
 {
+	$row = returnRow('Client', 'ClientName', $client);
+	
+	$teamError = $clientError = $dateError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
+	
+	//$client = $startdate = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
+	
+	if($_SERVER["REQUEST_METHOD"] == "POST")
+	{
+		if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
+		{
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			$position = $_POST['position'];
+			$firstname = $_POST['firstname'];
+			$lastname = $_POST['lastname'];
+			$phone = $_POST['phone'];
+			$email = $_POST['email'];
+			$address = $_POST['address'];
+			$city = $_POST['city'];
+			$state = $_POST['state'];
+		}
+		else
+		{
+			$username = $password = $position = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
+		}
+		if(empty($_POST['clientname']))
+		{
+			$clientError = "Missing";
+		}
+		else
+		{
+			$client = $_POST['clientname'];
+		}
+		if(empty($_POST['startdate']))
+		{
+			$dateError = "Please select a date.";
+		}
+		else
+		{
+			$startdate = $_POST['startdate'];
+		}
+		if(empty($_POST['hours']))
+		{
+			$hourError = "Please Input Hours Purchased"
+		}
+		//isset($_POST['clientname']) && isset($_POST['startdate'])
+		if($client != "" && $startdate != "" && $hours != "")
+		{
+			$developer->editClient($newName, $client, $startdate, $hours, $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
+			echo "<h1> $client was updated!</h1>";
+		}
+	}
 	
 	
+	echo <<<END
+	<form id="developer_form" action="" method="POST">
+	<br>Client Name: <font color="red">*</font><br>
+	<input type="text" name="clientname" value="$row[0]">
+	<font color='red'> $clientError</font>
+	<br>StartDate: <font color="red">*</font><br>
+	<input type="date" name="startdate" value="$row[1]">
+	<font color='red'> $dateError</font>
+	<br>Hours: <font color="red">*</font><br>
+	<input type="text" name="hours" value="$row[2]">
+	<font color='red'> $hourError</font>
+END;
+	echoContactInput();
+	echo <<<END
+	<input type="submit" name="Submit" value="Edit Client">
+	<br><font color="red">* Required fields.</font>
+	</form>
+	<br>
+	<a href="manage_clients.php">Back</a>
+END;
 }
 //BELOW:
 //UNFINISHED -- NEEDS WORK
