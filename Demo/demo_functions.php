@@ -180,6 +180,33 @@ function dateSelector()
  *
  */
 
+//This function prints out the developer reports tables if a developer and date have been selected
+function developerReports()
+{
+	echo '<form action="" method="POST">';
+	developerDropDown($_SESSION['Developer']);
+	echo "</form>";
+
+	if(isset($_POST['Developer_Selected']) || isset($_SESSION['report']['developer']))
+	{
+		if(isset($_POST['Developer_Selected']))
+			$_SESSION['report']['developer'] = $_POST['Developer_Selected'];
+
+		echo '<form action="" method="POST">';
+		dateSelector();
+		echo '<br>';
+		echo '<input type="submit" value="Build Report">';
+		echo '</form>';
+
+		if(isset($_POST['startdate']) && isset($_POST['enddate']))
+		{
+			echo '<h2>' . $_SESSION['report']['developer'] . ' was selected</h2>';
+			printAggregatedTimeLogTableByDeveloper($_SESSION['report']['developer'], $_POST['startdate'], $_POST['enddate']);
+			printTimeLogTableByDeveloper($_SESSION['report']['developer'], $_POST['startdate'], $_POST['enddate']);
+		}	
+	}
+}
+
 //This function prints out the client reports tables if a client has been selected
 function clientReport()
 {
@@ -467,9 +494,9 @@ function printTimeSheetTableByTask($task)
 }
 
 //This function consumes a develper username and echos the timeLog table for the specific developer
-function printTimeLogTableByDeveloper($developer)
+function printTimeLogTableByDeveloper($developer, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
 
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'Task Name', 'Time In', 'Time Out', 'Time Spent');
 
@@ -477,9 +504,9 @@ function printTimeLogTableByDeveloper($developer)
 }
 
 //This function consumes a developer username and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
-function printAggregatedTimeLogTableByDeveloper($developer)
+function printAggregatedTimeLogTableByDeveloper($developer, $startdate, $enddate)
 {
-	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.Username='" . $developer ."'GROUP BY t.ClientName";
+	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND t.Username='" . $developer ."'GROUP BY t.ClientName";
 
 	$table_headers = array('Username', 'Client', 'Time Spent');
 
