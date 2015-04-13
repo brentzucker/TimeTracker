@@ -230,6 +230,30 @@ function projectReports()
 	}
 }
 
+//This function prints out the task reports tables if a client, project, task, and dates have been selected.
+function taskReports()
+{
+	if(isset($_POST['Task_Selected']) || isset($_SESSION['report']['task']))
+	{
+		echo '<form action="" method="POST">';
+		dateSelector();
+		echo '<br>';
+		echo '<input type="submit" value="Build Report">';
+		echo '</form>';
+
+		if(isset($_POST['startdate']) && isset($_POST['enddate']))
+		{
+			echo '<h2>' . $_SESSION['report']['task']  . ' was selected</h2>';
+
+			echo '<h3>Developers Hours</h3>';
+			printAggregatedTimeLogTableByTask($_SESSION['report']['task'], $_POST['startdate'], $_POST['enddate']);
+
+			echo '<h3>Detailed Time Sheet</h3>';
+			printTimeLogTableByTask($_SESSION['report']['task'], $_POST['startdate'], $_POST['enddate']);
+		}
+	}
+}
+
 /* Forms dependent on Developer Selection
  *
  */
@@ -503,9 +527,9 @@ function printTimeLogTableByProject($project, $startdate, $enddate)
 }
 
 //This function consumes a taskid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
-function printAggregatedTimeLogTableByTask($task)
+function printAggregatedTimeLogTableByTask($task, $startdate, $enddate)
 {
-	$query = "SELECT t.ClientName, p.ProjectName, a.TaskName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p, Tasks a WHERE (t.ProjectID = p.ProjectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."' GROUP BY t.Username";
+	$query = "SELECT t.ClientName, p.ProjectName, a.TaskName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p, Tasks a WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."' GROUP BY t.Username";
 
 	$table_headers = array('Client', 'Project Name', 'Task Name', 'Username', 'Time Spent');
 
@@ -513,9 +537,9 @@ function printAggregatedTimeLogTableByTask($task)
 }
 
 //This function consumes a taskid and echos the timeLog table for the specific task
-function printTimeLogTableByTask($task)
+function printTimeLogTableByTask($task, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, a.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks a WHERE (t.ProjectID = p.projectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, a.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks a WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.projectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."'";
 
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Task', 'Time In', 'Time Out', 'Time Spent');
 
