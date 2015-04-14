@@ -153,6 +153,21 @@ class Time
 		$this->subtractTimeSpentFromClient();
 	}
 
+	function updateTimeStampOut($s)
+	{
+		//Add original time back to client
+		$this->addTimeBackToClient();
+
+		updateTableByTimeLogID('TimeOut', $s, $this->getTimeLogID());
+		$this->Info['TimeStampOut'] = new DateTime($s);
+
+		//Calculate time spent
+		$this->calculateTimeSpent();
+
+		//Subtract Time spent from Client
+		$this->subtractTimeSpentFromClient();
+	}
+
 	//subtract time spent from the client hours left
 	function subtractTimeSpentFromClient()
 	{
@@ -161,6 +176,18 @@ class Time
 
 		//SubtractTimeSpent
 		$Client_HoursLeft_row -= $this->getTimeSpent();
+
+		//Update Database
+		updateTableByClient_NumberValue('Client', 'HoursLeft', $Client_HoursLeft_row, $this->getClientName());
+	}
+
+	function addTimeBackToClient()
+	{
+		//Get Client Hours Spent
+		$Client_HoursLeft_row = returnRowByClient('Client', $this->getClientName())['HoursLeft'];
+
+		//Add TimeSpent
+		$Client_HoursLeft_row += $this->getTimeSpent();
 
 		//Update Database
 		updateTableByClient_NumberValue('Client', 'HoursLeft', $Client_HoursLeft_row, $this->getClientName());

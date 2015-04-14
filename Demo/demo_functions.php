@@ -282,6 +282,61 @@ function taskReports()
 	}
 }
 
+/* The following functions allow you to modify data by selecting the data and using forms.
+ *
+ */
+
+//This function prints the tables and forms and also calls functions that modify the developer to edit a record within timesheet
+function editTimeSheet()
+{
+	echo '<form action="" method="POST">';
+	dateSelector();
+	echo '<br>';
+	echo '<input type="submit" value="View Time Sheet">';
+	echo '</form>';
+
+	//If a new time out has been created, update the tables
+	if((isset($_POST['startdate']) && isset($_POST['enddate'])) || (isset($_SESSION['edit']['startdate']) && isset($_SESSION['edit']['enddate']) ))
+	{
+		if(isset($_POST['startdate']) && isset($_POST['enddate']))
+		{
+			$_SESSION['edit']['startdate'] = $_POST['startdate'];
+			$_SESSION['edit']['enddate'] = $_POST['enddate'];
+		}
+
+		echo '<h2>' . $_SESSION['Developer']->getUsername() . '\'s Time Sheet</h2>';
+
+		echo '<form action="" method="POST">';
+		editTimeLogTableByDeveloper($_SESSION['Developer']->getUsername(), $_SESSION['edit']['startdate'], $_SESSION['edit']['enddate']);
+		echo '<input type="submit" value="Edit Time Sheet">';
+		echo '</form>';
+	}	
+
+	//If a new time out has been created, update the tables
+	if(isset($_POST['TimeLogID']) || isset($_SESSION['edit']['timelogid']))
+	{
+		if(isset($_POST['TimeLogID']))
+			$_SESSION['edit']['timelogid'] = $_POST['TimeLogID'];
+
+		echo '<form action="" method="POST">';
+		editTimeLogByID($_SESSION['edit']['timelogid']);
+		echo '<input type="submit" value="Edit Time Log">';
+		echo '</form>';
+	}
+
+	if(isset($_POST['TimeOut']))
+	{
+		//The posted time out contains a "T" between the date and time. substr_replace will remove the "T" and replace it with " ""
+		$_POST['TimeOut'] = substr_replace($_POST['TimeOut'], " ", 10, 1);
+		echo '<h4>New Time Out: </h4><i>' . $_POST['TimeOut'] . '</i>';
+
+		//Update the developers new time out
+		$_SESSION['Developer']->updateTimeSheet($_SESSION['edit']['timelogid'], $_POST['TimeOut'] );
+
+		echo '<h2>The Time Sheet has been updated, Refresh to view updated sheet.</h2>';
+	}
+}
+
 /* Forms dependent on Developer Selection
  *
  */
@@ -675,6 +730,7 @@ function editTimeLogTableByDeveloper($developer, $startdate, $enddate)
 	printTableEditColumn($query, $table_headers);
 }
 
+//This function prints out a 1 row table that allows you to edit the selected row via text boxes
 function editTable($query, $table_headers)
 {
 	echo '<table style="border:1px solid black; text-align:center;">';
@@ -708,6 +764,7 @@ function editTable($query, $table_headers)
 	mysqli_free_result($result);
 }
 
+//This function creates a query for a row in timesheet that has a matching time log. It then calls edit table
 function editTimeLogByID($timeLogID)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TaskID=Tasks.TaskID AND t.ProjectID=p.ProjectID) AND t.TimeLogID='" . $timeLogID ."'";

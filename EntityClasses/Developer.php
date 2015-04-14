@@ -260,6 +260,41 @@ class Developer
 		}
 	}
 
+	//update timeSheet by a time log id
+	function updateTimeSheet($timelogid, $newtimeout)
+	{
+		//sets date format
+		$TimeOut = date('Y-m-d H:i:s', $newtimeout);
+
+		//get the timelog you want to update
+		$update = $this->getTimeLogByID($timelogid);
+
+		//update the Time Log
+		$update->updateTimeStampOut($newtimeout);
+
+		//insert it back into the time log list
+		array_push($this->Time_Log, $update);
+	}
+
+	//get the timeLog from the Time_Log
+	function getTimeLogByID($TimeLogID)
+	{
+		for($i=0; $i<count($this->Time_Log); $i++)
+			if($this->Time_Log[$i]->getTimeLogID() == $TimeLogID)
+			{
+				$ret = $this->Time_Log[$i];
+
+				//Remove timelog from list
+				unset($this->Time_Log[$i]);
+
+				//fix the indices of the array
+				$this->Time_Log = array_values($this->Time_Log);
+
+				return $ret;
+			}
+				
+	}
+
 	//get client name from Client_List
 	function getClient($ClientName)
 	{
