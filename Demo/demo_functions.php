@@ -24,6 +24,7 @@ function echoHomePageLinks()
 	echo '<li><h3><a href="ManageDevelopersDemo/manage_developers.php">Manage Developers</a></li>';
 	echo '<li><h3><a href="ManageClientsDemo/manage_clients.php">Manage Clients</a></li>';
 	echo '<li><h3><a href="MyAccountDemo/MyAccount.php">My Account</a></li>';
+	echo '<li><h3><a href="edit_time_sheet.php">Edit Time Sheet</a></li>';
 	echo '</ul>';
 }
 
@@ -630,6 +631,92 @@ function printAssignmentsTableTask($developer)
 
 	printTable($query, $table_headers);
 }
+
+/* The below functions print editable tables.
+ *
+ */
+
+//This function consumes a query and table headers and prints out the results in a table
+function printTableEditColumn($query, $table_headers)
+{
+	echo '<table style="border:1px solid black; text-align:center;">';
+
+	echo '<tr>';
+	foreach($table_headers as $t_h)
+		echo '<th>' . $t_h . '</th>';
+	echo '</tr>';
+
+	if($result = db_query($query))
+	{
+		while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
+		{
+			echo '<tr>';
+			foreach($row as $r)
+				echo "<td style=\"border:1px solid black;padding:5px;\">$r</td>";
+
+			echo '<td>';
+			//Print the radio button
+			echo '<input type="radio" name="TimeLogID" value="' . $row['TimeLogID'] . '">';
+			echo '</td>';
+			echo '</tr>';
+		}
+	}
+	echo '</table>';
+	mysqli_free_result($result);
+}
+
+//This function consumes a develper username, startdate, and enddate and echos an editable table for the specific developers time sheet
+function editTimeLogTableByDeveloper($developer, $startdate, $enddate)
+{
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
+
+	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'Task Name', 'Time In', 'Time Out', 'Time Spent', 'Edit');
+
+	printTableEditColumn($query, $table_headers);
+}
+
+function editTable($query, $table_headers)
+{
+	echo '<table style="border:1px solid black; text-align:center;">';
+
+	echo '<tr>';
+	foreach($table_headers as $t_h)
+		echo '<th>' . $t_h . '</th>';
+	echo '</tr>';
+
+	if($result = db_query($query))
+	{
+		while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
+		{
+			echo '<tr>';
+			foreach($row as $k=>$v)
+			{
+				echo '<td style=\"border:1px solid black;padding:5px;\">';
+				if($k == 'TimeLogID' || $k == 'Username' || $k == 'ClientName' || $k == 'ProjectName' || $k == 'TaskName')
+					echo '<label>' . $v . '</label>';
+				else
+					echo '<input type="text" name="' . $k . '" value="' . $v . '">';
+				echo '</td>';
+			}
+
+			echo '</tr>';
+		}
+	}
+	echo '</table>';
+	mysqli_free_result($result);
+}
+
+function editTimeLogByID($timeLogID)
+{
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TaskID=Tasks.TaskID AND t.ProjectID=p.ProjectID) AND t.TimeLogID='" . $timeLogID ."'";
+	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project Name', 'Task Name', 'Time In', 'Time Out', 'Time Spent');
+
+	editTable($query, $table_headers);
+}
+
+/*
+ *
+ */
 
 //This function consumes a developer and a taskid, echos a clockin/clockout form and handles the forms action (recording the developer's clockin/clockout)
 function clockForm($developer, $taskid)
