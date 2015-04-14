@@ -692,12 +692,14 @@ function editTable($query, $table_headers)
 			foreach($row as $k=>$v)
 			{
 				echo '<td style=\"border:1px solid black;padding:5px;\">';
-				if($k == 'TimeLogID' || $k == 'Username' || $k == 'ClientName' || $k == 'ProjectName' || $k == 'TaskName')
+				if($k == 'TimeLogID' || $k == 'Username' || $k == 'ClientName' || $k == 'ProjectName' || $k == 'TaskName' || $k == 'TimeIn')
 					echo '<label>' . $v . '</label>';
-				else
-					echo '<input type="text" name="' . $k . '" value="' . $v . '">';
-				echo '</td>';
 			}
+
+			//In order to have the timeout be the default value in the datetime selector, a "T" must be before the time
+			echo '<input type="datetime-local" name="TimeOut" value="' . substr_replace($row['TimeOut'], "T", 10, 1) . '">';
+			echo '<input type="number" name="TimeSpent" value="' . $row['TimeSpent'] . '">';
+			echo '</td>';
 
 			echo '</tr>';
 		}
