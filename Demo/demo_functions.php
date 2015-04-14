@@ -753,7 +753,7 @@ function editTable($query, $table_headers)
 			}
 
 			//In order to have the timeout be the default value in the datetime selector, a "T" must be before the time
-			echo '<input type="datetime-local" name="TimeOut" value="' . substr_replace($row['TimeOut'], "T", 10, 1) . '">';
+			echo '<input type="datetime-local" name="TimeOut" min="' . substr_replace($row['TimeIn'], "T", 10, 1) . '" value="' . substr_replace($row['TimeOut'], "T", 10, 1) . '">';
 			echo '<input type="number" name="TimeSpent" value="' . $row['TimeSpent'] . '">';
 			echo '</td>';
 
