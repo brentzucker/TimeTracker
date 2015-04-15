@@ -81,6 +81,27 @@ function echoMyAccountLinks()
 		<a href='../home.php'>Back to Home</a>
 END;
 }
+
+/* Functions below warn the user with alerts. 
+ *
+ */
+
+//This function consumes an amount of days and returns clients who have less days left on their contracts
+function warningExpiringContracts($minimum_days_left)
+{
+	foreach($_SESSION['Developer']->getClientList() as $client)
+		if($minimum_days_left >= $client->getContractDaysLeft())
+			echo $client->getClientname() . " has " . $client->getContractDaysLeft() . " days left on its contract.<br>";
+}
+
+//This function consumes an amount of hours and returns clients who have less hours left on their contract
+function warningLowHours($minimum_time_left)
+{
+	foreach($_SESSION['Developer']->getClientList() as $client)
+		if($minimum_time_left >= $client->getHoursLeft())
+			echo $client->getClientname() . " has " . $client->getTimeLeftFormatted() . "" . " much time left on their contract.<br>";
+}
+
 /* Functions that create dropdown selectors
  *
  */

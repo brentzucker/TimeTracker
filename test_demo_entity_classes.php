@@ -415,7 +415,7 @@ function testClientHoursLeft()
 
   	$Client_Demo->PurchaseHours(3600, '2015-03-09');
 
-  	echo $Client_Demo->getHoursLeft() . "<br>";
+  	echo $Client_Demo->getTimeInSecondsLeft() . "<br>";
 
   	//Create Project
 	$project_demo = new Projects($Client_Demo->getClientname(), 'First Project', 'This is the first project.');
@@ -452,7 +452,7 @@ function testClientHoursLeft()
 	echo '</div>';
 
 	
-  	echo "<br><br>" . $Client_Demo->getHoursLeft();
+  	echo "<br><br>" . $Client_Demo->getTimeInSecondsLeft();
 
   	removeTimeSheet($t_id);
   	removeTasks('The Business', 'First Project', 'First Task');
