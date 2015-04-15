@@ -315,7 +315,7 @@ class Developer
 	function getClientsProjectsAssigned($clientname)
 	{
 		$ret = array();
-		$client = $this->getClient($clientname);
+		$client = new Client($clientname);
 		$dev_projects = $this->getProjectList();
 
 		//for each project if they have the same ID push if into the list
@@ -364,6 +364,7 @@ class Developer
 		createClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
 		$this->assignClient( new Client($clientname) );
 	}
+	
 	//reference in developers class
 	function editClient($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state)
 	{
