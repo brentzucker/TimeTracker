@@ -22,10 +22,12 @@ function createEmployee($team, $username, $position, $password, $firstname, $las
 	newDeveloper($team, $username, $position);
 	newCredentials($username, $password);
 	newContact($username, $firstname, $lastname, $phone, $email, $address, $city, $state);
+	newAlert($username);
 }
 
 function deleteEmployee($username)
 {
+	removeAlert($username);
 	removeCredentials($username);
 	removeContact($username);
 	removeDeveloper($username);
@@ -235,6 +237,18 @@ function newDeveloperAssignments($Username, $ClientProjectTask, $Type)
 function removeDeveloperAssignments($ClientProjectTask, $Type)
 {
 	$sql = "DELETE FROM DeveloperAssignments WHERE ClientProjectTask='$ClientProjectTask' AND Type='$Type'";
+	db_query($sql);
+}
+
+function newAlert($Username)
+{
+	$sql = "INSERT INTO DeveloperAlerts(Username) VALUES ('$Username')";
+	db_query($sql);
+}
+
+function removeAlert($Username)
+{
+	$sql = "DELETE FROM DeveloperAlerts WHERE Username='$Username'";
 	db_query($sql);
 }
 

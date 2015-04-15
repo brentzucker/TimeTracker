@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Mar 31, 2015 at 10:33 PM
+-- Generation Time: Apr 16, 2015 at 01:29 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -58,7 +58,7 @@ CREATE TABLE `ClientPurchases` (
   `PurchaseDate` date DEFAULT NULL,
   PRIMARY KEY (`PurchaseID`),
   KEY `ClientName` (`ClientName`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -100,6 +100,19 @@ CREATE TABLE `Developer` (
   `Team` varchar(30) DEFAULT NULL,
   `Username` varchar(30) NOT NULL,
   `Position` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`Username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DeveloperAlerts`
+--
+
+CREATE TABLE `DeveloperAlerts` (
+  `DaysExpirationWarning` int(11) NOT NULL DEFAULT '100',
+  `HoursLeftWarning` int(11) NOT NULL DEFAULT '10',
+  `Username` varchar(30) NOT NULL,
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -197,6 +210,12 @@ ALTER TABLE `Contact`
 --
 ALTER TABLE `Credentials`
   ADD CONSTRAINT `credentials_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `Developer` (`Username`);
+
+--
+-- Constraints for table `DeveloperAlerts`
+--
+ALTER TABLE `DeveloperAlerts`
+  ADD CONSTRAINT `developeralerts_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `Developer` (`Username`);
 
 --
 -- Constraints for table `DeveloperAssignments`

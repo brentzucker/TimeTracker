@@ -34,6 +34,10 @@ class Developer
 	private $Time_Log = array();
 	private $Current_TimeLog;
 
+	//Alerts
+	private $DaysExpirationWarning;
+	private $HoursLeftWarning;
+
 	//If False Clock In, if True Clock out
 	private $TimeSet_Flag;
 
@@ -79,6 +83,16 @@ class Developer
 			array_push($this->Time_Log, new Time( $row['TimeLogID'] ));
 
 		$this->TimeSet_Flag = False;
+
+		//Load Alert Settings
+		$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
+		if($Alerts_Row == null)
+		{
+			newAlert($this->getUsername());
+			$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
+		}
+		$this->DaysExpirationWarning = $Alerts_Row['DaysExpirationWarning'];
+		$this->HoursLeftWarning = $Alerts_Row['HoursLeftWarning'];
 	}
 
 	//gets the assignments
@@ -185,6 +199,32 @@ class Developer
 	function setTimeSetFlag($boolean)
 	{
 		$this->TimeSet_Flag = $boolean;
+	}
+
+	function getDaysExpirationWarning()
+	{
+		$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
+		$this->DaysExpirationWarning = $Alerts_Row['DaysExpirationWarning'];
+		return $this->DaysExpirationWarning;
+	}
+
+	function setDaysExpirationWarning($s)
+	{
+		$this->DaysExpirationWarning = $s;
+		updateTableByUser('DeveloperAlerts', 'DaysExpirationWarning', $s, $this->getUsername());
+	}
+
+	function getHoursLeftWarning()
+	{
+		$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
+		$this->HoursLeftWarning = $Alerts_Row['HoursLeftWarning'];
+		return $this->HoursLeftWarning;
+	}
+
+	function setHoursLeftWarning($s)
+	{
+		$this->HoursLeftWarning = $s;
+		updateTableByUser('DeveloperAlerts', 'HoursLeftWarning', $s, $this->getUsername());
 	}
 
 	//gets the current time log
