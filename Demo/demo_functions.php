@@ -1222,4 +1222,22 @@ function removeTaskForm($session, $developer)
 		}
 	}
 }
+
+function delClient($session, $developer)
+{
+	echo '<form action="" method="POST">';
+	echo '<h2>Remove a Client</h2>';
+	clientDropDown($developer);
+	echo '</form>';
+	
+	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	{
+		if(isset($_POST['Client_Selected']))
+			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+
+		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was deleted.</h2>';
+		
+		deleteClient($_SESSION[$session]['Client_Selected']);
+	}
+}
 ?>
