@@ -3,6 +3,13 @@
   text-align: center;
 }
 
+.login-text {
+	text-align: center;
+	color: red;
+	font-size: 14px;
+	font-weight: bold;
+}
+
 body {
   padding-top: 40px;
   padding-bottom: 40px;

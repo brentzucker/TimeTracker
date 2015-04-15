@@ -364,7 +364,11 @@ class Developer
 		createClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
 		$this->assignClient( new Client($clientname) );
 	}
-
+	//reference in developers class
+	function editClient($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state)
+	{
+		editClientContact($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state);
+	}
 	function newProject($ClientName, $ProjectName, $Description)
 	{
 		$this->assignProject(new Projects($ClientName, $ProjectName, $Description));

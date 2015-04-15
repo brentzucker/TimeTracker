@@ -82,7 +82,7 @@ function echoMyAccountLinks()
 END;
 }
 
-/* Functions below warn the user with alerts. 
+/* Functions below warn the user with alerts.
  *
  */
 
@@ -133,7 +133,7 @@ function developerDropDown($developer)
 //This function gets passed a Developer and echos a dropdwon selector for the Developer's Client List
 function clientDropDown($Developer)
 {
-	
+
 	echo '<select name="Client_Selected">';
 
 	if(!isset($_POST['Client_Selected']))
@@ -177,7 +177,7 @@ function taskDropDown($developer, $projectid)
  *
  */
 
-//This function echos 2 inputs for a form. A startdate and an enddate. 
+//This function echos 2 inputs for a form. A startdate and an enddate.
 function dateSelector()
 {
 	$today = date('Y-m-d');
@@ -225,7 +225,7 @@ function developerReports()
 			echo '<h2>' . $_SESSION['report']['developer'] . ' was selected</h2>';
 			printAggregatedTimeLogTableByDeveloper($_SESSION['report']['developer'], $_POST['startdate'], $_POST['enddate']);
 			printTimeLogTableByDeveloper($_SESSION['report']['developer'], $_POST['startdate'], $_POST['enddate']);
-		}	
+		}
 	}
 }
 
@@ -250,7 +250,7 @@ function clientReport()
 	}
 }
 
-//This function prints out the project reports tables if a client, project, and dates have been selected. 
+//This function prints out the project reports tables if a client, project, and dates have been selected.
 function projectReports()
 {
 	//If a project is selected print the reports
@@ -331,7 +331,7 @@ function editTimeSheet()
 		editTimeLogTableByDeveloper($_SESSION['Developer']->getUsername(), $_SESSION['edit']['startdate'], $_SESSION['edit']['enddate']);
 		echo '<input type="submit" value="Edit Time Sheet">';
 		echo '</form>';
-	}	
+	}
 
 	//If a new time out has been created, update the tables
 	if(isset($_POST['TimeLogID']) || isset($_SESSION['edit']['timelogid']))
@@ -453,7 +453,7 @@ function developerClientProjectTaskDropdownForm($session_variable)
 
 //This function consumes a session name variable and a developer name and displays dropdowns for a client and a project
 function clientProjectDropDownForm($session)
-{	
+{
 	echo '<form action="" method="POST">';
 	echo '<h2>Select a Client</h2>';
 	clientDropDown($_SESSION['Developer']);
@@ -466,7 +466,7 @@ function clientProjectDropDownForm($session)
 			$_SESSION["$session"]['Client_Selected'] = $_POST['Client_Selected'];
 			unset($_SESSION["$session"]['project']);
 		}
-			
+
 		echo '<h2>' . $_SESSION["$session"]['Client_Selected'] . ' was selected.</h2>';
 
 		echo '<form action="" method="POST">';
@@ -1185,10 +1185,59 @@ END;
 END;
 
 }
+//This function echos a form to update a pre existing client by changing the client's contact information via editClient method
 function editClientForm($developer)
 {
-	
-	
+
+	$teamError = $clientError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
+
+	echo '<form action="" method="POST">';
+	echo '<h2>Select a Client</h2>';
+	clientDropDown($developer);
+	echo '</form>';
+
+	$client;
+	if(isset($_POST['Client_Selected']))
+	{
+		$client = $_POST['Client_Selected'];
+	}
+	if (isset($_POST['Client_Selected']))
+	{
+		if (isset($_POST['editClientSubmit']))
+		{
+			$validated = false;
+			if($_SERVER["REQUEST_METHOD"] == "POST")
+			{
+				if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['email'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
+				{
+					$firstname = $_POST['firstname'];
+					$lastname = $_POST['lastname'];
+					$phone = $_POST['phone'];
+					$email = $_POST['email'];
+					$address = $_POST['address'];
+					$city = $_POST['city'];
+					$state = $_POST['state'];
+					$validated= true;
+				}
+				//isset($_POST['clientname']) && isset($_POST['startdate'])
+				if($validated)
+				{
+					$developer->editClient($client, $firstname, $lastname, $phone, $email, $address, $city, $state);
+					echo "<h1> $client was updated!</h1>";
+				}
+			}
+		}
+		echo '<form action="" method="POST">';
+		echoContactInput();
+		echo <<<END
+		<br/>
+		<input type="submit" name="editClientSubmit" value="Edit Client">
+		<input type="hidden" name="Client_Selected" value="$client">
+		</form>
+		<br>
+		<a href="manage_clients.php">Back</a>
+END;
+	}
 }
 //BELOW:
 //UNFINISHED -- NEEDS WORK
@@ -1199,27 +1248,110 @@ function removeClientForm($developer)
 
 function removeProjectForm($session, $developer)
 {
+	echo '<form action="" method="POST">';
+	echo "<h2>Select a Client</h2>";
+	clientDropDown($developer);
+	echo"</form>";
 
+	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	{
+		if(isset($_POST['Client_Selected']))
+			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+
+		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
+
+		echo "Select a Project";
+		echo '<form action="" method="POST">';
+		projectDropDown($developer, $_SESSION[$session]['Client_Selected']);
+		echo "</form>";
+
+		if(isset($_POST['Project_Selected']))
+		{
+			$_SESSION[$session]['Project_Selected'] = $_POST['Project_Selected'];
+
+			echo '<h2>' . $_SESSION[$session]['Project_Selected'] . ' was selected.</h2>';
+
+			echo '<h2>Do you want to delete this project?</h2>';
+			echo '<form action="" method="POST">';
+			echo '<input type="Submit" name="removeproject" value="Delete">';
+			echo '</form>';
+		}
+
+		if(isset($_POST['removeproject']))
+		{
+
+			echo '<h1>' . $_POST['Project_Selected'] . ' is deleted</h1>';
+			$desc = $developer->getDescription();
+			deleteProject($_SESSION['Client_selected'], $_SESSION['Project_selected'], $desc);
+		}
+		}
 }
 function removeTaskForm($session, $developer)
 {
-	clientProjectTaskDropdownForm('report');
+	echo '<form action="" method="POST">';
+	echo "<h2>Select a Client</h2>";
+	clientDropDown($developer);
+	echo"</form>";
 
-	if(isset($_POST['Task_Selected']) || isset($_SESSION['remove']['task']))
+	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
 	{
-		if(isset($_POST['removetask']))
+		if(isset($_POST['Client_Selected']))
+			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+
+		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
+
+		echo "Select a Project";
+		echo '<form action="" method="POST">';
+		projectDropDown($developer, $_SESSION[$session]['Client_Selected']);
+		echo "</form>";
+
+		if(isset($_POST['Project_Selected']))
 		{
-			deleteTask($_SESSION['Client_selected'], $_SESSION['Project_selected'], $_SESSION['Task_selected']);
-		}
-		else
+			$_SESSION[$session]['Project_Selected'] = $_POST['Project_Selected'];
+
+			echo '<h2>' . $_SESSION[$session]['Project_Selected'] . ' was selected.</h2>';
+
+			echo "Select a Task";
+			echo '<form action="" method="POST">';
+			taskDropDown($developer, $_SESSION[$session]['Project_Selected']);
+			echo '</form>';
+
+		if(isset($_POST['Task_Selected']))
 		{
-			//unfinished
-			echo '<h2>' . $_SESSION['remove']['task']  . ' was selected</h2>';
+			$_SESSION[$session]['Task_Selected'] = $_POST['Task_Selected'];
+
+			echo '<h2>' . $_SESSION[$session]['Task_Selected'] . ' was selected.</h2>';
+
 			echo '<h2>Do you want to delete this task?</h2>';
 			echo '<form action="" method="POST">';
 			echo '<input type="Submit" name="removetask" value="Delete">';
 			echo '</form>';
 		}
+
+		if(isset($_POST['removetask']))
+		{
+
+			echo '<h1>' . $_POST['Task_Selected'] . ' is deleted</h1>';
+			deleteTask($_SESSION['Client_selected'], $_SESSION['Project_selected'], $_SESSION['Task_selected']);
+		}
+		}
+}
+}
+function delClient($session, $developer)
+{
+	echo '<form action="" method="POST">';
+	echo '<h2>Remove a Client</h2>';
+	clientDropDown($developer);
+	echo '</form>';
+
+	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	{
+		if(isset($_POST['Client_Selected']))
+			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+
+		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was deleted.</h2>';
+
+		deleteClient($_SESSION[$session]['Client_Selected']);
 	}
 }
 ?>
