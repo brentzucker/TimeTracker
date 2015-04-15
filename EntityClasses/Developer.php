@@ -3,15 +3,15 @@
 Name: Developer.php
 Description: sets up the an array with the developer's work information as well as how to handle the clock in/out functions
 Programmers: Brent Zucker
-Dates: (3/10/15, 
+Dates: (3/10/15,
 Names of files accessed: include.php
 Names of files changed:
-Input: 
+Input:
 Output:
 Error Handling: the assignClient and assignTask classes make sure that you can't assign the same client and task more than once
 Modification List:
-3/10/15-Initial code up 
-3/12/15-Updated path directories 
+3/10/15-Initial code up
+3/12/15-Updated path directories
 3/29/15-Demo report and clock in/out
 4/6/15-Assign client/task
 4/10/15-Developers set up
@@ -34,6 +34,10 @@ class Developer
 	private $Time_Log = array();
 	private $Current_TimeLog;
 
+	//Alerts
+	private $DaysExpirationWarning;
+	private $HoursLeftWarning;
+
 	//If False Clock In, if True Clock out
 	private $TimeSet_Flag;
 
@@ -50,7 +54,7 @@ class Developer
 
 		$this->Info['Contact'] = new Contact(
 			 $db_entry_Contact['Username'],
-			 $db_entry_Contact['Firstname'], 
+			 $db_entry_Contact['Firstname'],
 			 $db_entry_Contact['Lastname'],
 			 $db_entry_Contact['Phone'],
 			 $db_entry_Contact['Email'],
@@ -79,6 +83,16 @@ class Developer
 			array_push($this->Time_Log, new Time( $row['TimeLogID'] ));
 
 		$this->TimeSet_Flag = False;
+
+		//Load Alert Settings
+		$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
+		if($Alerts_Row == null)
+		{
+			newAlert($this->getUsername());
+			$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
+		}
+		$this->DaysExpirationWarning = $Alerts_Row['DaysExpirationWarning'];
+		$this->HoursLeftWarning = $Alerts_Row['HoursLeftWarning'];
 	}
 
 	//gets the assignments
@@ -89,7 +103,7 @@ class Developer
 
 	//gets the developer's work and contact information
 	function getInfo()
-	{	
+	{
 		return array_merge($this->getDeveloperInfo(), $this->getContact()->getInfo());
 	}
 
@@ -126,7 +140,7 @@ class Developer
 			$temp = $this->Time_Log;
 			array_push($temp, $this->getCurrentTimeLog());
 			return $temp;
-		}	
+		}
 		return $this->Time_Log;
 	}
 
@@ -187,6 +201,32 @@ class Developer
 		$this->TimeSet_Flag = $boolean;
 	}
 
+	function getDaysExpirationWarning()
+	{
+		$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
+		$this->DaysExpirationWarning = $Alerts_Row['DaysExpirationWarning'];
+		return $this->DaysExpirationWarning;
+	}
+
+	function setDaysExpirationWarning($s)
+	{
+		$this->DaysExpirationWarning = $s;
+		updateTableByUser('DeveloperAlerts', 'DaysExpirationWarning', $s, $this->getUsername());
+	}
+
+	function getHoursLeftWarning()
+	{
+		$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
+		$this->HoursLeftWarning = $Alerts_Row['HoursLeftWarning'];
+		return $this->HoursLeftWarning;
+	}
+
+	function setHoursLeftWarning($s)
+	{
+		$this->HoursLeftWarning = $s;
+		updateTableByUser('DeveloperAlerts', 'HoursLeftWarning', $s, $this->getUsername());
+	}
+
 	//gets the current time log
 	function getCurrentTimeLog()
 	{
@@ -212,7 +252,7 @@ class Developer
 		if(newDeveloperAssignments($this->getUsername(), $ClientObject->getClientname(), 'Client'))
 			array_push($this->Client_List, $ClientObject);
 	}
-	
+
 	//assigns project to developer
 	function assignProject($ProjectObject)
 	{
@@ -244,8 +284,8 @@ class Developer
 			$this->setTimeSetFlag(True);
 		}
 	}
-	
-	//clock developer out 
+
+	//clock developer out
 	function clockOut()
 	{
 		if($this->getTimeSetFlag() == True)
@@ -292,7 +332,7 @@ class Developer
 
 				return $ret;
 			}
-				
+
 	}
 
 	//get client name from Client_List
@@ -310,12 +350,12 @@ class Developer
 			if($project->getProjectID() == $projectid)
 				return $project;
 	}
-	
+
 	//gets the project that are under the client's name
 	function getClientsProjectsAssigned($clientname)
 	{
 		$ret = array();
-		$client = $this->getClient($clientname);
+		$client = new Client($clientname);
 		$dev_projects = $this->getProjectList();
 
 		//for each project if they have the same ID push if into the list
@@ -326,12 +366,13 @@ class Developer
 
 		return $ret;
 	}
-	
+
 	//gets the tasks that are under the project ID
 	function getProjectsTasksAssigned($projectid)
 	{
 		$ret = array();
-		$project = $this->getProject($projectid);
+		$project = new Projects($projectid);
+		//$project = $this->getProject($projectid);
 		$dev_tasks = $this->getTaskList();
 
 		//for each tasks if the developer's tasks and the task have the ID push it into the list
@@ -339,11 +380,11 @@ class Developer
 			foreach($project->getTaskList() as $task)
 				if($dev_task->getTaskID() == $task->getTaskID())
 					array_push($ret, $task);
-			
+
 		return $ret;
 	}
 
-	//gets the developers 
+	//gets the developers
 	function getDevelopers()
 	{
 		$ret = array();
@@ -356,7 +397,7 @@ class Developer
 			array_push( $ret, new Developer( $dev['Username'] ));
 
 		//return list
-		return $ret; 
+		return $ret;
 	}
 
 	function newClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state)
@@ -364,6 +405,7 @@ class Developer
 		createClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
 		$this->assignClient( new Client($clientname) );
 	}
+
 	//reference in developers class
 	function editClient($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state)
 	{
