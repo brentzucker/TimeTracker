@@ -149,6 +149,13 @@ function newClientContact($ClientName, $Firstname, $Lastname, $Phone, $Email, $A
 	db_query($sql);
 }
 
+function editClientContact($ClientName, $Firstname, $Lastname, $Phone, $Email, $Address, $City, $State)
+{
+	$sql = "UPDATE clientcontact SET Firstname='$Firstname', Lastname='$Lastname', Phone='$Phone', Email='$Email',
+	Address='$Address', City='$City', State='$State' WHERE ClientName='$ClientName'";
+	db_query($sql);
+}
+
 function removeClientContact($ClientName)
 {
 	$sql = "DELETE FROM ClientContact WHERE ClientName='$ClientName'";

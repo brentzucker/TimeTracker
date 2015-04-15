@@ -1185,10 +1185,59 @@ END;
 END;
 
 }
+//This function echos a form to update a pre existing client by changing the client's contact information via editClient method
 function editClientForm($developer)
 {
 
+	$teamError = $clientError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
 
+	echo '<form action="" method="POST">';
+	echo '<h2>Select a Client</h2>';
+	clientDropDown($developer);
+	echo '</form>';
+
+	$client;
+	if(isset($_POST['Client_Selected']))
+	{
+		$client = $_POST['Client_Selected'];
+	}
+	if (isset($_POST['Client_Selected']))
+	{
+		if (isset($_POST['editClientSubmit']))
+		{
+			$validated = false;
+			if($_SERVER["REQUEST_METHOD"] == "POST")
+			{
+				if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['email'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
+				{
+					$firstname = $_POST['firstname'];
+					$lastname = $_POST['lastname'];
+					$phone = $_POST['phone'];
+					$email = $_POST['email'];
+					$address = $_POST['address'];
+					$city = $_POST['city'];
+					$state = $_POST['state'];
+					$validated= true;
+				}
+				//isset($_POST['clientname']) && isset($_POST['startdate'])
+				if($validated)
+				{
+					$developer->editClient($client, $firstname, $lastname, $phone, $email, $address, $city, $state);
+					echo "<h1> $client was updated!</h1>";
+				}
+			}
+		}
+		echo '<form action="" method="POST">';
+		echoContactInput();
+		echo <<<END
+		<br/>
+		<input type="submit" name="editClientSubmit" value="Edit Client">
+		<input type="hidden" name="Client_Selected" value="$client">
+		</form>
+		<br>
+		<a href="manage_clients.php">Back</a>
+END;
+	}
 }
 //BELOW:
 //UNFINISHED -- NEEDS WORK
