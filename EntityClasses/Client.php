@@ -124,14 +124,36 @@ class Client
 		return "$hours:$minutes:$seconds";
 	}
 
-	//gets the hours lefs
-	function getHoursLeft()
+	//gets the time in seconds left
+	function getTimeInSecondsLeft()
 	{	
 		//make sure HoursLeft is up to date
 		$this->HoursLeft = returnRowByClient('Client', $this->getClientname())['HoursLeft'];
 		return $this->HoursLeft;
 	}
 
+	function getHoursLeft()
+	{
+		$hours = $this->getTimeInSecondsLeft() / 3600;
+		return (int)$hours;
+	}
+
+	function getMinutesLeft()
+	{
+		$minutes = ($this->getTimeInSecondsLeft() % 3600) / 60;
+		return (int)$minutes;
+	}
+
+	function getSecondsLeft()
+	{
+		$seconds = (($this->getTimeInSecondsLeft() % 3600) % 60);
+		return (int)$seconds;
+	}
+
+	function getTimeLeftFormatted()
+	{
+		return $this->getHoursLeft() . ":" . $this->getMinutesLeft() . ":" . $this->getSecondsLeft();
+	}
 
 	//add purchased hours in seconds
 	function addPurchasedHours($seconds)
@@ -213,6 +235,42 @@ class Client
 		if($this->getClientname() == $client2->getClientname() && $this->getStartDate() == $client2->getStartDate())
 			return true;
 		else return false;
+	}
+
+	//This function returns the purchase object with the latest purchase date.
+	function getLatestPurchase()
+	{	
+		//If the client has made a purchase
+		if(count($this->getPurchases()) > 0)
+		{
+			//first purchase
+			$purchase = $this->getPurchases()[0]->getPurchaseDate();
+
+			foreach($this->getPurchases() as $purchase)
+				if($purchase->getPurchaseDate() <= $purchase)
+					$purchase = $purchase;
+			
+			return $purchase;
+		}
+	}
+
+	function getContractDaysLeft()
+	{
+		if(count($this->getPurchases()) > 0)
+		{
+			$last_purchase_string = $this->getLatestPurchase()->getPurchaseDate();
+
+			//Add 1 year to the last purchase date
+			$expired_date_obj = (new DateTime($last_purchase_string))->add(new DateInterval('P1Y'));
+
+			$last_purchase_obj = new DateTime($last_purchase_string);
+
+			$today = new DateTime(date('Y-m-d'));
+
+			//How many days from today until the expired date 
+			return $today->diff($expired_date_obj)->days;
+		}
+		else return 0;
 	}
 }
 ?>
