@@ -15,6 +15,7 @@ Modification List:
 3/29/15-Demo report and clock in/out
 4/6/15-Assign client/task
 4/10/15-Developers set up
+4/15/15-Warnings for developers set up
 */
 
 require_once(__DIR__.'/../include.php');
@@ -201,6 +202,7 @@ class Developer
 		$this->TimeSet_Flag = $boolean;
 	}
 
+	//gets the row with the expiration day amount
 	function getDaysExpirationWarning()
 	{
 		$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
@@ -208,12 +210,14 @@ class Developer
 		return $this->DaysExpirationWarning;
 	}
 
+	//set the days until expiration
 	function setDaysExpirationWarning($s)
 	{
 		$this->DaysExpirationWarning = $s;
 		updateTableByUser('DeveloperAlerts', 'DaysExpirationWarning', $s, $this->getUsername());
 	}
 
+	//returns hours left
 	function getHoursLeftWarning()
 	{
 		$Alerts_Row = returnRowByUser('DeveloperAlerts', $this->Info['Username']);
@@ -221,6 +225,7 @@ class Developer
 		return $this->HoursLeftWarning;
 	}
 
+	//sets amount of hours for warning
 	function setHoursLeftWarning($s)
 	{
 		$this->HoursLeftWarning = $s;

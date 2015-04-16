@@ -13,6 +13,7 @@ Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories 
 4/10/15-Developers set up
+4/14/15-Lets the user know when the contract is up
 */
 
 require_once(__DIR__.'/../include.php');
@@ -132,6 +133,7 @@ class Client
 		return $this->HoursLeft;
 	}
 
+	//gets amount of time left 
 	function getHoursLeft()
 	{
 		$hours = $this->getTimeInSecondsLeft() / 3600;
@@ -150,6 +152,7 @@ class Client
 		return (int)$seconds;
 	}
 
+	//formats time left
 	function getTimeLeftFormatted()
 	{
 		return $this->getHoursLeft() . ":" . $this->getMinutesLeft() . ":" . $this->getSecondsLeft();
@@ -254,6 +257,7 @@ class Client
 		}
 	}
 
+	//gets amount of time until the contract expires
 	function getContractDaysLeft()
 	{
 		if(count($this->getPurchases()) > 0)
