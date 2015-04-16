@@ -25,6 +25,7 @@ function echoHomePageLinks()
 	echo '<li><h3><a href="ManageClientsDemo/manage_clients.php">Manage Clients</a></li>';
 	echo '<li><h3><a href="MyAccountDemo/MyAccount.php">My Account</a></li>';
 	echo '<li><h3><a href="edit_time_sheet.php">Edit Time Sheet</a></li>';
+	echo '<li><h3><a href="ManageClientsDemo/view_client_profiles.php">View Client Profiles</a></li>';
 	echo '</ul>';
 }
 
