@@ -164,6 +164,19 @@ CREATE TABLE `Tasks` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `TeamAssignments`
+--
+
+CREATE TABLE `TeamAssignments` (
+  `Team` varchar(30) DEFAULT NULL,
+  `ClientProjectTask` varchar(30) DEFAULT NULL,
+  `Type` char(7) DEFAULT NULL,
+  KEY `Team` (`Team`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `TimeSheet`
 --
 
