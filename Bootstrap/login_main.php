@@ -36,7 +36,6 @@ echo<<<_END
         <div class="checkbox">
         </div>
         <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign In</button>
-        <button class="btn btn-lg btn-primary btn-block" name="create" type="create">Create Account</button>
       </form>
 
 _END;

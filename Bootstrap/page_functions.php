@@ -146,14 +146,22 @@ function checkLogin($username, $password){
 				}
 				else
 				{
-					echo "<p class='login-text'>Wrong username/password Combination!<p>";
+					echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong username/password Combination!
+					
+					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+					
+					</div>";
 				}
 			}
 		}
 
 		if($rows==0)
 		{
-			echo "<p class='login-text'>Wrong username/password Combination!<p>";
+			echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong username/password Combination!
+					
+					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+					
+					</div>";
 		}
 	}
 }
