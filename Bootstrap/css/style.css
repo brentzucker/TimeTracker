@@ -3,6 +3,12 @@
   text-align: center;
 }
 
+.login-wrong {
+	max-width: 330px;
+	margin: 0 auto;
+	text-align: center;
+}
+
 .login-text {
 	text-align: center;
 	color: red;

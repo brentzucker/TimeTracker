@@ -304,6 +304,51 @@ function taskReports()
 	}
 }
 
+/* These functions print out profiles 
+ *
+ */
+
+//This function prints out the Client profile page
+function viewClientProfiles()
+{
+	echo '<form action="" method="POST">';
+	clientDropDown($_SESSION['Developer']);
+	echo '</form>';
+
+	if( isset($_POST['Client_Selected']) )
+	{
+		echo '<h2>' . $_POST['Client_Selected'] . '</h2>';
+
+		//Print Client Contact information
+		echo '<h3>Contact Info</h3>';
+		printClientContactTable($_POST['Client_Selected']);
+
+		//Print Client Contract Information
+		echo '<h3>Contract Info</h3>';
+		echo '<h4>Hours Left</h4>';
+		printHoursLeftTable($_POST['Client_Selected']);
+
+		echo '<h4>Client\'s Purchases</h4>';
+		printClientsPurchasesTable($_POST['Client_Selected']);
+
+		//Projects 
+		echo '<h3>Projects</h3>';
+		printProjects($_POST['Client_Selected']);
+
+		//Tasks
+		echo '<h3>Tasks</h3>';
+		printTasks($_POST['Client_Selected']);
+
+		//Assigned Developers
+		echo '<h3>Assigned Developers</h3>';
+		printDevelopersAssignedToClient($_POST['Client_Selected']);
+
+		//Grouped Developers by Time
+		echo '<h3>Developers Time Sheet</h3>';
+		printAggregatedTimeLogTableByClient($_POST['Client_Selected'],0,0);
+	}
+}
+
 /* The following functions allow you to modify data by selecting the data and using forms.
  *
  */
@@ -604,7 +649,10 @@ function printTimeLogTableByClient($client, $startdate, $enddate)
 //This function consumes a client name and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
 function printAggregatedTimeLogTableByClient($client, $startdate, $enddate)
 {
-	$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'GROUP BY t.Username";
+	if($startdate != 0 && $endate != 0)
+		$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'GROUP BY t.Username";
+	else
+		$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.ClientName='" . $client ."'GROUP BY t.Username";
 
 	$table_headers = array('Client', 'Username', 'Time Spent');
 
@@ -706,6 +754,34 @@ function printAssignmentsTableTask($developer)
 
 	$table_headers = array('Username', 'Tasks');
 
+	printTable($query, $table_headers);
+}
+
+function printClientContactTable($client)
+{
+	$query = "SELECT * FROM ClientContact WHERE ClientName='$client'";
+	$table_headers = array('Client Name', 'First Name', 'Last Name', 'Phone', 'Email', 'Address', 'City', 'State');
+	printTable($query, $table_headers);
+}
+
+function printProjects($client)
+{
+	$query = "SELECT ProjectName, Description FROM Projects WHERE ClientName='$client'";
+	$table_headers = array('Project Name', 'Description');
+	printTable($query, $table_headers);
+}
+
+function printTasks($client)
+{
+	$query = "SELECT TaskName, Description FROM Tasks WHERE ClientName='$client'";
+	$table_headers = array('Task Name', 'Description');
+	printTable($query, $table_headers);
+}
+
+function printDevelopersAssignedToClient($client)
+{
+	$query = "SELECT Username FROM DeveloperAssignments WHERE (Type='Client') AND ClientProjectTask='" . $client ."'";
+	$table_headers = array('Developer');
 	printTable($query, $table_headers);
 }
 
