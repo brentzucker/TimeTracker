@@ -832,6 +832,31 @@ function assignProject()
 	}
 }
 
+//This function consumes a developer, echos a form to modify the developers alert settings, and handles the post by updating the developers alert settings
+function updateAlertsForm($developer)
+{
+	if(isset($_POST['days']) && isset($_POST['hours']))
+	{
+		$developer->setDaysExpirationWarning( $_POST['days'] );
+		$developer->setHoursLeftWarning( $_POST['hours'] );
+	}
+
+	echo '<form action="" method="POST">';
+	echo '<label>Days Before a Contract Expires:</labels>';
+	echo '<input type="number" name="days" value="' . $developer->getDaysExpirationWarning() . '">';
+	echo '<br>';
+	echo '<label>Hours Left on Contract:</label>';
+	echo '<input type="number" name="hours" value="' . $developer->getHoursLeftWarning() . '">';
+	echo '<br>';
+	echo '<input type="submit" value="Update Alerts">';
+	echo '</form>';
+
+	if(isset($_POST['days']) && isset($_POST['hours']))
+	{
+		echo '<h3>Alerts has been updated.</h3>';
+	}
+}
+
 //This function creates a from that assigns a task to the developer and calls assignTask to load the data into the database
 function newTaskForm($session, $developer)
 {
