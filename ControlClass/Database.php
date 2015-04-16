@@ -421,7 +421,7 @@ function returnRowsDeveloperAssignments($WhereValue1, $WhereValue2)
 
 function returnRowsTeamAssignments($WhereValue1, $WhereValue2)
 {
-	return returnRowsForTwoValues('DeveloperAssignments', 'Team', $WhereValue1, 'Type', $WhereValue2);
+	return returnRowsForTwoValues('TeamAssignments', 'Team', $WhereValue1, 'Type', $WhereValue2);
 }
 
 function returnRowsDeveloperAssignmentsUnique($WhereValue1, $WhereValue2, $WhereValue3)

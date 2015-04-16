@@ -31,6 +31,8 @@ require_once (__DIR__.'/EntityClasses/Projects.php');
 require_once (__DIR__.'/EntityClasses/Tasks.php');
 require_once (__DIR__.'/EntityClasses/Time.php');
 require_once (__DIR__.'/EntityClasses/SuperUser.php');
+require_once (__DIR__.'/EntityClasses/Team.php');
+
 
 //Front End Functions
 require_once (__DIR__.'/Demo/demo_functions.php');
