@@ -124,6 +124,40 @@ echo<<<_END
 _END;
 }
 
+//Checks user login and matches the username and hashed password to the database
+function checkLogin($username, $password){
+		
+	if(isset($username) && isset($password)) {
+		$username = stripslashes($username);
+		$password = stripslashes($password);
+		$username = mysql_real_escape_string($username);
+		$password = mysql_real_escape_string($password);
+				
+		$token=hash('ripemd128',$password);			
+		$result = db_query("SELECT Password FROM credentials WHERE Username='$username'");	
+		$rows=mysqli_num_rows($result);
+				
+		for($i=0; $i<$rows; $i++) {					
+		$row=mysqli_fetch_row($result);
+				
+			foreach($row as $element) {			
+				if($token==$element) {
+					header("Location:main.php");
+				}
+				else
+				{
+					echo "<p class='login-text'>Wrong username/password Combination!<p>";
+				}
+			}
+		}
+
+		if($rows==0)
+		{
+			echo "<p class='login-text'>Wrong username/password Combination!<p>";
+		}
+	}
+}
+
 
 
 

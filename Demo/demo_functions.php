@@ -1124,8 +1124,10 @@ function newDeveloperForm($developer)
 	{
 			if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
 			{
+				$token = hash('ripemd128', $_POST['password']);
+			
 				$username = $_POST['username'];
-				$password = $_POST['password'];
+				$password = $token;
 				$position = $_POST['position'];
 				$firstname = $_POST['firstname'];
 				$lastname = $_POST['lastname'];
@@ -1171,7 +1173,7 @@ function newDeveloperForm($developer)
 		}
 	    else
 	    {
-	        $password = $_POST['password'];
+	        $password = $token;
 	    }
 		//isset($_POST['username']) && isset($_POST['position']) && isset($_POST['password'])
 		if($username != "" && $position != "" && $password)
