@@ -252,6 +252,24 @@ function removeAlert($Username)
 	db_query($sql);
 }
 
+function newTeamAssignment($Team, $ClientProjectTask, $Type)
+{
+	//Only create the assignment if it doesnt exist
+	if(count(returnRowsTeamAssignmentsUnique($Team, $Type, $ClientProjectTask)) == 0)
+	{
+		$sql = "INSERT INTO TeamAssignments(Team, ClientProjectTask, Type) VALUES ('$Team', '$ClientProjectTask', '$Type')";
+		db_query($sql);
+		return true;
+	}
+	return false;
+}
+
+function removeTeamAssignment($ClientProjectTask, $Type)
+{
+	$sql = "DELETE FROM TeamAssignments WHERE ClientProjectTask='$ClientProjectTask' AND Type='$Type'";
+	db_query($sql);
+}
+
 /* Returns a row for a Table.
  *
  */
@@ -363,6 +381,11 @@ function returnRowsByTeam($team)
 	return returnRows('Developer', 'Team', $team);
 }
 
+function returnTeamAssignmentsByTeam($team)
+{
+	return returnRows('TeamAssignments', 'Team', $team);
+}
+
 /* Returns all rows for a Table based off one Where value.
  *
  */
@@ -396,9 +419,19 @@ function returnRowsDeveloperAssignments($WhereValue1, $WhereValue2)
 	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2);
 }
 
+function returnRowsTeamAssignments($WhereValue1, $WhereValue2)
+{
+	return returnRowsForTwoValues('DeveloperAssignments', 'Team', $WhereValue1, 'Type', $WhereValue2);
+}
+
 function returnRowsDeveloperAssignmentsUnique($WhereValue1, $WhereValue2, $WhereValue3)
 {
 	return returnRowsForThreeValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
+}
+
+function returnRowsTeamAssignmentsUnique($WhereValue1, $WhereValue2, $WhereValue3)
+{
+	return returnRowsForThreeValues('TeamAssignments', 'Team', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
 }
 
 /* The following functions update the database.
