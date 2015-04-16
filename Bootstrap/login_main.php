@@ -35,48 +35,20 @@ echo<<<_END
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">
         </div>
-        <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign In</button>
       </form>
 
 _END;
 	
-		require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/page_functions.php');
 	
-		if(isset($_POST['submit']))
-		{
-			checkLogin($_POST['username'], $_POST['password']);
-		}
+if(isset($_POST['submit']))
+{
+	checkLogin($_POST['username'], $_POST['password']);
+}
 
-		function checkLogin($username, $password)
-		{
-			if(isset($username) && isset($password))
-			{
-				//$username = $_POST['username'];
-				//$password = $_POST['password'];
-				
-				$username = stripslashes($username);
-				$password = stripslashes($password);
-				$username = mysql_real_escape_string($username);
-				$password = mysql_real_escape_string($password);
-	
-				$result = db_query("SELECT * FROM credentials WHERE Username='$username' AND Password='$password'");
-		
-				$count = mysqli_num_rows($result);
-		
-				//echo $count;
-		
-				if($count==1)
-				{
-					header("Location:main.php");
-				}
-				else
-				{
-					echo "<p class='login-text'>Wrong username/password Combination!<p>";
-				}
-		}
-	}
-	
-	?>
+?>
 
     </div> <!-- /container -->
 

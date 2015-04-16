@@ -124,6 +124,48 @@ echo<<<_END
 _END;
 }
 
+//Checks user login and matches the username and hashed password to the database
+function checkLogin($username, $password){
+		
+	if(isset($username) && isset($password)) {
+		$username = stripslashes($username);
+		$password = stripslashes($password);
+		$username = mysql_real_escape_string($username);
+		$password = mysql_real_escape_string($password);
+				
+		$token=hash('ripemd128',$password);			
+		$result = db_query("SELECT Password FROM credentials WHERE Username='$username'");	
+		$rows=mysqli_num_rows($result);
+				
+		for($i=0; $i<$rows; $i++) {					
+		$row=mysqli_fetch_row($result);
+				
+			foreach($row as $element) {			
+				if($token==$element) {
+					header("Location:main.php");
+				}
+				else
+				{
+					echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong username/password Combination!
+					
+					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+					
+					</div>";
+				}
+			}
+		}
+
+		if($rows==0)
+		{
+			echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong username/password Combination!
+					
+					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+					
+					</div>";
+		}
+	}
+}
+
 
 
 
