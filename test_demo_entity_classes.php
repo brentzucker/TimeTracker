@@ -18,6 +18,7 @@ Modification List:
 3/7/15-Added Time accessor/modifer methods
 3/9/15-Added Time features
 3/10/15-Updates folder hierarchy
+4/14/15-Gets the time left in seconds
 */
 
 require_once 'config_loader.php';
