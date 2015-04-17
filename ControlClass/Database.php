@@ -224,6 +224,10 @@ function removeTimeSheet($TimeLogID)
 
 function newDeveloperAssignments($Username, $ClientProjectTask, $Type)
 {
+	//Assign to Team
+	$Team = returnRowByUser('Developer', $Username)['Team'];
+	newTeamAssignment($Team, $ClientProjectTask, $Type);
+
 	//Only create the assignment if it doesn't exist
 	if(count(returnRowsDeveloperAssignmentsUnique($Username, $Type, $ClientProjectTask)) == 0)
 	{
