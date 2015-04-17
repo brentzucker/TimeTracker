@@ -462,5 +462,13 @@ class Developer
 	{
 		removeDeveloperAssignments($this->getUsername(), $clientObject->getClientname(), 'Client');
 	}
+
+	function deleteClient($clientObject)
+	{
+		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
+			$developer->unassignClient($clientObject);
+
+		removeTeamAssignment( $this->getTeam() , $clientObject->getClientname() , 'Client');
+	}
 }
 ?>
