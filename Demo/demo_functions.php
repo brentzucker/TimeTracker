@@ -554,10 +554,13 @@ function clientProjectTaskDropdownForm($session_variable)
 	echo '<form action="" method="POST">';
 	
 	//if this is an assignmnet load the teams assignments not the developers
-	if($session_variable != 'assign')
-		clientDropDown($_SESSION['Developer']);
-	else 
+	//Select a Client that is assigned to the team
+	if($session_variable == 'assign')
 		clientDropDown( new Team( $_SESSION['Developer']->getTeam() ) );
+	elseif($session_variable == 'unassign')
+		clientDropDown( new Developer($_SESSION["$session_variable"]['developer']) );
+	else 
+		clientDropDown( new Developer($_SESSION["$session_variable"]['developer']) );
 	echo "</form>";
 
 	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session_variable"]['client']))
@@ -579,10 +582,12 @@ function clientProjectTaskDropdownForm($session_variable)
 		echo '<form action="" method="POST">';
 
 		//if this is an assignmnet load the teams assignments not the developers
-		if($session_variable != 'assign')
-			projectDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['client']);
-		else 
+		if($session_variable == 'assign') 
 			projectDropDown( new Team( $_SESSION['Developer']->getTeam() ) , $_SESSION["$session_variable"]['client']);
+		elseif($session_variable == 'unassign')
+			projectDropDown( new Developer($_SESSION['unassign']['developer']), $_SESSION["$session_variable"]['client']);
+		else
+			projectDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['client']);
 		echo "</form>";
 
 		if(isset($_POST['Project_Selected']) || isset($_SESSION["$session_variable"]['project']))
@@ -601,10 +606,12 @@ function clientProjectTaskDropdownForm($session_variable)
 			echo '<form action="" method="POST">';
 			
 			//if this is an assignmnet load the teams assignments not the developers
-			if($session_variable != 'assign')
-				taskDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['project']);
-			else
+			if($session_variable == 'assign')
 				taskDropDown( new Team( $_SESSION['Developer']->getTeam() ), $_SESSION["$session_variable"]['project']);
+			elseif($session_variable == 'unassign')
+				taskDropDown( new Developer($_SESSION['unassign']['developer']), $_SESSION["$session_variable"]['project']);
+			else 
+				taskDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['project']);
 			echo '</form>';
 
 			if(isset($_POST['Task_Selected']) || isset($_SESSION["$session_variable"]['task']))
@@ -1027,6 +1034,34 @@ function unassignProject()
 		$developer->unassignProject( new Projects($_POST['Project_Selected']) );
 
 		echo '<h1>Project: ' . (new Projects($_POST['Project_Selected']))->getProjectName() . ' was unassigned </h1>';
+	}
+}
+
+//This function unassigns a task from a selected developer.
+function unassignTask()
+{
+	echo '<h4>Select a Developer</h4>';
+
+	echo '<form action="" method="POST">';
+	developerDropDown($_SESSION['Developer']);
+	echo '</form>';
+
+	developerClientProjectTaskDropDownForm('unassign');
+
+	//If all of the drop downs have been selected, assign the task and print the table
+	if(isset($_POST['Task_Selected']) || isset($_SESSION['unassign']['task']))
+	{
+		echo '<h2>' . $_SESSION['unassign']['task']  . ' was selected</h2>';
+
+		//Assign the selected task to the developer (Creates a Task object and stores it in the Task_List). Makes an entry in the DeveloperAssignments Table
+		$task_to_unassign = new Tasks($_SESSION['unassign']['task']);
+
+		$developer_to_unassign = new Developer($_SESSION['unassign']['developer']);
+		$developer_to_unassign->unassignTask($task_to_unassign);
+
+		printAssignmentsTable($_SESSION['unassign']['developer']);
+
+		echo '<h3>' . $task_to_unassign->getTaskName() . ' was unassigned.</h3>';
 	}
 }
 
