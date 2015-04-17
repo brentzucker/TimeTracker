@@ -1013,6 +1013,22 @@ function unassignClient()
 	}
 }
 
+//This function unassigns a project from a selected developer
+function unassignProject()
+{
+	developerClientProjectDropdownForm('unassign');
+
+	if(isset($_POST['Project_Selected']))
+	{
+		echo '<h3>' . $_POST['Project_Selected'] . ' was selected</h3>';
+
+		$developer = new Developer($_SESSION['unassign']['developer']);
+
+		$developer->unassignProject( new Projects($_POST['Project_Selected']) );
+
+		echo '<h1>Project: ' . (new Projects($_POST['Project_Selected']))->getProjectName() . ' was unassigned </h1>';
+	}
+}
 
 //This function consumes a developer, echos a form to modify the developers alert settings, and handles the post by updating the developers alert settings
 function updateAlertsForm($developer)
