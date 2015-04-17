@@ -560,7 +560,7 @@ function clientProjectTaskDropdownForm($session_variable)
 	elseif($session_variable == 'unassign')
 		clientDropDown( new Developer($_SESSION["$session_variable"]['developer']) );
 	else 
-		clientDropDown( new Developer($_SESSION["$session_variable"]['developer']) );
+		clientDropDown( $_SESSION['Developer'] );
 	echo "</form>";
 
 	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session_variable"]['client']))
