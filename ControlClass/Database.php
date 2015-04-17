@@ -268,9 +268,9 @@ function newTeamAssignment($Team, $ClientProjectTask, $Type)
 	return false;
 }
 
-function removeTeamAssignment($ClientProjectTask, $Type)
+function removeTeamAssignment($Team, $ClientProjectTask, $Type)
 {
-	$sql = "DELETE FROM TeamAssignments WHERE ClientProjectTask='$ClientProjectTask' AND Type='$Type'";
+	$sql = "DELETE FROM TeamAssignments WHERE Team='$Team' AND ClientProjectTask='$ClientProjectTask' AND Type='$Type'";
 	db_query($sql);
 }
 
