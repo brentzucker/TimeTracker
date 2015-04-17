@@ -55,9 +55,12 @@ function echoManageDevelopersLinks()
 {
 	echo '<ul>';
 	echo '<li><h3><a href="create_developer.php">Create Developer</a></li>';
-	echo '<li><h3><a href="assign_task.php">Assign Task</a></li>';
-	echo '<li><h3><a href="assign_project.php">Assign Projects</a></li>';
 	echo '<li><h3><a href="assign_client.php">Assign Client</a></li>';
+	echo '<li><h3><a href="assign_project.php">Assign Projects</a></li>';
+	echo '<li><h3><a href="assign_task.php">Assign Task</a></li>';
+	echo '<li><h3><a href="unassign_client.php">Unassign Client</a></li>';
+	echo '<li><h3><a href="unassign_project.php">Unassign Projects</a></li>';
+	echo '<li><h3><a href="unassign_task.php">Unassign Task</a></li>';
 	echo '<li><h3><a href="view_all_assignments.php">View All Assignments</a></li>';
 	echo '</ul>';
 echo <<<END
@@ -134,7 +137,6 @@ function developerDropDown($developer)
 //This function gets passed a Developer and echos a dropdwon selector for the Developer's Client List
 function clientDropDown($Developer)
 {
-
 	echo '<select name="Client_Selected">';
 
 	if(!isset($_POST['Client_Selected']))
@@ -435,7 +437,13 @@ function developerClientDropdownForm($session_variable)
 		echo '<form action="" method="POST">';
 
 		//Select a Client that is assigned to the team
-		clientDropDown( new Team( $_SESSION['Developer']->getTeam() ) );
+		if($session_variable == 'assign')
+			clientDropDown( new Team( $_SESSION['Developer']->getTeam() ) );
+		elseif($session_variable == 'unassign')
+			clientDropDown( new Developer($_SESSION["$session_variable"]['developer']) );
+		else 
+			clientDropDown( new Developer($_SESSION["$session_variable"]['developer']) );
+
 		echo '</form>';
 
 		if(isset($_POST['Client_Selected']))
@@ -977,6 +985,25 @@ function assignClient()
 		$developer_to_assign->assignClient($client_to_assign);
 
 		printAssignmentsTableClient($_SESSION['assign']['developer']);
+	}
+}
+
+//This function unassigns a client from a selected developer
+function unassignClient()
+{
+	developerClientDropdownForm('unassign');
+
+	if(isset($_POST['Client_Selected']) || isset($_SESSION['unassign']['client']))
+	{
+		echo '<h4>' . $_SESSION['unassign']['client'] . ' was selected.</h4>';
+
+		//Assign the selected client to the developer (Creates a Client object and stores it in the Client_List). Makes an entry in the DeveloperAssignments Table
+		$client_to_unassign = new Client($_SESSION['unassign']['client']);
+
+		$developer_to_unassign = new Developer($_SESSION['unassign']['developer']);
+		$developer_to_unassign->unassignClient($client_to_unassign);
+
+		printAssignmentsTableClient($_SESSION['unassign']['developer']);
 	}
 }
 

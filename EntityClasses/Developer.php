@@ -129,6 +129,12 @@ class Developer
 	//gets the client list
 	function getClientList()
 	{
+		//Update Client List
+		$this->Client_List = null;
+		$assigned_clients_rows = returnRowsDeveloperAssignments($this->getUsername(), 'Client');
+		foreach($assigned_clients_rows as $assigned_client)
+			$this->Client_List[] = new Client( $assigned_client['ClientProjectTask'] );
+		
 		return $this->Client_List;
 	}
 
@@ -430,6 +436,21 @@ class Developer
 	function newProject($ClientName, $ProjectName, $Description)
 	{
 		$this->assignProject(new Projects($ClientName, $ProjectName, $Description));
+	}
+
+	function unassignTask($taskObject)
+	{
+		removeDeveloperAssignments($this->getUsername() , $taskObject->getTaskID(), 'Task');
+	}
+
+	function unassignProject($projectObject)
+	{
+		removeDeveloperAssignments($this->getUsername(), $projectObject->getProjectID(), 'Project');
+	}
+
+	function unassignClient($clientObject)
+	{
+		removeDeveloperAssignments($this->getUsername(), $clientObject->getClientname(), 'Client');
 	}
 }
 ?>
