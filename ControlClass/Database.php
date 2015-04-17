@@ -238,9 +238,9 @@ function newDeveloperAssignments($Username, $ClientProjectTask, $Type)
 	return false;	
 }
 
-function removeDeveloperAssignments($ClientProjectTask, $Type)
+function removeDeveloperAssignments($Username, $ClientProjectTask, $Type)
 {
-	$sql = "DELETE FROM DeveloperAssignments WHERE ClientProjectTask='$ClientProjectTask' AND Type='$Type'";
+	$sql = "DELETE FROM DeveloperAssignments WHERE Username='$Username' AND ClientProjectTask='$ClientProjectTask' AND Type='$Type'";
 	db_query($sql);
 }
 
