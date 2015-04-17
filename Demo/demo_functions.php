@@ -513,10 +513,13 @@ function clientProjectDropDownForm($session)
 	echo '<h2>Select a Client</h2>';
 
 	//if this is an assignmnet load the teams assignments not the developers
-	if($session != 'assign')
-		clientDropDown($_SESSION['Developer']);
-	else 
+	if($session == 'assign')
 		clientDropDown( new Team( $_SESSION['Developer']->getTeam() ) );
+	elseif($session == 'unassign')
+		clientDropDown( new Developer($_SESSION['unassign']['developer']) );
+	else
+		clientDropDown($_SESSION['Developer']);
+		
 	echo '</form>';
 
 	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session"]['Client_Selected']))
@@ -533,10 +536,13 @@ function clientProjectDropDownForm($session)
 		echo '<h2>Select a Project</h2>';
 
 		//if this is an assignmnet load the teams assignments not the developers
-		if($session != 'assign')
-			projectDropDown($_SESSION['Developer'], $_SESSION["$session"]['Client_Selected']);
-		else 
+		if($session == 'assign') 
 			projectDropDown( new Team( $_SESSION['Developer']->getTeam() ) , $_SESSION["$session"]['Client_Selected']);
+		elseif($session == 'unassign')
+			projectDropDown( new Developer($_SESSION['unassign']['developer']), $_SESSION["$session"]['Client_Selected']);
+		else
+			projectDropDown($_SESSION['Developer'], $_SESSION["$session"]['Client_Selected']);
+		
 		echo '</form>';
 	}
 }
