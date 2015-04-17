@@ -68,15 +68,26 @@ class Developer
 		foreach($assigned_clients_rows as $assigned_client)
 			array_push( $this->Client_List , new Client( $assigned_client['ClientProjectTask'] ));
 
+		//Load Clients assigned into teams assigned (only necessary if you have assigned stuff to developers before the team update)
+		foreach($assigned_clients_rows as $assigned_client)
+			newTeamAssignment($this->Info['Team'], $assigned_client['ClientProjectTask'], 'Client');
+
 		//Load Assigned Project List
 		$assigned_projects_rows = returnRowsDeveloperAssignments($this->Info['Username'], 'Project');
 		foreach($assigned_projects_rows as $assigned_project)
 			array_push( $this->Project_List , new Projects( $assigned_project['ClientProjectTask'] ));
 
+		//Load Projects assigned into teams assigned (only necessary if you have assigned stuff to developers before the team update)
+		foreach($assigned_projects_rows as $assigned_project)
+			newTeamAssignment($this->Info['Team'], $assigned_project['ClientProjectTask'], 'Project');
+
 		//Load Assigned Task List
 		$assigned_tasks_rows = returnRowsDeveloperAssignments($this->Info['Username'], 'Task');
 		foreach($assigned_tasks_rows as $assigned_task)
 			array_push( $this->Task_List , new Tasks( $assigned_task['ClientProjectTask'] ));
+
+		foreach($assigned_tasks_rows as $assigned_task)
+			newTeamAssignment($this->Info['Team'], $assigned_task['ClientProjectTask'], 'Task');
 
 		//Loads the Time Logs
 		$TimeSheet_Rows = returnRowsByUser('TimeSheet', $this->Info['Username']);
