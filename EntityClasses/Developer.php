@@ -141,6 +141,11 @@ class Developer
 	//gets the project list
 	function getProjectList()
 	{
+		//Update Project List
+		$this->Project_List = null;
+		$assigned_projects_rows = returnRowsDeveloperAssignments($this->getUsername(), 'Project');
+		foreach($assigned_projects_rows as $assigned_project)
+			$this->Project_List[] = new Projects( $assigned_project['ClientProjectTask'] );
 		return $this->Project_List;
 	}
 
