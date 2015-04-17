@@ -433,8 +433,9 @@ function developerClientDropdownForm($session_variable)
 		echo '<h2>Select a Client</h2>';
 
 		echo '<form action="" method="POST">';
-		//Select a Client that the Developer logged in has permission to assign
-		clientDropDown($_SESSION['Developer']);
+
+		//Select a Client that is assigned to the team
+		clientDropDown( new Team( $_SESSION['Developer']->getTeam() ) );
 		echo '</form>';
 
 		if(isset($_POST['Client_Selected']))
@@ -487,7 +488,7 @@ function developerClientProjectTaskDropdownForm($session_variable)
 		if(isset($_POST['Developer_Selected']))
 			$_SESSION["$session_variable"]['developer'] = $_POST['Developer_Selected'];
 
-		echo '<h2>' . $_SESSION['$session_variable']['developer'] . ' was selected.</h2>';
+		echo '<h2>' . $_SESSION["$session_variable"]['developer'] . ' was selected.</h2>';
 
 		clientProjectTaskDropdownForm("$session_variable");
 	}
@@ -502,7 +503,12 @@ function clientProjectDropDownForm($session)
 {
 	echo '<form action="" method="POST">';
 	echo '<h2>Select a Client</h2>';
-	clientDropDown($_SESSION['Developer']);
+
+	//if this is an assignmnet load the teams assignments not the developers
+	if($session != 'assign')
+		clientDropDown($_SESSION['Developer']);
+	else 
+		clientDropDown( new Team( $_SESSION['Developer']->getTeam() ) );
 	echo '</form>';
 
 	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session"]['Client_Selected']))
@@ -517,7 +523,12 @@ function clientProjectDropDownForm($session)
 
 		echo '<form action="" method="POST">';
 		echo '<h2>Select a Project</h2>';
-		projectDropDown($_SESSION['Developer'], $_SESSION["$session"]['Client_Selected']);
+
+		//if this is an assignmnet load the teams assignments not the developers
+		if($session != 'assign')
+			projectDropDown($_SESSION['Developer'], $_SESSION["$session"]['Client_Selected']);
+		else 
+			projectDropDown( new Team( $_SESSION['Developer']->getTeam() ) , $_SESSION["$session"]['Client_Selected']);
 		echo '</form>';
 	}
 }
@@ -527,7 +538,12 @@ function clientProjectTaskDropdownForm($session_variable)
 {
 	echo '<h3>Select a Client</h3>';
 	echo '<form action="" method="POST">';
-	clientDropDown($_SESSION['Developer']);
+	
+	//if this is an assignmnet load the teams assignments not the developers
+	if($session_variable != 'assign')
+		clientDropDown($_SESSION['Developer']);
+	else 
+		clientDropDown( new Team( $_SESSION['Developer']->getTeam() ) );
 	echo "</form>";
 
 	if(isset($_POST['Client_Selected']) || isset($_SESSION["$session_variable"]['client']))
@@ -547,7 +563,12 @@ function clientProjectTaskDropdownForm($session_variable)
 
 		echo '<h3>Select a Project</h3>';
 		echo '<form action="" method="POST">';
-		projectDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['client']);
+
+		//if this is an assignmnet load the teams assignments not the developers
+		if($session_variable != 'assign')
+			projectDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['client']);
+		else 
+			projectDropDown( new Team( $_SESSION['Developer']->getTeam() ) , $_SESSION["$session_variable"]['client']);
 		echo "</form>";
 
 		if(isset($_POST['Project_Selected']) || isset($_SESSION["$session_variable"]['project']))
@@ -564,7 +585,12 @@ function clientProjectTaskDropdownForm($session_variable)
 
 			echo '<h3>Select a Task</h3>';
 			echo '<form action="" method="POST">';
-			taskDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['project']);
+			
+			//if this is an assignmnet load the teams assignments not the developers
+			if($session_variable != 'assign')
+				taskDropDown($_SESSION['Developer'], $_SESSION["$session_variable"]['project']);
+			else
+				taskDropDown( new Team( $_SESSION['Developer']->getTeam() ), $_SESSION["$session_variable"]['project']);
 			echo '</form>';
 
 			if(isset($_POST['Task_Selected']) || isset($_SESSION["$session_variable"]['task']))
@@ -892,6 +918,32 @@ function clockForm($developer, $taskid)
 	echo '</form>';
 }
 
+//This function calls developerClientProjectTaskDropdownForm to select the tasks to be displayed and assigns the task selected to the developer selected. 
+function assignTask()
+{
+	echo '<h4>Select a Developer</h4>';
+
+	echo '<form action="" method="POST">';
+	developerDropDown($_SESSION['Developer']);
+	echo '</form>';
+
+	developerClientProjectTaskDropDownForm('assign');
+
+	//If all of the drop downs have been selected, assign the task and print the table
+	if(isset($_POST['Task_Selected']) || isset($_SESSION['assign']['task']))
+	{
+		echo '<h2>' . $_SESSION['assign']['task']  . ' was selected</h2>';
+
+		//Assign the selected task to the developer (Creates a Task object and stores it in the Task_List). Makes an entry in the DeveloperAssignments Table
+		$task_to_assign = new Tasks($_SESSION['assign']['task']);
+
+		$developer_to_assign = new Developer($_SESSION['assign']['developer']);
+		$developer_to_assign->assignTask($task_to_assign);
+
+		printAssignmentsTable($_SESSION['assign']['developer']);
+	}
+}
+
 //This function calls developerClientProjectDropdownForm to select the projects to be displayed and assigns the project selected to the developer selected
 function assignProject()
 {
@@ -908,6 +960,26 @@ function assignProject()
 		echo '<h1>Project: ' . $developer->getProject($_POST['Project_Selected'])->getProjectName() . ' was assigned </h1>';
 	}
 }
+
+//This functino calls developerClientDropdownForm to select the client to be dispaled and assigns the client selected to the developer selected
+function assignClient()
+{
+	developerClientDropdownForm('assign');
+
+	if(isset($_POST['Client_Selected']) || isset($_SESSION['assign']['client']))
+	{
+		echo '<h4>' . $_SESSION['assign']['client'] . ' was selected.</h4>';
+
+		//Assign the selected client to the developer (Creates a Client object and stores it in the Client_List). Makes an entry in the DeveloperAssignments Table
+		$client_to_assign = new Client($_SESSION['assign']['client']);
+
+		$developer_to_assign = new Developer($_SESSION['assign']['developer']);
+		$developer_to_assign->assignClient($client_to_assign);
+
+		printAssignmentsTableClient($_SESSION['assign']['developer']);
+	}
+}
+
 
 //This function consumes a developer, echos a form to modify the developers alert settings, and handles the post by updating the developers alert settings
 function updateAlertsForm($developer)

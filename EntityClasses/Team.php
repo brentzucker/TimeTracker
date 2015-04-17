@@ -79,5 +79,37 @@ class Team
 			$this->Task_List[] = new Tasks($task_row['ClientProjectTask']);
 		return $this->Task_List;
 	}
+
+	//gets the project that are under the client's name
+	function getClientsProjectsAssigned($clientname)
+	{
+		$ret = array();
+		$client = new Client($clientname);
+		$team_projects = $this->getProjectList();
+
+		//for each project if they have the same ID push if into the list
+		foreach($team_projects as $team_project)
+			foreach($client->getProjects() as $project)
+				if($team_project->getProjectID() == $project->getProjectID())
+					array_push($ret, $project);
+
+		return $ret;
+	}
+
+	//gets the tasks that are under the project ID
+	function getProjectsTasksAssigned($projectid)
+	{
+		$ret = array();
+		$project = new Projects($projectid);
+		$team_tasks = $this->getTaskList();
+
+		//for each tasks if the developer's tasks and the task have the ID push it into the list
+		foreach($team_tasks as $team_task)
+			foreach($project->getTaskList() as $task)
+				if($team_task->getTaskID() == $task->getTaskID())
+					array_push($ret, $task);
+
+		return $ret;
+	}
 }
 ?>
