@@ -4,6 +4,7 @@ require_once(__DIR__.'/../include.php');
 class Team
 {
 	private $Team;
+	private $Developer_List;
 	private $Client_List;
 	private $Project_List;
 	private $Task_List;
@@ -24,6 +25,11 @@ class Team
 	{
 
 		$this->Team = $Team;
+
+		$developer_rows = returnRowsByTeam($Team);
+
+		foreach($developer_rows as $developer_row)
+			$this->Developer_List[] = new Developer($developer_row['Username']);
 
 		$client_rows = returnRowsTeamAssignments($Team, 'Client');
 
@@ -46,6 +52,17 @@ class Team
 		print_r( $this->Client_List );
 		print_r( $this->Project_List );
 		print_r( $this->Task_List );
+	}
+
+	function getDeveloperList()
+	{
+		//Update Developer List
+		$this->Developer_List = null;
+		$developer_rows = returnRowsByTeam($this->Team);
+		foreach($developer_rows as $developer_row)
+			$this->Developer_List[] = new Developer($developer_row['Username']);
+
+		return $this->Developer_List;
 	}
 
 	function getClientList()
