@@ -47,5 +47,37 @@ class Team
 		print_r( $this->Project_List );
 		print_r( $this->Task_List );
 	}
+
+	function getClientList()
+	{
+		//Update Client List
+		$this->Client_List = null;
+		$client_rows = returnRowsTeamAssignments($this->Team, 'Client');
+		foreach($client_rows as $client_row)
+			$this->Client_List[] = new Client($client_row['ClientProjectTask']);
+
+		return $this->Client_List;
+	}
+
+	function getProjectList()
+	{
+		//Update Project List
+		$this->Project_List = null;
+		$project_rows = returnRowsTeamAssignments($this->Team, 'Project');
+		foreach($project_rows as $project_row)
+			$this->Project_List[] = new Projects($project_row['ClientProjectTask']);
+
+		return $this->Project_List;
+	}
+
+	function getTaskList()
+	{
+		//Update Task List
+		$this->Task_List = null;
+		$task_rows = returnRowsTeamAssignments($this->Team, 'Task');
+		foreach($task_rows as $task_row)
+			$this->Task_List[] = new Tasks($task_row['ClientProjectTask']);
+		return $this->Task_List;
+	}
 }
 ?>
