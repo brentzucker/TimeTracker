@@ -152,6 +152,11 @@ class Developer
 	//gets the task list
 	function getTaskList()
 	{
+		//Update Task List
+		$this->Task_List = null;
+		$assigned_tasks_rows = returnRowsDeveloperAssignments($this->getUsername(), 'Task');
+		foreach($assigned_tasks_rows as $assigned_task)
+			$this->Task_List[] = new Tasks( $assigned_task['ClientProjectTask'] );
 		return $this->Task_List;
 	}
 
