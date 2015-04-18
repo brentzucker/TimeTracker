@@ -115,11 +115,7 @@ _END;
 function checkLogin($username, $password){
 		
 	if(isset($username) && isset($password)) {
-		$username = stripslashes($username);
-		$password = stripslashes($password);
-		$username = mysql_real_escape_string($username);
-		$password = mysql_real_escape_string($password);
-				
+
 		$token=hash('ripemd128',$password);			
 		$result = db_query("SELECT Password FROM credentials WHERE Username='$username'");	
 		$rows=mysqli_num_rows($result);
@@ -129,7 +125,7 @@ function checkLogin($username, $password){
 				
 			foreach($row as $element) {			
 				if($token==$element) {
-					header("Location:main.php");
+					header("Location:sidebar.php");
 				}
 				else
 				{
