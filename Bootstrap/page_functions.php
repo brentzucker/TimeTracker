@@ -117,7 +117,7 @@ function checkLogin($username, $password){
 	if(isset($username) && isset($password)) {
 
 		$token=hash('ripemd128',$password);			
-		$result = db_query("SELECT Password FROM credentials WHERE Username='$username'");	
+		$result = db_query("SELECT Password FROM Credentials WHERE Username='$username'");	
 		$rows=mysqli_num_rows($result);
 				
 		for($i=0; $i<$rows; $i++) {					
