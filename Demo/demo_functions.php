@@ -40,9 +40,9 @@ function echoManageClientsLinks()
 	echo '<li><h3><a href="edit_client.php">Edit Client</a></li>';
 	echo '<li><h3><a href="edit_project.php">Edit Project</a></li>';
 	echo '<li><h3><a href="edit_task.php">Edit Task</a></li>';
-	echo '<li><h3><a href="remove_client.php">Remove Client</a></li>';
-	echo '<li><h3><a href="remove_project.php">Remove Project</a></li>';
-	echo '<li><h3><a href="remove_task.php">Remove Task</a></li>';
+	echo '<li><h3><a href="delete_client.php">Delete Client</a></li>';
+	echo '<li><h3><a href="delete_project.php">Delete Project</a></li>';
+	echo '<li><h3><a href="delete_task.php">Delete Task</a></li>';
 	echo '</ul>';
 	echo <<<END
 	<br>
@@ -1065,6 +1065,21 @@ function unassignTask()
 	}
 }
 
+//This function deletes DeveloperASsignments and Team Assignments for a specified client.
+function deleteClientForm()
+{
+	echo '<form action="" method="POST">';
+	clientDropDown($_SESSION['Developer']);
+	echo '</form>';
+
+	if($_POST['Client_Selected'])
+	{	
+		$client_to_delete = new Client( $_POST['Client_Selected'] );
+		$_SESSION['Developer']->deleteClient( $client_to_delete );
+		echo '<h3>' . $client_to_delete->getClientname() . ' was deleted.</h3>';
+	}
+}
+
 //This function consumes a developer, echos a form to modify the developers alert settings, and handles the post by updating the developers alert settings
 function updateAlertsForm($developer)
 {
@@ -1501,10 +1516,6 @@ END;
 }
 //BELOW:
 //UNFINISHED -- NEEDS WORK
-function removeClientForm($developer)
-{
-
-}
 
 function removeProjectForm($session, $developer)
 {

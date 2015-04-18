@@ -6,93 +6,80 @@ echo<<<_END
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="images/fav.jpg">
 
     <title>$title</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <link href="css/style.css" rel="stylesheet">
-  </head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
 
-  <body>
-  
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="main.php">Codec</a>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="clockin.php">Clock In</a></li>
-			
-            <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="reports.php">Reports<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Developer Reports</a></li>
-					<li><a href="#">Client Reports</a></li>
-					<li><a href="#">Project Reports</a></li>
-					<li><a href="#">Task Reports</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="developers.php">Manage Developers<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Create Developer</a></li>
-					<li><a href="#">Assign Task</a></li>
-					<li><a href="#">Assign Project</a></li>
-					<li><a href="#">Assign Client</a></li>
-					<li><a href="#">View Assignments</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="clients.php">Manage Clients<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Add Purchased Hours</a></li>
-					<li><a href="#">New Client</a></li>
-					<li><a href="#">New Project</a></li>
-					<li><a href="#">New Task</a></li>
-					<li><a href="#">Remove Client</a></li>
-					<li><a href="#">Remove Project</a></li>
-					<li><a href="#">Remove Task</a></li>
-				</ul>
-			</li>
-			
-			<li><a href="account.php">My Account</a></li>
-          </ul>
-		  
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#">Log Out</a></li>
-		</ul>
-		
-        </div>
-      </div>
-    </nav>
+        <!-- /#sidebar-wrapper -->
 _END;
 }	
 
 function close_html()
 {
 echo<<<_END
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-  </body>
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
 </html>
 _END;
 }
@@ -164,6 +151,60 @@ function checkLogin($username, $password){
 					</div>";
 		}
 	}
+}
+
+function open_login($title)
+{
+echo<<<_END
+
+	<!DOCTYPE html>
+	<html lang="en">
+  	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/fav.jpg">
+
+    <title>$title</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" href="images/fav.jpg">
+  	</head>
+
+	<body>
+	
+	<img class="img-responsive center-block" src="http://i.imgur.com/dupUHP0.jpg" />
+    <div class="container">
+      <form class="form-signin" action="" method="POST">
+        <h2 class="form-signin-heading">Please Sign In</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign In</button>
+      </form>
+    </div>	
+    
+    
+
+_END;
+}
+
+function close_login()
+{
+echo<<<_END
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  	</body>
+</html>
+_END;
 }
 
 
