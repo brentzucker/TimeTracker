@@ -33,14 +33,14 @@ echo<<<_END
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Start Bootstrap
+                        CODEC
                     </a>
                 </li>
                 <li>
-                    <a href="#">Dashboard</a>
+                    <a href="#">Home</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a>
+                    <a href="#">Clock In</a>
                 </li>
                 <li>
                     <a href="#">Overview</a>
