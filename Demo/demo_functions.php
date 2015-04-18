@@ -1080,6 +1080,19 @@ function deleteClientForm()
 	}
 }
 
+//This function deletes DeveloperAssignments and Team Assignments for a specificied project
+function deleteProjectForm()
+{
+	clientProjectDropDownForm('delete');
+
+	if(isset($_POST['Project_Selected']))
+	{
+		$project_to_delete = new Projects( $_POST['Project_Selected'] );
+		$_SESSION['Developer']->deleteProject( $project_to_delete );
+		echo '<h3>' . $project_to_delete->getProjectName() . ' was deleted.</h3>';
+	}
+}
+
 //This function consumes a developer, echos a form to modify the developers alert settings, and handles the post by updating the developers alert settings
 function updateAlertsForm($developer)
 {

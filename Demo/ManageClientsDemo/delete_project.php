@@ -5,6 +5,5 @@ session_start();
 
 echo '<h1>Delete Project</h1>';
 
-
-
+deleteProjectForm();
 ?>
