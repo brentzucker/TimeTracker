@@ -16,6 +16,14 @@
 	font-weight: bold;
 }
 
+h1 {
+	margin-top: 0px!important;
+}
+
+.h1-center {
+	text-align: center;
+}
+
 body {
   background-color: #eee;
 }
