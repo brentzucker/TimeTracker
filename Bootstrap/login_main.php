@@ -1,3 +1,13 @@
+<?php
+require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/page_functions.php');
+
+if(isset($_POST['submit']))
+{
+	checkLogin($_POST['username'], $_POST['password']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,15 +49,6 @@ echo<<<_END
       </form>
 
 _END;
-	
-require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
-	
-if(isset($_POST['submit']))
-{
-	checkLogin($_POST['username'], $_POST['password']);
-}
-
 ?>
 
     </div> <!-- /container -->
