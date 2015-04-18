@@ -1093,6 +1093,19 @@ function deleteProjectForm()
 	}
 }
 
+//This function deletes DeveloperAssignments and Team assignments for a specified task.
+function deleteTaskForm()
+{
+	clientProjectTaskDropDownForm('delete');
+
+	if(isset($_POST['Task_Selected']))
+	{
+		$task_to_delete = new Tasks( $_POST['Task_Selected'] );
+		$_SESSION['Developer']->deleteTask( $task_to_delete );
+		echo '<h3>' . $task_to_delete->getTaskName() . ' was deleted.</h3>';
+	}
+}
+
 //This function consumes a developer, echos a form to modify the developers alert settings, and handles the post by updating the developers alert settings
 function updateAlertsForm($developer)
 {
