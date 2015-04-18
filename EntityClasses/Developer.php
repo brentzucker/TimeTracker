@@ -478,5 +478,13 @@ class Developer
 
 		removeTeamAssignment( $this->getTeam() , $projectObject->getProjectID() , 'Project');
 	}
+
+	function deleteTask($taskObject)
+	{
+		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
+			$developer->unassignTask($taskObject);
+
+		removeTeamAssignment( $this->getTeam() , $taskObject->getTaskID() , 'Task');
+	}
 }
 ?>
