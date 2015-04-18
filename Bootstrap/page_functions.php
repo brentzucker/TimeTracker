@@ -14,6 +14,7 @@ echo<<<_END
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="images/fav.png">
 
     <title>$title</title>
 _END;
@@ -181,7 +182,7 @@ function checkLogin($username, $password){
 				
 			foreach($row as $element) {			
 				if($token==$element) {
-					header("Location:sidebar.php");
+					header("Location:home.php");
 				}
 				else
 				{
@@ -196,7 +197,7 @@ function checkLogin($username, $password){
 
 		if($rows==0)
 		{
-			echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong username/password Combination!
+			echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong Username/Password Combination!
 					
 					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 					
@@ -217,13 +218,12 @@ echo<<<_END
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="images/fav.jpg">
 
     <title>$title</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link rel="icon" href="images/fav.jpg">
+    <link rel="icon" href="images/fav.png">
   	</head>
 
 	<body>
