@@ -11,7 +11,7 @@ echo <<<END
 <br>
 <form action="" method="POST">
 Password:
-<input type="text" name="updatepassword">
+<input type="password" name="password">
 <br>
 <br>
 <input type="Submit" name="Update" value="Update">
@@ -20,10 +20,13 @@ END;
 
 if(isset($_POST['Update']))
 {
-  //NEED TO SET PASSWORD!
-  //$_SESSION['Developer']->getContact()->setPassword($_POST['updatepassword']);
-  //echo 'Password successfully updated!';
+	$hashed_password = hash('ripemd128', $_POST['password']);
+
+	updateTableByUser('Credentials', 'Password', $hashed_password, $_SESSION['Developer']->getUsername() );
+
+	echo 'Password successfully updated!';
 }
+
 echo <<<END
 <br>
 <a href='MyAccount.php'>Back To My Account Page</a>
