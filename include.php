@@ -36,4 +36,7 @@ require_once (__DIR__.'/EntityClasses/Team.php');
 
 //Front End Functions
 require_once (__DIR__.'/Demo/demo_functions.php');
+
+//Boostrap page functions
+require_once (__DIR__.'/Bootstrap/page_functions.php');
 ?>
