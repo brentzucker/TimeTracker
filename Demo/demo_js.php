@@ -9,13 +9,29 @@ echo '<main id="container">';
 
 clientDropDownJS($_SESSION['Developer']);
 
+projectDropDownJS();
 
 $client_project_array = clientListToArrayOfProjectLists();
 
 //projectDropDown($_SESSION['Developer'], $_SESSION["$session"]['Client_Selected']);
 
 echo '</main>';
+
+//This function creates the project dropdown with the id of projectDropdown and onchange getTaskDropdown()
+function projectDropDownJS()
+{
+	echo '<select id="projectDropdown" onchange="getTaskDropdown()" name="Project_Selected">';
+
+	//foreach($developer->getClientsProjectsAssigned($clientname) as $p)
+		//echo '<option value="' . $p->getProjectID() . '">' . $p->getProjectName() . '</option>';
+
+	echo '</select>';
+}
+
 ?>
+
+
+
 
 <script>
 
@@ -59,18 +75,18 @@ function getSelectedProjects()
 
 function createProjectDropdown(developer_projects, client_projects)
 {
-	var container = document.querySelector("#container");
-	var frag = document.createDocumentFragment();
-	var select = document.createElement("select");
+	var select = document.getElementById("projectDropdown");
+
+	//Clear old select options
+	for(i=0; i<select.options.length; i++)
+		select.options[i] = null;
+	select.options.add( new Option ( "Select a Project",  "") );
 
 	//If Project is in both lists add it as an option (same projectID)
 	for(var client_key in client_projects)
 		for(var dev_key in developer_projects)
 			if(client_key == dev_key)
 				select.options.add( new Option( developer_projects[dev_key] , dev_key ) );
-			
-	frag.appendChild(select);
-	container.appendChild(frag);
 }
 
 function getProjectDropdown()
