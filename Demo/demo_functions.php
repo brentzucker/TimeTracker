@@ -176,6 +176,51 @@ function taskDropDown($developer, $projectid)
 	echo '<input type="submit" value="Submit">';
 }
 
+//This functino converts a list of project objects to an associative array of projects
+function projectListToArray($projectObjectList)
+{
+	//print_r( $projectObjectList );
+
+	$project_array = array();
+
+	foreach($projectObjectList as $projectObject)
+		$project_array[ $projectObject->getProjectID() ] = $projectObject->getProjectName();
+
+	return $project_array;
+}
+
+/* These functions help with the javascript drop down selectors
+ *
+ */
+
+//This function converts a list of client objects to an array list of client project arrays
+function clientListToArrayOfProjectLists()
+{
+	$client_project_array = array();
+	foreach($_SESSION['Developer']->getClientList() as $clientObject)
+		$client_project_array[ $clientObject->getClientname() ] = projectListToArray( $clientObject->getProjects() );
+		
+	return $client_project_array;
+}
+
+//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
+function clientDropDownJS($Developer)
+{
+	echo '<select id="clientDropdown" onchange="getProjectDropdown()" name="Client_Selected">';
+
+	if(!isset($_POST['Client_Selected']))
+		foreach($Developer->getClientList() as $client)
+			echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	else
+		foreach($Developer->getClientList() as $client)
+			if($_POST['Client_Selected'] == $client->getClientname())
+				echo '<option selected="selected" value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+			else
+				echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+
+	echo '</select>';
+}
+
 /* These functions query the date
  *
  */
