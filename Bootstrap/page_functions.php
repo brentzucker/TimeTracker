@@ -1,119 +1,120 @@
 <?php
+require_once (__DIR__.'/../include.php');
 
+session_start();
 function open_html($title)
 {
-echo<<<_END
+	echo<<<_END
 
-<!DOCTYPE html>
-<html lang="en">
+	<!DOCTYPE html>
+	<html lang="en">
 
-<head>
+	<head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="images/fav.png">
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="description" content="">
+    	<meta name="author" content="">
 
-    <title>$title</title>
+    	<title>$title</title>
 _END;
 
-echo 	'<link href="css/bootstrap.min.css" rel="stylesheet">';
-echo    '<link href="css/style.css" rel="stylesheet">';
-echo    '<link href="css/bootstrap.min.css" rel="stylesheet">';
-echo    '<link href="css/simple-sidebar.css" rel="stylesheet">';
+	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="css/style.css" rel="stylesheet">';
+	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="css/simple-sidebar.css" rel="stylesheet">';
 
-echo<<<_END
-</head>
+	echo<<<_END
+	</head>
 
-<body>
+	<body>
 
-    <div id="wrapper">
+    	<div id="wrapper">
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="sidebar.php">
-                        CODEC
-                    </a>
-                </li>
-                <li>
-                    <a href="sidebar.php">Home</a>
-                </li>
+        	<!-- Sidebar -->
+        	<div id="sidebar-wrapper">
+            	<ul class="sidebar-nav">
+                	<li class="sidebar-brand">
+                    	<a href="home.php">
+                        	CODEC
+                    	</a>
+                	</li>
+                	<li>
+                    	<a href="home.php">Home</a>
+                	</li>
                 
-                <li>
-                    <a href="clock.php">Clock In</a>
-                </li>
+            	    <li>
+            		    <a href="clock.php">Clock In</a>
+                	</li>
                 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Reports<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-					<li><a href="developer_reports.php">Developer Reports</a></li>
-					<li><a href="client_reports.php">Client Reports</a></li>
-					<li><a href="project_reports.php">Project Reports</a></li>
-					<li><a href="task_reports.php">Task Reports</a></li>
-				</ul>
-                </li>
+                	<li class="dropdown">
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Reports<span class="caret"></span></a>
+                    	<ul class="dropdown-menu">
+						<li><a href="developer_reports.php">Developer Reports</a></li>
+						<li><a href="client_reports.php">Client Reports</a></li>
+						<li><a href="project_reports.php">Project Reports</a></li>
+						<li><a href="task_reports.php">Task Reports</a></li>
+					</ul>
+                	</li>
                 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Manage Developers<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-					<li><a href="create_developer.php">Create Developers</a></li>
-					<li><a href="assign_client.php">Assign Client</a></li>
-					<li><a href="assign_project.php">Assign Project</a></li>
-					<li><a href="assign_task.php">Assign Task</a></li>
-					<li><a href="unassign_client.php">Un-Assign Client</a></li>
-					<li><a href="unassign_project.php">Un-Assign Project</a></li>
-					<li><a href="unassign_task.php">Un-Assign Task</a></li>
-					<li><a href="view_assignments.php">View All Assignments</a></li>
-				</ul>
-                </li>
+                	<li class="dropdown">
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Manage Developers<span class="caret"></span></a>
+                    	<ul class="dropdown-menu">
+						<li><a href="create_developer.php">Create Developers</a></li>
+						<li><a href="assign_client.php">Assign Client</a></li>
+						<li><a href="assign_project.php">Assign Project</a></li>
+						<li><a href="assign_task.php">Assign Task</a></li>
+						<li><a href="unassign_client.php">Un-Assign Client</a></li>
+						<li><a href="unassign_project.php">Un-Assign Project</a></li>
+						<li><a href="unassign_task.php">Un-Assign Task</a></li>
+						<li><a href="view_assignments.php">View All Assignments</a></li>
+					</ul>
+                	</li>
                 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Manage Clients<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-					<li><a href="add_hours.php">Add Purchased Hours</a></li>
-					<li><a href="new_client.php">New Client</a></li>
-					<li><a href="new_project.php">New Project</a></li>
-					<li><a href="new_task.php">New Task</a></li>
-					<li><a href="edit_client.php">Edit Client</a></li>
-					<li><a href="edit_project.php">Edit Project</a></li>
-					<li><a href="edit_task.php">Edit Task</a></li>
-					<li><a href="delete_client.php">Delete Client</a></li>
-					<li><a href="delete_client.php">Delete Project</a></li>
-					<li><a href="delete_task.php">Delete Task</a></li>
-				</ul>
-                </li>
+                	<li class="dropdown">
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Manage Clients<span class="caret"></span></a>
+                    	<ul class="dropdown-menu">
+						<li><a href="add_hours.php">Add Purchased Hours</a></li>
+						<li><a href="new_client.php">New Client</a></li>
+						<li><a href="new_project.php">New Project</a></li>
+						<li><a href="new_task.php">New Task</a></li>
+						<li><a href="edit_client.php">Edit Client</a></li>
+						<li><a href="edit_project.php">Edit Project</a></li>
+						<li><a href="edit_task.php">Edit Task</a></li>
+						<li><a href="delete_client.php">Delete Client</a></li>
+						<li><a href="delete_client.php">Delete Project</a></li>
+						<li><a href="delete_task.php">Delete Task</a></li>
+					</ul>
+                	</li>
                 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">My Account<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-					<li><a href="update_info.php">Update Info</a></li>
-					<li><a href="update_email.php">Update Email</a></li>
-					<li><a href="update_password.php">Update Password</a></li>
-					<li><a href="update_avatar.php">Update Avatar</a></li>
-					<li><a href="update_alerts.php">Update Alerts</a></li>
-					<li><a href="delete_account.php">Delete Account</a></li>
-				</ul>
-                </li>
+                	<li class="dropdown">
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">My Account<span class="caret"></span></a>
+                    	<ul class="dropdown-menu">
+						<li><a href="update_info.php">Update Info</a></li>
+						<li><a href="update_email.php">Update Email</a></li>
+						<li><a href="update_password.php">Update Password</a></li>
+						<li><a href="update_avatar.php">Update Avatar</a></li>
+						<li><a href="update_alerts.php">Update Alerts</a></li>
+						<li><a href="delete_account.php">Delete Account</a></li>
+					</ul>
+                	</li>
                 
-                <li>
-                    <a href="edit_timesheet.php">Edit Time Sheet</a>
-                </li>
+                	<li>
+                    	<a href="edit_timesheet.php">Edit Time Sheet</a>
+                	</li>
                 
-                <li>
-                    <a href="client_profiles.php">View Client Profiles</a>
-                </li>
+                	<li>
+                    	<a href="client_profiles.php">View Client Profiles</a>
+                	</li>
                 
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+            	</ul>
+        	</div>
+        	<!-- /#sidebar-wrapper -->
         
-        <div id="page-content-wrapper">
-			<div class="container-fluid">
-			<a href="#menu-toggle" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle">Menu</a>
+        	<div id="page-content-wrapper">
+				<div class="container-fluid">
+				<a href="#menu-toggle" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle">Menu</a>
 _END;
 }	
 
@@ -169,20 +170,27 @@ _END;
 }
 
 //Checks user login and matches the username and hashed password to the database
-function checkLogin($username, $password){
+function checkLogin($username, $password)
+{
 		
-	if(isset($username) && isset($password)) {
+	if(isset($username) && isset($password)) 
+	{
 
 		$token=hash('ripemd128',$password);			
 		$result = db_query("SELECT Password FROM Credentials WHERE Username='$username'");	
 		$rows=mysqli_num_rows($result);
 				
-		for($i=0; $i<$rows; $i++) {					
+		for($i=0; $i<$rows; $i++) 
+		{					
 		$row=mysqli_fetch_row($result);
 				
-			foreach($row as $element) {			
-				if($token==$element) {
-					header("Location:home.php");
+			foreach($row as $element) 
+			{			
+				if($token==$element) 
+				{
+					$_SESSION['SuperUser'] = new SuperUser();
+					$_SESSION['Developer'] = new Developer($username);
+					header("Location:sidebar.php");
 				}
 				else
 				{
@@ -197,7 +205,7 @@ function checkLogin($username, $password){
 
 		if($rows==0)
 		{
-			echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong Username/Password Combination!
+			echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong username/password Combination!
 					
 					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 					
@@ -218,12 +226,13 @@ echo<<<_END
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="images/fav.jpg">
 
     <title>$title</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link rel="icon" href="images/fav.png">
+    <link rel="icon" href="images/fav.jpg">
   	</head>
 
 	<body>
