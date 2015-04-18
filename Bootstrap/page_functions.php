@@ -190,7 +190,7 @@ function checkLogin($username, $password)
 				{
 					$_SESSION['SuperUser'] = new SuperUser();
 					$_SESSION['Developer'] = new Developer($username);
-					header("Location:sidebar.php");
+					header("Location:home.php");
 				}
 				else
 				{
