@@ -1614,4 +1614,37 @@ function delClient($session, $developer)
 		deleteClient($_SESSION[$session]['Client_Selected']);
 	}
 }
+/*
+ * The below functions deal with printing to excel
+ */
+
+//this function prevents corruption of the excel file
+function cleanData(&$str)
+{
+	$str = preg_replace("/\t/", "\\t", $str);
+	$str = preg_replace("/\r?\n/", "\\n", $str);
+	if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+}
+//this function can handle a single query to the database and prints the result in an excel spreadsheet
+function excel($query)
+{
+	// filename for download
+	$filename = "website_data_" . date('Ymd') . ".xls";
+
+	header("Content-Disposition: attachment; filename=\"$filename\"");
+	header("Content-Type: application/vnd.ms-excel");
+
+	$flag = false;
+	$result = db_query($query) or die('Query failed!');
+	while($row = mysqli_fetch_assoc($result))
+	{
+		if(!$flag) {
+			// display field/column names as first row
+			echo implode("\t", array_keys($row))."\r\n";
+			$flag = true;
+		}
+		array_walk($row, 'cleanData');
+		echo implode("\t", array_values($row))."\r\n";
+	}
+}
 ?>
