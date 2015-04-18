@@ -208,15 +208,10 @@ function clientDropDownJS($Developer)
 {
 	echo '<select id="clientDropdown" onchange="getProjectDropdown()" name="Client_Selected">';
 
-	if(!isset($_POST['Client_Selected']))
-		foreach($Developer->getClientList() as $client)
-			echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
-	else
-		foreach($Developer->getClientList() as $client)
-			if($_POST['Client_Selected'] == $client->getClientname())
-				echo '<option selected="selected" value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
-			else
-				echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	echo '<option value="">Select a Client</option>';
+
+	foreach($Developer->getClientList() as $client)
+		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
 
 	echo '</select>';
 }
