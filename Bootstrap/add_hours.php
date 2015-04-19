@@ -1,14 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Add Purchased Hours");
 
-echo<<<_END
-	<h1>Add Purchased Hours</h1>
-_END;
+echo '<h1>Add Purchased Hours</h1>';
+
+addHours();
 
 close_html();
-
 ?>

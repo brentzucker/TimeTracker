@@ -1,14 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Delete Project");
 
-echo<<<_END
-	<h1>Delete Project</h1>
-_END;
+echo '<h1>Delete Project</h1>';
+
+deleteProjectForm();
 
 close_html();
-
 ?>

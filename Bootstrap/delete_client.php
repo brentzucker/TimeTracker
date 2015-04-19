@@ -1,14 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Delete Client");
 
-echo<<<_END
-	<h1>Delete Client</h1>
-_END;
+echo '<h1>Delete Client</h1>';
+
+deleteClientForm();
 
 close_html();
-
 ?>
