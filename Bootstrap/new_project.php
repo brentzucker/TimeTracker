@@ -1,14 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("New Project");
 
-echo<<<_END
-	<h1>New Project</h1>
-_END;
+echo '<h1>New Project</h1>';
+
+newProjectForm('new', $_SESSION['Developer']);
 
 close_html();
-
 ?>

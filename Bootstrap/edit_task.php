@@ -1,13 +1,11 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Edit Task");
 
-echo<<<_END
-	<h1>Edit Task</h1>
-_END;
+echo '<h1>Edit Task</h1>';
 
 close_html();
 

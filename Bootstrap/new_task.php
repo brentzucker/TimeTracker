@@ -1,14 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("New Task");
 
-echo<<<_END
-	<h1>New Task</h1>
-_END;
+echo '<h1>New Task</h1>';
+
+newTaskForm("new", $_SESSION['Developer']);
 
 close_html();
-
 ?>
