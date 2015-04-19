@@ -1,13 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Assign Client");
 
-echo<<<_END
-	<h1>Assign Client</h1>
-_END;
+echo "<h2>Assign Client</h2>";
+
+assignClient();
 
 close_html();
 

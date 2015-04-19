@@ -1,13 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("unassign_client");
 
-echo<<<_END
-	<h1>Unassign Client</h1>
-_END;
+echo "<h2>Unassign Client</h2>";
+
+unassignClient();
 
 close_html();
 

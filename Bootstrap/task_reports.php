@@ -1,13 +1,15 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Task Reports");
 
-echo<<<_END
-	<h1>Task Reports</h1>
-_END;
+echo '<h1>Task Reports</h1>';
+
+clientProjectTaskDropdownForm('report');
+
+taskReports();
 
 close_html();
 
