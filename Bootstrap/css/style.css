@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.dropdown-menu > li > a {
+    width: 205px!important;
+}
+
 .login-wrong {
 	max-width: 330px;
 	margin: 0 auto;
