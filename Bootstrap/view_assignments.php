@@ -1,13 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("View All Assignments");
 
-echo<<<_END
-	<h1>View All Assignments</h1>
-_END;
+echo '<h2>View All Assignments</h2>';
+
+viewAllAssignments();
 
 close_html();
 

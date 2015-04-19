@@ -1,13 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Unassign Task");
 
-echo<<<_END
-	<h1>Unassign Task</h1>
-_END;
+echo "<h2>Unassign Task</h2>";
+
+unassignTask();
 
 close_html();
 

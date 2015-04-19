@@ -5,10 +5,9 @@ require_once(__DIR__.'/page_functions.php');
 
 open_html("Create Developer");
 
-echo<<<_END
-	<h1>Create Developer</h1>
-_END;
+echo '<h2>Create Developer</h2>';
+
+newDeveloperForm($_SESSION['Developer']);
 
 close_html();
-
 ?>

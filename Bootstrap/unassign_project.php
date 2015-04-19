@@ -1,13 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Unassign Project");
 
-echo<<<_END
-	<h1>Unassign Project</h1>
-_END;
+echo "<h2>Unassign Project</h2>";
+
+unassignProject();
 
 close_html();
 

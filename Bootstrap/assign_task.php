@@ -1,13 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Assign Task");
 
-echo<<<_END
-	<h1>Assign Task</h1>
-_END;
+echo "<h2>Manage Developers</h2>";
+
+assignTask();
 
 close_html();
 
