@@ -1,6 +1,7 @@
 <?php
 require_once (__DIR__.'/../include.php');
 
+//This function...
 function open_html($title)
 {
 	echo<<<_END
@@ -117,27 +118,28 @@ _END;
 _END;
 }	
 
+//This function...
 function close_html()
 {
-echo<<<_END
+	echo<<<_END
+			</div>
 		</div>
-	</div>
 
-    <script src="js/jquery.js"></script>
+	    <script src="js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+	    <!-- Bootstrap Core JavaScript -->
+	    <script src="js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+	    <!-- Menu Toggle Script -->
+	    <script>
+	    $("#menu-toggle").click(function(e) {
+	        e.preventDefault();
+	        $("#wrapper").toggleClass("toggled");
+	    });
+	    </script>
 
-</body>
-</html>
+		</body>
+	</html>
 _END;
 }
 
@@ -153,36 +155,40 @@ function close_header()
 
 function open_footer()
 {
-echo<<<_END
-<footer>
-
-_END;
+	echo '<footer>';
 }
 
 function close_footer()
 {
-echo<<<_END
+	echo '</footer>';
+}
 
-</footer>
-
-_END;
+//This function echos the error message if a login attempt is incorrect
+function getWrongLoginError()
+{
+	echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>";
+	echo "Wrong username/password Combination!";
+	echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+	echo "<span aria-hidden='true'>";
+	echo "&times;";
+	echo "</span>";
+	echo "</button>";
+	echo "</div>";
 }
 
 //Checks user login and matches the username and hashed password to the database
 function checkLogin($username, $password)
-{
-		
+{	
 	if(isset($username) && isset($password)) 
 	{
-
 		$token=hash('ripemd128',$password);			
 		$result = db_query("SELECT Password FROM Credentials WHERE Username='$username'");	
 		$rows=mysqli_num_rows($result);
 				
 		for($i=0; $i<$rows; $i++) 
 		{					
-		$row=mysqli_fetch_row($result);
-				
+			$row=mysqli_fetch_row($result);
+
 			foreach($row as $element) 
 			{			
 				if($token==$element) 
@@ -192,30 +198,18 @@ function checkLogin($username, $password)
 					header("Location:home.php");
 				}
 				else
-				{
-					echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong username/password Combination!
-					
-					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-					
-					</div>";
-				}
+					return false;
 			}
 		}
-
 		if($rows==0)
-		{
-			echo "<div class='alert-dismissible alert alert-danger login-wrong' role='alert'>Wrong username/password Combination!
-					
-					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-					
-					</div>";
-		}
+			return false;
 	}
 }
 
+//This function...
 function open_login($title)
 {
-echo<<<_END
+	echo<<<_END
 
 	<!DOCTYPE html>
 	<html lang="en">
@@ -249,15 +243,13 @@ echo<<<_END
         <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign In</button>
       </form>
     </div>	
-    
-    
-
 _END;
 }
 
+//This funcion ... 
 function close_login()
 {
-echo<<<_END
+	echo<<<_END
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">

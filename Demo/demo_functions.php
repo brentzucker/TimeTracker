@@ -359,36 +359,41 @@ function viewClientProfiles()
 
 	if( isset($_POST['Client_Selected']) )
 	{
-		echo '<h2>' . $_POST['Client_Selected'] . '</h2>';
-
-		//Print Client Contact information
-		echo '<h3>Contact Info</h3>';
-		printClientContactTable($_POST['Client_Selected']);
-
-		//Print Client Contract Information
-		echo '<h3>Contract Info</h3>';
-		echo '<h4>Hours Left</h4>';
-		printHoursLeftTable($_POST['Client_Selected']);
-
-		echo '<h4>Client\'s Purchases</h4>';
-		printClientsPurchasesTable($_POST['Client_Selected']);
-
-		//Projects 
-		echo '<h3>Projects</h3>';
-		printProjects($_POST['Client_Selected']);
-
-		//Tasks
-		echo '<h3>Tasks</h3>';
-		printTasks($_POST['Client_Selected']);
-
-		//Assigned Developers
-		echo '<h3>Assigned Developers</h3>';
-		printDevelopersAssignedToClient($_POST['Client_Selected']);
-
-		//Grouped Developers by Time
-		echo '<h3>Developers Time Sheet</h3>';
-		printAggregatedTimeLogTableByClient($_POST['Client_Selected'],0,0);
+		getClientProfile($_POST['Client_Selected']);
 	}
+}
+
+function getClientProfile($clientName)
+{
+	echo '<h2>' . $clientName . '</h2>';
+
+	//Print Client Contact information
+	echo '<h3>Contact Info</h3>';
+	printClientContactTable($clientName);
+
+	//Print Client Contract Information
+	echo '<h3>Contract Info</h3>';
+	echo '<h4>Hours Left</h4>';
+	printHoursLeftTable($clientName);
+
+	echo '<h4>Client\'s Purchases</h4>';
+	printClientsPurchasesTable($clientName);
+
+	//Projects 
+	echo '<h3>Projects</h3>';
+	printProjects($clientName);
+
+	//Tasks
+	echo '<h3>Tasks</h3>';
+	printTasks($clientName);
+
+	//Assigned Developers
+	echo '<h3>Assigned Developers</h3>';
+	printDevelopersAssignedToClient($clientName);
+
+	//Grouped Developers by Time
+	echo '<h3>Developers Time Sheet</h3>';
+	printAggregatedTimeLogTableByClient($clientName,0,0);
 }
 
 /* The following functions allow you to modify data by selecting the data and using forms.
