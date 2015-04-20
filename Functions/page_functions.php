@@ -89,12 +89,9 @@ function assignTask()
 function clientReport()
 {
 	//Form to select a client, start date, and end date
-	echo '<form action="" method="POST">';
-	clientDropDown($_SESSION['Developer']);
-	dateSelector();
-	echo "</form>";
+	jsFormClientStartDateEndDate();
 	
-	if(isset($_POST['Client_Selected']))
+	if(isset($_POST['Client_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
 		echo '<h2>' . $_POST['Client_Selected'] . ' was selected</h2>';
 
@@ -130,9 +127,6 @@ function clock()
 
 		printTimeSheetTableByTask($_SESSION['currentLog']['task']);
 	}
-
-	//Get the javascript functions required
-	jsFunctions();
 }
 
 //This function deletes DeveloperASsignments and Team Assignments for a specified client.
@@ -476,55 +470,19 @@ END;
 function newProjectForm($session, $developer)
 {
 	echo '<form action="" method="POST">';
-	echo '<h2>Select a Client</h2>';
-	clientDropDown($developer);
+	clientDropDownJSenableButton($developer);
+	echo '<input type="text" name="project" value="Project Name" id="projectName" onfocus="clearField(\'projectName\')" onblur="blurField(\'projectName\')">';
+	echo '<input type="textarea" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
+	echo '<input type="submit" value="Create Project" id="submit_button" disabled>';
 	echo '</form>';
 
-
-	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	if(isset($_POST['Client_Selected']) && isset($_POST['project']) && isset($_POST['description']))
 	{
-		if(isset($_POST['Client_Selected']))
-			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+		$developer->newProject($_POST['Client_Selected'], $_POST['project'], $_POST['description']);
 
-		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
-
-		$projectname = $projectError = "";
-
-		//$_SERVER["REQUEST_METHOD"] == "POST"
-		if(isset($_POST['newprojectsubmitted']))
-		{
-			if(empty($_POST['projectname']))
-				{
-					$projectError = "Missing";
-				}
-			else
-				{
-					$projectname = $_POST['projectname'];
-				}
-		}
-		if($projectname != "")
-		{
-			$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['description']);
-			echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
-		}
-		echo <<<END
-		<form action="" method="POST">
-		Project Name: <font color="red">*</font><br>
-		<input type="text" name="projectname">
-		<font color='red'> $projectError</font>
-		<br>Description:<br>
-		<input type="textarea" name="description"><br>
-		<input type="Submit" name="newprojectsubmitted">
-		<br><font color="red">* Required fields.</font>
-		</form>
-		<br>
-		<a href='manage_clients.php'>Back</a>
-END;
-		//if(isset($_POST['projectname']))
-		//{
-		//	$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['Description']);
-		//	echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
-		//}
+		//Projects 
+		echo '<h3>' . $_POST['Client_Selected'] . '\'s Projects</h3>';
+		printProjects($_POST['Client_Selected']);
 	}
 }
 
@@ -575,53 +533,34 @@ function newTaskForm($session, $developer)
 //This function prints out the project reports tables if a client, project, and dates have been selected.
 function projectReports()
 {
-	//If a project is selected print the reports
-	if(isset($_POST['Project_Selected']) || isset($_SESSION['report']['project']))
+	jsFormClientProjectStartDateEndDate();
+
+	if(isset($_POST['Project_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<form action="" method="POST">';
-		dateSelector();
-		echo '<br>';
-		echo '<input type="submit" value="submit">';
-		echo '</form>';
+		echo '<h2>' . $_POST['Project_Selected']  . ' was selected</h2>';
 
-		//Store the project selected in the report session
-		if(isset($_POST['Project_Selected']))
-			$_SESSION['report']['project'] = $_POST['Project_Selected'];
+		echo '<h3>Developers Hours</h3>';
+		printAggregatedTimeLogTableByProject($_POST['Project_Selected'], $_POST['startdate'], $_POST['enddate']);
 
-		if(isset($_POST['startdate']) && isset($_POST['enddate']))
-		{
-			echo '<h2>' . $_SESSION['report']['project']  . ' was selected</h2>';
-
-			echo '<h3>Developers Hours</h3>';
-			printAggregatedTimeLogTableByProject($_SESSION['report']['project'], $_POST['startdate'], $_POST['enddate']);
-
-			echo '<h3>Detailed Time Sheet</h3>';
-			printTimeLogTableByProject($_SESSION['report']['project'], $_POST['startdate'], $_POST['enddate']);
-		}
+		echo '<h3>Detailed Time Sheet</h3>';
+		printTimeLogTableByProject($_POST['Project_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
 
 //This function prints out the task reports tables if a client, project, task, and dates have been selected.
 function taskReports()
 {
-	if(isset($_POST['Task_Selected']) || isset($_SESSION['report']['task']))
+	jsFormClientProjectTaskStartDateEndDate();
+
+	if(isset($_POST['Task_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<form action="" method="POST">';
-		dateSelector();
-		echo '<br>';
-		echo '<input type="submit" value="Build Report">';
-		echo '</form>';
+		echo '<h2>' . (new Tasks($_POST['Task_Selected']))->getTaskName()  . ' was selected</h2>';
 
-		if(isset($_POST['startdate']) && isset($_POST['enddate']))
-		{
-			echo '<h2>' . $_SESSION['report']['task']  . ' was selected</h2>';
+		echo '<h3>Developers Hours</h3>';
+		printAggregatedTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate']);
 
-			echo '<h3>Developers Hours</h3>';
-			printAggregatedTimeLogTableByTask($_SESSION['report']['task'], $_POST['startdate'], $_POST['enddate']);
-
-			echo '<h3>Detailed Time Sheet</h3>';
-			printTimeLogTableByTask($_SESSION['report']['task'], $_POST['startdate'], $_POST['enddate']);
-		}
+		echo '<h3>Detailed Time Sheet</h3>';
+		printTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
 
@@ -717,14 +656,10 @@ function updateAlertsForm($developer)
 //This function prints out the Client profile page
 function viewClientProfiles()
 {
-	echo '<form action="" method="POST">';
-	clientDropDown($_SESSION['Developer']);
-	echo '</form>';
+	jsFormClient();
 
 	if( isset($_POST['Client_Selected']) )
-	{
 		getClientProfile($_POST['Client_Selected']);
-	}
 }
 
 function updatePassword()

@@ -147,9 +147,36 @@ function getTaskDropdown()
 
 function submitForm()
 {
-	var client_selected = getClientSelection();
-	var project_selected = getProjectSelection();
-	var task_selected = getTaskSelection();
-
 	document.getElementById("ClientProjectTaskForm").submit();
 }
+
+function enableButton()
+{
+	var submit_button = document.getElementById('submit_button');
+	submit_button.disabled = false;
+}
+
+/* Functions for text fields
+ *
+ */
+
+ function clearField(id)
+ {
+ 	var element = document.getElementById(id);
+	if(element.value == 'Project Name' || element.value == 'Description')
+		element.value = '';
+ }
+
+ function blurField(id)
+ {
+ 	var element = document.getElementById(id);
+
+ 	if(element.value == '')
+ 	{
+ 		console.log(element.id);
+ 		if(element.id == 'projectName')
+ 			element.value = 'Project Name';
+ 		else if(element.id == 'description')
+ 			element.value = 'Description';
+ 	}
+ }
