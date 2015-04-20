@@ -20,8 +20,9 @@ echo '</main>';
 //This function creates the project dropdown with the id of projectDropdown and onchange getTaskDropdown()
 function projectDropDownJS()
 {
-	echo '<select id="projectDropdown" onchange="getTaskDropdown()" name="Project_Selected">';
+	echo '<select id="projectDropdown" onchange="getTaskDropdown()" name="Project_Selected" disabled>';
 
+	echo '<option selected="selected" value="">Select a Project</option>';
 	//foreach($developer->getClientsProjectsAssigned($clientname) as $p)
 		//echo '<option value="' . $p->getProjectID() . '">' . $p->getProjectName() . '</option>';
 
@@ -77,16 +78,39 @@ function createProjectDropdown(developer_projects, client_projects)
 {
 	var select = document.getElementById("projectDropdown");
 
-	//Clear old select options
-	for(i=0; i<select.options.length; i++)
-		select.options[i] = null;
-	select.options.add( new Option ( "Select a Project",  "") );
+	//If there are no projects from that client disable the dropdown
+	if(client_projects == null)
+		select.disabled = true;
+	else 
+		select.disabled = false;
 
-	//If Project is in both lists add it as an option (same projectID)
+	//Clear old select options	
+	for (var i = select.options.length-1 ; i >=0; i--)
+		select.remove(i);
+
+	//This array holds the common elements between the developer and the client selected
+	var dropdown_elements = [];
+
+	//If Project is in both lists add it to the dropdown_elements array (same projectID)
 	for(var client_key in client_projects)
 		for(var dev_key in developer_projects)
 			if(client_key == dev_key)
-				select.options.add( new Option( developer_projects[dev_key] , dev_key ) );
+				dropdown_elements.push( new Option( developer_projects[dev_key] , dev_key ) );
+
+	//If there are no options in dropdown_elements then disable the dropdown
+	if(dropdown_elements.length == 0)
+	{
+		select.disabled = true;
+		select.options.add( new Option ( "No Projects Available",  "") );
+	}
+	else
+	{
+		var default_option = (new Option ( "Select a Project",  "")).setAttribute("selected", "selected");
+		select.options.add( new Option ( "Select a Project",  "") );
+
+		for(var i=0; i<dropdown_elements.length; i++)
+			select.options.add( dropdown_elements[i] );
+	}
 }
 
 function getProjectDropdown()
