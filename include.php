@@ -13,6 +13,8 @@ Modification List:
 3/12/15-Added entity and control classes to the file
 4/1/15-Moved code into the demo_functions file/
 4/9/15-Added Super User Entity class
+4/16/15-Added Team class
+4/18/15-Added Bootstrap/Frontend functions
 */
 
 //Database Connection
