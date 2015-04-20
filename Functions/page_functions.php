@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__.'/../include.php');
 
 //This function creates a form for a client and adds the purchased hours to the database
 function addHours()
@@ -114,11 +115,14 @@ function clientReport()
 //This is the function for the Clock In page
 function clock()
 {
-	clientProjectTaskDropdownForm('currentLog');
+	jsFormClientProjectTask();
 
 	if(isset($_POST['Task_Selected']) || isset($_SESSION['currentLog']['task']))
 	{
-		echo '<h2>' . $_SESSION['currentLog']['task']  . ' was selected</h2>';
+		if(isset($_POST['Task_Selected']))
+			$_SESSION['currentLog']['task'] = $_POST['Task_Selected'];
+		
+		echo '<h2>' . (new Tasks($_SESSION['currentLog']['task']))->getTaskName() . ' was selected</h2>';
 
 		echo '<h3>Clock In</h3>';
 
@@ -126,6 +130,9 @@ function clock()
 
 		printTimeSheetTableByTask($_SESSION['currentLog']['task']);
 	}
+
+	//Get the javascript functions required
+	jsFunctions();
 }
 
 //This function deletes DeveloperASsignments and Team Assignments for a specified client.

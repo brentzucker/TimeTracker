@@ -129,6 +129,9 @@ function close_html()
 			</div>
 		</div>
 
+		<!-- /Javascript/dropdown.js -->
+		<script src="../Javascript/dropdowns.js"></script>
+
 	    <script src="js/jquery.js"></script>
 
 	    <!-- Bootstrap Core JavaScript -->
