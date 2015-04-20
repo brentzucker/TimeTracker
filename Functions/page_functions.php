@@ -130,9 +130,6 @@ function clock()
 
 		printTimeSheetTableByTask($_SESSION['currentLog']['task']);
 	}
-
-	//Get the javascript functions required
-	jsFunctions();
 }
 
 //This function deletes DeveloperASsignments and Team Assignments for a specified client.
@@ -575,53 +572,34 @@ function newTaskForm($session, $developer)
 //This function prints out the project reports tables if a client, project, and dates have been selected.
 function projectReports()
 {
-	//If a project is selected print the reports
-	if(isset($_POST['Project_Selected']) || isset($_SESSION['report']['project']))
+	jsFormClientProjectStartDateEndDate();
+
+	if(isset($_POST['Project_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<form action="" method="POST">';
-		dateSelector();
-		echo '<br>';
-		echo '<input type="submit" value="submit">';
-		echo '</form>';
+		echo '<h2>' . $_POST['Project_Selected']  . ' was selected</h2>';
 
-		//Store the project selected in the report session
-		if(isset($_POST['Project_Selected']))
-			$_SESSION['report']['project'] = $_POST['Project_Selected'];
+		echo '<h3>Developers Hours</h3>';
+		printAggregatedTimeLogTableByProject($_POST['Project_Selected'], $_POST['startdate'], $_POST['enddate']);
 
-		if(isset($_POST['startdate']) && isset($_POST['enddate']))
-		{
-			echo '<h2>' . $_SESSION['report']['project']  . ' was selected</h2>';
-
-			echo '<h3>Developers Hours</h3>';
-			printAggregatedTimeLogTableByProject($_SESSION['report']['project'], $_POST['startdate'], $_POST['enddate']);
-
-			echo '<h3>Detailed Time Sheet</h3>';
-			printTimeLogTableByProject($_SESSION['report']['project'], $_POST['startdate'], $_POST['enddate']);
-		}
+		echo '<h3>Detailed Time Sheet</h3>';
+		printTimeLogTableByProject($_POST['Project_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
 
 //This function prints out the task reports tables if a client, project, task, and dates have been selected.
 function taskReports()
 {
-	if(isset($_POST['Task_Selected']) || isset($_SESSION['report']['task']))
+	jsFormClientProjectTaskStartDateEndDate();
+
+	if(isset($_POST['Task_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<form action="" method="POST">';
-		dateSelector();
-		echo '<br>';
-		echo '<input type="submit" value="Build Report">';
-		echo '</form>';
+		echo '<h2>' . (new Tasks($_POST['Task_Selected']))->getTaskName()  . ' was selected</h2>';
 
-		if(isset($_POST['startdate']) && isset($_POST['enddate']))
-		{
-			echo '<h2>' . $_SESSION['report']['task']  . ' was selected</h2>';
+		echo '<h3>Developers Hours</h3>';
+		printAggregatedTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate']);
 
-			echo '<h3>Developers Hours</h3>';
-			printAggregatedTimeLogTableByTask($_SESSION['report']['task'], $_POST['startdate'], $_POST['enddate']);
-
-			echo '<h3>Detailed Time Sheet</h3>';
-			printTimeLogTableByTask($_SESSION['report']['task'], $_POST['startdate'], $_POST['enddate']);
-		}
+		echo '<h3>Detailed Time Sheet</h3>';
+		printTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
 

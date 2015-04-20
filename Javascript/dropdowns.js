@@ -147,9 +147,11 @@ function getTaskDropdown()
 
 function submitForm()
 {
-	var client_selected = getClientSelection();
-	var project_selected = getProjectSelection();
-	var task_selected = getTaskSelection();
-
 	document.getElementById("ClientProjectTaskForm").submit();
+}
+
+function enableBuildReport()
+{
+	var build_report_button = document.getElementById('BuildReport');
+	build_report_button.disabled = false;
 }
