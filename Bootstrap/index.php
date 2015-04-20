@@ -1,4 +1,19 @@
 <?php
+/*
+ Name: index.php
+ Description: if login is correct to to page or load error
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/18/15,
+ Names of files accessed: include.php
+ Names of files changed:
+ Input:
+ Output: error message (if login information is incorrect)
+ Error Handling: if the user informaltion is incorrect load the error message
+ Modification List:
+ 4/18/15-Initial code up
+ 4/19/15-Starts session
+ */
+
 require_once(__DIR__.'/../include.php');
 
 session_start();

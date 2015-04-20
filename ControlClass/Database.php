@@ -1,7 +1,7 @@
 <?php
 /*
-Name: Team.php
-Description: 
+Name: Database.php
+Description: functions for the whole application, including SQL statements, database queries, and simplifying large functions
 Programmers: Brent Zucker, Ryan Graessle, Johnathan Self 
 Dates: (3/10/15,
 Names of files accessed: include.php
