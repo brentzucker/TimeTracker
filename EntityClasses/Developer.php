@@ -16,6 +16,8 @@ Modification List:
 4/6/15-Assign client/task
 4/10/15-Developers set up
 4/15/15-Warnings for developers set up
+4/17/15-Modified Developer constructor/new function deleteClient
+4/18/15-New functions: deleteTask and delete Project
 */
 
 require_once(__DIR__.'/../include.php');
@@ -432,6 +434,7 @@ class Developer
 		return $ret;
 	}
 
+	//creates a new client
 	function newClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state)
 	{
 		createClient($clientname, $startdate, $firstname, $lastname, $phone, $email, $address, $city, $state);
@@ -448,42 +451,54 @@ class Developer
 		$this->assignProject(new Projects($ClientName, $ProjectName, $Description));
 	}
 
+	//remove task from developer
 	function unassignTask($taskObject)
 	{
 		removeDeveloperAssignments($this->getUsername() , $taskObject->getTaskID(), 'Task');
 	}
 
+	//remove project from developer
 	function unassignProject($projectObject)
 	{
 		removeDeveloperAssignments($this->getUsername(), $projectObject->getProjectID(), 'Project');
 	}
 
+	//remove client from developer
 	function unassignClient($clientObject)
 	{
 		removeDeveloperAssignments($this->getUsername(), $clientObject->getClientname(), 'Client');
 	}
 
+	//delete client
 	function deleteClient($clientObject)
 	{
+		//removes client from each member of the team 
 		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
 			$developer->unassignClient($clientObject);
-
+		
+		//removes client from the team
 		removeTeamAssignment( $this->getTeam() , $clientObject->getClientname() , 'Client');
 	}
 
+	//deletes project
 	function deleteProject($projectObject)
 	{
+		//removes project  from each member of the team
 		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
 			$developer->unassignProject($projectObject);
 
+		//removes project from the team
 		removeTeamAssignment( $this->getTeam() , $projectObject->getProjectID() , 'Project');
 	}
 
+	//deletes task
 	function deleteTask($taskObject)
 	{
+		//removes task from each member of the team 
 		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
 			$developer->unassignTask($taskObject);
 
+		//removes task from the team
 		removeTeamAssignment( $this->getTeam() , $taskObject->getTaskID() , 'Task');
 	}
 }

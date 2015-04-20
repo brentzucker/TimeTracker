@@ -1,4 +1,26 @@
 <?php
+/*
+Name: Team.php
+Description: 
+Programmers: Brent Zucker, Ryan Graessle, Johnathan Self 
+Dates: (3/10/15,
+Names of files accessed: include.php
+Names of files changed:
+Input:
+Output:
+Error Handling: newTeamAssignment/newDeveloperAssignment only create the assignment if it does not already exist
+Modification List:
+3/10/15-Initial code up
+3/11/15-Clock in updated
+3/12/15-Updated path directories
+3/29/15-Reports updated
+4/10/15-New functions: returnAllRows, new_task, newDeveloperAssignments
+4/13/15-fixed client bugs, edit client added
+4/15/15-Edit client functions updated, created DeveloperAlerts table
+4/16/15-Team class created and TeamAssignments rely on DeveloperAssignments
+4/17/15-UnassignClient updated, new function: deleteClient
+*/
+
 require_once(__DIR__.'/../include.php');
 
 //Sets Default timezone.
@@ -418,21 +440,25 @@ function returnRowsForThreeValues($Tablename, $WhereColumn1, $WhereValue1, $Wher
 	return $rows;
 }
 
+//returns developer assignments given the username and the type of assignment
 function returnRowsDeveloperAssignments($WhereValue1, $WhereValue2)
 {
 	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2);
 }
 
+//gives the team assignments given the team name and the type of assignment
 function returnRowsTeamAssignments($WhereValue1, $WhereValue2)
 {
 	return returnRowsForTwoValues('TeamAssignments', 'Team', $WhereValue1, 'Type', $WhereValue2);
 }
 
+//gives the developer assignments given the username, the type of assignment, and the name or ID (depending on type)
 function returnRowsDeveloperAssignmentsUnique($WhereValue1, $WhereValue2, $WhereValue3)
 {
 	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
 }
 
+//gives the team assignments given the team name, the type of assignment, and the name or ID (depending on type)
 function returnRowsTeamAssignmentsUnique($WhereValue1, $WhereValue2, $WhereValue3)
 {
 	return returnRowsForThreeValues('TeamAssignments', 'Team', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);

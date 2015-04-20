@@ -7,23 +7,34 @@ echo '<h1>Demo Javascript Dropdowns</h1>';
 
 echo '<main id="container">';
 
+//print_r(taskListToArray($_SESSION['Developer']->getTaskList()));
+
 clientDropDownJS($_SESSION['Developer']);
 
 projectDropDownJS();
 
-$client_project_array = clientListToArrayOfProjectLists();
+taskDropDownJS();
 
-//projectDropDown($_SESSION['Developer'], $_SESSION["$session"]['Client_Selected']);
+$client_project_array = clientListToArrayOfProjectLists();
 
 echo '</main>';
 
 //This function creates the project dropdown with the id of projectDropdown and onchange getTaskDropdown()
 function projectDropDownJS()
 {
-	echo '<select id="projectDropdown" onchange="getTaskDropdown()" name="Project_Selected">';
+	echo '<select id="projectDropdown" onchange="getTaskDropdown()" name="Project_Selected" disabled>';
 
-	//foreach($developer->getClientsProjectsAssigned($clientname) as $p)
-		//echo '<option value="' . $p->getProjectID() . '">' . $p->getProjectName() . '</option>';
+	echo '<option selected="selected" value="">Select a Project</option>';
+
+	echo '</select>';
+}
+
+//This function creates the task dropdown with the using the project selected and the developer
+function taskDropDownJS()
+{
+	echo '<select id="taskDropdown" onchange="submitTask()" name="Task_Selected" disabled>';
+
+	echo '<option selected="selected" value="">Select a Task</option>';
 
 	echo '</select>';
 }
@@ -44,6 +55,14 @@ function getClientSelection()
 	return client_selected;
 }
 
+function getProjectSelection()
+{
+	var projectDropdown = document.getElementById("projectDropdown");
+	var project_selected = projectDropdown.options[ projectDropdown.selectedIndex ].value;
+
+	return project_selected;
+}
+
 //This function get the developer projects array from php
 function getDeveloperProjects()
 {
@@ -53,6 +72,14 @@ function getDeveloperProjects()
 	return developer_projects;
 }
 
+function getDeveloperTasks()
+{
+	//Get developer task list from php
+	var developer_tasks = <?php echo json_encode( taskListToArray( $_SESSION['Developer']->getTaskList() ) ); ?>;
+
+	return developer_tasks;
+}
+
 //This function gets the array of clients with their projects array from php (clientName => projectArray)
 function getClientProjects()
 {
@@ -60,6 +87,21 @@ function getClientProjects()
 	var client_project_array = <?php echo json_encode( clientListToArrayOfProjectLists() ); ?>;
 
 	return client_project_array;
+}
+
+function getProjectTasks()
+{
+	var client_name = getClientSelection();
+
+	var project_name = getProjectSelection();
+
+	//get the clients project lists
+	var client_project_array = getClientProjects();
+
+	if(client_project_array[ client_name ][ project_name ] != null)
+		return client_project_array[ client_name ][ project_name ][ 'TaskList' ];
+	else 
+		return null;
 }
 
 //This function gets the array of projects that corresponds to the client selected
@@ -77,16 +119,78 @@ function createProjectDropdown(developer_projects, client_projects)
 {
 	var select = document.getElementById("projectDropdown");
 
-	//Clear old select options
-	for(i=0; i<select.options.length; i++)
-		select.options[i] = null;
-	select.options.add( new Option ( "Select a Project",  "") );
+	//If there are no projects from that client disable the dropdown
+	if(client_projects == null)
+		select.disabled = true;
+	else 
+		select.disabled = false;
 
-	//If Project is in both lists add it as an option (same projectID)
+	//Clear old select options	
+	for (var i = select.options.length-1 ; i >=0; i--)
+		select.remove(i);
+
+	//This array holds the common elements between the developer and the client selected
+	var dropdown_elements = [];
+
+	//If Project is in both lists add it to the dropdown_elements array (same projectID)
 	for(var client_key in client_projects)
 		for(var dev_key in developer_projects)
 			if(client_key == dev_key)
-				select.options.add( new Option( developer_projects[dev_key] , dev_key ) );
+				dropdown_elements.push( new Option( developer_projects[dev_key]['ProjectName'] , dev_key ) );
+
+	//If there are no options in dropdown_elements then disable the dropdown
+	if(dropdown_elements.length == 0)
+	{
+		select.disabled = true;
+		select.options.add( new Option ( "No Projects Available",  "") );
+	}
+	else
+	{
+		var default_option = (new Option ( "Select a Project",  "")).setAttribute("selected", "selected");
+		select.options.add( new Option ( "Select a Project",  "") );
+
+		for(var i=0; i<dropdown_elements.length; i++)
+			select.options.add( dropdown_elements[i] );
+	}
+}
+
+function createTaskDropdown(developer_tasks, project_tasks)
+{
+	var select = document.getElementById("taskDropdown");
+
+	//If there are no tasks from the project selected disable the dropdown
+	if(project_tasks == null)
+		select.disabled = true;
+	else 
+		select.disabled = false;
+
+	//Clear old select options	
+	for (var i = select.options.length-1 ; i >=0; i--)
+		select.remove(i);
+
+	//This array holds the common elements between the developer and the project selected
+	var dropdown_elements = [];
+
+	//If Task is in both lists add it to the dropdown_elements array (same projectID)
+	for(var task_key in project_tasks)
+		for(var dev_key in developer_tasks)
+			if(task_key == dev_key)
+				dropdown_elements.push( new Option( developer_tasks[dev_key] , dev_key ) );
+
+	//If there are no options in dropdown_elements then disable the dropdown
+	if(dropdown_elements.length == 0)
+	{
+		select.disabled = true;
+		select.options.add( new Option ( "No Tasks Available",  "") );
+	}
+	else
+	{
+		var default_option = (new Option ( "Select a Task",  "")).setAttribute("selected", "selected");
+		select.options.add( new Option ( "Select a Task",  "") );
+
+		for(var i=0; i<dropdown_elements.length; i++)
+			select.options.add( dropdown_elements[i] );
+	}
 }
 
 function getProjectDropdown()
@@ -95,6 +199,15 @@ function getProjectDropdown()
 	var client_projects = getSelectedProjects();
 
 	createProjectDropdown(developer_projects, client_projects);	
+}
+
+function getTaskDropdown()
+{
+	var developer_tasks = getDeveloperTasks();
+
+	var project_tasks = getProjectTasks();
+
+	createTaskDropdown(developer_tasks, project_tasks);
 }
 
 /*

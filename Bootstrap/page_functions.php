@@ -107,6 +107,10 @@ _END;
                 	<li>
                     	<a href="client_profiles.php">View Client Profiles</a>
                 	</li>
+                	
+                	<li>
+                		<a href="logout.php">Logout</a>
+                	</li>
                 
             	</ul>
         	</div>
@@ -155,11 +159,8 @@ function close_header()
 
 function open_footer()
 {
-	echo '<footer>';
-}
-
-function close_footer()
-{
+	echo '<footer class="footer">';
+		echo '<p>Copyright &copy; 2015 CODEC</p>';
 	echo '</footer>';
 }
 
@@ -224,7 +225,7 @@ function open_login($title)
     <title>$title</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style_home.css" rel="stylesheet">
     <link rel="icon" href="images/fav.jpg">
   	</head>
 
@@ -256,6 +257,17 @@ function close_login()
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   	</body>
 </html>
+_END;
+}
+
+function alertBox()
+{
+echo<<<_END
+		<div class="col-lg-3 alert-box">
+		
+			<h2>Alerts</h2>
+		
+		</div>
 _END;
 }
 

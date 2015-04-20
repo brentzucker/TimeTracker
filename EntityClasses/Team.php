@@ -1,4 +1,19 @@
 <?php
+/*
+Name: Team.php
+Description: 
+Programmers: Brent Zucker
+Dates: (3/10/15,
+Names of files accessed: include.php
+Names of files changed:
+Input:
+Output: the client list, project list, and task list (text)
+Error Handling: 
+Modification List:
+4/16/15-Initial code up
+4/17/15-Made the assigments dropdown relative to the team assignments/ added getDeveloperList function
+*/
+
 require_once(__DIR__.'/../include.php');
 
 class Team
@@ -20,7 +35,7 @@ class Team
             call_user_func_array(array($this,$f),$a); 
         } 
 	}
-
+	
 	function __construct1($Team)
 	{
 
@@ -28,21 +43,25 @@ class Team
 
 		$developer_rows = returnRowsByTeam($Team);
 
+		//adds developers to Developer_List
 		foreach($developer_rows as $developer_row)
 			$this->Developer_List[] = new Developer($developer_row['Username']);
 
 		$client_rows = returnRowsTeamAssignments($Team, 'Client');
 
+		//adds clients to Client_List array
 		foreach($client_rows as $client_row)
 			$this->Client_List[] = new Client($client_row['ClientProjectTask']);
 
 		$project_rows = returnRowsTeamAssignments($Team, 'Project');
 
+		//adds projects to Project_List array
 		foreach($project_rows as $project_row)
 			$this->Project_List[] = new Projects($project_row['ClientProjectTask']);
 
 		$task_rows = returnRowsTeamAssignments($Team, 'Task');
-
+		
+		//adds tasks to Task_List array
 		foreach($task_rows as $task_row)
 			$this->Task_List[] = new Tasks($task_row['ClientProjectTask']);
 	}
