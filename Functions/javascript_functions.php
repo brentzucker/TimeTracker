@@ -43,6 +43,25 @@ function jsFormClientProjectTaskStartDateEndDate()
 	echo '</form>';
 }
 
+//This function creates a form with javascript dropdowns
+function jsFormClientProjectTaskButton()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	clientDropDownJS($_SESSION['Developer']);
+
+	projectDropDownJS();
+
+	taskDropDownJS();
+
+	echo '<input type="submit" value="submit" id="submit_button" disabled>';
+
+	echo '</form>';
+}
+
 /* Client > Project
  *
  */
@@ -92,6 +111,7 @@ function jsFormClientProjectEnableButton()
 
 	projectDropDownJSenableButton();
 
+	echo '<input type="submit" value="submit" id="submit_button" disabled>';
 	echo '</form>';
 }
 
@@ -205,7 +225,7 @@ function taskDropDownJSsubmit()
 
 function taskDropDownJS()
 {
-	echo '<select id="taskDropdown" onchange="enableBuildReport()" name="Task_Selected" disabled>';
+	echo '<select id="taskDropdown" onchange="enableButton()" name="Task_Selected" disabled>';
 	echo '<option selected="selected" value="">Select a Task</option>';
 	echo '</select>';
 }

@@ -150,7 +150,7 @@ function deleteClientForm()
 //This function deletes DeveloperAssignments and Team assignments for a specified task.
 function deleteTaskForm()
 {
-	clientProjectTaskDropDownForm('delete');
+	jsFormClientProjectTaskButton();
 
 	if(isset($_POST['Task_Selected']))
 	{
@@ -163,7 +163,7 @@ function deleteTaskForm()
 //This function deletes DeveloperAssignments and Team Assignments for a specificied project
 function deleteProjectForm()
 {
-	clientProjectDropDownForm('delete');
+	jsFormClientProjectEnableButton();
 
 	if(isset($_POST['Project_Selected']))
 	{
