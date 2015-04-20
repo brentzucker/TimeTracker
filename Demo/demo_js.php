@@ -7,13 +7,15 @@ echo '<h1>Demo Javascript Dropdowns</h1>';
 
 echo '<main id="container">';
 
+//print_r(taskListToArray($_SESSION['Developer']->getTaskList()));
+
 clientDropDownJS($_SESSION['Developer']);
 
 projectDropDownJS();
 
-$client_project_array = clientListToArrayOfProjectLists();
+taskDropDownJS();
 
-//projectDropDown($_SESSION['Developer'], $_SESSION["$session"]['Client_Selected']);
+$client_project_array = clientListToArrayOfProjectLists();
 
 echo '</main>';
 
@@ -23,8 +25,16 @@ function projectDropDownJS()
 	echo '<select id="projectDropdown" onchange="getTaskDropdown()" name="Project_Selected" disabled>';
 
 	echo '<option selected="selected" value="">Select a Project</option>';
-	//foreach($developer->getClientsProjectsAssigned($clientname) as $p)
-		//echo '<option value="' . $p->getProjectID() . '">' . $p->getProjectName() . '</option>';
+
+	echo '</select>';
+}
+
+//This function creates the task dropdown with the using the project selected and the developer
+function taskDropDownJS()
+{
+	echo '<select id="taskDropdown" onchange="submitTask()" name="Task_Selected" disabled>';
+
+	echo '<option selected="selected" value="">Select a Task</option>';
 
 	echo '</select>';
 }
@@ -45,6 +55,14 @@ function getClientSelection()
 	return client_selected;
 }
 
+function getProjectSelection()
+{
+	var projectDropdown = document.getElementById("projectDropdown");
+	var project_selected = projectDropdown.options[ projectDropdown.selectedIndex ].value;
+
+	return project_selected;
+}
+
 //This function get the developer projects array from php
 function getDeveloperProjects()
 {
@@ -54,6 +72,14 @@ function getDeveloperProjects()
 	return developer_projects;
 }
 
+function getDeveloperTasks()
+{
+	//Get developer task list from php
+	var developer_tasks = <?php echo json_encode( taskListToArray( $_SESSION['Developer']->getTaskList() ) ); ?>;
+
+	return developer_tasks;
+}
+
 //This function gets the array of clients with their projects array from php (clientName => projectArray)
 function getClientProjects()
 {
@@ -61,6 +87,18 @@ function getClientProjects()
 	var client_project_array = <?php echo json_encode( clientListToArrayOfProjectLists() ); ?>;
 
 	return client_project_array;
+}
+
+function getProjectTasks()
+{
+	var client_name = getClientSelection();
+
+	var project_name = getProjectSelection();
+
+	//get the clients project lists
+	var client_project_array = getClientProjects();
+
+	return client_project_array[ client_name ][ project_name ][ 'TaskList' ];
 }
 
 //This function gets the array of projects that corresponds to the client selected
@@ -76,6 +114,9 @@ function getSelectedProjects()
 
 function createProjectDropdown(developer_projects, client_projects)
 {
+
+	console.log(getClientProjects());
+
 	var select = document.getElementById("projectDropdown");
 
 	//If there are no projects from that client disable the dropdown
@@ -95,7 +136,7 @@ function createProjectDropdown(developer_projects, client_projects)
 	for(var client_key in client_projects)
 		for(var dev_key in developer_projects)
 			if(client_key == dev_key)
-				dropdown_elements.push( new Option( developer_projects[dev_key] , dev_key ) );
+				dropdown_elements.push( new Option( developer_projects[dev_key]['ProjectName'] , dev_key ) );
 
 	//If there are no options in dropdown_elements then disable the dropdown
 	if(dropdown_elements.length == 0)
@@ -113,12 +154,38 @@ function createProjectDropdown(developer_projects, client_projects)
 	}
 }
 
+function createTaskDropdown(developer_tasks, project_tasks)
+{
+	//console.log(developer_tasks);
+
+	console.log(project_tasks);
+
+	var select = document.getElementById("taskDropdown");
+
+	//If there are no tasks from the project selected disable the dropdown
+	if(project_tasks == null)
+		select.disabled = true;
+	else 
+		select.disabled = false;
+}
+
 function getProjectDropdown()
 {
 	var developer_projects = getDeveloperProjects();
 	var client_projects = getSelectedProjects();
 
 	createProjectDropdown(developer_projects, client_projects);	
+}
+
+function getTaskDropdown()
+{
+	var developer_tasks = getDeveloperTasks();
+
+	//console.log(developer_tasks);
+
+	var project_tasks = getProjectTasks();
+
+	createTaskDropdown(developer_tasks, project_tasks);
 }
 
 /*

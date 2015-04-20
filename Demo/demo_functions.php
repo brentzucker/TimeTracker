@@ -178,16 +178,29 @@ function taskDropDown($developer, $projectid)
 	echo '<input type="submit" value="Submit">';
 }
 
-//This functino converts a list of project objects to an associative array of projects
+//This function converts a list of task objects to an assoicative array of tasks
+function taskListToArray($taskObjectList)
+{
+	$task_array = array();
+
+	foreach($taskObjectList as $taskObject)
+		$task_array[ $taskObject->getTaskID() ] = $taskObject->getTaskName();
+
+	return $task_array;
+}
+
+//This function converts a list of project objects to an associative array of projects
 function projectListToArray($projectObjectList)
 {
-	//print_r( $projectObjectList );
-
 	$project_array = array();
 
 	foreach($projectObjectList as $projectObject)
-		$project_array[ $projectObject->getProjectID() ] = $projectObject->getProjectName();
-
+	{
+		$project_array[ $projectObject->getProjectID() ] = array();
+		$project_array[ $projectObject->getProjectID() ]['ProjectName'] = $projectObject->getProjectName();
+		$project_array[ $projectObject->getProjectID() ]['TaskList'] = taskListToArray( $projectObject->getTaskList() );
+	}
+		
 	return $project_array;
 }
 
@@ -217,7 +230,6 @@ function clientDropDownJS($Developer)
 
 	echo '</select>';
 }
-
 /* These functions query the date
  *
  */
