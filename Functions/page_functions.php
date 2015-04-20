@@ -89,12 +89,9 @@ function assignTask()
 function clientReport()
 {
 	//Form to select a client, start date, and end date
-	echo '<form action="" method="POST">';
-	clientDropDown($_SESSION['Developer']);
-	dateSelector();
-	echo "</form>";
+	jsFormClientStartDateEndDate();
 	
-	if(isset($_POST['Client_Selected']))
+	if(isset($_POST['Client_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
 		echo '<h2>' . $_POST['Client_Selected'] . ' was selected</h2>';
 

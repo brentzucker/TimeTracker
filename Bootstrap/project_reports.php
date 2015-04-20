@@ -7,10 +7,7 @@ open_html("Project Reports");
 
 echo '<h1>Project Reports</h1>';
 
-clientProjectDropDownForm('report');
-
 projectReports();
 
 close_html();
-
 ?>

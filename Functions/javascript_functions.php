@@ -80,8 +80,7 @@ function jsFormClientProjectStartDateEndDate()
 	echo '</form>';
 }
 
-
-/* Client 
+/* Client >
  *
  */
 
@@ -98,6 +97,27 @@ function jsFormClient()
 	echo '</form>';
 }
 
+//This function creates a form with javascript dropdowns
+function jsFormClientStartDateEndDate()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	clientDropDownJSenableButton($_SESSION['Developer']);
+
+	dateSelectorWide();
+
+	echo '<input id="BuildReport" type="submit" value="Build Report" class="btn btn-primary" disabled>';
+
+	echo '</form>';
+}
+
+/* Client 
+ *
+ */
+
 //This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
 function clientDropDownJSsubmit($Developer)
 {
@@ -112,6 +132,16 @@ function clientDropDownJSsubmit($Developer)
 function clientDropDownJS($Developer)
 {
 	echo '<select id="clientDropdown" onchange="getProjectDropdown()" name="Client_Selected">';
+	echo '<option value="">Select a Client</option>';
+	foreach($Developer->getClientList() as $client)
+		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	echo '</select>';
+}
+
+//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
+function clientDropDownJSenableButton($Developer)
+{
+	echo '<select id="clientDropdown" onchange="enableBuildReport()" name="Client_Selected">';
 	echo '<option value="">Select a Client</option>';
 	foreach($Developer->getClientList() as $client)
 		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
