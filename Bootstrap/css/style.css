@@ -70,3 +70,22 @@ body {
 .col-sm-6 {
 	background-color: #999;
 }
+
+.dropdown-menu > li > a:hover {
+    color: #000!important;
+}
+
+.alert-box {
+	height: 500px;
+	border: 1px solid black;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.footer {
+	text-align: center;
+}
+
+.main-box {
+	text-align: center;
+}

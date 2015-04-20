@@ -9,7 +9,7 @@ open_html("Home");
  * Keep all content in the div #page-content-wrapper
  */
 echo '<main id="page-content-wrapper">'; 
-echo '<div class="col-lg-12">';
+echo '<div class="col-lg-9 main-box">';
 
 //Custom Greeting Message
 if(localtime(time(), true)['tm_hour'] < 11 && localtime(time(), true)['tm_hour'] > 3)
@@ -38,9 +38,16 @@ if(count($_SESSION['Developer']->getTimeLog()) > 0)
 }
 
 echo '</div>';
+
+alertBox();
+
+open_footer();
+
 echo '</div>';
 echo '</div>';
-echo '</div>';    
+echo '</div>'; 
+
+   
 echo '</main>';
 
 close_html();

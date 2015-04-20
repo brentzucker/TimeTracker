@@ -155,11 +155,8 @@ function close_header()
 
 function open_footer()
 {
-	echo '<footer>';
-}
-
-function close_footer()
-{
+	echo '<footer class="footer">';
+		echo '<p>Copyright &copy; 2015 CODEC</p>';
 	echo '</footer>';
 }
 
@@ -256,6 +253,17 @@ function close_login()
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   	</body>
 </html>
+_END;
+}
+
+function alertBox()
+{
+echo<<<_END
+		<div class="col-lg-3 alert-box">
+		
+			<h2>Alerts</h2>
+		
+		</div>
 _END;
 }
 
