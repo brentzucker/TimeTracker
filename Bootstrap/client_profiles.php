@@ -3,11 +3,11 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
-open_html("Edit Time Sheet");
+open_html("Client Profiles");
 
-echo '<h1>Edit Time Sheet</h1>';
+echo '<h1>Client Profiles</h1>';
 
-editTimeSheet();
+viewClientProfiles();
 
 close_html();
 ?>
