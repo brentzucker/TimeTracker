@@ -14,5 +14,4 @@ warningExpiringContracts( $_SESSION['Developer']->getDaysExpirationWarning() );
 warningLowHours( $_SESSION['Developer']->getHoursLeftWarning() );
 
 echoHomePageLinks();
-
 ?>

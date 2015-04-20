@@ -5,6 +5,5 @@ session_start();
 
 echo '<h1>Edit Client</h1>';
 
-editClientForm($_SESSION['Developer']);
-
+editClient();
 ?>

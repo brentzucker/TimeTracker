@@ -1,9 +1,30 @@
 <?php
+require_once(__DIR__.'/../include.php');
 //PHP functions in this folder call javascript functions 
 
 //This function creates a form with javascript dropdowns
 function jsFormClientProjectTask()
 {
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	clientDropDownJS($_SESSION['Developer']);
+
+	projectDropDownJS();
+
+	taskDropDownJSsubmit();
+
+	echo '</form>';
+}
+
+//This function creates a form with javascript dropdowns
+function jsFormClientProjectTaskStartDateEndDate()
+{
+	//Get the javascript functions required
+	jsFunctions();
+	
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
 
 	clientDropDownJS($_SESSION['Developer']);
@@ -11,6 +32,10 @@ function jsFormClientProjectTask()
 	projectDropDownJS();
 
 	taskDropDownJS();
+
+	dateSelectorWide();
+
+	echo '<input id="BuildReport" type="submit" value="Build Report" disabled>';
 
 	echo '</form>';
 }
@@ -39,9 +64,18 @@ function projectDropDownJS()
 }
 
 //This function creates the task dropdown with the using the project selected and the developer
-function taskDropDownJS()
+function taskDropDownJSsubmit()
 {
 	echo '<select id="taskDropdown" onchange="submitForm()" name="Task_Selected" disabled>';
+
+	echo '<option selected="selected" value="">Select a Task</option>';
+
+	echo '</select>';
+}
+
+function taskDropDownJS()
+{
+	echo '<select id="taskDropdown" onchange="enableBuildReport()" name="Task_Selected" disabled>';
 
 	echo '<option selected="selected" value="">Select a Task</option>';
 
