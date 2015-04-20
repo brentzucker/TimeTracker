@@ -8,46 +8,16 @@ echo '<h1>Demo Javascript Dropdowns</h1>';
 echo '<main id="container">';
 
 
-
-echo '<form id="ClientProjectTaskForm" action="" method="POST">';
-
-clientDropDownJS($_SESSION['Developer']);
-
-projectDropDownJS();
-
-taskDropDownJS();
-
-echo '</form>';
+jsFormClientProjectTask();
 
 if(isset($_POST['Task_Selected']))
 	echo $_POST['Client_Selected'] . ' ' . $_POST['Project_Selected'] . ' ' . $_POST['Task_Selected'];
 
 echo '</main>';
 
-//This function creates the project dropdown with the id of projectDropdown and onchange getTaskDropdown()
-function projectDropDownJS()
-{
-	echo '<select id="projectDropdown" onchange="getTaskDropdown()" name="Project_Selected" disabled>';
 
-	echo '<option selected="selected" value="">Select a Project</option>';
-
-	echo '</select>';
-}
-
-//This function creates the task dropdown with the using the project selected and the developer
-function taskDropDownJS()
-{
-	echo '<select id="taskDropdown" onchange="submitForm()" name="Task_Selected" disabled>';
-
-	echo '<option selected="selected" value="">Select a Task</option>';
-
-	echo '</select>';
-}
 
 ?>
-
-
-
 
 <script>
 
