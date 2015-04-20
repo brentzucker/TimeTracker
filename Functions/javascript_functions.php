@@ -43,6 +43,25 @@ function jsFormClientProjectTaskStartDateEndDate()
 	echo '</form>';
 }
 
+//This function creates a form with javascript dropdowns
+function jsFormClientProjectTaskButton()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	clientDropDownJS($_SESSION['Developer']);
+
+	projectDropDownJS();
+
+	taskDropDownJS();
+
+	echo '<input type="submit" value="submit" id="submit_button" disabled>';
+
+	echo '</form>';
+}
+
 /* Client > Project
  *
  */
@@ -77,6 +96,22 @@ function jsFormClientProjectStartDateEndDate()
 	dateSelectorWide();
 
 	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-primary" disabled>';
+	echo '</form>';
+}
+
+//This function creates a form with javascript dropdowns
+function jsFormClientProjectEnableButton()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	clientDropDownJS($_SESSION['Developer']);
+
+	projectDropDownJSenableButton();
+
+	echo '<input type="submit" value="submit" id="submit_button" disabled>';
 	echo '</form>';
 }
 
@@ -171,7 +206,7 @@ function projectDropDownJS()
 //This function creates the project dropdown with the id of projectDropdown and onchange getTaskDropdown()
 function projectDropDownJSenableButton()
 {
-	echo '<select id="projectDropdown" onchange="enableBuildReport()" name="Project_Selected" disabled>';
+	echo '<select id="projectDropdown" onchange="enableButton()" name="Project_Selected" disabled>';
 	echo '<option selected="selected" value="">Select a Project</option>';
 	echo '</select>';
 }
@@ -190,7 +225,7 @@ function taskDropDownJSsubmit()
 
 function taskDropDownJS()
 {
-	echo '<select id="taskDropdown" onchange="enableBuildReport()" name="Task_Selected" disabled>';
+	echo '<select id="taskDropdown" onchange="enableButton()" name="Task_Selected" disabled>';
 	echo '<option selected="selected" value="">Select a Task</option>';
 	echo '</select>';
 }

@@ -163,7 +163,7 @@ function enableButton()
  function clearField(id)
  {
  	var element = document.getElementById(id);
-	if(element.value == 'Project Name' || element.value == 'Description')
+	if(element.value == 'Project Name' || element.value == 'Description' || element.value == 'Task Name')
 		element.value = '';
  }
 
@@ -176,6 +176,8 @@ function enableButton()
  		console.log(element.id);
  		if(element.id == 'projectName')
  			element.value = 'Project Name';
+ 		else if(element.id == 'taskName')
+ 			element.value = 'Task Name';
  		else if(element.id == 'description')
  			element.value = 'Description';
  	}
