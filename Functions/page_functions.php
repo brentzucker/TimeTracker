@@ -470,55 +470,19 @@ END;
 function newProjectForm($session, $developer)
 {
 	echo '<form action="" method="POST">';
-	echo '<h2>Select a Client</h2>';
-	clientDropDown($developer);
+	clientDropDownJSenableButton($developer);
+	echo '<input type="text" name="project" value="Project Name" id="projectName" onfocus="clearField(\'projectName\')" onblur="blurField(\'projectName\')">';
+	echo '<input type="textarea" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
+	echo '<input type="submit" value="Create Project" id="submit_button" disabled>';
 	echo '</form>';
 
-
-	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	if(isset($_POST['Client_Selected']) && isset($_POST['project']) && isset($_POST['description']))
 	{
-		if(isset($_POST['Client_Selected']))
-			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
+		$developer->newProject($_POST['Client_Selected'], $_POST['project'], $_POST['description']);
 
-		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
-
-		$projectname = $projectError = "";
-
-		//$_SERVER["REQUEST_METHOD"] == "POST"
-		if(isset($_POST['newprojectsubmitted']))
-		{
-			if(empty($_POST['projectname']))
-				{
-					$projectError = "Missing";
-				}
-			else
-				{
-					$projectname = $_POST['projectname'];
-				}
-		}
-		if($projectname != "")
-		{
-			$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['description']);
-			echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
-		}
-		echo <<<END
-		<form action="" method="POST">
-		Project Name: <font color="red">*</font><br>
-		<input type="text" name="projectname">
-		<font color='red'> $projectError</font>
-		<br>Description:<br>
-		<input type="textarea" name="description"><br>
-		<input type="Submit" name="newprojectsubmitted">
-		<br><font color="red">* Required fields.</font>
-		</form>
-		<br>
-		<a href='manage_clients.php'>Back</a>
-END;
-		//if(isset($_POST['projectname']))
-		//{
-		//	$developer->newProject($_SESSION[$session]['Client_Selected'], $_POST['projectname'], $_POST['Description']);
-		//	echo '<h1>' . $_POST['projectname'] . ' was created!</h1>';
-		//}
+		//Projects 
+		echo '<h3>' . $_POST['Client_Selected'] . '\'s Projects</h3>';
+		printProjects($_POST['Client_Selected']);
 	}
 }
 
@@ -692,14 +656,10 @@ function updateAlertsForm($developer)
 //This function prints out the Client profile page
 function viewClientProfiles()
 {
-	echo '<form action="" method="POST">';
-	clientDropDown($_SESSION['Developer']);
-	echo '</form>';
+	jsFormClient();
 
 	if( isset($_POST['Client_Selected']) )
-	{
 		getClientProfile($_POST['Client_Selected']);
-	}
 }
 
 function updatePassword()

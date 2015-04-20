@@ -39,7 +39,7 @@ function jsFormClientProjectTaskStartDateEndDate()
 
 	dateSelectorWide();
 
-	echo '<input id="BuildReport" type="submit" value="Build Report" class="btn btn-primary" disabled>';
+	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-primary" disabled>';
 	echo '</form>';
 }
 
@@ -76,7 +76,7 @@ function jsFormClientProjectStartDateEndDate()
 
 	dateSelectorWide();
 
-	echo '<input id="BuildReport" type="submit" value="Build Report" class="btn btn-primary" disabled>';
+	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-primary" disabled>';
 	echo '</form>';
 }
 
@@ -109,7 +109,7 @@ function jsFormClientStartDateEndDate()
 
 	dateSelectorWide();
 
-	echo '<input id="BuildReport" type="submit" value="Build Report" class="btn btn-primary" disabled>';
+	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-primary" disabled>';
 
 	echo '</form>';
 }
@@ -141,7 +141,7 @@ function clientDropDownJS($Developer)
 //This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
 function clientDropDownJSenableButton($Developer)
 {
-	echo '<select id="clientDropdown" onchange="enableBuildReport()" name="Client_Selected">';
+	echo '<select id="clientDropdown" onchange="enableButton()" name="Client_Selected">';
 	echo '<option value="">Select a Client</option>';
 	foreach($Developer->getClientList() as $client)
 		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
