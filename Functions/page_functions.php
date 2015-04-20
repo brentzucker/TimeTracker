@@ -9,17 +9,20 @@ function addHours()
 	echo '<form action="" method="POST">';
 	echo '<label>Hours Purchased:</label>';
 	echo '<br>';
-	echo '<input type="number" name="hours_purchased">';
-	echo '<input type="date" name="purchase_date">';
-	clientDropDown($_SESSION['Developer']);
+	clientDropDownJSenableButton($_SESSION['Developer']);
+	echo '<input type="number" name="hours_purchased" value="8">';
+	echo '<input type="date" name="purchase_date" value="' . (new dateTime())->format('Y-m-d') . '">';
+	echo '<input type="submit" value="Add Hours" id="submit_button" disabled>';
 	echo '</form>';
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['hours_purchased']) && isset($_POST['purchase_date']))
 	{
-		echo '<h4>' . $_POST['Client_Selected'] . ' purchase has been accounted for.</h4>';
+		echo '<h4>' . $_POST['Client_Selected'] . '\'s purchase has been accounted for.</h4>';
 		$purchase_seconds = $_POST['hours_purchased'] * 3600;
 		//Add the purchased hours to the client
 		$_SESSION['Developer']->getClient($_POST['Client_Selected'])->PurchaseHours($purchase_seconds, $_POST['purchase_date']);
+
+		printClientsPurchasesTable($_POST['Client_Selected']);
 	}
 }
 
@@ -467,7 +470,7 @@ END;
 }
 
 //This function consumes the name of a session variable and a developer and echos a project form and assigns and inputs that project into the database
-function newProjectForm($session, $developer)
+function newProjectForm($developer)
 {
 	echo '<form action="" method="POST">';
 	clientDropDownJSenableButton($developer);
@@ -489,44 +492,21 @@ function newProjectForm($session, $developer)
 //This function creates a from that assigns a task to the developer and calls assignTask to load the data into the database
 function newTaskForm($session, $developer)
 {
+	jsFunctions();
 	echo '<form action="" method="POST">';
 	echo "<h2>Select a Client</h2>";
-	clientDropDown($developer);
+	clientDropDownJS($developer);
+	projectDropDownJSenableButton();
+	echo '<input type="text" name="task" value="Task Name" id="taskName" onfocus="clearField(\'taskName\')" onblur="blurField(\'taskName\')">';
+	echo '<input type="textarea" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
+	echo '<input type="submit" name="Create Task" id="submit_button"  disabled>';
 	echo"</form>";
 
-	if(isset($_POST['Client_Selected']) || isset($_SESSION[$session]['Client_Selected']))
+	if(isset($_POST['Client_Selected']) && isset($_POST['Project_Selected']) && isset($_POST['task']) )
 	{
-		if(isset($_POST['Client_Selected']))
-			$_SESSION[$session]['Client_Selected'] = $_POST['Client_Selected'];
-
-		echo '<h2>' . $_SESSION[$session]['Client_Selected'] . ' was selected.</h2>';
-
-		echo "Select a Project";
-		echo '<form action="" method="POST">';
-		projectDropDown($developer, $_SESSION[$session]['Client_Selected']);
-		echo "</form>";
-
-		if(isset($_POST['Project_Selected']))
-		{
-			$_SESSION[$session]['Project_Selected'] = $_POST['Project_Selected'];
-
-			echo '<h2>' . $_SESSION[$session]['Project_Selected'] . ' was selected.</h2>';
-
-			echo '<form action="" method="POST">';
-			echo 'Task Name: <br>';
-			echo '<input type="text" name="taskname">';
-			echo '<br>Description:<br>';
-			echo '<input type="textarea" name="description"><br>';
-			echo '<input type="Submit" name="newtasksubmitted">';
-			echo '</form>';
-		}
-
-		if(isset($_POST['taskname']))
-		{
-
-			echo '<h1>' . $_POST['taskname'] . ' was created!</h1>';
-			$_SESSION['Developer']->assignTask( new Tasks($_SESSION[$session]['Client_Selected'], $_SESSION[$session]['Project_Selected'], $_POST['taskname'], $_POST['description']) );
-		}
+		$_SESSION['Developer']->assignTask( new Tasks($_POST['Client_Selected'], $_POST['Project_Selected'], $_POST['task'], $_POST['description']) );
+		echo '<h3>' . $_POST['Client_Selected'] . '\'s Tasks</h3>';
+		printTasks($_POST['Client_Selected']);
 	}
 }
 
