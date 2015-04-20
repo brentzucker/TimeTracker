@@ -182,6 +182,37 @@ function taskDropDown($developer, $projectid)
  *
  */
 
+//This function echos 3 javascript functions that read php encoded with json
+function jsFunctions()
+{
+	echo '<script>';
+
+	//This function get the developer projects array from php
+	echo 'function getDeveloperProjects()';
+	echo '{';
+				//Get developer project list from php
+	echo 	'var developer_projects = ' . json_encode( projectListToArray( $_SESSION["Developer"]->getProjectList() )) . ';';
+	echo 	'return developer_projects;';
+	echo '}';
+
+	echo 'function getDeveloperTasks()';
+	echo '{';
+				//Get developer task list from php
+	echo 	'var developer_tasks = ' . json_encode( taskListToArray( $_SESSION['Developer']->getTaskList() )) . ';';
+	echo 	'return developer_tasks;';
+	echo '}';
+
+	//This function gets the array of clients with their projects array from php (clientName => projectArray)
+	echo 'function getClientProjects()';
+	echo '{';
+				//get the clients project lists
+	echo 	'var client_project_array = ' . json_encode( clientListToArrayOfProjectLists() ) . ';';
+	echo 	'return client_project_array;';
+	echo '}';
+
+	echo '</script>';
+}
+
 //This function converts a list of client objects to an array list of client project arrays
 function clientListToArrayOfProjectLists()
 {
@@ -217,7 +248,6 @@ function projectListToArray($projectObjectList)
 		
 	return $project_array;
 }
-
 
 /* These functions query the date
  *
