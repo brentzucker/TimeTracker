@@ -1,14 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Update Alerts");
 
-echo<<<_END
-	<h1>Update Alerts</h1>
-_END;
+echo '<h1>Update Alerts</h1>';
+
+updateAlertsForm($_SESSION['Developer']);
 
 close_html();
-
 ?>
