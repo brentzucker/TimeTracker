@@ -265,13 +265,14 @@ _END;
 
 function alertBox()
 {
-echo<<<_END
-		<div class="col-lg-3 alert-box">
+	echo '<div class="col-lg-3 alert-box">';
+	echo '<h2>Alerts</h2>';
+
+	warningExpiringContracts( $_SESSION['Developer']->getDaysExpirationWarning() );
+	warningLowHours( $_SESSION['Developer']->getHoursLeftWarning() );
 		
-			<h2>Alerts</h2>
-		
-		</div>
-_END;
+	echo '<h6><a href="update_alerts.php">Update Alert Settings</a></h6>';
+	echo '</div>';
 }
 
 ?>
