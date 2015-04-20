@@ -20,6 +20,11 @@
 	font-weight: bold;
 }
 
+body {
+	background-color: #fff;
+}
+
+
 h1 {
 	margin-top: 0px!important;
 }
@@ -65,44 +70,4 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-.col-sm-6 {
-	background-color: #999;
-}
-
-.dropdown-menu > li > a:hover {
-    color: #000!important;
-}
-
-.alert-box {
-	height: 500px;
-	border: 1px solid black;
-	text-align: center;
-	border-radius: 10px;
-}
-
-.footer {
-	text-align: center;
-}
-
-.main-box {
-	text-align: center;
-}
-
-body {
-	background-color: #BDC3C7!important;
-}
-
-client-select {
-	width: 100px!important;
-}
-
-.form-control {
-    width: auto!important;
-}
-
-.client-select {
-	text-align: center;
-	margin: 0 auto;
 }

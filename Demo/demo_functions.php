@@ -137,7 +137,7 @@ function developerDropDown($developer)
 //This function gets passed a Developer and echos a dropdwon selector for the Developer's Client List
 function clientDropDown($Developer)
 {
-	echo '<select name="Client_Selected">';
+	echo '<select name="Client_Selected" class="form-control client-select" id="sel1" >';
 
 	if(!isset($_POST['Client_Selected']))
 		foreach($Developer->getClientList() as $client)
@@ -150,7 +150,9 @@ function clientDropDown($Developer)
 				echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
 
 	echo '</select>';
-	echo '<input type="submit" value="Submit">';
+	echo '<br>';
+	echo '<input type="submit" class="btn btn-primary" value="Submit" >';
+	echo '<br>'; 
 
 }
 
@@ -432,7 +434,7 @@ function editTimeSheet()
 	echo '<form action="" method="POST">';
 	dateSelector();
 	echo '<br>';
-	echo '<input type="submit" value="View Time Sheet">';
+	echo '<input type="submit" class="btn btn-primary" value="Submit">';
 	echo '</form>';
 
 	//If a new time out has been created, update the tables
