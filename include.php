@@ -35,10 +35,7 @@ require_once (__DIR__.'/EntityClasses/Team.php');
 
 //Functions Folder
 require_once (__DIR__.'/Functions/page_functions.php');
-
-//Front End Functions
-require_once (__DIR__.'/Demo/demo_functions.php');
-
-//Boostrap page functions
-require_once (__DIR__.'/Bootstrap/page_functions.php');
+require_once (__DIR__.'/Functions/javascript_functions.php');
+require_once (__DIR__.'/Functions/demo_functions.php');
+require_once (__DIR__.'/Functions/bootstrap_functions.php');
 ?>
