@@ -3,9 +3,11 @@ require_once(__DIR__.'/../../include.php');
 
 session_start();
 
-echo '<h1>Task Reports</h1>';
+//Call in javascript file
+$src =  '../../Javascript/dropdowns.js';
+echo '<script src="' . $src . '"></script>';
 
-clientProjectTaskDropdownForm('report');
+echo '<h1>Task Reports</h1>';
 
 taskReports();
 ?>

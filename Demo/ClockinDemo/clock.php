@@ -3,18 +3,9 @@ require_once(__DIR__.'/../../include.php');
 
 session_start();
 
-echo '<h1>' . $_SESSION['Developer']->getUsername() . ' is logged in</h1>';
+//Call in javascript file
+$src =  '../../Javascript/dropdowns.js';
+echo '<script src="' . $src . '"></script>';
 
-clientProjectTaskDropdownForm('currentLog');
-
-if(isset($_POST['Task_Selected']) || isset($_SESSION['currentLog']['task']))
-{
-	echo '<h2>' . $_SESSION['currentLog']['task']  . ' was selected</h2>';
-
-	echo '<h3>Clock In</h3>';
-
-	clockForm($_SESSION['Developer'], $_SESSION['currentLog']['task']);
-
-	printTimeSheetTableByTask($_SESSION['currentLog']['task']);
-}
+clock();
 ?>

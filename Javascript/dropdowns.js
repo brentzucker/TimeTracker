@@ -24,34 +24,6 @@ function getTaskSelection()
 	return task_selected;
 }
 
-/*
-//This function get the developer projects array from php
-function getDeveloperProjects()
-{
-	//Get developer project list from php
-	var developer_projects = <?php echo json_encode( projectListToArray( $_SESSION['Developer']->getProjectList() ) ); ?>;
-
-	return developer_projects;
-}
-
-function getDeveloperTasks()
-{
-	//Get developer task list from php
-	var developer_tasks = <?php echo json_encode( taskListToArray( $_SESSION['Developer']->getTaskList() ) ); ?>;
-
-	return developer_tasks;
-}
-
-//This function gets the array of clients with their projects array from php (clientName => projectArray)
-function getClientProjects()
-{
-	//get the clients project lists
-	var client_project_array = <?php echo json_encode( clientListToArrayOfProjectLists() ); ?>;
-
-	return client_project_array;
-}
-*/
-
 function getProjectTasks()
 {
 	var client_name = getClientSelection();

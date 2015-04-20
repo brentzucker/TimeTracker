@@ -20,7 +20,7 @@ echo '</main>';
 ?>
 
 <script>
-
+/*
 //This function gets the client selection from the client drop down and returns it
 function getClientSelection()
 {
@@ -45,6 +45,7 @@ function getTaskSelection()
 
 	return task_selected;
 }
+*/
 
 //This function get the developer projects array from php
 function getDeveloperProjects()
@@ -72,6 +73,7 @@ function getClientProjects()
 	return client_project_array;
 }
 
+/*
 function getProjectTasks()
 {
 	var client_name = getClientSelection();
@@ -201,6 +203,6 @@ function submitForm()
 
 	document.getElementById("ClientProjectTaskForm").submit();
 }
-
+*/
 
 </script>

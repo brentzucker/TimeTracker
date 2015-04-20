@@ -274,6 +274,27 @@ function dateSelector()
 		echo '<input type="date" name="enddate" value="' . $_POST['enddate'] . '">';
 }
 
+//This function echos 2 inputs for a form. A startdate and an enddate.
+function dateSelectorWide()
+{
+	$today = date('Y-m-d');
+
+	echo ' &nbsp  From  &nbsp ';
+
+	//Saves the date in the in selector view
+	if(!isset($_POST['startdate']))
+		echo '<input type="date" name="startdate" value="2015-01-01">';
+	else
+		echo '<input type="date" name="startdate" value="' . $_POST['startdate'] . '">';
+
+	echo ' &nbsp  to  &nbsp ';
+
+	if(!isset($_POST['enddate']))
+		echo '<input type="date" name="enddate" value="' . $today. '">';
+	else
+		echo '<input type="date" name="enddate" value="' . $_POST['enddate'] . '">';
+}
+
 /* These functions print out profiles 
  *
  */
