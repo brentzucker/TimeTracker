@@ -7,7 +7,9 @@ echo '<h1>Demo Javascript Dropdowns</h1>';
 
 echo '<main id="container">';
 
-//print_r(taskListToArray($_SESSION['Developer']->getTaskList()));
+
+
+echo '<form id="ClientProjectTaskForm" action="" method="POST">';
 
 clientDropDownJS($_SESSION['Developer']);
 
@@ -15,7 +17,10 @@ projectDropDownJS();
 
 taskDropDownJS();
 
-$client_project_array = clientListToArrayOfProjectLists();
+echo '</form>';
+
+if(isset($_POST['Task_Selected']))
+	echo $_POST['Client_Selected'] . ' ' . $_POST['Project_Selected'] . ' ' . $_POST['Task_Selected'];
 
 echo '</main>';
 
@@ -32,7 +37,7 @@ function projectDropDownJS()
 //This function creates the task dropdown with the using the project selected and the developer
 function taskDropDownJS()
 {
-	echo '<select id="taskDropdown" onchange="submitTask()" name="Task_Selected" disabled>';
+	echo '<select id="taskDropdown" onchange="submitForm()" name="Task_Selected" disabled>';
 
 	echo '<option selected="selected" value="">Select a Task</option>';
 
@@ -61,6 +66,14 @@ function getProjectSelection()
 	var project_selected = projectDropdown.options[ projectDropdown.selectedIndex ].value;
 
 	return project_selected;
+}
+
+function getTaskSelection()
+{
+	var taskDropdown = document.getElementById("taskDropdown");
+	var task_selected = taskDropdown.options[taskDropdown.selectedIndex].value;
+
+	return task_selected;
 }
 
 //This function get the developer projects array from php
@@ -210,42 +223,14 @@ function getTaskDropdown()
 	createTaskDropdown(developer_tasks, project_tasks);
 }
 
-/*
-//This function loads the data from php into javascript
-function loadProjectDropdown()
+function submitForm()
 {
-	//get the clients project lists
-	var developer_client_project_array = <?php echo json_encode( clientListToArrayOfProjectLists() ); ?>;
-
-	//Get developer project list from php
-	var developer_projects = <?php echo json_encode( projectListToArray( $_SESSION['Developer']->getProjectList() ) ); ?>;
-	
-	//Client Selected from DropDown
 	var client_selected = getClientSelection();
+	var project_selected = getProjectSelection();
+	var task_selected = getTaskSelection();
 
-	//Select the client selected array
-	var client_projects = developer_client_project_array[client_selected];
-	
-	//Create the Dropdown for the selected data
-	createProjectDropdown(developer_projects, client_projects);
-	
-	/*
-	//Print JSON String
-	console.log(developer_projects);
-	
-	console.log("Developer Projects: ");
-	//Print associative array
-	for(var key in developer_projects)
-		console.log( key + " => "+ developer_projects[key] );
-	
-	console.log("Client Selected Projects: ");
-	//Print associative array
-	for(var key in client_projects)
-		console.log( key + " => "+ client_projects[key] );
-	*/
-//}
-
-
+	document.getElementById("ClientProjectTaskForm").submit();
+}
 
 
 </script>
