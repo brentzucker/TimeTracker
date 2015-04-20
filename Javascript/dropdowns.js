@@ -1,25 +1,3 @@
-<?php
-require_once(__DIR__.'/../include.php');
-
-session_start();
-
-echo '<h1>Demo Javascript Dropdowns</h1>';
-
-echo '<main id="container">';
-
-
-jsFormClientProjectTask();
-
-if(isset($_POST['Task_Selected']))
-	echo $_POST['Client_Selected'] . ' ' . $_POST['Project_Selected'] . ' ' . $_POST['Task_Selected'];
-
-echo '</main>';
-
-
-
-?>
-
-<script>
 
 //This function gets the client selection from the client drop down and returns it
 function getClientSelection()
@@ -46,6 +24,7 @@ function getTaskSelection()
 	return task_selected;
 }
 
+/*
 //This function get the developer projects array from php
 function getDeveloperProjects()
 {
@@ -71,6 +50,7 @@ function getClientProjects()
 
 	return client_project_array;
 }
+*/
 
 function getProjectTasks()
 {
@@ -201,6 +181,3 @@ function submitForm()
 
 	document.getElementById("ClientProjectTaskForm").submit();
 }
-
-
-</script>
