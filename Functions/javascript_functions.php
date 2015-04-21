@@ -17,6 +17,19 @@
 require_once(__DIR__.'/../include.php');
 //PHP functions in this folder call javascript functions 
 
+/* Developer
+ *
+ */
+
+function jsFormDeveloperStartDateEndDate()
+{
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+	developerDropDownJSenableButton((new Team($_SESSION['Developer']->getTeam())));
+	dateSelectorWide();
+	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '</form>';
+}
+
 /* Developer > Client
  *
  */
@@ -298,6 +311,15 @@ function developerDropDownJS($Team)
 function developerDropDownJSsubmit($Team)
 {
 	echo '<select id="developerDropdown" onchange="submitForm()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
+	echo '<option value="">Select a Developer</option>';
+	foreach($Team->getDeveloperList() as $dev)
+		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
+	echo '</select>';
+}
+
+function developerDropDownJSenableButton($Team)
+{
+	echo '<select id="developerDropdown" onchange="enableButton()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
 	echo '<option value="">Select a Developer</option>';
 	foreach($Team->getDeveloperList() as $dev)
 		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
