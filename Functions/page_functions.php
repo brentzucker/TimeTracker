@@ -44,7 +44,7 @@ function addHours()
 //This functino calls developerClientDropdownForm to select the client to be dispaled and assigns the client selected to the developer selected
 function assignClient()
 {
-	jsFormDeveloperClient();
+	jsFormAssignDeveloperClient();
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
 	{

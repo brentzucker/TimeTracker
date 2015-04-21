@@ -35,16 +35,16 @@ function jsFormDeveloperStartDateEndDate()
  */
 
 //This function creates a form with javascript dropdowns
-function jsFormDeveloperClient()
+function jsFormAssignDeveloperClient()
 {
 	//Get the javascript functions required
 	jsFunctions();
 
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
 
-	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
+	developerDropDownJSassignClient( (new Team($_SESSION['Developer']->getTeam())) );
 
-	clientDropDownJSfromTeamenableButton( (new Team($_SESSION['Developer']->getTeam())) );
+	clientDropDownJSfromTeamenableButton();
 
 	echo '<input type="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
@@ -308,6 +308,15 @@ function developerDropDownJS($Team)
 	echo '</select>';
 }
 
+function developerDropDownJSassignClient($Team)
+{
+	echo '<select id="developerDropdown" onchange="getAssignClientDropdown()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
+	echo '<option value="">Select a Developer</option>';
+	foreach($Team->getDeveloperList() as $dev)
+		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
+	echo '</select>';
+}
+
 function developerDropDownJSsubmit($Team)
 {
 	echo '<select id="developerDropdown" onchange="submitForm()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
@@ -361,7 +370,7 @@ function clientDropDownJSenableButton($Developer)
 }
 
 //This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
-function clientDropDownJSfromTeamenableButton($Team)
+function clientDropDownJSfromTeamenableButton()
 {
 	echo '<select id="clientDropdown" onchange="enableButton()" name="Client_Selected" class="form-control select select-primary" data-toggle="select" disabled>';
 	echo '<option selected="selected" value="">Select a Client</option>';
@@ -503,6 +512,14 @@ function jsFunctions()
 	echo '{';
 				//get the clients project lists
 	echo 	'var client_project_array = ' . json_encode( clientListToArrayOfProjectLists($_SESSION['Developer']) ) . ';';
+	echo 	'return client_project_array;';
+	echo '}';
+
+	//This function gets the array of clients with their projects array from php (clientName => projectArray)
+	echo 'function getAllClients()';
+	echo '{';
+				//get the clients project lists
+	echo 	'var client_project_array = ' . json_encode( clientListToArrayOfProjectLists( new Team( $_SESSION['Developer']->getTeam() ) ) ). ';';
 	echo 	'return client_project_array;';
 	echo '}';
 
