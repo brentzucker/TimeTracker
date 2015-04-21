@@ -20,17 +20,18 @@ session_start();
 
 open_html("Update Email");
 
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
+echo '<h1>Update Email</h1>';
+
 $currentemail = $_SESSION['Developer']->getContact()->getEmail();
 
 echo <<<END
-<br>
-<br>
 <form action="" method="POST">
 Email:
-<input type="text" name="updateemail" value="$currentemail">
+<input type="text" name="updateemail" value="$currentemail" class="form-control">
 <br>
-<br>
-<input type="Submit" name="Update" value="Update">
+<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">
 </form>
 END;
 
@@ -39,6 +40,12 @@ if(isset($_POST['Update']))
   $_SESSION['Developer']->getContact()->setEmail($_POST['updateemail']);
   echo 'Email successfully updated!';
 }
+
+echo '</div>';
+
+alertBox();
+
+echo '</main>';
 
 close_html();
 ?>

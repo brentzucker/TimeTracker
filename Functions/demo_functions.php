@@ -179,15 +179,12 @@ function taskDropDown($developer, $projectid)
 	echo '<input type="submit" class="btn btn-block btn-lg btn-primary" value="Submit">';
 }
 
-function teamListToArrayOfClientLists()
+function teamListToArrayOfDeveloperLists()
 {
 	$team_developer_array = array();
 	foreach( ( new Team( $_SESSION['Developer']->getTeam() ) )->getDeveloperList() as $developerObject)
 		$team_developer_array[ $developerObject->getUsername() ] = clientListToArrayOfProjectLists( $developerObject );
 
-	//TESTING 
-
-	print_r( $team_developer_array );
 	return $team_developer_array;
 }
 

@@ -32,19 +32,17 @@ $currentcity = $_SESSION['Developer']->getContact()->getCity();
 $currentstate = $_SESSION['Developer']->getContact()->getState();
 
 echo <<<END
-<br>
-<br>
 <form action="" method="POST">
 First name:
-<input type="text" name="updatefirstname" value="$currentfirstname" class="form-control"><br><br>
+<input type="text" name="updatefirstname" value="$currentfirstname" class="form-control">
 Last name:
-<input type="text" name="updatelastname" value="$currentlastname" class="form-control"><br><br>
+<input type="text" name="updatelastname" value="$currentlastname" class="form-control">
 Phone:
-<input type="text" name="updatephone" value="$currentphone" class="form-control"><br><br>
+<input type="text" name="updatephone" value="$currentphone" class="form-control">
 Address:
-<input type="text" name="updateaddress" value="$currentaddress" class="form-control"><br><br>
+<input type="text" name="updateaddress" value="$currentaddress" class="form-control">
 City:
-<input type="text" name="updatecity" value="$currentcity" class="form-control"><br><br>
+<input type="text" name="updatecity" value="$currentcity" class="form-control">
 State:<br>
 <select name="updatestate" class="form-control select select-primary" data-toggle="select">
 <option value="">Select your state</option>
@@ -120,6 +118,8 @@ if(isset($_POST['UpdateInfo']))
 echo '</div>';
 
 alertBox();
+
+echo '</main>';
 
 close_html();
 ?>

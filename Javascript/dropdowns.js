@@ -58,14 +58,70 @@ function getSelectedProjects()
 	return client_projects[client_selected];
 }
 
-function createClientDropdown(developer_selected)
+function createUnassignClientDropdown(developer_selected)
 {
 	var select = document.getElementById("clientDropdown");
 
-	if(developer_selected == 'Select a Developer')
+	if(developer_selected == '')
 		select.disabled = true;
 	else 
 		select.disabled = false;
+
+	//Clear old select options	
+	for (var i = select.options.length-1 ; i >=0; i--)
+		select.remove(i);
+
+	//get the developers clients
+	var client_list = getDeveloperList()[developer_selected];
+
+	//If there are no options in client_list then disable the dropdown
+	if(client_list.length == 0)
+	{
+		select.disabled = true;
+		select.options.add( new Option("No Clients Available", "") );
+	}
+	else 
+	{
+		select.options.add( new Option ( "Select a Client",  "") );
+
+		for(var client in client_list)
+			select.options.add( new Option( client, client ) );
+	}
+}
+
+function createUnassignProjectDropdown(developer_selected, client_selected)
+{
+	var select = document.getElementById("projectDropdown");
+
+	if(developer_selected == '')
+		select.disabled = true;
+	else 
+		select.disabled = false;
+
+	//Clear old select options	
+	for (var i = select.options.length-1 ; i >=0; i--)
+		select.remove(i);
+
+	var client_list = getDeveloperList()[developer_selected];
+
+	console.log(client_list);
+
+	var project_list = client_list[ client_selected ];
+
+	console.log(project_list);
+
+	if(project_list.length == 0)
+	{
+		select.disabled = true;
+		select.options.add( new Option("No Projects Available", "") );
+	}
+	else 
+	{
+		select.options.add( new Option ( "Select a Project",  "") );
+
+		for(var project in project_list)
+			select.options.add( new Option( project_list[ project ]['ProjectName'] , project ) );			
+	}
 }
 
 function createProjectDropdown(developer_projects, client_projects)
@@ -157,11 +213,19 @@ function createTaskDropdown(developer_tasks, project_tasks)
 	}
 }
 
-function getClientDropdown()
+function getUnassignClientDropdown()
 {
 	var developer_selected = getDeveloperSelection();
 
-	createClientDropdown(developer_selected);
+	createUnassignClientDropdown(developer_selected);
+}
+
+function getUnassignProjectDropdown()
+{
+	var developer_selected = getDeveloperSelection();
+	var client_selected = getClientSelection();
+
+	createUnassignProjectDropdown(developer_selected, client_selected);	
 }
 
 function getTeamProjectDropdown()
@@ -194,8 +258,9 @@ function submitForm()
 }
 
 function enableButton()
-{
+{	
 	var submit_button = document.getElementById('submit_button');
+
 	submit_button.disabled = false;
 }
 
@@ -216,7 +281,6 @@ function enableButton()
 
  	if(element.value == '')
  	{
- 		console.log(element.id);
  		if(element.id == 'projectName')
  			element.value = 'Project Name';
  		else if(element.id == 'taskName')

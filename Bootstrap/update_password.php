@@ -20,17 +20,16 @@ session_start();
 
 open_html("Update Password");
 
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
 echo '<h1>Update Password</h1>';
 
 echo <<<END
-<br>
-<br>
 <form action="" method="POST">
 Password:
-<input type="password" name="password">
+<input type="password" name="password" class="form-control">
 <br>
-<br>
-<input type="Submit" name="Update" value="Update">
+<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">
 </form>
 END;
 
@@ -42,6 +41,12 @@ if(isset($_POST['Update']))
 
 	echo 'Password successfully updated!';
 }
+
+echo '</div>';
+
+alertBox();
+
+echo '</main>';
 
 close_html();
 ?>

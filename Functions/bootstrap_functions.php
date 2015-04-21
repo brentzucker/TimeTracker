@@ -19,6 +19,8 @@ require_once (__DIR__.'/../include.php');
 //This function sets up the text in the sidebar and the dropdowns
 function open_html($title)
 {
+	isLogin();
+
 	echo<<<_END
 
 	<!DOCTYPE html>
@@ -31,6 +33,7 @@ function open_html($title)
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<meta name="description" content="">
     	<meta name="author" content="">
+    	<link rel="icon" type="image/png" href="Images/fav.png">
 
     	<title>$title</title>
 _END;
@@ -234,7 +237,7 @@ function open_login($title)
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="images/fav.jpg">
+    <link rel="icon" type="image/png" href="Images/fav.png">
 
     <title>$title</title>
 
@@ -278,7 +281,7 @@ _END;
 function alertBox()
 {
 	echo '<div class="col-lg-3 alert-box">';
-	echo '<h2>Alerts</h2>';
+	echo '<h2 class="alert-header">Alerts</h2>';
 
 	warningExpiringContracts( $_SESSION['Developer']->getDaysExpirationWarning() );
 	warningLowHours( $_SESSION['Developer']->getHoursLeftWarning() );

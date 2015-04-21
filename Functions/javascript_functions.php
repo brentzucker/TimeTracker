@@ -37,6 +37,21 @@ function jsFormDeveloperClient()
 	echo '</form>';
 }
 
+function jsUnassignFormDeveloperClient()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
+
+	clientDropDownJSunnasignEnableButton();
+
+	echo '<input type="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '</form>';
+}
+
 /* Developer > Client > Project
  *
  */
@@ -58,6 +73,24 @@ function jsFormDeveloperClientProject()
 	echo '<input type="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 }
+
+function jsUnassignFormDeveloperClientProject()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
+
+	clientDropDownJSunassign();
+
+	projectDropDownJSenableButton();
+
+	echo '<input type="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '</form>';
+}
+
 
 /* Developer > Client > Project > Task
  *
@@ -236,7 +269,7 @@ function jsFormClientStartDateEndDate()
 //This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
 function developerDropDownJS($Team)
 {
-	echo '<select id="developerDropdown" onchange="getClientDropdown()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
+	echo '<select id="developerDropdown" onchange="getUnassignClientDropdown()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
 	echo '<option value="">Select a Developer</option>';
 	foreach($Team->getDeveloperList() as $dev)
 		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
@@ -282,8 +315,6 @@ function clientDropDownJSfromTeamenableButton($Team)
 {
 	echo '<select id="clientDropdown" onchange="enableButton()" name="Client_Selected" class="form-control select select-primary" data-toggle="select" disabled>';
 	echo '<option selected="selected" value="">Select a Client</option>';
-	foreach($Team->getClientList() as $client)
-		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
 	echo '</select>';
 }
 
@@ -294,6 +325,20 @@ function clientDropDownJSfromTeam($Team)
 	echo '<option selected="selected" value="">Select a Client</option>';
 	foreach($Team->getClientList() as $client)
 		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	echo '</select>';
+}
+//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
+function clientDropDownJSunnasignEnableButton()
+{
+	echo '<select id="clientDropdown" onchange="enableButton()" name="Client_Selected" class="form-control select select-primary" data-toggle="select" disabled>';
+	echo '<option selected="selected" value="">Select a Client</option>';
+	echo '</select>';
+}
+
+function clientDropDownJSunassign()
+{
+	echo '<select id="clientDropdown" onchange="getUnassignProjectDropdown()" name="Client_Selected" class="form-control select select-primary" data-toggle="select" disabled>';
+	echo '<option selected="selected" value="">Select a Client</option>';
 	echo '</select>';
 }
 
@@ -403,6 +448,14 @@ function jsFunctions()
 				//get the clients project lists
 	echo 	'var client_project_array = ' . json_encode( clientListToArrayOfProjectLists($_SESSION['Developer']) ) . ';';
 	echo 	'return client_project_array;';
+	echo '}';
+
+	//This function get the developer projects array from php
+	echo 'function getDeveloperList()';
+	echo '{';
+				//Get developer project list from php
+	echo 	'var developer_projects = ' . json_encode( teamListToArrayOfDeveloperLists() ) . ';';
+	echo 	'return developer_projects;';
 	echo '}';
 
 	echo '</script>';
