@@ -629,12 +629,11 @@ function updateAlertsForm($developer)
 
 	echo '<form action="" method="POST">';
 	echo '<label>Days Before a Contract Expires:</labels>';
-	echo '<input type="number" name="days" value="' . $developer->getDaysExpirationWarning() . '">';
-	echo '<br>';
+	echo '<input type="number" name="days" value="' . $developer->getDaysExpirationWarning() . '" class="form-control">';
 	echo '<label>Hours Left on Contract:</label>';
-	echo '<input type="number" name="hours" value="' . $developer->getHoursLeftWarning() . '">';
+	echo '<input type="number" name="hours" value="' . $developer->getHoursLeftWarning() . '" class="form-control">';
 	echo '<br>';
-	echo '<input type="submit" value="Update Alerts">';
+	echo '<input type="submit" value="Update Alerts" class="btn btn-block btn-lg btn-primary">';
 	echo '</form>';
 
 	if(isset($_POST['days']) && isset($_POST['hours']))
