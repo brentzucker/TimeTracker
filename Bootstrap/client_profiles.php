@@ -6,7 +6,7 @@
  Dates: (4/20/15,
  Names of files accessed: include.php
  Names of files changed:
- Input:
+ Input: client (dropdown)
  Output: form showing the client's information
  Error Handling:
  Modification List:

@@ -122,7 +122,7 @@ function clock()
 		if(isset($_POST['Task_Selected']))
 			$_SESSION['currentLog']['task'] = $_POST['Task_Selected'];
 		
-		echo '<h2>' . (new Tasks($_SESSION['currentLog']['task']))->getTaskName() . ' was selected</h2>';
+		echo '<h4>' . (new Tasks($_SESSION['currentLog']['task']))->getTaskName() . ' was selected</h4>';
 
 		echo '<h3>Clock In</h3>';
 

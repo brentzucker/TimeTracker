@@ -1,4 +1,20 @@
 <?php
+/*
+ Name: new_project.php
+ Description: creates a new project based off the user-entered information
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/18/15,
+ Names of files accessed: include.php
+ Names of files changed:
+ Input: client (dropdown), project name (string), description (string)
+ Output: text stating that the new project was created
+ Error Handling:
+ Modification List:
+ 4/18/15-Initial code up
+ 4/19/15-Migrated client reports
+ 4/20/15-Updated purchase hours
+*/
+
 require_once(__DIR__.'/../include.php');
 
 session_start();

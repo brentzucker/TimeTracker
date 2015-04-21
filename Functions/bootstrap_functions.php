@@ -24,6 +24,8 @@ _END;
 	echo '<link href="css/style.css" rel="stylesheet">';
 	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
 	echo '<link href="css/simple-sidebar.css" rel="stylesheet">';
+	echo '<link href="dist/css/flat-ui.css" rel="stylesheet">';
+    echo '<link href="docs/assets/css/demo.css" rel="stylesheet">';
 
 	echo<<<_END
 	</head>
@@ -128,23 +130,17 @@ function close_html()
 	echo<<<_END
 			</div>
 		</div>
-
-		<!-- /Javascript/dropdown.js -->
-		<script src="../Javascript/dropdowns.js"></script>
-
-	    <script src="js/jquery.js"></script>
-
-	    <!-- Bootstrap Core JavaScript -->
-	    <script src="js/bootstrap.min.js"></script>
-
-	    <!-- Menu Toggle Script -->
-	    <script>
-	    $("#menu-toggle").click(function(e) {
-	        e.preventDefault();
-	        $("#wrapper").toggleClass("toggled");
-	    });
-	    </script>
-
+			<script src="dist/js/vendor/jquery.min.js"></script>
+			<script src="dist/js/flat-ui.min.js"></script>
+			<script src="docs/assets/js/application.js"></script>
+			<script src="../Javascript/dropdowns.js"></script>
+			<script src="js/jquery.js"></script>
+			<script>
+				$("#menu-toggle").click(function(e) {
+					e.preventDefault();
+					$("#wrapper").toggleClass("toggled");
+				});
+			</script>
 		</body>
 	</html>
 _END;
@@ -273,6 +269,18 @@ function alertBox()
 		
 	echo '<h6><a href="update_alerts.php">Update Alert Settings</a></h6>';
 	echo '</div>';
+}
+
+function isLogin()
+{
+	if(isset($_SESSION['Developer']))
+	{
+		//Nothing
+	}
+	else
+	{
+		header("Location:index.php");
+	}
 }
 
 ?>

@@ -1,9 +1,28 @@
 <?php
+/*
+ Name: update_info.php
+ Description: lets the user update their information
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/18/15,
+ Names of files accessed: include.php
+ Names of files changed:
+ Input: first name (string), last name (string), phone (string), email (string), address (string), city (string), state (dropdown)
+ Output: text showing the information has been updated
+ Error Handling:
+ Modification List:
+ 4/18/15-Initial code up
+ 4/20/15-Migrated my account pages
+ */
+
 require_once(__DIR__.'/../include.php');
 
 session_start();
 
 open_html("Update Info");
+
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
+echo '<h1>Update Information</h1>';
 
 $currentfirstname = $_SESSION['Developer']->getContact()->getFirstname();
 $currentlastname = $_SESSION['Developer']->getContact()->getLastname();
@@ -17,17 +36,17 @@ echo <<<END
 <br>
 <form action="" method="POST">
 First name:
-<input type="text" name="updatefirstname" value="$currentfirstname"><br><br>
+<input type="text" name="updatefirstname" value="$currentfirstname" class="form-control"><br><br>
 Last name:
-<input type="text" name="updatelastname" value="$currentlastname"><br><br>
+<input type="text" name="updatelastname" value="$currentlastname" class="form-control"><br><br>
 Phone:
-<input type="text" name="updatephone" value="$currentphone"><br><br>
+<input type="text" name="updatephone" value="$currentphone" class="form-control"><br><br>
 Address:
-<input type="text" name="updateaddress" value="$currentaddress"><br><br>
+<input type="text" name="updateaddress" value="$currentaddress" class="form-control"><br><br>
 City:
-<input type="text" name="updatecity" value="$currentcity"><br><br>
-State:
-<select name="updatestate">
+<input type="text" name="updatecity" value="$currentcity" class="form-control"><br><br>
+State:<br>
+<select name="updatestate" class="form-control select select-primary" data-toggle="select">
 <option value="">Select your state</option>
 <option value="AL">Alabama</option>
 <option value="AK">Alaska</option>
@@ -83,7 +102,7 @@ State:
 <option value="WI">Wisconsin</option>
 <option value="WY">Wyoming</option>
 </select><br><br>
-<input type="Submit" name="UpdateInfo" value="Update Info">
+<input type="Submit" name="UpdateInfo" value="Update Info" class="btn btn-block btn-lg btn-primary">
 </form>
 END;
 
@@ -97,6 +116,10 @@ if(isset($_POST['UpdateInfo']))
   $_SESSION['Developer']->getContact()->setState($_POST['updatestate']);
   echo "<h2>Info Has Been Updated</h2>";
 }
+
+echo '</div>';
+
+alertBox();
 
 close_html();
 ?>

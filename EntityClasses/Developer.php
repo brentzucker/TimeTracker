@@ -306,9 +306,8 @@ class Developer
 	{
 		if($this->getTimeSetFlag() == False)
 		{
-			$task_row = returnRowByTaskID($TaskID);
-			$ClientName = $task_row['ClientName'];
-			$ProjectID = $task_row['ProjectID'];
+			$ClientName = (new Tasks($TaskID))->getClientname();
+			$ProjectID = (new Tasks($TaskID))->getProjectID();
 
 			//sets the date format
 			$TimeIn = date('Y-m-d H:i:s', time());
