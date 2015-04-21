@@ -1,7 +1,22 @@
 <?php
+/*
+ Name: bootstrap_functions.php
+ Description: sets up the functions used for the Bootstrap theme
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/20/15,
+ Names of files accessed: include.php
+ Names of files changed:
+ Input:
+ Output: links, buttons, labels, etc
+ Error Handling:
+ Modification List:
+ 4/20/15-Initial code up
+ 4/21/15-Edit functions, merge Flat UI
+ */
+
 require_once (__DIR__.'/../include.php');
 
-//This function...
+//This function sets up the text in the sidebar and the dropdowns
 function open_html($title)
 {
 	echo<<<_END
@@ -51,7 +66,7 @@ _END;
                 	</li>
                 
                 	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Reports<span class="caret"></span></a>
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret"></span></a>
                     	<ul class="dropdown-menu">
 						<li><a href="developer_reports.php">Developer Reports</a></li>
 						<li><a href="client_reports.php">Client Reports</a></li>
@@ -61,7 +76,7 @@ _END;
                 	</li>
                 
                 	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Manage Developers<span class="caret"></span></a>
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Developers<span class="caret"></span></a>
                     	<ul class="dropdown-menu">
 						<li><a href="create_developer.php">Create Developers</a></li>
 						<li><a href="assign_client.php">Assign Client</a></li>
@@ -75,7 +90,7 @@ _END;
                 	</li>
                 
                 	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Manage Clients<span class="caret"></span></a>
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Clients<span class="caret"></span></a>
                     	<ul class="dropdown-menu">
 						<li><a href="add_hours.php">Add Purchased Hours</a></li>
 						<li><a href="new_client.php">New Client</a></li>
@@ -91,7 +106,7 @@ _END;
                 	</li>
                 
                 	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">My Account<span class="caret"></span></a>
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account<span class="caret"></span></a>
                     	<ul class="dropdown-menu">
 						<li><a href="update_info.php">Update Info</a></li>
 						<li><a href="update_email.php">Update Email</a></li>
@@ -124,7 +139,7 @@ _END;
 _END;
 }	
 
-//This function...
+//This function toggles the side menu
 function close_html()
 {
 	echo<<<_END
@@ -206,7 +221,7 @@ function checkLogin($username, $password)
 	}
 }
 
-//This function...
+//This function sets up the login page
 function open_login($title)
 {
 	echo<<<_END
@@ -246,7 +261,7 @@ function open_login($title)
 _END;
 }
 
-//This funcion ... 
+//This funcion sets up the logout page
 function close_login()
 {
 	echo<<<_END
@@ -259,6 +274,7 @@ function close_login()
 _END;
 }
 
+//this function sets up the alert box and displays the alert times
 function alertBox()
 {
 	echo '<div class="col-lg-3 alert-box">';
