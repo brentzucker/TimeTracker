@@ -557,18 +557,18 @@ function taskReports()
 //This function unassigns a client from a selected developer
 function unassignClient()
 {
+	//Delete the Client before the dropdown is created
+	if(isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
+	{
+		$developer_to_unassign = new Developer($_POST['Developer_Selected']);
+		$developer_to_unassign->unassignClient(new Client($_POST['Client_Selected']));
+	}
+
 	jsUnassignFormDeveloperClient();
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
 	{
 		echo '<h4>' . $_POST['Client_Selected'] . ' was unassigned from ' . $_POST['Developer_Selected'] . '.</h4>';
-
-		//Assign the selected client to the developer (Creates a Client object and stores it in the Client_List). Makes an entry in the DeveloperAssignments Table
-		$client_to_unassign = new Client($_POST['Client_Selected']);
-
-		$developer_to_unassign = new Developer($_POST['Developer_Selected']);
-		$developer_to_unassign->unassignClient($client_to_unassign);
-
 		printAssignmentsTableClient($_POST['Developer_Selected']);
 	}
 }
@@ -629,11 +629,12 @@ function updateAlertsForm($developer)
 
 	echo '<form action="" method="POST">';
 	echo '<label>Days Before a Contract Expires:</labels>';
-	echo '<input type="number" name="days" value="' . $developer->getDaysExpirationWarning() . '" class="form-control">';
-	echo '<label>Hours Left on Contract:</label>';
-	echo '<input type="number" name="hours" value="' . $developer->getHoursLeftWarning() . '" class="form-control">';
+	echo '<input type="number" name="days" value="' . $developer->getDaysExpirationWarning() . '">';
 	echo '<br>';
-	echo '<input type="submit" value="Update Alerts" class="btn btn-block btn-lg btn-primary">';
+	echo '<label>Hours Left on Contract:</label>';
+	echo '<input type="number" name="hours" value="' . $developer->getHoursLeftWarning() . '">';
+	echo '<br>';
+	echo '<input type="submit" value="Update Alerts">';
 	echo '</form>';
 
 	if(isset($_POST['days']) && isset($_POST['hours']))
