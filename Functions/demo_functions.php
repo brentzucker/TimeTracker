@@ -582,9 +582,9 @@ function printTable($query, $table_headers)
 //This function consumes a taskid and echos the timeLog table for the specific task. Displays by TimeLogID Descending and limits 10 results
 function printTimeSheetTableByTask($task)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.TaskID=" . $task . " ORDER BY TimeLogID DESC LIMIT 10";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TaskID=Tasks.TaskID) AND (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.TaskID=" . $task . " ORDER BY TimeLogID DESC LIMIT 10";
 
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'TaskName', 'Time In', 'Time Out', 'Time Spent');
+	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project Name', 'TaskName', 'Time In', 'Time Out', 'Time Spent');
 
 	printTable($query, $table_headers);
 }

@@ -133,7 +133,7 @@ function close_html()
 			<script src="dist/js/vendor/jquery.min.js"></script>
 			<script src="dist/js/flat-ui.min.js"></script>
 			<script src="docs/assets/js/application.js"></script>
-			<script src="Javascript/dropdowns.js"></script>
+			<script src="../Javascript/dropdowns.js"></script>
 			<script src="js/jquery.js"></script>
 			<script>
 				$("#menu-toggle").click(function(e) {
