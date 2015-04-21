@@ -594,29 +594,21 @@ function unassignProject()
 
 //This function unassigns a task from a selected developer.
 function unassignTask()
-{
-	echo '<h4>Select a Developer</h4>';
+{	
+	//Delete the Task before the dropdown is created
+	if(isset($_POST['Task_Selected']) && isset($_POST['Developer_Selected']))
+	{
+		$developer_to_unassign = new Developer($_POST['Developer_Selected']);
+		$developer_to_unassign->unassignTask(new Tasks($_POST['Task_Selected']));
+	}
 
-	echo '<form action="" method="POST">';
-	developerDropDown($_SESSION['Developer']);
-	echo '</form>';
-
-	developerClientProjectTaskDropDownForm('unassign');
+	jsUnassignFormDeveloperClientProjectTask();
 
 	//If all of the drop downs have been selected, assign the task and print the table
-	if(isset($_POST['Task_Selected']) || isset($_SESSION['unassign']['task']))
+	if(isset($_POST['Task_Selected']) && isset($_POST['Developer_Selected']))
 	{
-		echo '<h2>' . $_SESSION['unassign']['task']  . ' was selected</h2>';
-
-		//Assign the selected task to the developer (Creates a Task object and stores it in the Task_List). Makes an entry in the DeveloperAssignments Table
-		$task_to_unassign = new Tasks($_SESSION['unassign']['task']);
-
-		$developer_to_unassign = new Developer($_SESSION['unassign']['developer']);
-		$developer_to_unassign->unassignTask($task_to_unassign);
-
-		printAssignmentsTable($_SESSION['unassign']['developer']);
-
-		echo '<h3>' . $task_to_unassign->getTaskName() . ' was unassigned.</h3>';
+		echo '<h3>' . (new Tasks($_POST['Task_Selected']))->getTaskName() . ' was unassigned from ' . $_POST['Developer_Selected'] . '.</h3>';
+		printAssignmentsTableTask($_POST['Developer_Selected']);
 	}
 }
 
