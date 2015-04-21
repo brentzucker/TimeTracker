@@ -19,6 +19,8 @@ require_once (__DIR__.'/../include.php');
 //This function sets up the text in the sidebar and the dropdowns
 function open_html($title)
 {
+	isLogin();
+
 	echo<<<_END
 
 	<!DOCTYPE html>

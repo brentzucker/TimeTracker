@@ -425,7 +425,7 @@ body {
 }
 
 .alert-box {
-	height: 500px;
+	height: auto;
 	border: 1px solid black;
 	text-align: center;
 	border-radius: 10px;
