@@ -1,4 +1,12 @@
 
+function getDeveloperSelection()
+{
+	var developerDropdown = document.getElementById("developerDropdown");
+	var developer_selected = developerDropdown.options[developerDropdown.selectedIndex].value;
+
+	return developer_selected;
+}
+
 //This function gets the client selection from the client drop down and returns it
 function getClientSelection()
 {
@@ -48,6 +56,16 @@ function getSelectedProjects()
 	var client_projects = getClientProjects();
 
 	return client_projects[client_selected];
+}
+
+function createClientDropdown(developer_selected)
+{
+	var select = document.getElementById("clientDropdown");
+
+	if(developer_selected == 'Select a Developer')
+		select.disabled = true;
+	else 
+		select.disabled = false;
 }
 
 function createProjectDropdown(developer_projects, client_projects)
@@ -126,6 +144,13 @@ function createTaskDropdown(developer_tasks, project_tasks)
 		for(var i=0; i<dropdown_elements.length; i++)
 			select.options.add( dropdown_elements[i] );
 	}
+}
+
+function getClientDropdown()
+{
+	var developer_selected = getDeveloperSelection();
+
+	createClientDropdown(developer_selected);
 }
 
 function getProjectDropdown()

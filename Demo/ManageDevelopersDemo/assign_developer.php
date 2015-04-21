@@ -3,6 +3,10 @@ require_once(__DIR__.'/../../include.php');
 
 session_start();
 
+//Call in javascript file
+$src =  '../../Javascript/dropdowns.js';
+echo '<script src="' . $src . '"></script>';
+
 echo '<a href="create_developer.php"><h2>Create Developer</h2></a>';
 
 //Select Developer
