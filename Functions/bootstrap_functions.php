@@ -275,4 +275,16 @@ function alertBox()
 	echo '</div>';
 }
 
+function isLogin()
+{
+	if(isset($_SESSION['Developer']))
+	{
+		//Nothing
+	}
+	else
+	{
+		header("Location:index.php");
+	}
+}
+
 ?>
