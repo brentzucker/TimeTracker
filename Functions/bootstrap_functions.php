@@ -51,7 +51,7 @@ _END;
                 	</li>
                 
                 	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Reports<span class="caret"></span></a>
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret"></span></a>
                     	<ul class="dropdown-menu">
 						<li><a href="developer_reports.php">Developer Reports</a></li>
 						<li><a href="client_reports.php">Client Reports</a></li>
@@ -61,7 +61,7 @@ _END;
                 	</li>
                 
                 	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Manage Developers<span class="caret"></span></a>
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Developers<span class="caret"></span></a>
                     	<ul class="dropdown-menu">
 						<li><a href="create_developer.php">Create Developers</a></li>
 						<li><a href="assign_client.php">Assign Client</a></li>
@@ -75,7 +75,7 @@ _END;
                 	</li>
                 
                 	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">Manage Clients<span class="caret"></span></a>
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Clients<span class="caret"></span></a>
                     	<ul class="dropdown-menu">
 						<li><a href="add_hours.php">Add Purchased Hours</a></li>
 						<li><a href="new_client.php">New Client</a></li>
@@ -91,7 +91,7 @@ _END;
                 	</li>
                 
                 	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="Reports/reports.php">My Account<span class="caret"></span></a>
+                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account<span class="caret"></span></a>
                     	<ul class="dropdown-menu">
 						<li><a href="update_info.php">Update Info</a></li>
 						<li><a href="update_email.php">Update Email</a></li>
