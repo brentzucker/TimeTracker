@@ -53,7 +53,7 @@ h5, h6
   padding-bottom: 15px;}
   
 span
-{ color: #fff;
+{ color: #16a085;
   text-shadow: none;}
 
 a, a:hover
@@ -464,4 +464,8 @@ input.btn-block[type="button"], input.btn-block[type="reset"], input.btn-block[t
 
 .dropdown-menu, .select2-drop {
     min-width: auto!important;
+}
+
+.alert-header {
+	margin-top: 5px!important;
 }
