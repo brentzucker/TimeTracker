@@ -278,6 +278,8 @@ function homePage()
 	/*
 	 * Keep all content in the div #page-content-wrapper
 	 */
+	
+
 	echo '<main id="page-content-wrapper">'; 
 	echo '<div class="col-lg-9 main-box">';
 
@@ -290,11 +292,15 @@ function homePage()
 		echo '<h1>Good Evening ' . $_SESSION['Developer']->getContact()->getFirstname() . '</h1>';
 	else
 		echo '<h1>Welcome back ' . $_SESSION['Developer']->getContact()->getFirstname() . '!</h1>';
-
+	
+	//If the minutes are less than 10 add a zero digit infront 
+	$min = localtime(time(), true)['tm_min'];
+	$min = (strlen(''.$min) == 1) ? '0'.$min : $min;
+	
 	if(localtime(time(), true)['tm_hour'] > 12)	
-		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . localtime(time(), true)['tm_min'] . ' pm</h5>';
+		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' pm</h5>';
 	else 
-		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . localtime(time(), true)['tm_min'] . ' am</h5>';
+		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' am</h5>';
 
 	//If they have clocked in before
 	if(count($_SESSION['Developer']->getTimeLog()) > 0)
@@ -311,11 +317,12 @@ function homePage()
 
 	alertBox();
 
-	open_footer();
+	//open_footer(); Causing problems
 
 	echo '</div>';
 	echo '</div>';
 	echo '</div>'; 
+
 	   
 	echo '</main>';
 }
@@ -673,22 +680,21 @@ END;
 //views all assigned clients/projects/tasks for a developer
 function viewAllAssignments()
 {
-	echo '<h4>Select a Developer</h4>';
-	echo '<form action="" method="POST">';
-	developerDropDown($_SESSION['Developer']);
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+	developerDropDownJSsubmit((new Team($_SESSION['Developer']->getTeam())));
 	echo '</form>';
 
 	if(isset($_POST['Developer_Selected']))
 	{
 		echo '<h4>' . $_POST['Developer_Selected'] . " was selected</h4>";
 
-		echo '<h4>Client\'s Assigned </h4>';
+		echo '<h6>Client\'s Assigned </h6>';
 		printAssignmentsTableClient($_POST['Developer_Selected']);
 
-		echo '<h4>Project\'s Assigned </h4>';
+		echo '<h6>Project\'s Assigned </h6>';
 		printAssignmentsTableProject($_POST['Developer_Selected']);
 
-		echo '<h4>Task\'s Assigned </h4>';
+		echo '<h6>Task\'s Assigned </h6>';
 		printAssignmentsTableTask($_POST['Developer_Selected']);
 	}
 }
