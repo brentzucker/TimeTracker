@@ -557,19 +557,19 @@ function taskReports()
 //This function unassigns a client from a selected developer
 function unassignClient()
 {
-	developerClientDropdownForm('unassign');
+	jsFormDeveloperClient();
 
-	if(isset($_POST['Client_Selected']) || isset($_SESSION['unassign']['client']))
+	if(isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
 	{
-		echo '<h4>' . $_SESSION['unassign']['client'] . ' was selected.</h4>';
+		echo '<h4>' . $_POST['Client_Selected'] . ' was unassigned from ' . $_POST['Developer_Selected'] . '.</h4>';
 
 		//Assign the selected client to the developer (Creates a Client object and stores it in the Client_List). Makes an entry in the DeveloperAssignments Table
-		$client_to_unassign = new Client($_SESSION['unassign']['client']);
+		$client_to_unassign = new Client($_POST['Client_Selected']);
 
-		$developer_to_unassign = new Developer($_SESSION['unassign']['developer']);
+		$developer_to_unassign = new Developer($_POST['Developer_Selected']);
 		$developer_to_unassign->unassignClient($client_to_unassign);
 
-		printAssignmentsTableClient($_SESSION['unassign']['developer']);
+		printAssignmentsTableClient($_POST['Developer_Selected']);
 	}
 }
 
