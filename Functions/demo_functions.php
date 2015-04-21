@@ -115,11 +115,11 @@ function teamDropDown($superUser)
 {
 	$teams = $superUser->getTeams();
 
-	echo '<select name="Team_Selected">';
+	echo '<select name="Team_Selected" class="form-control select select-primary" data-toggle="select">';
 	foreach($teams as $t)
 		echo '<option value="' . $t . '">' . $t . '</option>';
 	echo '</select>';
-	echo '<input type="submit" value="Submit">';
+	echo '<input type="submit" value="Submit" class="btn btn-block btn-lg btn-primary">';
 }
 
 //This function gets passed a Developer and echos a dropdwon selector for the Developer's developer List
@@ -127,17 +127,17 @@ function developerDropDown($developer)
 {
 	$developers = $developer->getDevelopers();
 
-	echo '<select name="Developer_Selected">';
+	echo '<select name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
 	foreach($developers as $d)
 		echo '<option value="' . $d->getUsername() . '">' . $d->getUsername() . '</option>';
-	echo '</select>';
-	echo '<input type="submit" value="Submit">';
+	echo '</select><br>';
+	echo '<input type="submit" value="Submit" class="btn btn-block btn-lg btn-primary">';
 }
 
 //This function gets passed a Developer and echos a dropdwon selector for the Developer's Client List
 function clientDropDown($Developer)
 {
-	echo '<select name="Client_Selected" class="form-control client-select" id="sel1" >';
+	echo '<select name="Client_Selected" class="form-control select select-primary" data-toggle="select">';
 
 	if(!isset($_POST['Client_Selected']))
 		foreach($Developer->getClientList() as $client)
@@ -151,7 +151,7 @@ function clientDropDown($Developer)
 
 	echo '</select>';
 	echo '<br>';
-	echo '<input type="submit" class="btn btn-primary" value="Submit" >';
+	echo '<input type="submit" class="btn btn-block btn-lg btn-primary" value="Submit" >';
 	echo '<br>'; 
 
 }
@@ -159,23 +159,23 @@ function clientDropDown($Developer)
 //This function gets passed a developer and client, and echos a dropdown selector for the list of projects that are assigned to that developer and that client
 function projectDropDown($developer, $clientname)
 {
-	echo '<select name="Project_Selected">';
+	echo '<select name="Project_Selected" class="form-control select select-primary" data-toggle="select">';
 
 	foreach($developer->getClientsProjectsAssigned($clientname) as $p)
 		echo '<option value="' . $p->getProjectID() . '">' . $p->getProjectName() . '</option>';
 
 	echo '</select>';
-	echo '<input type="submit" value="Submit">';
+	echo '<input type="submit" class="btn btn-block btn-lg btn-primary" value="Submit">';
 }
 
 //This function gets passed a developer and a projectid, and echos a dropdown selector for the list of tasks that are assigned to that developer and that project
 function taskDropDown($developer, $projectid)
 {
-	echo '<select name="Task_Selected">';
+	echo '<select name="Task_Selected" class="form-control select select-primary" data-toggle="select">';
 	foreach($developer->getProjectsTasksAssigned($projectid) as $t)
 		echo '<option value="' . $t->getTaskID() . '">' . $t->getTaskName() . '</option>';
 	echo '</select>';
-	echo '<input type="submit" value="Submit">';
+	echo '<input type="submit" class="btn btn-block btn-lg btn-primary" value="Submit">';
 }
 
 /* These functions help with the javascript drop down selectors

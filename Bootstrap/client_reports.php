@@ -19,6 +19,8 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
+isLogin();
+
 open_html("Client Reports");
 
 echo '<main id="page-content-wrapper">'; 

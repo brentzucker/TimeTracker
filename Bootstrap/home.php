@@ -19,6 +19,8 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
+isLogin();
+
 open_html("Home");
 
 /*
@@ -57,7 +59,7 @@ echo '</div>';
 
 alertBox();
 
-open_footer();
+//open_footer(); Causing problems
 
 echo '</div>';
 echo '</div>';
