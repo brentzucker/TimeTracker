@@ -25,5 +25,4 @@ echo "<h2>Assign Client</h2>";
 assignClient();
 
 close_html();
-
 ?>

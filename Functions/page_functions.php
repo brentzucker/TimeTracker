@@ -31,7 +31,7 @@ function assignClient()
 {
 	jsFormDeveloperClient();
 
-	if(isset($_POST['Client_Selected']) || isset($_POST['Developer_Selected']))
+	if(isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
 	{
 		echo '<h4>' . $_POST['Client_Selected'] . ' was assigned to ' . $_POST['Developer_Selected'] . '.</h4>';
 
@@ -48,17 +48,17 @@ function assignClient()
 //This function calls developerClientProjectDropdownForm to select the projects to be displayed and assigns the project selected to the developer selected
 function assignProject()
 {
-	developerClientProjectDropdownForm('assign');
+	jsFormDeveloperClientProject();
 
-	if(isset($_POST['Project_Selected']))
+	if(isset($_POST['Project_Selected']) && isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
 	{
-		echo '<h3>' . $_POST['Project_Selected'] . ' was selected</h3>';
+		echo '<h4>' . (new Projects($_POST['Project_Selected']))->getProjectName() . ' was assigned to ' . $_POST['Developer_Selected'] . '</h4>';
 
-		$developer = new Developer($_SESSION['assign']['developer']);
+		$developer = new Developer($_POST['Developer_Selected']);
 
 		$developer->assignProject( new Projects($_POST['Project_Selected']) );
 
-		echo '<h1>Project: ' . $developer->getProject($_POST['Project_Selected'])->getProjectName() . ' was assigned </h1>';
+		printAssignmentsTableProject($_POST['Developer_Selected']);
 	}
 }
 
