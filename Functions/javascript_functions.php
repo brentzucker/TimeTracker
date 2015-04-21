@@ -2,6 +2,26 @@
 require_once(__DIR__.'/../include.php');
 //PHP functions in this folder call javascript functions 
 
+/* Developer > Client
+ *
+ */
+
+//This function creates a form with javascript dropdowns
+function jsFormDeveloperClient()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
+
+	clientDropDownJSfromTeamenableButton( (new Team($_SESSION['Developer']->getTeam())) );
+
+	echo '<input type="submit" id="submit_button" disabled>';
+	echo '</form>';
+}
+
 /* Client > Project > Task
  * 
  */
@@ -145,23 +165,26 @@ function jsFormClientStartDateEndDate()
 	dateSelectorWide();
 
 	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-primary" disabled>';
-
 	echo '</form>';
+}
+
+/* Developer
+ *
+ */
+
+//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
+function developerDropDownJS($Team)
+{
+	echo '<select id="developerDropdown" onchange="getClientDropdown()" name="Developer_Selected">';
+	echo '<option value="">Select a Developer</option>';
+	foreach($Team->getDeveloperList() as $dev)
+		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
+	echo '</select>';
 }
 
 /* Client 
  *
  */
-
-//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
-function clientDropDownJSsubmit($Developer)
-{
-	echo '<select id="clientDropdown" onchange="submitForm()" name="Client_Selected">';
-	echo '<option value="">Select a Client</option>';
-	foreach($Developer->getClientList() as $client)
-		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
-	echo '</select>';
-}
 
 //This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
 function clientDropDownJS($Developer)
@@ -174,11 +197,31 @@ function clientDropDownJS($Developer)
 }
 
 //This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
+function clientDropDownJSsubmit($Developer)
+{
+	echo '<select id="clientDropdown" onchange="submitForm()" name="Client_Selected">';
+	echo '<option value="">Select a Client</option>';
+	foreach($Developer->getClientList() as $client)
+		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	echo '</select>';
+}
+
+//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
 function clientDropDownJSenableButton($Developer)
 {
 	echo '<select id="clientDropdown" onchange="enableButton()" name="Client_Selected">';
 	echo '<option value="">Select a Client</option>';
 	foreach($Developer->getClientList() as $client)
+		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	echo '</select>';
+}
+
+//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
+function clientDropDownJSfromTeamenableButton($Team)
+{
+	echo '<select id="clientDropdown" onchange="enableButton()" name="Client_Selected" disabled>';
+	echo '<option selected="selected" value="">Select a Client</option>';
+	foreach($Team->getClientList() as $client)
 		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
 	echo '</select>';
 }
@@ -228,6 +271,41 @@ function taskDropDownJS()
 	echo '<select id="taskDropdown" onchange="enableButton()" name="Task_Selected" disabled>';
 	echo '<option selected="selected" value="">Select a Task</option>';
 	echo '</select>';
+}
+
+/* These functions help with the javascript drop down selectors
+ *
+ */
+
+//This function echos 3 javascript functions that read php encoded with json
+function jsFunctions()
+{
+	echo '<script>';
+
+	//This function get the developer projects array from php
+	echo 'function getDeveloperProjects()';
+	echo '{';
+				//Get developer project list from php
+	echo 	'var developer_projects = ' . json_encode( projectListToArray( $_SESSION["Developer"]->getProjectList() )) . ';';
+	echo 	'return developer_projects;';
+	echo '}';
+
+	echo 'function getDeveloperTasks()';
+	echo '{';
+				//Get developer task list from php
+	echo 	'var developer_tasks = ' . json_encode( taskListToArray( $_SESSION['Developer']->getTaskList() )) . ';';
+	echo 	'return developer_tasks;';
+	echo '}';
+
+	//This function gets the array of clients with their projects array from php (clientName => projectArray)
+	echo 'function getClientProjects()';
+	echo '{';
+				//get the clients project lists
+	echo 	'var client_project_array = ' . json_encode( clientListToArrayOfProjectLists() ) . ';';
+	echo 	'return client_project_array;';
+	echo '}';
+
+	echo '</script>';
 }
 
 ?>
