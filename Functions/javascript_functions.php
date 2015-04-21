@@ -1,4 +1,19 @@
 <?php
+/*
+ Name: javascript_functions.php
+ Description: sets up the javascript dropdowns
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/20/15,
+ Names of files accessed: include.php
+ Names of files changed:
+ Input:
+ Output: dropdowns
+ Error Handling:
+ Modification List:
+ 4/20/15-Initial code up
+ 4/21/15-Updated dropdowns, added classes to buttons and dropdowns
+ */
+
 require_once(__DIR__.'/../include.php');
 //PHP functions in this folder call javascript functions 
 

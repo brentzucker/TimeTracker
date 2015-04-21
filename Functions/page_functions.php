@@ -1,4 +1,19 @@
 <?php
+/*
+ Name: page_functions.php
+ Description: sets up the javascript dropdowns
+ Programmers: Brent Zucker
+ Dates: (4/20/15,
+ Names of files accessed: include.php
+ Names of files changed:
+ Input:
+ Output: links, buttons, labels, etc
+ Error Handling:
+ Modification List:
+ 4/20/15-Initial code up
+ 4/21/15-Updated dropdown functions and looks
+ */
+
 require_once(__DIR__.'/../include.php');
 
 //This function creates a form for a client and adds the purchased hours to the database
@@ -661,6 +676,7 @@ END;
 	}
 }
 
+//views all assigned clients/projects/tasks for a developer
 function viewAllAssignments()
 {
 	echo '<h4>Select a Developer</h4>';

@@ -1,18 +1,19 @@
 <?php
 /*
-Name: demo_functions.php
-Description: has all the functions needed for the demo in one place
-Programmers: Brent Zucker, Jon Self (editted)
-Dates: (3/12/15,
-Names of files accessed: include.php
-Names of files changed:
-Input:
-Output:
-Error Handling:
-Modification List:
+ Name: demo_functions.php
+ Description: sets up the labels, looks, etc of the webpage
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/20/15,
+ Names of files accessed: include.php
+ Names of files changed:
+ Input:
+ Output: links, buttons, labels, etc
+ Error Handling:
+ Modification List:
+ 4/20/15-Initial code up
+ 4/21/15-Updated dropdowns, merge Flat UI
+ */
 
-4/8/2015: Selective edits
-*/
 require_once(__DIR__.'/../include.php');
 
 //This function echos the links on the home page
