@@ -13,9 +13,9 @@
  4/18/15-Initial code up
  4/19/15-Migrated manage developer pages
  */
-
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Create Developer");
 
