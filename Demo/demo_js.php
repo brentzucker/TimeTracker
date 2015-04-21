@@ -68,7 +68,7 @@ function getDeveloperTasks()
 function getClientProjects()
 {
 	//get the clients project lists
-	var client_project_array = <?php echo json_encode( clientListToArrayOfProjectLists() ); ?>;
+	var client_project_array = <?php echo json_encode( clientListToArrayOfProjectLists($_SESSION['Developer']) ); ?>;
 
 	return client_project_array;
 }

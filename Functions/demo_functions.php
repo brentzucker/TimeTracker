@@ -179,25 +179,26 @@ function taskDropDown($developer, $projectid)
 	echo '<input type="submit" class="btn btn-block btn-lg btn-primary" value="Submit">';
 }
 
+function teamListToArrayOfClientLists()
+{
+	$team_developer_array = array();
+	foreach( ( new Team( $_SESSION['Developer']->getTeam() ) )->getDeveloperList() as $developerObject)
+		$team_developer_array[ $developerObject->getUsername() ] = clientListToArrayOfProjectLists( $developerObject );
+
+	//TESTING 
+
+	print_r( $team_developer_array );
+	return $team_developer_array;
+}
+
 //This function converts a list of client objects to an array list of client project arrays
-function clientListToArrayOfProjectLists()
+function clientListToArrayOfProjectLists($developerObject)
 {
 	$client_project_array = array();
-	foreach($_SESSION['Developer']->getClientList() as $clientObject)
+	foreach($developerObject->getClientList() as $clientObject)
 		$client_project_array[ $clientObject->getClientname() ] = projectListToArray( $clientObject->getProjects() );
 		
 	return $client_project_array;
-}
-
-//This function converts a list of task objects to an assoicative array of tasks
-function taskListToArray($taskObjectList)
-{
-	$task_array = array();
-
-	foreach($taskObjectList as $taskObject)
-		$task_array[ $taskObject->getTaskID() ] = $taskObject->getTaskName();
-
-	return $task_array;
 }
 
 //This function converts a list of project objects to an associative array of projects
@@ -213,6 +214,17 @@ function projectListToArray($projectObjectList)
 	}
 		
 	return $project_array;
+}
+
+//This function converts a list of task objects to an assoicative array of tasks
+function taskListToArray($taskObjectList)
+{
+	$task_array = array();
+
+	foreach($taskObjectList as $taskObject)
+		$task_array[ $taskObject->getTaskID() ] = $taskObject->getTaskName();
+
+	return $task_array;
 }
 
 /* These functions query the date

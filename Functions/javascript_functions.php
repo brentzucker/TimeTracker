@@ -401,7 +401,7 @@ function jsFunctions()
 	echo 'function getClientProjects()';
 	echo '{';
 				//get the clients project lists
-	echo 	'var client_project_array = ' . json_encode( clientListToArrayOfProjectLists() ) . ';';
+	echo 	'var client_project_array = ' . json_encode( clientListToArrayOfProjectLists($_SESSION['Developer']) ) . ';';
 	echo 	'return client_project_array;';
 	echo '}';
 
