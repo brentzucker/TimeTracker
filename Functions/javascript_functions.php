@@ -22,6 +22,52 @@ function jsFormDeveloperClient()
 	echo '</form>';
 }
 
+/* Developer > Client > Project
+ *
+ */
+
+//This function creates a form with javascript dropdowns
+function jsFormDeveloperClientProject()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
+
+	clientDropDownJSfromTeam( (new Team($_SESSION['Developer']->getTeam())) );
+
+	projectDropDownJSfromTeamenableButton((new Team($_SESSION['Developer']->getTeam())));
+
+	echo '<input type="submit" id="submit_button" disabled>';
+	echo '</form>';
+}
+
+/* Developer > Client > Project > Task
+ *
+ */
+
+//This function creates a form with javascript dropdowns
+function jsFormDeveloperClientProjectTask()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
+
+	clientDropDownJSfromTeam( (new Team($_SESSION['Developer']->getTeam())) );
+
+	projectDropDownJSfromTeam((new Team($_SESSION['Developer']->getTeam())));
+
+	taskDropDownJSfromTeamenableButton( (new Team($_SESSION['Developer']->getTeam())) );
+
+	echo '<input type="submit" id="submit_button" disabled>';
+	echo '</form>';
+}
+
 /* Client > Project > Task
  * 
  */
@@ -226,6 +272,16 @@ function clientDropDownJSfromTeamenableButton($Team)
 	echo '</select>';
 }
 
+//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
+function clientDropDownJSfromTeam($Team)
+{
+	echo '<select id="clientDropdown" onchange="getProjectDropdown()" name="Client_Selected" disabled>';
+	echo '<option selected="selected" value="">Select a Client</option>';
+	foreach($Team->getClientList() as $client)
+		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	echo '</select>';
+}
+
 /* Project Dropdowns
  *
  */
@@ -254,6 +310,26 @@ function projectDropDownJSenableButton()
 	echo '</select>';
 }
 
+//This function creates the project dropdown with the id of projectDropdown and onchange getTaskDropdown()
+function projectDropDownJSfromTeam($Team)
+{
+	echo '<select id="projectDropdown" onchange="getTaskDropdown()" name="Project_Selected" disabled>';
+	echo '<option selected="selected" value="">Select a Project</option>';
+	foreach($Team->getProjectList() as $project)
+		echo '<option value="' . $project->getProjectID() . '">' . $project->getProjectName() . '</option>';
+	echo '</select>';
+}
+
+//This function creates the project dropdown with the id of projectDropdown and onchange getTaskDropdown()
+function projectDropDownJSfromTeamenableButton($Team)
+{
+	echo '<select id="projectDropdown" onchange="enableButton()" name="Project_Selected" disabled>';
+	echo '<option selected="selected" value="">Select a Project</option>';
+	foreach($Team->getProjectList() as $project)
+		echo '<option value="' . $project->getProjectID() . '">' . $project->getProjectName() . '</option>';
+	echo '</select>';
+}
+
 /* Task Dropdowns
  *
  */
@@ -270,6 +346,15 @@ function taskDropDownJS()
 {
 	echo '<select id="taskDropdown" onchange="enableButton()" name="Task_Selected" disabled>';
 	echo '<option selected="selected" value="">Select a Task</option>';
+	echo '</select>';
+}
+
+function taskDropDownJSfromTeamenableButton($Team)
+{
+	echo '<select id="taskDropdown" onchange="enableButton()" name="Task_Selected" disabled>';
+	echo '<option selected="selected" value="">Select a Task</option>';
+	foreach($Team->getTaskList() as $task)
+		echo '<option value="' . $task->getTaskID() . '">' . $task->getTaskName() . '</option>';
 	echo '</select>';
 }
 

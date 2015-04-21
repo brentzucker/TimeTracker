@@ -107,6 +107,17 @@ function createProjectDropdown(developer_projects, client_projects)
 	}
 }
 
+function createTeamProjectDropdown(client_selected)
+{
+	var select = document.getElementById("projectDropdown");
+
+	//If there are no projects from that client disable the dropdown
+	if(client_selected == 'Select a Client')
+		select.disabled = true;
+	else 
+		select.disabled = false;
+}
+
 function createTaskDropdown(developer_tasks, project_tasks)
 {
 	var select = document.getElementById("taskDropdown");
@@ -151,6 +162,13 @@ function getClientDropdown()
 	var developer_selected = getDeveloperSelection();
 
 	createClientDropdown(developer_selected);
+}
+
+function getTeamProjectDropdown()
+{
+	var client_selected = getClientSelection();
+
+	createTeamProjectDropdown(client_selected);	
 }
 
 function getProjectDropdown()
