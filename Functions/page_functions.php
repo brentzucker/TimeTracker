@@ -576,17 +576,19 @@ function unassignClient()
 //This function unassigns a project from a selected developer
 function unassignProject()
 {
-	developerClientProjectDropdownForm('unassign');
-
-	if(isset($_POST['Project_Selected']))
+	//Delete the Project before the dropdown is created
+	if(isset($_POST['Project_Selected']) && isset($_POST['Developer_Selected']))
 	{
-		echo '<h3>' . $_POST['Project_Selected'] . ' was selected</h3>';
+		$developer_to_unassign = new Developer($_POST['Developer_Selected']);
+		$developer_to_unassign->unassignProject( new Projects($_POST['Project_Selected']) );
+	}
 
-		$developer = new Developer($_SESSION['unassign']['developer']);
+	jsUnassignFormDeveloperClientProject();
 
-		$developer->unassignProject( new Projects($_POST['Project_Selected']) );
-
-		echo '<h1>Project: ' . (new Projects($_POST['Project_Selected']))->getProjectName() . ' was unassigned </h1>';
+	if(isset($_POST['Project_Selected']) && isset($_POST['Developer_Selected']))
+	{
+		echo '<h3>' . (new Projects($_POST['Project_Selected']))->getProjectName() . ' was unassigned from ' . $_POST['Developer_Selected'] . '.</h3>';
+		printAssignmentsTableProject($_POST['Developer_Selected']);
 	}
 }
 

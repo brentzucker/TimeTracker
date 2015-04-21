@@ -46,7 +46,7 @@ function jsUnassignFormDeveloperClient()
 
 	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
 
-	clientDropDownJSfromTeamenableButton();
+	clientDropDownJSunnasignEnableButton();
 
 	echo '<input type="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
@@ -73,6 +73,24 @@ function jsFormDeveloperClientProject()
 	echo '<input type="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 }
+
+function jsUnassignFormDeveloperClientProject()
+{
+	//Get the javascript functions required
+	jsFunctions();
+
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+
+	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
+
+	clientDropDownJSunassign();
+
+	projectDropDownJSenableButton();
+
+	echo '<input type="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '</form>';
+}
+
 
 /* Developer > Client > Project > Task
  *
@@ -307,6 +325,20 @@ function clientDropDownJSfromTeam($Team)
 	echo '<option selected="selected" value="">Select a Client</option>';
 	foreach($Team->getClientList() as $client)
 		echo '<option value="' . $client->getClientname() . '">' . $client->getClientname() . '</option>';
+	echo '</select>';
+}
+//This function is like clientDropDown except onchange calls getProjectDropdown() and it has an id of clientDropdown
+function clientDropDownJSunnasignEnableButton()
+{
+	echo '<select id="clientDropdown" onchange="enableButton()" name="Client_Selected" class="form-control select select-primary" data-toggle="select" disabled>';
+	echo '<option selected="selected" value="">Select a Client</option>';
+	echo '</select>';
+}
+
+function clientDropDownJSunassign()
+{
+	echo '<select id="clientDropdown" onchange="getUnassignProjectDropdown()" name="Client_Selected" class="form-control select select-primary" data-toggle="select" disabled>';
+	echo '<option selected="selected" value="">Select a Client</option>';
 	echo '</select>';
 }
 
