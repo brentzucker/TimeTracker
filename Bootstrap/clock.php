@@ -6,7 +6,7 @@
  Dates: (4/18/15,
  Names of files accessed: include.php
  Names of files changed:
- Input: 
+ Input: client (dropdown), project (dropdown), task (dropdown)
  Output: shows a table with the developer's clock in/out information and what task they were working on
  Error Handling:
  Modification List:

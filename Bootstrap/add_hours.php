@@ -6,7 +6,7 @@ Programmers: Ryan Graessle, Brent Zucker
 Dates: (4/18/15, 
 Names of files accessed: include.php
 Names of files changed:
-Input: number of hours (int), date of purchase (date)
+Input: client (dropdown), number of hours (int), date of purchase (date)
 Output: text saying the hours were added
 Error Handling:
 Modification List:

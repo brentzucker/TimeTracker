@@ -6,7 +6,7 @@
  Dates: (4/18/15,
  Names of files accessed: include.php
  Names of files changed:
- Input:
+ Input: developer (dropdown), client (dropdown), project (dropdown), task (dropdown)
  Output: text saying the task was added to the developer
  Error Handling:
  Modification List:

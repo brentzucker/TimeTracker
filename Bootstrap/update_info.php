@@ -1,4 +1,19 @@
 <?php
+/*
+ Name: update_info.php
+ Description: lets the user update their information
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/18/15,
+ Names of files accessed: include.php
+ Names of files changed:
+ Input: first name (string), last name (string), phone (string), email (string), address (string), city (string), state (dropdown)
+ Output: text showing the information has been updated
+ Error Handling:
+ Modification List:
+ 4/18/15-Initial code up
+ 4/20/15-Migrated my account pages
+ */
+
 require_once(__DIR__.'/../include.php');
 
 session_start();

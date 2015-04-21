@@ -6,8 +6,8 @@
  Dates: (4/18/15,
  Names of files accessed: include.php
  Names of files changed:
- Input: 
- Output: table showing the client was added to the developer
+ Input: developer (dropdown), client (dropdown)
+ Output: table showing the clients/projects/tasks that the developer is assigned
  Error Handling:
  Modification List:
  4/18/15-Initial code up

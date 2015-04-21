@@ -6,7 +6,7 @@
  Dates: (4/18/15,
  Names of files accessed: include.php
  Names of files changed:
- Input: start date (date) and end date (date)
+ Input: developer (dropdown), start date (date), end date (date)
  Output: table showing the user's information as well as their timelogs
  Error Handling:
  Modification List:

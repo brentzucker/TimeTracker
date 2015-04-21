@@ -6,7 +6,7 @@
  Dates: (4/18/15,
  Names of files accessed: include.php
  Names of files changed:
- Input:
+ Input: client (dropdown), project (dropdown)
  Output: shows text saying the project was deleted
  Error Handling:
  Modification List:
