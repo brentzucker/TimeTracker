@@ -557,7 +557,7 @@ function taskReports()
 //This function unassigns a client from a selected developer
 function unassignClient()
 {
-	jsFormDeveloperClient();
+	jsUnassignFormDeveloperClient();
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
 	{
