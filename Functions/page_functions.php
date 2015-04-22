@@ -186,27 +186,13 @@ function deleteProjectForm()
 //This function prints out the developer reports tables if a developer and date have been selected
 function developerReports()
 {
-	echo '<form action="" method="POST">';
-	developerDropDown($_SESSION['Developer']);
-	echo "</form>";
+	jsFormDeveloperStartDateEndDate();
 
-	if(isset($_POST['Developer_Selected']) || isset($_SESSION['report']['developer']))
+	if(isset($_POST['Developer_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		if(isset($_POST['Developer_Selected']))
-			$_SESSION['report']['developer'] = $_POST['Developer_Selected'];
-
-		echo '<form action="" method="POST">';
-		dateSelector();
-		echo '<br>';
-		echo '<input type="submit" value="Build Report">';
-		echo '</form>';
-
-		if(isset($_POST['startdate']) && isset($_POST['enddate']))
-		{
-			echo '<h2>' . $_SESSION['report']['developer'] . ' was selected</h2>';
-			printAggregatedTimeLogTableByDeveloper($_SESSION['report']['developer'], $_POST['startdate'], $_POST['enddate']);
-			printTimeLogTableByDeveloper($_SESSION['report']['developer'], $_POST['startdate'], $_POST['enddate']);
-		}
+		echo '<h4>' . $_SESSION['report']['developer'] . '\'s Reports</h4>';
+		printAggregatedTimeLogTableByDeveloper($_POST['Developer_Selected'], $_POST['startdate'], $_POST['enddate']);
+		printTimeLogTableByDeveloper($_POST['Developer_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
 
@@ -278,6 +264,8 @@ function homePage()
 	/*
 	 * Keep all content in the div #page-content-wrapper
 	 */
+	
+
 	echo '<main id="page-content-wrapper">'; 
 	echo '<div class="col-lg-9 main-box">';
 
@@ -290,11 +278,15 @@ function homePage()
 		echo '<h1>Good Evening ' . $_SESSION['Developer']->getContact()->getFirstname() . '</h1>';
 	else
 		echo '<h1>Welcome back ' . $_SESSION['Developer']->getContact()->getFirstname() . '!</h1>';
-
+	
+	//If the minutes are less than 10 add a zero digit infront 
+	$min = localtime(time(), true)['tm_min'];
+	$min = (strlen(''.$min) == 1) ? '0'.$min : $min;
+	
 	if(localtime(time(), true)['tm_hour'] > 12)	
-		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . localtime(time(), true)['tm_min'] . ' pm</h5>';
+		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' pm</h5>';
 	else 
-		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . localtime(time(), true)['tm_min'] . ' am</h5>';
+		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' am</h5>';
 
 	//If they have clocked in before
 	if(count($_SESSION['Developer']->getTimeLog()) > 0)
@@ -311,11 +303,12 @@ function homePage()
 
 	alertBox();
 
-	open_footer();
+	//open_footer(); Causing problems
 
 	echo '</div>';
 	echo '</div>';
 	echo '</div>'; 
+
 	   
 	echo '</main>';
 }
@@ -594,29 +587,21 @@ function unassignProject()
 
 //This function unassigns a task from a selected developer.
 function unassignTask()
-{
-	echo '<h4>Select a Developer</h4>';
+{	
+	//Delete the Task before the dropdown is created
+	if(isset($_POST['Task_Selected']) && isset($_POST['Developer_Selected']))
+	{
+		$developer_to_unassign = new Developer($_POST['Developer_Selected']);
+		$developer_to_unassign->unassignTask(new Tasks($_POST['Task_Selected']));
+	}
 
-	echo '<form action="" method="POST">';
-	developerDropDown($_SESSION['Developer']);
-	echo '</form>';
-
-	developerClientProjectTaskDropDownForm('unassign');
+	jsUnassignFormDeveloperClientProjectTask();
 
 	//If all of the drop downs have been selected, assign the task and print the table
-	if(isset($_POST['Task_Selected']) || isset($_SESSION['unassign']['task']))
+	if(isset($_POST['Task_Selected']) && isset($_POST['Developer_Selected']))
 	{
-		echo '<h2>' . $_SESSION['unassign']['task']  . ' was selected</h2>';
-
-		//Assign the selected task to the developer (Creates a Task object and stores it in the Task_List). Makes an entry in the DeveloperAssignments Table
-		$task_to_unassign = new Tasks($_SESSION['unassign']['task']);
-
-		$developer_to_unassign = new Developer($_SESSION['unassign']['developer']);
-		$developer_to_unassign->unassignTask($task_to_unassign);
-
-		printAssignmentsTable($_SESSION['unassign']['developer']);
-
-		echo '<h3>' . $task_to_unassign->getTaskName() . ' was unassigned.</h3>';
+		echo '<h3>' . (new Tasks($_POST['Task_Selected']))->getTaskName() . ' was unassigned from ' . $_POST['Developer_Selected'] . '.</h3>';
+		printAssignmentsTableTask($_POST['Developer_Selected']);
 	}
 }
 
@@ -681,22 +666,21 @@ END;
 //views all assigned clients/projects/tasks for a developer
 function viewAllAssignments()
 {
-	echo '<h4>Select a Developer</h4>';
-	echo '<form action="" method="POST">';
-	developerDropDown($_SESSION['Developer']);
+	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
+	developerDropDownJSsubmit((new Team($_SESSION['Developer']->getTeam())));
 	echo '</form>';
 
 	if(isset($_POST['Developer_Selected']))
 	{
 		echo '<h4>' . $_POST['Developer_Selected'] . " was selected</h4>";
 
-		echo '<h4>Client\'s Assigned </h4>';
+		echo '<h6>Client\'s Assigned </h6>';
 		printAssignmentsTableClient($_POST['Developer_Selected']);
 
-		echo '<h4>Project\'s Assigned </h4>';
+		echo '<h6>Project\'s Assigned </h6>';
 		printAssignmentsTableProject($_POST['Developer_Selected']);
 
-		echo '<h4>Task\'s Assigned </h4>';
+		echo '<h6>Task\'s Assigned </h6>';
 		printAssignmentsTableTask($_POST['Developer_Selected']);
 	}
 }
