@@ -1016,6 +1016,14 @@ function editTaskForm($taskID)
 	echo '</form>';
 }
 
+function editEmailForm()
+{
+	echo '<form action="" method="POST">';
+	echo '<input type="text" name="email" value="' . $_SESSION['Developer']->getContact()->getEmail() . '" class="form-control input-lg">';
+	echo '<input type="Submit" name="submit" value="Update Email" class="btn btn-block btn-lg btn-primary">';
+	echo '</form>';
+}
+
 //This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
 function newClientForm($developer)
 {

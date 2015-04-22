@@ -657,6 +657,18 @@ function viewClientProfiles()
 		getClientProfile($_POST['Client_Selected']);
 }
 
+function updateEmail()
+{
+	//Update Email before form is displayed
+	if(isset($_POST['submit']))
+	{
+		$_SESSION['Developer']->getContact()->setEmail($_POST['email']);
+		echo '<h4>' . $_SESSION['Developer']->getUsername() . '\'s email has been updated to ' . $_SESSION['Developer']->getContact()->getEmail() . '</h4>';
+	}
+	else
+		editEmailForm();
+}
+
 function updatePassword()
 {
 	echo <<<END
