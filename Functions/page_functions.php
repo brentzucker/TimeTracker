@@ -81,7 +81,7 @@ function assignProject()
 //This function calls developerClientProjectTaskDropdownForm to select the tasks to be displayed and assigns the task selected to the developer selected. 
 function assignTask()
 {
-	jsFormDeveloperClientProjectTask();
+	jsFormAssignDeveloperClientProjectTask();
 
 	//If all of the drop downs have been selected, assign the task and print the table
 	if(isset($_POST['Task_Selected']) && isset($_POST['Project_Selected']) && isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))

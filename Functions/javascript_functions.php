@@ -129,20 +129,20 @@ function jsUnassignFormDeveloperClientProjectTask()
 }
 
 //This function creates a form with javascript dropdowns
-function jsFormDeveloperClientProjectTask()
+function jsFormAssignDeveloperClientProjectTask()
 {
 	//Get the javascript functions required
 	jsFunctions();
 
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
 
-	developerDropDownJS( (new Team($_SESSION['Developer']->getTeam())) );
+	developerDropDownJSassignClient( (new Team($_SESSION['Developer']->getTeam())) );
 
-	//clientDropDownJSfromTeam( (new Team($_SESSION['Developer']->getTeam())) );
+	clientDropDownJSfromTeam();
 
-	//projectDropDownJSfromTeam((new Team($_SESSION['Developer']->getTeam())));
+	projectDropDownJSassign();
 
-	//taskDropDownJSfromTeamenableButton( (new Team($_SESSION['Developer']->getTeam())) );
+	taskDropDownJS();
 
 	echo '<input type="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
@@ -450,6 +450,15 @@ function projectDropDownJSunassign()
 {
 	echo '<select id="projectDropdown" onchange="getUnassignTaskDropdown()" name="Project_Selected" class="form-control select select-primary" data-toggle="select" disabled>';
 	echo '<option selected="selected" value="">Select a Project</option>';
+	echo '</select>';
+}
+
+//This function creates the project dropdown with the id of projectDropdown and onchange getTaskDropdown()
+function projectDropDownJSassign()
+{
+	echo '<select id="projectDropdown" onchange="getAssignTaskDropdown()" name="Project_Selected" class="form-control select select-primary" data-toggle="select" disabled>';
+	echo '<option selected="selected" value="">Select a Project</option>';
+
 	echo '</select>';
 }
 /* Task Dropdowns

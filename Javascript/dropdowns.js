@@ -264,7 +264,6 @@ function createAssignProjectDropdown(client_selected, project_list)
 function getAssignProjectDropdown()
 {
 	var client_selected = getClientSelection();
-	console.log(client_selected.length);
 
 	var project_list = getAllClients()[client_selected];
 
@@ -341,6 +340,50 @@ function getTaskDropdown()
 
 	createTaskDropdown(developer_tasks, project_tasks);
 }
+
+function createAssignTaskDropdown(project_selected, task_list)
+{
+	var select = document.getElementById("taskDropdown");
+
+	//If there are no projects from that client disable the dropdown
+	if(project_selected.length == 0)
+		select.disabled = true;
+	else 
+		select.disabled = false;
+
+	//Clear old select options	
+	for (var i = select.options.length-1 ; i >=0; i--)
+		select.remove(i);
+
+	if(task_list.length == 0)
+	{
+		select.disabled = true;
+		select.add( new Option("No Tasks Available", "") );
+	}
+	else
+	{
+		select.add( new Option("Select a Task", "") );
+		for(var task in task_list)
+			select.add( new Option(task_list[task], task) );
+	}
+}
+
+function getAssignTaskDropdown()
+{
+	var client_selected = getClientSelection();
+	var project_selected = getProjectSelection();
+
+	if(client_selected.length != 0 && project_selected.length != 0)
+		var task_list = getAllClients()[client_selected][project_selected]['TaskList'];
+	else 
+		var task_list = [];
+
+	createAssignTaskDropdown(project_selected, task_list);
+}
+
+/* Other Javascript
+ *
+ */
 
 function submitForm()
 {
