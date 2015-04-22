@@ -199,13 +199,13 @@ function developerReports()
 //This function calls editClientForm after a client has been selected
 function editClient()
 {
-	echo '<form action="" method="POST">';
-	echo '<h2>Select a Client</h2>';
-	clientDropDown($_SESSION['Developer']);
-	echo '</form>';
+	jsFormClient();
 
 	if(isset($_POST['Client_Selected']))
+	{
+		echo '<h4>Edit ' . $_POST['Client_Selected'] . '</h4>';
 		editClientForm($_SESSION['Developer'], $_POST['Client_Selected']);
+	}		
 }
 
 //This function prints the tables and forms and also calls functions that modify the developer to edit a record within timesheet

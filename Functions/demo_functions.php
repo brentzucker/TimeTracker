@@ -920,13 +920,7 @@ END;
 //This function echos a form to update a pre existing client by changing the client's contact information via editClient method
 function editClientForm($developer)
 {
-
 	$teamError = $clientError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
-
-	echo '<form action="" method="POST">';
-	echo '<h2>Select a Client</h2>';
-	clientDropDown($developer);
-	echo '</form>';
 
 	$client;
 	if(isset($_POST['Client_Selected']))
