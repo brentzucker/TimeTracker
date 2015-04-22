@@ -994,6 +994,26 @@ function editTaskForm($taskID)
 	echo '</form>';
 }
 
+//This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
+function newClientForm($developer)
+{
+	echo '<form id="developer_form" action="" method="POST">';
+	echo '<br>';
+	echo '<label>Client Name:</label><font color="red">*</font>';
+	echo '<br>';
+	echo '<input type="text" class="form-control" name="clientname">';
+	echo '<font color="red">' . $clientError . '</font>';
+	echo '<br>';
+	echo '<label>StartDate: <font color="red">*</font>';
+	echo '<br>';
+	echo '<input type="date" class="form-control" name="startdate">';
+	echo '<font color="red">' . $dateError . '</font>';
+	echo '<input type="submit" name="Submit" value="Create Client" class="btn btn-block btn-lg btn-primary">';
+	echo '<br>';
+	echo '<font color="red">* Required fields.</font>';
+	echo '</form>';
+}
+
 //BELOW:
 //UNFINISHED -- NEEDS WORK
 
