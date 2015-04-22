@@ -382,61 +382,17 @@ function loginPage()
 	}
 }
 
-//This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
-function newClientForm($developer)
+function newClientPage()
 {
-	$teamError = $clientError = $dateError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
-
-	if($_SERVER["REQUEST_METHOD"] == "POST")
+	
+	//If mandatory fields are set
+	if(isset($_POST['clientname']) && isset($_POST['startdate']))
 	{
-		if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
-		{
-			$username = $_POST['username'];
-			$password = $_POST['password'];
-			$position = $_POST['position'];
-			$firstname = $_POST['firstname'];
-			$lastname = $_POST['lastname'];
-			$phone = $_POST['phone'];
-			$email = $_POST['email'];
-			$address = $_POST['address'];
-			$city = $_POST['city'];
-			$state = $_POST['state'];
-		}
-		else
-			$username = $password = $position = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
-
-		if(empty($_POST['clientname']))
-				$clientError = "Missing";
-		else
-			$client = $_POST['clientname'];
-
-		if(empty($_POST['startdate']))
-			$dateError = "Please select a date.";
-		else
-			$startdate = $_POST['startdate'];
-
-		if($client != "" && $startdate != "")
-		{
-			$developer->newClient($client, $startdate, $_POST['firstname'], $_POST['lastname'], $_POST['phone'], $_POST['email'], $_POST['address'], $_POST['city'], $_POST['state']);
-			echo "<h1> $client was created!</h1>";
-		}
+		$_SESSION['Developer']->newClient($_POST['clientname'], $_POST['startdate']);
+		echo '<h4>' . (new Client($_POST['clientname']))->getClientName() . ' has been created.</h4>';
 	}
-
-	echo <<<END
-	<form id="developer_form" action="" method="POST">
-	<br>Client Name: <font color="red">*</font><br>
-	<input type="text" class="form-control" name="clientname">
-	<font color='red'> $clientError</font>
-	<br>StartDate: <font color="red">*</font><br>
-	<input type="date" class="form-control" name="startdate">
-	<font color='red'> $dateError</font>
-END;
-	echoContactInput();
-	echo <<<END
-	<input type="submit" name="Submit" value="Create Client" class="btn btn-block btn-lg btn-primary">
-	<br><font color="red">* Required fields.</font>
-	</form>
-END;
+	else
+		newClientForm($_SESSION['Developer']);
 }
 
 //This function echos a form to create a new Developer and calls the createEmployee method which stores the info in the database.
