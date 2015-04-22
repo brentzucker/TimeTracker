@@ -231,6 +231,32 @@ function editProject()
 		echo '<h4>' . (new Projects($_SESSION['edit']['ProjectID']))->getProjectName() . ' has been updated</h4>';
 }
 
+function editTask()
+{
+	//Update before dropdown is printed
+	if(isset($_POST['taskName']) && isset($_POST['description']))
+	{
+		$update_task = new Tasks($_SESSION['edit']['TaskID']);
+		$update_task->setTaskName($_POST['taskName']);
+		$update_task->setDescription($_POST['description']);
+	}
+
+	//javascript dropdowns for a client, project, and task
+	jsFormClientProjectTask();
+
+	//If a Client, Project and Task have been selected display the edit form
+	if(isset($_POST['Client_Selected']) && isset($_POST['Project_Selected']) && isset($_POST['Task_Selected']))
+	{
+		echo '<h4>Edit ' . (new Tasks($_POST['Task_Selected']))->getTaskName() . '</h4>';
+		$_SESSION['edit']['TaskID'] = $_POST['Task_Selected'];
+		editTaskForm($_POST['Task_Selected']);
+	}
+
+	//If the form has been submitted display the confirm message
+	if(isset($_POST['taskName']) && isset($_POST['description']))
+		echo '<h4>' . (new Tasks($_SESSION['edit']['TaskID']))->getTaskName() . ' has been updated</h4>';
+}
+
 //This function prints the tables and forms and also calls functions that modify the developer to edit a record within timesheet
 function editTimeSheet()
 {

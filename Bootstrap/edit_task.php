@@ -9,6 +9,8 @@ echo '<main id="page-content-wrapper">';
 echo '<div class="col-lg-9 main-box">';
 echo '<h1>Edit Task</h1>';
 
+editTask();
+
 echo '</div>';
 alertBox();
 echo '</main>';

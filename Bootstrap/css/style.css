@@ -14,6 +14,7 @@ html
 body
 { font: normal 90% Arial, Helvetica, sans-serif;
   color: #000;
+  font-size: 14px!important;
 }
 
 article, aside, figure, footer, header, hgroup, nav, section { 
@@ -353,7 +354,7 @@ footer a:hover
 }
 
 .dropdown-menu > li > a {
-    width: 205px!important;
+    width: 185px!important;
 }
 
 .login-wrong {
@@ -477,4 +478,18 @@ input.btn-block[type="button"], input.btn-block[type="reset"], input.btn-block[t
 
 table {
 	margin: 0 auto!important;
+}
+
+/*
+MEDIA QUERIES
+*/
+
+@media only screen and (max-width: 1280px) {
+
+	.select {
+    	min-width: 180px!important;
+    	margin-bottom: 8px!important;
+    	margin-top: 8px!important;
+	}
+
 }
