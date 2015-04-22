@@ -1,4 +1,8 @@
 
+/* Developer
+ *
+ */
+
 function getDeveloperSelection()
 {
 	var developerDropdown = document.getElementById("developerDropdown");
@@ -7,6 +11,10 @@ function getDeveloperSelection()
 	return developer_selected;
 }
 
+/* Client
+ *
+ */
+
 //This function gets the client selection from the client drop down and returns it
 function getClientSelection()
 {
@@ -14,48 +22,6 @@ function getClientSelection()
 	var client_selected = clientDropdown.options[clientDropdown.selectedIndex].value;
 
 	return client_selected;
-}
-
-function getProjectSelection()
-{
-	var projectDropdown = document.getElementById("projectDropdown");
-	var project_selected = projectDropdown.options[ projectDropdown.selectedIndex ].value;
-
-	return project_selected;
-}
-
-function getTaskSelection()
-{
-	var taskDropdown = document.getElementById("taskDropdown");
-	var task_selected = taskDropdown.options[taskDropdown.selectedIndex].value;
-
-	return task_selected;
-}
-
-function getProjectTasks()
-{
-	var client_name = getClientSelection();
-
-	var project_name = getProjectSelection();
-
-	//get the clients project lists
-	var client_project_array = getClientProjects();
-
-	if(client_project_array[ client_name ][ project_name ] != null)
-		return client_project_array[ client_name ][ project_name ][ 'TaskList' ];
-	else 
-		return null;
-}
-
-//This function gets the array of projects that corresponds to the client selected
-function getSelectedProjects()
-{
-	//Client Selected from DropDown
-	var client_selected = getClientSelection();
-
-	var client_projects = getClientProjects();
-
-	return client_projects[client_selected];
 }
 
 function createUnassignClientDropdown(developer_selected)
@@ -87,6 +53,77 @@ function createUnassignClientDropdown(developer_selected)
 		for(var client in client_list)
 			select.options.add( new Option( client, client ) );
 	}
+}
+
+function getUnassignClientDropdown()
+{
+	var developer_selected = getDeveloperSelection();
+
+	createUnassignClientDropdown(developer_selected);
+}
+
+function createAssignClientDropdown(developer_selected)
+{
+	var select = document.getElementById('clientDropdown');
+
+	if(developer_selected == 'Select a Developer')
+		select.disabled = true;
+	else
+		select.disabled = false;
+
+	//Clear old select options	
+	for (var i = select.options.length-1 ; i >=0; i--)
+		select.remove(i);
+
+	var client_list = getAllClients();
+
+	//If there are no options in client_list then disable the dropdown
+	if(client_list.length == 0)
+	{
+		select.disabled = true;
+		select.options.add( new Option("No Clients Available", "") );
+	}
+	else 
+	{
+		select.options.add( new Option ( "Select a Client",  "") );
+
+		for(var client in client_list)
+			select.options.add( new Option( client, client ) );
+	}
+}
+
+function getAssignClientDropdown()
+{
+	var developer_selected = getDeveloperSelection();
+
+	createAssignClientDropdown(developer_selected);
+}
+
+/* Project
+ *
+ */
+
+function getProjectSelection()
+{
+	var projectDropdown = document.getElementById("projectDropdown");
+	var project_selected = projectDropdown.options[ projectDropdown.selectedIndex ].value;
+
+	return project_selected;
+}
+
+function getProjectTasks()
+{
+	var client_name = getClientSelection();
+
+	var project_name = getProjectSelection();
+
+	//get the clients project lists
+	var client_project_array = getClientProjects();
+
+	if(client_project_array[ client_name ][ project_name ] != null)
+		return client_project_array[ client_name ][ project_name ][ 'TaskList' ];
+	else 
+		return null;
 }
 
 function createUnassignProjectDropdown(developer_selected, client_selected)
@@ -174,6 +211,52 @@ function createTeamProjectDropdown(client_selected)
 		select.disabled = false;
 }
 
+function getUnassignProjectDropdown()
+{
+	var developer_selected = getDeveloperSelection();
+	var client_selected = getClientSelection();
+
+	createUnassignProjectDropdown(developer_selected, client_selected);	
+}
+
+function getTeamProjectDropdown()
+{
+	var client_selected = getClientSelection();
+
+	createTeamProjectDropdown(client_selected);	
+}
+
+function getProjectDropdown()
+{
+	var developer_projects = getDeveloperProjects();
+	var client_projects = getSelectedProjects();
+
+	createProjectDropdown(developer_projects, client_projects);	
+}
+
+//This function gets the array of projects that corresponds to the client selected
+function getSelectedProjects()
+{
+	//Client Selected from DropDown
+	var client_selected = getClientSelection();
+
+	var client_projects = getClientProjects();
+
+	return client_projects[client_selected];
+}
+
+/* Task
+ *
+ */
+
+function getTaskSelection()
+{
+	var taskDropdown = document.getElementById("taskDropdown");
+	var task_selected = taskDropdown.options[taskDropdown.selectedIndex].value;
+
+	return task_selected;
+}
+
 function createTaskDropdown(developer_tasks, project_tasks)
 {
 	var select = document.getElementById("taskDropdown");
@@ -211,36 +294,6 @@ function createTaskDropdown(developer_tasks, project_tasks)
 		for(var i=0; i<dropdown_elements.length; i++)
 			select.options.add( dropdown_elements[i] );
 	}
-}
-
-function getUnassignClientDropdown()
-{
-	var developer_selected = getDeveloperSelection();
-
-	createUnassignClientDropdown(developer_selected);
-}
-
-function getUnassignProjectDropdown()
-{
-	var developer_selected = getDeveloperSelection();
-	var client_selected = getClientSelection();
-
-	createUnassignProjectDropdown(developer_selected, client_selected);	
-}
-
-function getTeamProjectDropdown()
-{
-	var client_selected = getClientSelection();
-
-	createTeamProjectDropdown(client_selected);	
-}
-
-function getProjectDropdown()
-{
-	var developer_projects = getDeveloperProjects();
-	var client_projects = getSelectedProjects();
-
-	createProjectDropdown(developer_projects, client_projects);	
 }
 
 function getTaskDropdown()

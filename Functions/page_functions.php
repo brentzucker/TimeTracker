@@ -25,9 +25,9 @@ function addHours()
 	echo '<label>Hours Purchased:</label>';
 	echo '<br>';
 	clientDropDownJSenableButton($_SESSION['Developer']);
-	echo '<input type="number" name="hours_purchased" value="8">';
-	echo '<input type="date" name="purchase_date" value="' . (new dateTime())->format('Y-m-d') . '">';
-	echo '<input type="submit" value="Add Hours" id="submit_button" disabled>';
+	echo '<input type="number" name="hours_purchased" value="8" class="form-control">';
+	echo '<input type="date" class="form-control" name="purchase_date" value="' . (new dateTime())->format('Y-m-d') . '">';
+	echo '<input type="submit" value="Add Hours" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['hours_purchased']) && isset($_POST['purchase_date']))
@@ -44,7 +44,7 @@ function addHours()
 //This functino calls developerClientDropdownForm to select the client to be dispaled and assigns the client selected to the developer selected
 function assignClient()
 {
-	jsFormDeveloperClient();
+	jsFormAssignDeveloperClient();
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
 	{
@@ -448,11 +448,11 @@ function newDeveloperForm($developer)
 
 	echo <<<END
 	<br>Username: <font color="red">*</font><br>
-	<input type="text" name="username"> <font color="red">$usernameError</font>
+	<input type="text" name="username" class="form-control"> <font color="red">$usernameError</font>
 	<br>Password: <font color="red">*</font><br>
-	<input type="password" name="password"> <font color="red">$passwordError</font>
+	<input type="password" name="password" class="form-control"> <font color="red">$passwordError</font>
 	<br>Position: <font color="red">*</font><br>
-	<select name="position">
+	<select name="position" class="form-control select select-primary" data-toggle="select">
 		<option value="">Select your position</option>
 		<option value="Project Manager">Project Manager</option>
 		<option value="Developer">Developer</option>
@@ -464,11 +464,9 @@ END;
 	echoContactInput();
 
 	echo <<<END
-	<br><input type="submit" name="Submit" value="Create Developer">
+	<br><input type="submit" name="Submit" value="Create Developer" class="btn btn-block btn-lg btn-primary">
 	<br><font color="red">* Required fields.</font>
 	</form>
-	<br>
-	<a href="manage_developers.php">Back to Manage Developers</a>
 END;
 }
 
