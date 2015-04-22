@@ -969,11 +969,11 @@ function editProjectForm($projectID)
 	echo '<form action="" method="POST">';
 	echo '<label>Project Name:</label>';
 	echo '<br>';
-	echo '<input type="text" name="projectName">';
+	echo '<input type="text" name="projectName" value="' . (new Projects($projectID))->getProjectName() . '">';
 	echo '<br>';
 	echo '<label>Description:</label>';
 	echo '<br>';
-	echo '<input type="textarea" name="description">';
+	echo '<textarea rows=4 name="description" >' . (new Projects($projectID))->getDescription() . '</textarea>';
 	echo '<br>';
 	echo '<input type="submit">';
 	echo '</form>';

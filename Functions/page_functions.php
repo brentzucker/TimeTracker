@@ -210,13 +210,25 @@ function editClient()
 
 function editProject()
 {
+	//Update before dropdown is printed
+	if(isset($_POST['projectName']) && isset($_POST['description']))
+	{
+		$update_project = new Projects($_SESSION['edit']['ProjectID']);
+		$update_project->setProjectName($_POST['projectName']);
+		$update_project->setDescription($_POST['description']);
+	}
+
 	jsFormClientProject();
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['Project_Selected']))
 	{
 		echo '<h4>Edit ' . (new Projects($_POST['Project_Selected']))->getProjectName() . '</h4>';
+		$_SESSION['edit']['ProjectID'] = $_POST['Project_Selected'];
 		editProjectForm($_POST['Project_Selected']);
 	}
+
+	if(isset($_POST['projectName']) && isset($_POST['description']))
+		echo '<h4>' . (new Projects($_SESSION['edit']['ProjectID']))->getProjectName() . ' has been updated</h4>';
 }
 
 //This function prints the tables and forms and also calls functions that modify the developer to edit a record within timesheet
