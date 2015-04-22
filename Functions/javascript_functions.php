@@ -25,9 +25,11 @@ function jsFormDeveloperStartDateEndDate()
 {
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
 	developerDropDownJSenableButton((new Team($_SESSION['Developer']->getTeam())));
+	echo '<br />';
 	dateSelectorWide();
 	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
+	echo '<br />';
 }
 
 /* Developer > Client
