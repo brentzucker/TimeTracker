@@ -234,6 +234,43 @@ function getProjectDropdown()
 	createProjectDropdown(developer_projects, client_projects);	
 }
 
+function createAssignProjectDropdown(client_selected, project_list)
+{
+	var select = document.getElementById("projectDropdown");
+
+	//If there are no projects from that client disable the dropdown
+	if(client_selected.length == 0)
+		select.disabled = true;
+	else 
+		select.disabled = false;
+
+	//Clear old select options	
+	for (var i = select.options.length-1 ; i >=0; i--)
+		select.remove(i);
+
+	if(project_list.length == 0)
+	{
+		select.disabled = true;
+		select.add( new Option("No Projects Available", "") );
+	}
+	else
+	{
+		select.add( new Option("Select a Project", "") );
+		for(var project in project_list)
+			select.add( new Option(project_list[project]['ProjectName'], project) );
+	}
+}
+
+function getAssignProjectDropdown()
+{
+	var client_selected = getClientSelection();
+	console.log(client_selected.length);
+
+	var project_list = getAllClients()[client_selected];
+
+	createAssignProjectDropdown(client_selected, project_list);
+}
+
 //This function gets the array of projects that corresponds to the client selected
 function getSelectedProjects()
 {

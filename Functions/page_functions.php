@@ -63,16 +63,16 @@ function assignClient()
 //This function calls developerClientProjectDropdownForm to select the projects to be displayed and assigns the project selected to the developer selected
 function assignProject()
 {
-	jsFormDeveloperClientProject();
+	jsFormAssignDeveloperClientProject();
 
 	if(isset($_POST['Project_Selected']) && isset($_POST['Client_Selected']) && isset($_POST['Developer_Selected']))
 	{
 		echo '<h4>' . (new Projects($_POST['Project_Selected']))->getProjectName() . ' was assigned to ' . $_POST['Developer_Selected'] . '</h4>';
 
-		$developer = new Developer($_POST['Developer_Selected']);
+		$developer_to_assign = new Developer($_POST['Developer_Selected']);
 
 		$developer_to_assign->assignClient(new Client($_POST['Client_Selected']));
-		$developer->assignProject( new Projects($_POST['Project_Selected']) );
+		$developer_to_assign->assignProject( new Projects($_POST['Project_Selected']) );
 
 		printAssignmentsTableProject($_POST['Developer_Selected']);
 	}
