@@ -199,13 +199,36 @@ function developerReports()
 //This function calls editClientForm after a client has been selected
 function editClient()
 {
-	echo '<form action="" method="POST">';
-	echo '<h2>Select a Client</h2>';
-	clientDropDown($_SESSION['Developer']);
-	echo '</form>';
+	jsFormClient();
 
 	if(isset($_POST['Client_Selected']))
+	{
+		echo '<h4>Edit ' . $_POST['Client_Selected'] . '</h4>';
 		editClientForm($_SESSION['Developer'], $_POST['Client_Selected']);
+	}		
+}
+
+function editProject()
+{
+	//Update before dropdown is printed
+	if(isset($_POST['projectName']) && isset($_POST['description']))
+	{
+		$update_project = new Projects($_SESSION['edit']['ProjectID']);
+		$update_project->setProjectName($_POST['projectName']);
+		$update_project->setDescription($_POST['description']);
+	}
+
+	jsFormClientProject();
+
+	if(isset($_POST['Client_Selected']) && isset($_POST['Project_Selected']))
+	{
+		echo '<h4>Edit ' . (new Projects($_POST['Project_Selected']))->getProjectName() . '</h4>';
+		$_SESSION['edit']['ProjectID'] = $_POST['Project_Selected'];
+		editProjectForm($_POST['Project_Selected']);
+	}
+
+	if(isset($_POST['projectName']) && isset($_POST['description']))
+		echo '<h4>' . (new Projects($_SESSION['edit']['ProjectID']))->getProjectName() . ' has been updated</h4>';
 }
 
 //This function prints the tables and forms and also calls functions that modify the developer to edit a record within timesheet
@@ -376,18 +399,17 @@ function newClientForm($developer)
 	echo <<<END
 	<form id="developer_form" action="" method="POST">
 	<br>Client Name: <font color="red">*</font><br>
-	<input type="text" name="clientname">
+	<input type="text" class="form-control" name="clientname">
 	<font color='red'> $clientError</font>
 	<br>StartDate: <font color="red">*</font><br>
-	<input type="date" name="startdate">
+	<input type="date" class="form-control" name="startdate">
 	<font color='red'> $dateError</font>
 END;
 	echoContactInput();
 	echo <<<END
-	<input type="submit" name="Submit" value="Create Client">
+	<input type="submit" name="Submit" value="Create Client" class="btn btn-block btn-lg btn-primary">
 	<br><font color="red">* Required fields.</font>
 	</form>
-	<br>
 END;
 }
 
@@ -475,9 +497,9 @@ function newProjectForm($developer)
 {
 	echo '<form action="" method="POST">';
 	clientDropDownJSenableButton($developer);
-	echo '<input type="text" name="project" value="Project Name" id="projectName" onfocus="clearField(\'projectName\')" onblur="blurField(\'projectName\')">';
-	echo '<input type="textarea" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
-	echo '<input type="submit" value="Create Project" id="submit_button" disabled>';
+	echo '<input type="text" class="form-control" name="project" value="Project Name" id="projectName" onfocus="clearField(\'projectName\')" onblur="blurField(\'projectName\')">';
+	echo '<input type="textarea" class="form-control" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
+	echo '<input type="submit" value="Create Project" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['project']) && isset($_POST['description']))
@@ -498,9 +520,9 @@ function newTaskForm($session, $developer)
 	echo "<h2>Select a Client</h2>";
 	clientDropDownJS($developer);
 	projectDropDownJSenableButton();
-	echo '<input type="text" name="task" value="Task Name" id="taskName" onfocus="clearField(\'taskName\')" onblur="blurField(\'taskName\')">';
-	echo '<input type="textarea" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
-	echo '<input type="submit" name="Create Task" id="submit_button"  disabled>';
+	echo '<input type="text" class="form-control" name="task" value="Task Name" id="taskName" onfocus="clearField(\'taskName\')" onblur="blurField(\'taskName\')">';
+	echo '<input type="textarea" class="form-control" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
+	echo '<input type="submit" name="Create Task" id="submit_button" class="btn btn-block btn-lg btn-primary"  disabled>';
 	echo"</form>";
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['Project_Selected']) && isset($_POST['task']) )
@@ -614,12 +636,12 @@ function updateAlertsForm($developer)
 
 	echo '<form action="" method="POST">';
 	echo '<label>Days Before a Contract Expires:</labels>';
-	echo '<input type="number" name="days" value="' . $developer->getDaysExpirationWarning() . '">';
+	echo '<input type="number" name="days" class="form-control" value="' . $developer->getDaysExpirationWarning() . '">';
 	echo '<br>';
 	echo '<label>Hours Left on Contract:</label>';
-	echo '<input type="number" name="hours" value="' . $developer->getHoursLeftWarning() . '">';
+	echo '<input type="number" name="hours" class="form-control" value="' . $developer->getHoursLeftWarning() . '">';
 	echo '<br>';
-	echo '<input type="submit" value="Update Alerts">';
+	echo '<input type="submit" value="Update Alerts" class="btn btn-block btn-lg btn-primary">';
 	echo '</form>';
 
 	if(isset($_POST['days']) && isset($_POST['hours']))
@@ -640,14 +662,11 @@ function viewClientProfiles()
 function updatePassword()
 {
 	echo <<<END
-	<br>
-	<br>
 	<form action="" method="POST">
 	Password:
-	<input type="password" name="password">
+	<input type="password" name="password" class="form-control">
 	<br>
-	<br>
-	<input type="Submit" name="Update" value="Update">
+	<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">
 	</form>
 END;
 

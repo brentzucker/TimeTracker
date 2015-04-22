@@ -920,13 +920,7 @@ END;
 //This function echos a form to update a pre existing client by changing the client's contact information via editClient method
 function editClientForm($developer)
 {
-
 	$teamError = $clientError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
-
-	echo '<form action="" method="POST">';
-	echo '<h2>Select a Client</h2>';
-	clientDropDown($developer);
-	echo '</form>';
 
 	$client;
 	if(isset($_POST['Client_Selected']))
@@ -969,6 +963,22 @@ function editClientForm($developer)
 END;
 	}
 }
+
+function editProjectForm($projectID)
+{
+	echo '<form action="" method="POST">';
+	echo '<label>Project Name:</label>';
+	echo '<br>';
+	echo '<input type="text" name="projectName" value="' . (new Projects($projectID))->getProjectName() . '">';
+	echo '<br>';
+	echo '<label>Description:</label>';
+	echo '<br>';
+	echo '<textarea rows=4 name="description" >' . (new Projects($projectID))->getDescription() . '</textarea>';
+	echo '<br>';
+	echo '<input type="submit">';
+	echo '</form>';
+}
+
 //BELOW:
 //UNFINISHED -- NEEDS WORK
 
