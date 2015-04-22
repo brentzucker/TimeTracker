@@ -53,7 +53,7 @@ h5, h6
   padding-bottom: 15px;}
   
 span
-{ color: #16a085;
+{ color: #fff;
   text-shadow: none;}
 
 a, a:hover
@@ -468,4 +468,8 @@ input.btn-block[type="button"], input.btn-block[type="reset"], input.btn-block[t
 
 .alert-header {
 	margin-top: 5px!important;
+}
+
+.green {
+	color: #16a085;
 }

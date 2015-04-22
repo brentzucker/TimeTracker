@@ -835,8 +835,8 @@ function clockForm($developer, $taskid)
 		$developer->clockOut();
 
 	echo '<form action="" method="POST">';
-	echo '<input type="submit" name="clockin" value="Clock In">';
-	echo '<input type="submit" name="clockout" value="Clock Out">';
+	echo '<input type="submit" name="clockin" value="Clock In" class="btn btn-block btn-lg btn-primary">';
+	echo '<input type="submit" name="clockout" value="Clock Out" class="btn btn-block btn-lg btn-primary">';
 	echo '</form>';
 }
 
@@ -845,19 +845,19 @@ function echoContactInput()
 {
 	echo<<<END
 	<br>Firstname:<br>
-	<input type="text" name="firstname">
+	<input type="text" name="firstname" class="form-control">
 	<br>Lastname:<br>
-	<input type="text" name="lastname">
+	<input type="text" name="lastname" class="form-control">
 	<br>Phone:<br>
-	<input type="text" name="phone">
+	<input type="text" name="phone" class="form-control">
 	<br>Email:<br>
-	<input type="text" name="email">
+	<input type="text" name="email" class="form-control">
 	<br>Address:<br>
-	<input type="text" name="address">
+	<input type="text" name="address" class="form-control">
 	<br>City:<br>
-	<input type="text" name="city">
+	<input type="text" name="city" class="form-control">
 	<br>State:<br>
-	<select name="state">
+	<select name="state" class="form-control select select-primary" data-toggle="select">
 	<option value="">Select your state</option>
 	<option value="AL">Alabama</option>
 	<option value="AK">Alaska</option>
@@ -963,11 +963,9 @@ function editClientForm($developer)
 		echoContactInput();
 		echo <<<END
 		<br/>
-		<input type="submit" name="editClientSubmit" value="Edit Client">
+		<input type="submit" name="editClientSubmit" value="Edit Client" class="form-control">
 		<input type="hidden" name="Client_Selected" value="$client">
 		</form>
-		<br>
-		<a href="manage_clients.php">Back</a>
 END;
 	}
 }
@@ -1000,8 +998,8 @@ function removeProjectForm($session, $developer)
 			echo '<h2>' . $_SESSION[$session]['Project_Selected'] . ' was selected.</h2>';
 
 			echo '<h2>Do you want to delete this project?</h2>';
-			echo '<form action="" method="POST">';
-			echo '<input type="Submit" name="removeproject" value="Delete">';
+			echo '<form action="" method="POST" >';
+			echo '<input type="Submit" name="removeproject" value="Delete" class="btn btn-block btn-lg btn-primary">';
 			echo '</form>';
 		}
 
@@ -1052,7 +1050,7 @@ function removeTaskForm($session, $developer)
 
 			echo '<h2>Do you want to delete this task?</h2>';
 			echo '<form action="" method="POST">';
-			echo '<input type="Submit" name="removetask" value="Delete">';
+			echo '<input type="Submit" name="removetask" value="Delete" class="btn btn-block btn-lg btn-primary">';
 			echo '</form>';
 		}
 
