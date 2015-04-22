@@ -23,7 +23,7 @@ echo '<main id="page-content-wrapper">';
 echo '<div class="col-lg-9 main-box">';
 echo '<h2>Create Developer</h2>';
 
-newDeveloperForm($_SESSION['Developer']);
+newDeveloperPage();
 
 echo '</div>';
 

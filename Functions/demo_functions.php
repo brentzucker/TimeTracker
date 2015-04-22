@@ -1024,6 +1024,76 @@ function editEmailForm()
 	echo '</form>';
 }
 
+function newDeveloperForm($developer)
+{
+	echo '<form action="" method="POST">';
+	
+	//If the form has already been submitted display the error, otherwise print out the form	
+	if(isset($_POST['submit']))
+	{
+		if(verifyUsername($_POST['username']))
+			echo '<label>Username:</label>';
+		else
+			echo '<label style="color:red;">Username must be at least 3 characters</label>';
+
+		echo '<input type="text" name="username" class="form-control" value="' . $_POST['username'] . '">';
+		
+		if(verifyEmail($_POST['email']))
+			echo '<label>Email:</label>';
+		else
+			echo '<label style="color:red;">Enter a valid email address</label>';
+		
+		echo '<input type="text" name="email" class="form-control" value="' . $_POST['email'] . '">';
+		
+		if(verifyPassword($_POST['password']))
+			echo '<label>Password:</label>';
+		else
+			echo '<label style="color:red;">Password must be at least 5 characters</label>';
+		
+		echo '<input type="password" name="password" class="form-control">';
+
+		echo '<input type="hidden" name="position" value="Developer">';
+		echo '<input type="submit" name="submit" value="Create Developer" class="btn btn-block btn-lg btn-primary">';
+	}
+	else
+	{
+		echo '<label>Username:</label>';
+		echo '<input type="text" name="username" class="form-control">';
+		echo '<label>Email:</label>';
+		echo '<input type="text" name="email" class="form-control">';
+		echo '<label>Password:</label>';
+		echo '<input type="password" name="password" class="form-control">';
+		echo '<input type="hidden" name="position" value="Developer">';
+		echo '<input type="submit" name="submit" value="Create Developer" class="btn btn-block btn-lg btn-primary">';	
+	}
+
+	echo '</form>';
+}
+
+function verifyEmail($email)
+{
+	if(strpos($email, '@') !== false && strpos($email, '.') !== false && strlen($email) > 4)
+		return true;
+	else 
+		return false;
+}
+
+function verifyUsername($username)
+{
+	if(strlen($username) > 2)
+		return true;
+	else 
+		return false;
+}
+
+function verifyPassword($password)
+{
+	if(strlen($password) > 4)
+		return true;
+	else
+		return false;
+}
+
 //This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
 function newClientForm($developer)
 {
