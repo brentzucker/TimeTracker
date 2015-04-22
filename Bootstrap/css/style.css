@@ -458,7 +458,7 @@ client-select {
 }
 
 input.btn-block[type="button"], input.btn-block[type="reset"], input.btn-block[type="submit"] {
-    width: 200px!important;
+    margin: 15px auto 0!important;
 	margin: 0 auto;
 }
 

@@ -20,9 +20,15 @@ session_start();
 
 open_html("Assign Task");
 
-echo "<h2>Manage Developers</h2>";
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
+echo "<h2>Assign Task</h2>";
 
 assignTask();
+
+echo '</div>';
+alertBox();
+echo '</main>';
 
 close_html();
 

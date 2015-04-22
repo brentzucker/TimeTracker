@@ -20,9 +20,15 @@ session_start();
 
 open_html("New Task");
 
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
 echo '<h1>New Task</h1>';
 
 newTaskForm("new", $_SESSION['Developer']);
+
+echo '</div>';
+alertBox();
+echo '</main>';
 
 close_html();
 ?>

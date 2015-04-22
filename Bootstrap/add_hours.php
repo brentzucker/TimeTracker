@@ -20,9 +20,15 @@ session_start();
 
 open_html("Add Purchased Hours");
 
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
 echo '<h1>Add Purchased Hours</h1>';
 
 addHours();
+
+echo '</div>';
+alertBox();
+echo '</main>';
 
 close_html();
 ?>

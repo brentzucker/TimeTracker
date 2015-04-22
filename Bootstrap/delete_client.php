@@ -20,9 +20,15 @@ session_start();
 
 open_html("Delete Client");
 
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
 echo '<h1>Delete Client</h1>';
 
 deleteClientForm();
+
+echo '</div>';
+alertBox();
+echo '</main>';
 
 close_html();
 ?>
