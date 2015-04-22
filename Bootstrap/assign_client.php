@@ -20,9 +20,17 @@ session_start();
 
 open_html("Assign Client");
 
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
 echo "<h2>Assign Client</h2>";
 
 assignClient();
+
+echo '</div>';
+
+alertBox();
+
+echo '</main>';
 
 close_html();
 ?>

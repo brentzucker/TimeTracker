@@ -21,9 +21,17 @@ session_start();
 
 open_html("Project Reports");
 
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
 echo '<h1>Project Reports</h1>';
 
 projectReports();
+
+echo '</div>';
+
+alertBox();
+
+echo '</main>';
 
 close_html();
 ?>
