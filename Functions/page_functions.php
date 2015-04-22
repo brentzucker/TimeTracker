@@ -201,10 +201,26 @@ function editClient()
 {
 	jsFormClient();
 
-	if(isset($_POST['Client_Selected']))
+	if(isset($_POST['submit']))
+	{
+		//Get Client Contact object
+		$contact = (new Client($_SESSION['edit']['client']))->getContact();
+
+		$contact->setFirstName($_POST['firstname']);
+		$contact->setLastName($_POST['lastname']);
+		$contact->setPhone($_POST['phone']);
+		$contact->setEmail($_POST['email']);
+		$contact->setAddress($_POST['address']);
+		$contact->setCity($_POST['city']);
+		$contact->setState($_POST['state']);
+
+		echo '<h4>' . $_SESSION['edit']['client'] . ' has been updated.</h4>';
+		$_SESSION['edit']['client'] = null;
+	}
+	elseif(isset($_POST['Client_Selected']))
 	{
 		echo '<h4>Edit ' . $_POST['Client_Selected'] . '</h4>';
-		editClientForm($_SESSION['Developer'], $_POST['Client_Selected']);
+		editClientForm($_SESSION['Developer']);
 	}		
 }
 
@@ -384,12 +400,12 @@ function loginPage()
 
 function newClientPage()
 {
-	
 	//If mandatory fields are set
 	if(isset($_POST['clientname']) && isset($_POST['startdate']))
 	{
 		$_SESSION['Developer']->newClient($_POST['clientname'], $_POST['startdate']);
 		echo '<h4>' . (new Client($_POST['clientname']))->getClientName() . ' has been created.</h4>';
+		echo '<h6><a href="edit_client.php">Edit ' . (new Client($_POST['clientname']))->getClientName() . ' Contact Information</a></h6>';
 	}
 	else
 		newClientForm($_SESSION['Developer']);
@@ -465,7 +481,7 @@ function newDeveloperForm($developer)
 	<br>
 END;
 
-	echoContactInput();
+	echoNewContactInput();
 
 	echo <<<END
 	<br><input type="submit" name="Submit" value="Create Developer" class="btn btn-block btn-lg btn-primary">

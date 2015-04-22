@@ -434,14 +434,10 @@ class Developer
 	function newClient($clientname, $startdate)
 	{
 		newClient($clientname, $startdate);
+		newClientContact($clientname, '', '', '', '', '', '', '');
 		$this->assignClient( new Client($clientname) );
 	}
-
-	function newClientContact($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state)
-	{
-		newClientContact($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state);
-	}
-
+	
 	//reference in developers class
 	function editClient($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state)
 	{
