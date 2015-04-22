@@ -979,6 +979,21 @@ function editProjectForm($projectID)
 	echo '</form>';
 }
 
+function editTaskForm($taskID)
+{
+	echo '<form action="" method="POST">';
+	echo '<label>Task Name:</label>';
+	echo '<br>';
+	echo '<input type="text" name="taskName" value="' . (new Tasks($taskID))->getTaskName() . '">';
+	echo '<br>';
+	echo '<label>Description:</label>';
+	echo '<br>';
+	echo '<textarea rows=4 name="description" >' . (new Tasks($taskID))->getDescription() . '</textarea>';
+	echo '<br>';
+	echo '<input type="submit">';
+	echo '</form>';
+}
+
 //BELOW:
 //UNFINISHED -- NEEDS WORK
 
