@@ -20,7 +20,7 @@ session_start();
 
 open_html("Assign Project");
 
-echo "<h1>Assign a Project</h1>";
+echo "<h1>Assign Project</h1>";
 
 assignProject();
 
