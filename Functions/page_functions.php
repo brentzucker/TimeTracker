@@ -208,6 +208,17 @@ function editClient()
 	}		
 }
 
+function editProject()
+{
+	jsFormClientProject();
+
+	if(isset($_POST['Client_Selected']) && isset($_POST['Project_Selected']))
+	{
+		echo '<h4>Edit ' . (new Projects($_POST['Project_Selected']))->getProjectName() . '</h4>';
+		editProjectForm($_POST['Project_Selected']);
+	}
+}
+
 //This function prints the tables and forms and also calls functions that modify the developer to edit a record within timesheet
 function editTimeSheet()
 {

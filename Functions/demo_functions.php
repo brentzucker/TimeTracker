@@ -963,6 +963,22 @@ function editClientForm($developer)
 END;
 	}
 }
+
+function editProjectForm($projectID)
+{
+	echo '<form action="" method="POST">';
+	echo '<label>Project Name:</label>';
+	echo '<br>';
+	echo '<input type="text" name="projectName">';
+	echo '<br>';
+	echo '<label>Description:</label>';
+	echo '<br>';
+	echo '<input type="textarea" name="description">';
+	echo '<br>';
+	echo '<input type="submit">';
+	echo '</form>';
+}
+
 //BELOW:
 //UNFINISHED -- NEEDS WORK
 
