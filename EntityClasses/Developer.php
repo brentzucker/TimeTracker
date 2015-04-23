@@ -42,8 +42,20 @@ class Developer
 	//If False Clock In, if True Clock out
 	private $TimeSet_Flag;
 
+	function __construct()
+	{
+        $a = func_get_args(); 
+        $i = func_num_args(); 
+
+        //Calls the constructor with the corresponding number of arguments.
+        if (method_exists($this,$f='__construct'.$i)) 
+        { 
+            call_user_func_array(array($this,$f),$a); 
+        } 
+	}
+
 	//constructs a developer position with the contact information from the contact class
-	function __construct($Username)
+	function __construct1($Username)
 	{
 		$db_entry_Developer = returnRowByUser("Developer", $Username);
 
@@ -105,6 +117,14 @@ class Developer
 		}
 		$this->DaysExpirationWarning = $Alerts_Row['DaysExpirationWarning'];
 		$this->HoursLeftWarning = $Alerts_Row['HoursLeftWarning'];
+	}
+
+	//Creates a new developer in the database
+	function __construct5($team, $username, $email, $position, $password)
+	{
+		createEmployee($team, $username, $position, $password, '', '', '', '', '', '', '');
+
+		$this->setUsername($username);
 	}
 
 	//gets the assignments
@@ -434,14 +454,10 @@ class Developer
 	function newClient($clientname, $startdate)
 	{
 		newClient($clientname, $startdate);
+		newClientContact($clientname, '', '', '', '', '', '', '');
 		$this->assignClient( new Client($clientname) );
 	}
-
-	function newClientContact($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state)
-	{
-		newClientContact($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state);
-	}
-
+	
 	//reference in developers class
 	function editClient($clientname, $firstname, $lastname, $phone, $email, $address, $city, $state)
 	{

@@ -201,10 +201,26 @@ function editClient()
 {
 	jsFormClient();
 
-	if(isset($_POST['Client_Selected']))
+	if(isset($_POST['submit']))
+	{
+		//Get Client Contact object
+		$contact = (new Client($_SESSION['edit']['client']))->getContact();
+
+		$contact->setFirstName($_POST['firstname']);
+		$contact->setLastName($_POST['lastname']);
+		$contact->setPhone($_POST['phone']);
+		$contact->setEmail($_POST['email']);
+		$contact->setAddress($_POST['address']);
+		$contact->setCity($_POST['city']);
+		$contact->setState($_POST['state']);
+
+		echo '<h4>' . $_SESSION['edit']['client'] . ' has been updated.</h4>';
+		$_SESSION['edit']['client'] = null;
+	}
+	elseif(isset($_POST['Client_Selected']))
 	{
 		echo '<h4>Edit ' . $_POST['Client_Selected'] . '</h4>';
-		editClientForm($_SESSION['Developer'], $_POST['Client_Selected']);
+		editClientForm($_SESSION['Developer']);
 	}		
 }
 
@@ -372,7 +388,6 @@ function loginPage()
 			open_login("Login");
 			getWrongLoginError();
 			close_login();
-
 		}
 	}
 	else
@@ -384,94 +399,29 @@ function loginPage()
 
 function newClientPage()
 {
-	
 	//If mandatory fields are set
 	if(isset($_POST['clientname']) && isset($_POST['startdate']))
 	{
 		$_SESSION['Developer']->newClient($_POST['clientname'], $_POST['startdate']);
 		echo '<h4>' . (new Client($_POST['clientname']))->getClientName() . ' has been created.</h4>';
+		echo '<h6><a href="edit_client.php">Edit ' . (new Client($_POST['clientname']))->getClientName() . ' Contact Information</a></h6>';
 	}
 	else
 		newClientForm($_SESSION['Developer']);
 }
 
 //This function echos a form to create a new Developer and calls the createEmployee method which stores the info in the database.
-function newDeveloperForm($developer)
+function newDeveloperPage()
 {
-	$teamError = $usernameError = $positionError = $passwordError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
-
-	if ($_SERVER["REQUEST_METHOD"] == "POST")
+	//Verify the Username, Email, and Password are valid
+	if( isset($_POST['position']) && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && verifyUsername($_POST['username']) && verifyEmail($_POST['email']) && verifyPassword($_POST['password']) )
 	{
-		if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
-		{
-			$token = hash('ripemd128', $_POST['password']);
-		
-			$username = $_POST['username'];
-			$password = $token;
-			$position = $_POST['position'];
-			$firstname = $_POST['firstname'];
-			$lastname = $_POST['lastname'];
-			$phone = $_POST['phone'];
-			$email = $_POST['email'];
-			$address = $_POST['address'];
-			$city = $_POST['city'];
-			$state = $_POST['state'];
-		}
-		else
-			$username = $password = $position = $firstname = $lastname = $phone = $email = $address = $city = $state = "";
-    
-	    if (empty($_POST['username']))
-	        $usernameError = "Missing";
-		elseif(strlen($_POST['username']) < 3)
-			$usernameError = "Username needs to be at least 3 characters long";
-	    else
-	        $username = $_POST['username'];
-
-	    if ($_POST['position'] == "")
-	        $positionError = "Please select your position.";
-	    else
-	        $position = $_POST['position'];
-
-		if (empty($_POST['password']))
-        	$passwordError = "Missing";
-		elseif(strlen($_POST['password']) < 4)
-			$passwordError = "Password needs to be at least 5 characters long";
-	    else
-	        $password = $token;
-
-		if($username != "" && $position != "" && $password)
-		{
-			createEmployee($developer->getTeam(), $username, $position, $password, $firstname, $lastname, $phone, $email, $address, $city, $state);
-			echo "<h1> Developer created!</h1>";
-		}
+		$new_developer = new Developer( $_SESSION['Developer']->getTeam() , $_POST['username'], $_POST['email'], $_POST['position'], $_POST['password']);
+		echo '<h4>' . $new_developer->getUsername() . ' has been created.</h4>';
+		return;
 	}
 
-	echo '<form id="developer_form" action="" method="POST"><br>';
-
-	//teamDropDown($_SESSION['SuperUser']);
-
-	echo <<<END
-	<br>Username: <font color="red">*</font><br>
-	<input type="text" name="username" class="form-control"> <font color="red">$usernameError</font>
-	<br>Password: <font color="red">*</font><br>
-	<input type="password" name="password" class="form-control"> <font color="red">$passwordError</font>
-	<br>Position: <font color="red">*</font><br>
-	<select name="position" class="form-control select select-primary" data-toggle="select">
-		<option value="">Select your position</option>
-		<option value="Project Manager">Project Manager</option>
-		<option value="Developer">Developer</option>
-	</select>
-	<font color="red">$positionError</font>
-	<br>
-END;
-
-	echoContactInput();
-
-	echo <<<END
-	<br><input type="submit" name="Submit" value="Create Developer" class="btn btn-block btn-lg btn-primary">
-	<br><font color="red">* Required fields.</font>
-	</form>
-END;
+	newDeveloperForm($_SESSION['Developer']);
 }
 
 //This function consumes the name of a session variable and a developer and echos a project form and assigns and inputs that project into the database
@@ -641,25 +591,21 @@ function viewClientProfiles()
 		getClientProfile($_POST['Client_Selected']);
 }
 
+function updateEmail()
+{
+	//Update Email before form is displayed
+	if(isset($_POST['submit']))
+	{
+		$_SESSION['Developer']->getContact()->setEmail($_POST['email']);
+		echo '<h4>' . $_SESSION['Developer']->getUsername() . '\'s email has been updated to ' . $_SESSION['Developer']->getContact()->getEmail() . '</h4>';
+	}
+	else
+		editEmailForm();
+}
+
 function updatePassword()
 {
-	echo <<<END
-	<form action="" method="POST">
-	Password:
-	<input type="password" name="password" class="form-control">
-	<br>
-	<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">
-	</form>
-END;
-
-	if(isset($_POST['Update']))
-	{
-		$hashed_password = hash('ripemd128', $_POST['password']);
-
-		updateTableByUser('Credentials', 'Password', $hashed_password, $_SESSION['Developer']->getUsername() );
-
-		echo 'Password successfully updated!';
-	}
+	editPasswordForm();
 }
 
 //views all assigned clients/projects/tasks for a developer

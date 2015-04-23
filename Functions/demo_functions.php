@@ -841,126 +841,137 @@ function clockForm($developer, $taskid)
 }
 
 //This function echos the contact input fields for a form.
-function echoContactInput()
+function echoClientContactInput($contact)
 {
-	echo<<<END
-	<br>Firstname:<br>
-	<input type="text" name="firstname" class="form-control">
-	<br>Lastname:<br>
-	<input type="text" name="lastname" class="form-control">
-	<br>Phone:<br>
-	<input type="text" name="phone" class="form-control">
-	<br>Email:<br>
-	<input type="text" name="email" class="form-control">
-	<br>Address:<br>
-	<input type="text" name="address" class="form-control">
-	<br>City:<br>
-	<input type="text" name="city" class="form-control">
-	<br>State:<br>
-	<select name="state" class="form-control select select-primary" data-toggle="select">
-	<option value="">Select your state</option>
-	<option value="AL">Alabama</option>
-	<option value="AK">Alaska</option>
-	<option value="AZ">Arizona</option>
-	<option value="AR">Arkansas</option>
-	<option value="CA">California</option>
-	<option value="CO">Colorado</option>
-	<option value="CT">Connecticut</option>
-	<option value="DE">Delaware</option>
-	<option value="DC">District of Columbia</option>
-	<option value="FL">Florida</option>
-	<option value="GA">Georgia</option>
-	<option value="GU">Guam</option>
-	<option value="HI">Hawaii</option>
-	<option value="ID">Idaho</option>
-	<option value="IL">Illinois</option>
-	<option value="IN">Indiana</option>
-	<option value="IA">Iowa</option>
-	<option value="KS">Kansas</option>
-	<option value="KY">Kentucky</option>
-	<option value="LA">Louisiana</option>
-	<option value="ME">Maine</option>
-	<option value="MD">Maryland</option>
-	<option value="MA">Massachusetts</option>
-	<option value="MI">Michigan</option>
-	<option value="MN">Minnesota</option>
-	<option value="MS">Mississippi</option>
-	<option value="MO">Missouri</option>
-	<option value="MT">Montana</option>
-	<option value="NE">Nebraska</option>
-	<option value="NV">Nevada</option>
-	<option value="NH">New Hampshire</option>
-	<option value="NJ">New Jersey</option>
-	<option value="NM">New Mexico</option>
-	<option value="NY">New York</option>
-	<option value="NC">North Carolina</option>
-	<option value="ND">North Dakota</option>
-	<option value="OH">Ohio</option>
-	<option value="OK">Oklahoma</option>
-	<option value="OR">Oregon</option>
-	<option value="PA">Pennsylvania</option>
-	<option value="PR">Puerto Rico</option>
-	<option value="RI">Rhode Island</option>
-	<option value="SC">South Carolina</option>
-	<option value="SD">South Dakota</option>
-	<option value="TN">Tennessee</option>
-	<option value="TX">Texas</option>
-	<option value="UT">Utah</option>
-	<option value="VT">Vermont</option>
-	<option value="VA">Virginia</option>
-	<option value="WA">Washington</option>
-	<option value="WV">West Virginia</option>
-	<option value="WI">Wisconsin</option>
-	<option value="WY">Wyoming</option>
-	</select>
-	<br>
-END;
+	echo '<label>Firstname:</label>';
+	echo '<input type="text" name="firstname" class="form-control" value="' . $contact->getFirstName() . '">';
+	echo '<label>Lastname:</label>';
+	echo '<input type="text" name="lastname" class="form-control" value="' . $contact->getLastName() . '">';
+	echo '<label>Phone:</label>';
+	echo '<input type="text" name="phone" class="form-control" value="' . $contact->getPhone() . '">';
+	echo '<label>Email:</label>';
+	echo '<input type="text" name="email" class="form-control" value="' . $contact->getEmail() . '">';
+	echo '<label>Address:</label>';
+	echo '<input type="text" name="address" class="form-control" value="' . $contact->getAddress() . '">';
+	echo '<label>City:</label>';
+	echo '<input type="text" name="city" class="form-control" value="' . $contact->getCity() . '">';
+	echo '<label>State:</label>';
+	echo '<br>';
+	echoStateDropdown($contact->getState());
+}
+
+//This function echos the contact input fields for a form.
+function echoNewContactInput()
+{
+	echo '<label>Firstname:</label>';
+	echo '<br>';
+	echo '<input type="text" name="firstname" class="form-control">';
+	echo '<br>';
+	echo '<label>Lastname:</label>';
+	echo '<input type="text" name="lastname" class="form-control">';
+	echo '<br>';
+	echo '<label>Phone:</label>';
+	echo '<br>';
+	echo '<input type="text" name="phone" class="form-control">';
+	echo '<br>';
+	echo '<label>Email:</label>';
+	echo '<br>';
+	echo '<input type="text" name="email" class="form-control">';
+	echo '<br>';
+	echo '<label>Address:</label>';
+	echo '<br>';
+	echo '<input type="text" name="address" class="form-control">';
+	echo '<br>';
+	echo '<label>City:</label>';
+	echo '<br>';
+	echo '<input type="text" name="city" class="form-control">';
+	echo '<br>';
+	echo '<label>State:</label>';
+	echo '<br>';
+	echoStateDropdown('');
+}
+
+function echoStateDropdown($state_selected)
+{
+	$state_array = array(
+		""=>"Select your state",
+		"AL"=>"Alabama",
+		"AK"=>"Alaska",
+		"AZ"=>"Arizona",
+		"AR"=>"Arkansas",
+		"CA"=>"California",
+		"CO"=>"Colorado",
+		"CT"=>"Connecticut",
+		"DE"=>"Delaware",
+		"DC"=>"District of Columbia",
+		"FL"=>"Florida",
+		"GA"=>"Georgia",
+		"GU"=>"Guam",
+		"HI"=>"Hawaii",
+		"ID"=>"Idaho",
+		"IL"=>"Illinois",
+		"IN"=>"Indiana",
+		"IA"=>"Iowa",
+		"KS"=>"Kansas",
+		"KY"=>"Kentucky",
+		"LA"=>"Louisiana",
+		"ME"=>"Maine",
+		"MD"=>"Maryland",
+		"MA"=>"Massachusetts",
+		"MI"=>"Michigan",
+		"MN"=>"Minnesota",
+		"MS"=>"Mississippi",
+		"MO"=>"Missouri",
+		"MT"=>"Montana",
+		"NE"=>"Nebraska",
+		"NV"=>"Nevada",
+		"NH"=>"New Hampshire",
+		"NJ"=>"New Jersey",
+		"NM"=>"New Mexico",
+		"NY"=>"New York",
+		"NC"=>"North Carolina",
+		"ND"=>"North Dakota",
+		"OH"=>"Ohio",
+		"OK"=>"Oklahoma",
+		"OR"=>"Oregon",
+		"PA"=>"Pennsylvania",
+		"PR"=>"Puerto Rico",
+		"RI"=>"Rhode Island",
+		"SC"=>"South Carolina",
+		"SD"=>"South Dakota",
+		"TN"=>"Tennessee",
+		"TX"=>"Texas",
+		"UT"=>"Utah",
+		"VT"=>"Vermont",
+		"VA"=>"Virginia",
+		"WA"=>"Washington",
+		"WV"=>"West Virginia",
+		"WI"=>"Wisconsin",
+		"WY"=>"Wyoming");
+	
+	echo '<select name="state" class="form-control select select-primary" data-toggle="select">';
+	
+	foreach($state_array as $key=>$state)
+		if($state_selected == $key)
+			echo '<option value="' . $key . '" selected="selected">' . $state . '</option>';
+		else
+			echo '<option value="' . $key . '">' . $state . '</option>';
+	
+	echo '</select>';
+	echo '<br>';
 }
 
 //This function echos a form to update a pre existing client by changing the client's contact information via editClient method
 function editClientForm($developer)
 {
-	$teamError = $clientError = $firstnameError = $lastnameError = $phoneError = $emailError = $addressError = $cityError = $stateError = "";
-
-	$client;
 	if(isset($_POST['Client_Selected']))
 	{
-		$client = $_POST['Client_Selected'];
-	}
-	if (isset($_POST['Client_Selected']))
-	{
-		if (isset($_POST['editClientSubmit']))
-		{
-			$validated = false;
-			if($_SERVER["REQUEST_METHOD"] == "POST")
-			{
-				if(!empty($_POST['firstname'] && $_POST['lastname'] && $_POST['phone'] && $_POST['email'] && $_POST['address'] && $_POST['city'] && $_POST['state']))
-				{
-					$firstname = $_POST['firstname'];
-					$lastname = $_POST['lastname'];
-					$phone = $_POST['phone'];
-					$email = $_POST['email'];
-					$address = $_POST['address'];
-					$city = $_POST['city'];
-					$state = $_POST['state'];
-					$validated= true;
-				}
-				//isset($_POST['clientname']) && isset($_POST['startdate'])
-				if($validated)
-				{
-					$developer->editClient($client, $firstname, $lastname, $phone, $email, $address, $city, $state);
-					echo "<h1> $client was updated!</h1>";
-				}
-			}
-		}
-		echo '<form action="" method="POST">';
-		echoContactInput();
-		echo <<<END
-		<br/>
-		<input type="submit" name="editClientSubmit" value="Edit Client" class="form-control">
-		<input type="hidden" name="Client_Selected" value="$client">
-		</form>
-END;
+		$_SESSION['edit']['client'] = $_POST['Client_Selected'];
+
+		echo '<form action="" method="POST" class="form-horizontal">';
+		echoClientContactInput( (new Client($_POST['Client_Selected']))->getContact() );
+		echo '<input type="submit" name="submit" class="btn btn-block btn-lg btn-primary">';
+		echo '</form>';
 	}
 }
 
@@ -992,6 +1003,171 @@ function editTaskForm($taskID)
 	echo '<br>';
 	echo '<input type="submit">';
 	echo '</form>';
+}
+
+function editEmailForm()
+{
+	echo '<form action="" method="POST">';
+	echo '<input type="text" name="email" value="' . $_SESSION['Developer']->getContact()->getEmail() . '" class="form-control input-lg">';
+	echo '<input type="Submit" name="submit" value="Update Email" class="btn btn-block btn-lg btn-primary">';
+	echo '</form>';
+}
+
+
+function editPasswordForm()
+{
+	//If the form has been submitted
+	if(isset($_POST['Update']))
+	{
+		//If the current password is correct
+		if(isset($_POST['currentpassword']) && verifyCurrentPassword( $_SESSION['Developer']->getUsername(), $_POST['currentpassword']) )
+		{
+			//If the new passwords match
+			if(isset($_POST['password']) && isset($_POST['confirmpassword']) && $_POST['password'] == $_POST['confirmpassword'])
+			{
+				//Hashing function to encrypt password
+				$hashed_password = hash('ripemd128', $_POST['password']);
+
+				//Store encrypted password in database
+				updateTableByUser('Credentials', 'Password', $hashed_password, $_SESSION['Developer']->getUsername() );
+
+				echo '<h4>Successfully updated password!</h4';
+			}
+			else
+			{
+				echo '<form action="" method="POST">';
+				echo '<label>Current Password:</label>';
+				echo '<input type="password" name="currentpassword" class="form-control">';
+				echo '<label>Password:</label>';
+				echo '<input type="password" name="password" class="form-control">';
+				echo '<label style="color:red;">Password Mismatch</label>';
+				echo '<input type="password" name="confirmpassword" class="form-control">';
+				echo '<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">';
+				echo '</form>';
+			}
+		}
+		else
+		{
+			echo '<form action="" method="POST">';
+			echo '<label style="color:red;">Incorrect Password:</label>';
+			echo '<input type="password" name="currentpassword" class="form-control">';
+			echo '<label>New Password:</label>';
+			echo '<input type="password" name="password" class="form-control">';
+			echo '<label>Confirm Password:</label>';
+			echo '<input type="password" name="confirmpassword" class="form-control">';
+			echo '<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">';
+			echo '</form>';
+		}
+	}
+	else
+	{
+		echo '<form action="" method="POST">';
+		echo '<label>Current Password:</label>';
+		echo '<input type="password" name="currentpassword" class="form-control">';
+		echo '<label>New Password:</label>';
+		echo '<input type="password" name="password" class="form-control">';
+		echo '<label>Confirm Password:</label>';
+		echo '<input type="password" name="confirmpassword" class="form-control">';
+		echo '<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">';
+		echo '</form>';
+	}	
+}
+
+function newDeveloperForm($developer)
+{
+	echo '<form action="" method="POST">';
+	
+	//If the form has already been submitted display the error, otherwise print out the form	
+	if(isset($_POST['submit']))
+	{
+		if(verifyUsername($_POST['username']))
+			echo '<label>Username:</label>';
+		else
+			echo '<label style="color:red;">Username must be at least 3 characters</label>';
+
+		echo '<input type="text" name="username" class="form-control" value="' . $_POST['username'] . '">';
+		
+		if(verifyEmail($_POST['email']))
+			echo '<label>Email:</label>';
+		else
+			echo '<label style="color:red;">Enter a valid email address</label>';
+		
+		echo '<input type="text" name="email" class="form-control" value="' . $_POST['email'] . '">';
+		
+		if(verifyPassword($_POST['password']))
+			echo '<label>Password:</label>';
+		else
+			echo '<label style="color:red;">Password must be at least 5 characters</label>';
+		
+		echo '<input type="password" name="password" class="form-control">';
+
+		echo '<input type="hidden" name="position" value="Developer">';
+		echo '<input type="submit" name="submit" value="Create Developer" class="btn btn-block btn-lg btn-primary">';
+	}
+	else
+	{
+		echo '<label>Username:</label>';
+		echo '<input type="text" name="username" class="form-control">';
+		echo '<label>Email:</label>';
+		echo '<input type="text" name="email" class="form-control">';
+		echo '<label>Password:</label>';
+		echo '<input type="password" name="password" class="form-control">';
+		echo '<input type="hidden" name="position" value="Developer">';
+		echo '<input type="submit" name="submit" value="Create Developer" class="btn btn-block btn-lg btn-primary">';	
+	}
+
+	echo '</form>';
+}
+
+function verifyEmail($email)
+{
+	if(strpos($email, '@') !== false && strpos($email, '.') !== false && strlen($email) > 4)
+		return true;
+	else 
+		return false;
+}
+
+function verifyUsername($username)
+{
+	if(strlen($username) > 2)
+		return true;
+	else 
+		return false;
+}
+
+function verifyPassword($password)
+{
+	if(strlen($password) > 4)
+		return true;
+	else
+		return false;
+}
+
+function verifyCurrentPassword($username, $password)
+{
+	if(isset($username) && isset($password)) 
+	{
+		$token=hash('ripemd128',$password);			
+		$result = db_query("SELECT Password FROM Credentials WHERE Username='$username'");	
+		$rows=mysqli_num_rows($result);
+				
+		for($i=0; $i<$rows; $i++) 
+		{					
+			$row=mysqli_fetch_row($result);
+
+			foreach($row as $element) 
+			{			
+				if($token==$element) 
+				{
+					return true;
+				}
+				else
+					return false;
+			}
+		}
+		if($rows==0)
+			return false;
+	}
 }
 
 //This function echos a form to create a new Client and calls the createClient method which stores the info in the database.
