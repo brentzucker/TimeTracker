@@ -26,6 +26,7 @@ function jsFormDeveloperStartDateEndDate()
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
 	developerDropDownJSenableButton((new Team($_SESSION['Developer']->getTeam())));
 	echo '<br />';
+	echo '<br />';
 	dateSelectorWide();
 	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
@@ -186,6 +187,7 @@ function jsFormClientProjectTaskStartDateEndDate()
 	taskDropDownJS();
 	
 	echo '<br>';
+	echo '<br>';
 
 	dateSelectorWide();
 
@@ -244,6 +246,7 @@ function jsFormClientProjectStartDateEndDate()
 	projectDropDownJSenableButton();
 	
 	echo '<br>';
+	echo '<br>';
 
 	dateSelectorWide();
 
@@ -293,7 +296,8 @@ function jsFormClientStartDateEndDate()
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
 
 	clientDropDownJSenableButton($_SESSION['Developer']);
-
+	echo '<br>';
+	echo '<br>';
 	dateSelectorWide();
 
 	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';

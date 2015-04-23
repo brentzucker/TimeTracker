@@ -459,9 +459,11 @@ client-select {
 }
 
 input.btn-block[type="button"], input.btn-block[type="reset"], input.btn-block[type="submit"] {
-    width: 200px!important;
-	margin: 15px auto 0!important;
-	
+    margin-bottom: 15px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 15px !important;
+    width: 200px !important;
 }
 
 .dropdown-menu, .select2-drop {
