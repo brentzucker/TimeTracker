@@ -179,7 +179,7 @@ function deleteProjectForm()
 		$_SESSION['Developer']->deleteProject( $project_to_delete );
 		echo '<h3>' . $project_to_delete->getProjectName() . ' was deleted.</h3>';
 	}
-	
+
 	jsFormClientProjectEnableButton();
 }
 
@@ -334,6 +334,8 @@ function homePage()
 	echo '<main id="page-content-wrapper">'; 
 	echo '<div class="col-lg-9 main-box">';
 
+	//Bootstrap Jumbotron
+	echo '<div class="jumbotron">';
 	//Custom Greeting Message
 	if(localtime(time(), true)['tm_hour'] < 11 && localtime(time(), true)['tm_hour'] > 3)
 		echo '<h1>Good Morning ' . $_SESSION['Developer']->getContact()->getFirstname() . '!</h1>';
@@ -343,22 +345,23 @@ function homePage()
 		echo '<h1>Good Evening ' . $_SESSION['Developer']->getContact()->getFirstname() . '</h1>';
 	else
 		echo '<h1>Welcome back ' . $_SESSION['Developer']->getContact()->getFirstname() . '!</h1>';
-	
+
 	//If the minutes are less than 10 add a zero digit infront 
 	$min = localtime(time(), true)['tm_min'];
 	$min = (strlen(''.$min) == 1) ? '0'.$min : $min;
 	
 	if(localtime(time(), true)['tm_hour'] > 12)	
-		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' pm</h5>';
+		echo '<p>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' pm</p>';
 	else 
-		echo '<h5>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' am</h5>';
+		echo '<p>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' am</p>';
+	echo '</div>';
 
 	//If they have clocked in before
 	if(count($_SESSION['Developer']->getTimeLog()) > 0)
 	{
 		$last_timeObject = $_SESSION['Developer']->getTimeLog()[ count($_SESSION['Developer']->getTimeLog()) - 1 ];
-		echo '<h3>You last clocked out on ' . (new DateTime($last_timeObject->getTimeOut()))->format('l F jS Y') . (new DateTime($last_timeObject->getTimeOut()))->format(' \a\t g:ia') . '.</h3>';
-		echo '<h3>You were working on ' . $last_timeObject->getClientname() . ', ' . (new Projects ($last_timeObject->getProjectId()))->getProjectName() . ', ' . (new Tasks ($last_timeObject->getTaskId()))->getTaskName() . '.</h3>';
+		echo '<h5>You last clocked out on ' . (new DateTime($last_timeObject->getTimeOut()))->format('l F jS Y') . (new DateTime($last_timeObject->getTimeOut()))->format(' \a\t g:ia') . '.</h5>';
+		echo '<h5>You were working on ' . $last_timeObject->getClientname() . ', ' . (new Projects ($last_timeObject->getProjectId()))->getProjectName() . ', ' . (new Tasks ($last_timeObject->getTaskId()))->getTaskName() . '.</h5>';
 
 		//Load Client Profile Page of last clock in
 		getClientProfile($last_timeObject->getClientname());
