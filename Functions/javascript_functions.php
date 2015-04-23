@@ -184,6 +184,8 @@ function jsFormClientProjectTaskStartDateEndDate()
 	projectDropDownJS();
 
 	taskDropDownJS();
+	
+	echo '<br>';
 
 	dateSelectorWide();
 
@@ -240,6 +242,8 @@ function jsFormClientProjectStartDateEndDate()
 	clientDropDownJS($_SESSION['Developer']);
 
 	projectDropDownJSenableButton();
+	
+	echo '<br>';
 
 	dateSelectorWide();
 
