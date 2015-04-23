@@ -455,7 +455,7 @@ function returnRowsTeamAssignments($WhereValue1, $WhereValue2)
 //gives the developer assignments given the username, the type of assignment, and the name or ID (depending on type)
 function returnRowsDeveloperAssignmentsUnique($WhereValue1, $WhereValue2, $WhereValue3)
 {
-	return returnRowsForTwoValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
+	return returnRowsForThreeValues('DeveloperAssignments', 'Username', $WhereValue1, 'Type', $WhereValue2, 'ClientProjectTask', $WhereValue3);
 }
 
 //gives the team assignments given the team name, the type of assignment, and the name or ID (depending on type)
