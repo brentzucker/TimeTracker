@@ -844,28 +844,17 @@ function clockForm($developer, $taskid)
 function echoClientContactInput($contact)
 {
 	echo '<label>Firstname:</label>';
-	echo '<br>';
 	echo '<input type="text" name="firstname" class="form-control" value="' . $contact->getFirstName() . '">';
-	echo '<br>';
 	echo '<label>Lastname:</label>';
 	echo '<input type="text" name="lastname" class="form-control" value="' . $contact->getLastName() . '">';
-	echo '<br>';
 	echo '<label>Phone:</label>';
-	echo '<br>';
 	echo '<input type="text" name="phone" class="form-control" value="' . $contact->getPhone() . '">';
-	echo '<br>';
 	echo '<label>Email:</label>';
-	echo '<br>';
 	echo '<input type="text" name="email" class="form-control" value="' . $contact->getEmail() . '">';
-	echo '<br>';
 	echo '<label>Address:</label>';
-	echo '<br>';
 	echo '<input type="text" name="address" class="form-control" value="' . $contact->getAddress() . '">';
-	echo '<br>';
 	echo '<label>City:</label>';
-	echo '<br>';
 	echo '<input type="text" name="city" class="form-control" value="' . $contact->getCity() . '">';
-	echo '<br>';
 	echo '<label>State:</label>';
 	echo '<br>';
 	echoStateDropdown($contact->getState());
@@ -979,9 +968,9 @@ function editClientForm($developer)
 	{
 		$_SESSION['edit']['client'] = $_POST['Client_Selected'];
 
-		echo '<form action="" method="POST">';
+		echo '<form action="" method="POST" class="form-horizontal">';
 		echoClientContactInput( (new Client($_POST['Client_Selected']))->getContact() );
-		echo '<input type="submit" name="submit" class="form-control">';
+		echo '<input type="submit" name="submit" class="btn btn-block btn-lg btn-primary">';
 		echo '</form>';
 	}
 }
