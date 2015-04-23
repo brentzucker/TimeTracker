@@ -532,7 +532,7 @@ function clientProjectTaskDropdownForm($session_variable)
 //This function consumes a query and table headers and prints out the results in a table
 function printTable($query, $table_headers)
 {
-	echo '<table style="border:1px solid black; text-align:center;">';
+	echo '<table class="table table-condensed table-bordered" style="text-align:left;">';
 
 	echo '<tr>';
 	foreach($table_headers as $t_h)
@@ -545,7 +545,7 @@ function printTable($query, $table_headers)
 		{
 			echo '<tr>';
 			foreach($row as $r)
-				echo "<td style=\"border:1px solid black;padding:5px;\">$r</td>";
+				echo "<td>$r</td>";
 			echo '</tr>';
 		}
 	}
@@ -740,7 +740,7 @@ function printDevelopersAssignedToClient($client)
 //This function consumes a query and table headers and prints out the results in a table
 function printTableEditColumn($query, $table_headers)
 {
-	echo '<table style="border:1px solid black; text-align:center;">';
+	echo '<table class="table table-condensed table-bordered" style="text-align:left;">';
 
 	echo '<tr>';
 	foreach($table_headers as $t_h)
@@ -753,7 +753,7 @@ function printTableEditColumn($query, $table_headers)
 		{
 			echo '<tr>';
 			foreach($row as $r)
-				echo "<td style=\"border:1px solid black;padding:5px;\">$r</td>";
+				echo "<td>$r</td>";
 
 			echo '<td>';
 			//Print the radio button
@@ -779,7 +779,7 @@ function editTimeLogTableByDeveloper($developer, $startdate, $enddate)
 //This function prints out a 1 row table that allows you to edit the selected row via text boxes
 function editTable($query, $table_headers)
 {
-	echo '<table style="border:1px solid black; text-align:center;">';
+	echo '<table class="table table-condensed table-bordered" style="border:1px solid black; text-align:center;">';
 
 	echo '<tr>';
 	foreach($table_headers as $t_h)
