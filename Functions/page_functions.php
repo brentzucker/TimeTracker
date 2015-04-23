@@ -145,42 +145,42 @@ function clock()
 //This function deletes DeveloperASsignments and Team Assignments for a specified client.
 function deleteClientForm()
 {
-	echo '<form action="" method="POST">';
-	clientDropDown($_SESSION['Developer']);
-	echo '</form>';
-
 	if($_POST['Client_Selected'])
 	{	
 		$client_to_delete = new Client( $_POST['Client_Selected'] );
 		$_SESSION['Developer']->deleteClient( $client_to_delete );
 		echo '<h3>' . $client_to_delete->getClientname() . ' was deleted.</h3>';
 	}
+
+	echo '<form action="" method="POST">';
+	clientDropDown($_SESSION['Developer']);
+	echo '</form>';
 }
 
 //This function deletes DeveloperAssignments and Team assignments for a specified task.
 function deleteTaskForm()
 {
-	jsFormClientProjectTaskButton();
-
 	if(isset($_POST['Task_Selected']))
 	{
 		$task_to_delete = new Tasks( $_POST['Task_Selected'] );
 		$_SESSION['Developer']->deleteTask( $task_to_delete );
 		echo '<h3>' . $task_to_delete->getTaskName() . ' was deleted.</h3>';
 	}
+
+	jsFormClientProjectTaskButton();
 }
 
 //This function deletes DeveloperAssignments and Team Assignments for a specificied project
 function deleteProjectForm()
 {
-	jsFormClientProjectEnableButton();
-
 	if(isset($_POST['Project_Selected']))
 	{
 		$project_to_delete = new Projects( $_POST['Project_Selected'] );
 		$_SESSION['Developer']->deleteProject( $project_to_delete );
 		echo '<h3>' . $project_to_delete->getProjectName() . ' was deleted.</h3>';
 	}
+	
+	jsFormClientProjectEnableButton();
 }
 
 //This function prints out the developer reports tables if a developer and date have been selected
