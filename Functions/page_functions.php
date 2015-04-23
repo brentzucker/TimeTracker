@@ -388,7 +388,6 @@ function loginPage()
 			open_login("Login");
 			getWrongLoginError();
 			close_login();
-
 		}
 	}
 	else
@@ -606,23 +605,7 @@ function updateEmail()
 
 function updatePassword()
 {
-	echo <<<END
-	<form action="" method="POST">
-	Password:
-	<input type="password" name="password" class="form-control">
-	<br>
-	<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">
-	</form>
-END;
-
-	if(isset($_POST['Update']))
-	{
-		$hashed_password = hash('ripemd128', $_POST['password']);
-
-		updateTableByUser('Credentials', 'Password', $hashed_password, $_SESSION['Developer']->getUsername() );
-
-		echo 'Password successfully updated!';
-	}
+	editPasswordForm();
 }
 
 //views all assigned clients/projects/tasks for a developer

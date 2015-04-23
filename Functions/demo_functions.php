@@ -1013,6 +1013,66 @@ function editEmailForm()
 	echo '</form>';
 }
 
+
+function editPasswordForm()
+{
+	//If the form has been submitted
+	if(isset($_POST['Update']))
+	{
+		//If the current password is correct
+		if(isset($_POST['currentpassword']) && verifyCurrentPassword( $_SESSION['Developer']->getUsername(), $_POST['currentpassword']) )
+		{
+			//If the new passwords match
+			if(isset($_POST['password']) && isset($_POST['confirmpassword']) && $_POST['password'] == $_POST['confirmpassword'])
+			{
+				//Hashing function to encrypt password
+				$hashed_password = hash('ripemd128', $_POST['password']);
+
+				//Store encrypted password in database
+				updateTableByUser('Credentials', 'Password', $hashed_password, $_SESSION['Developer']->getUsername() );
+
+				echo '<h4>Successfully updated password!</h4';
+			}
+			else
+			{
+				echo '<form action="" method="POST">';
+				echo '<label>Current Password:</label>';
+				echo '<input type="password" name="currentpassword" class="form-control">';
+				echo '<label>Password:</label>';
+				echo '<input type="password" name="password" class="form-control">';
+				echo '<label style="color:red;">Password Mismatch</label>';
+				echo '<input type="password" name="confirmpassword" class="form-control">';
+				echo '<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">';
+				echo '</form>';
+			}
+		}
+		else
+		{
+			echo '<form action="" method="POST">';
+			echo '<label style="color:red;">Incorrect Password:</label>';
+			echo '<input type="password" name="currentpassword" class="form-control">';
+			echo '<label>New Password:</label>';
+			echo '<input type="password" name="password" class="form-control">';
+			echo '<label>Confirm Password:</label>';
+			echo '<input type="password" name="confirmpassword" class="form-control">';
+			echo '<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">';
+			echo '</form>';
+		}
+	}
+	else
+	{
+		echo '<form action="" method="POST">';
+		echo '<label>Current Password:</label>';
+		echo '<input type="password" name="currentpassword" class="form-control">';
+		echo '<label>New Password:</label>';
+		echo '<input type="password" name="password" class="form-control">';
+		echo '<label>Confirm Password:</label>';
+		echo '<input type="password" name="confirmpassword" class="form-control">';
+		echo '<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">';
+		echo '</form>';
+	}	
+}
+
 function newDeveloperForm($developer)
 {
 	echo '<form action="" method="POST">';
@@ -1081,6 +1141,33 @@ function verifyPassword($password)
 		return true;
 	else
 		return false;
+}
+
+function verifyCurrentPassword($username, $password)
+{
+	if(isset($username) && isset($password)) 
+	{
+		$token=hash('ripemd128',$password);			
+		$result = db_query("SELECT Password FROM Credentials WHERE Username='$username'");	
+		$rows=mysqli_num_rows($result);
+				
+		for($i=0; $i<$rows; $i++) 
+		{					
+			$row=mysqli_fetch_row($result);
+
+			foreach($row as $element) 
+			{			
+				if($token==$element) 
+				{
+					return true;
+				}
+				else
+					return false;
+			}
+		}
+		if($rows==0)
+			return false;
+	}
 }
 
 //This function echos a form to create a new Client and calls the createClient method which stores the info in the database.

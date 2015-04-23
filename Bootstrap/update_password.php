@@ -24,23 +24,7 @@ echo '<main id="page-content-wrapper">';
 echo '<div class="col-lg-9 main-box">';
 echo '<h1>Update Password</h1>';
 
-echo <<<END
-<form action="" method="POST">
-Password:
-<input type="password" name="password" class="form-control">
-<br>
-<input type="Submit" name="Update" value="Update" class="btn btn-block btn-lg btn-primary">
-</form>
-END;
-
-if(isset($_POST['Update']))
-{
-	$hashed_password = hash('ripemd128', $_POST['password']);
-
-	updateTableByUser('Credentials', 'Password', $hashed_password, $_SESSION['Developer']->getUsername() );
-
-	echo 'Password successfully updated!';
-}
+updatePassword();
 
 echo '</div>';
 
