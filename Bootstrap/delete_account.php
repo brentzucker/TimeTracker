@@ -14,13 +14,12 @@
  */
 
 require_once(__DIR__.'/../include.php');
-require_once(__DIR__.'/page_functions.php');
+
+session_start();
 
 open_html("Delete Account");
 
-echo<<<_END
-	<h1>Delete Account</h1>
-_END;
+echo '<h1>Delete Account</h1>';
 
 close_html();
 
