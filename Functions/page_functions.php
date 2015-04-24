@@ -132,12 +132,18 @@ function clock()
 		if(isset($_POST['Task_Selected']))
 			$_SESSION['currentLog']['task'] = $_POST['Task_Selected'];
 		
-		echo '<h4>' . (new Tasks($_SESSION['currentLog']['task']))->getTaskName() . ' was selected</h4>';
+		echo '<div class="page-header">';
 
-		echo '<h3>Clock In</h3>';
+		echo '<h4>' . (new Tasks($_SESSION['currentLog']['task']))->getTaskName() . '</h4>';
+
+		echo '<br>';
 
 		clockForm($_SESSION['Developer'], $_SESSION['currentLog']['task']);
 
+		echo '<br><br>';
+		echo '</div>';
+
+		echo '<h6>Time Sheet</h6>';
 		printTimeSheetTableByTask($_SESSION['currentLog']['task']);
 	}
 }

@@ -24,11 +24,15 @@ open_html("Clock In");
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
 
-echo '<h1>Clock In</h1>';
+echo '<div class="jumbotron">';
+
+echo '<h1 class="page-header">Clock In</h1>';
 
 echo '<h4>' . $_SESSION['Developer']->getUsername() . ' is logged in</h4>';
 
 clock();
+
+echo '</div>'; //close jumbotron
 
 echo '</div>';
 

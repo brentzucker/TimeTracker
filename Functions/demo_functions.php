@@ -541,8 +541,10 @@ function clockForm($developer, $taskid)
 		$developer->clockOut();
 
 	echo '<form action="" method="POST">';
-	echo '<input type="submit" name="clockin" value="Clock In" class="btn btn-block btn-lg btn-primary">';
-	echo '<input type="submit" name="clockout" value="Clock Out" class="btn btn-block btn-lg btn-primary">';
+	echo '<div class="col-sm-1"></div>';
+	echo '<input type="submit" name="clockin" value="Clock In" class="col-sm-4 btn btn-success btn-lg">';
+	echo '<div class="col-sm-2"></div>';
+	echo '<input type="submit" name="clockout" value="Clock Out" class="col-sm-4 btn btn-danger btn-lg">';
 	echo '</form>';
 }
 
