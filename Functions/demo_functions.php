@@ -692,7 +692,7 @@ function editProjectForm($projectID)
 	echo '<br>';
 	echo '<textarea rows=4 name="description" >' . (new Projects($projectID))->getDescription() . '</textarea>';
 	echo '<br>';
-	echo '<input type="submit">';
+	echo '<input type="submit" class="btn btn-block btn-lg btn-primary">';
 	echo '</form>';
 }
 
