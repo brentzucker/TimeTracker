@@ -84,7 +84,7 @@ function printTimeLogTableByDeveloper($developer, $startdate, $enddate)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TaskID=Tasks.TaskID) AND (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
 
-	$table_headers = array('ID', 'Username', 'Client', 'Project Name', 'Task Name', 'Time In', 'Time Out', 'Total');
+	$table_headers = array('ID', 'Username', 'Client', 'Project', 'Task', 'Time In', 'Time Out', 'Total');
 
 	printTable($query, $table_headers);
 }
@@ -102,7 +102,7 @@ function printAggregatedTimeLogTableByDeveloper($developer, $startdate, $enddate
 //This function consumes a client name and echos the timeLog table for the specific developer
 function printTimeLogTableByClient($client, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'";
 
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Time in', 'Time Out', 'Time Spent');
 
@@ -113,7 +113,7 @@ function printTimeLogTableByClient($client, $startdate, $enddate)
 function printAggregatedTimeLogTableByClient($client, $startdate, $enddate)
 {
 	if($startdate != 0 && $endate != 0)
-		$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'GROUP BY t.Username";
+		$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'GROUP BY t.Username";
 	else
 		$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE t.ClientName='" . $client ."'GROUP BY t.Username";
 
@@ -125,7 +125,7 @@ function printAggregatedTimeLogTableByClient($client, $startdate, $enddate)
 //This function consumes a projectid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
 function printAggregatedTimeLogTableByProject($project, $startdate, $enddate)
 {
-	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
+	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
 
 	$table_headers = array('Client', 'Project Name', 'Username', 'Time Spent');
 
@@ -135,7 +135,7 @@ function printAggregatedTimeLogTableByProject($project, $startdate, $enddate)
 //This function consumes a projectid and echos the timeLog table for the specific project
 function printTimeLogTableByProject($project, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
 
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Time In', 'Time Out', 'Time Spent');
 
@@ -145,7 +145,7 @@ function printTimeLogTableByProject($project, $startdate, $enddate)
 //This function consumes a taskid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
 function printAggregatedTimeLogTableByTask($task, $startdate, $enddate)
 {
-	$query = "SELECT t.ClientName, p.ProjectName, a.TaskName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p, Tasks a WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."' GROUP BY t.Username";
+	$query = "SELECT t.ClientName, p.ProjectName, a.TaskName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p, Tasks a WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."' GROUP BY t.Username";
 
 	$table_headers = array('Client', 'Project Name', 'Task Name', 'Username', 'Time Spent');
 
@@ -155,7 +155,7 @@ function printAggregatedTimeLogTableByTask($task, $startdate, $enddate)
 //This function consumes a taskid and echos the timeLog table for the specific task
 function printTimeLogTableByTask($task, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, a.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks a WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.projectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, a.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks a WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.projectID AND a.TaskID=t.TaskID) AND t.TaskID='" . $task ."'";
 
 	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Task', 'Time In', 'Time Out', 'Time Spent');
 

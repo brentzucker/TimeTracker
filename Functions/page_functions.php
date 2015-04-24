@@ -465,12 +465,12 @@ function projectReports()
 
 	if(isset($_POST['Project_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<h2>' . $_POST['Project_Selected']  . ' was selected</h2>';
+		echo '<h4>' . (new Projects($_POST['Project_Selected']))->getProjectName()  . ' was selected</h4>';
 
-		echo '<h3>Developers Hours</h3>';
+		echo '<h6>Developers Hours</h6>';
 		printAggregatedTimeLogTableByProject($_POST['Project_Selected'], $_POST['startdate'], $_POST['enddate']);
 
-		echo '<h3>Detailed Time Sheet</h3>';
+		echo '<h6>Time Sheet</h6>';
 		printTimeLogTableByProject($_POST['Project_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
