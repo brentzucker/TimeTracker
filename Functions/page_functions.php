@@ -430,14 +430,9 @@ function newDeveloperPage()
 }
 
 //This function consumes the name of a session variable and a developer and echos a project form and assigns and inputs that project into the database
-function newProjectForm($developer)
+function newProject($developer)
 {
-	echo '<form action="" method="POST">';
-	clientDropDownJSenableButton($developer);
-	echo '<input type="text" class="form-control" name="project" value="Project Name" id="projectName" onfocus="clearField(\'projectName\')" onblur="blurField(\'projectName\')">';
-	echo '<input type="textarea" class="form-control" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
-	echo '<input type="submit" value="Create Project" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
-	echo '</form>';
+	newProjectForm($developer);
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['project']) && isset($_POST['description']))
 	{
@@ -450,17 +445,10 @@ function newProjectForm($developer)
 }
 
 //This function creates a from that assigns a task to the developer and calls assignTask to load the data into the database
-function newTaskForm($session, $developer)
+function newTask($developer)
 {
 	jsFunctions();
-	echo '<form action="" method="POST">';
-	echo "<h2>Select a Client</h2>";
-	clientDropDownJS($developer);
-	projectDropDownJSenableButton();
-	echo '<input type="text" class="form-control" name="task" value="Task Name" id="taskName" onfocus="clearField(\'taskName\')" onblur="blurField(\'taskName\')">';
-	echo '<input type="textarea" class="form-control" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\')">';
-	echo '<input type="submit" name="Create Task" id="submit_button" class="btn btn-block btn-lg btn-primary"  disabled>';
-	echo"</form>";
+	newTaskForm($developer);
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['Project_Selected']) && isset($_POST['task']) )
 	{

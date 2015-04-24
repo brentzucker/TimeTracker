@@ -404,21 +404,14 @@ function enableButton()
  function clearField(id)
  {
  	var element = document.getElementById(id);
-	if(element.value == 'Project Name' || element.value == 'Description' || element.value == 'Task Name')
+	if(element.value == 'Project Name' || element.value == 'Description' || element.value == 'Task Name' || element.value == 'Client Name')
 		element.value = '';
  }
 
- function blurField(id)
+ function blurField(id, text)
  {
  	var element = document.getElementById(id);
 
  	if(element.value == '')
- 	{
- 		if(element.id == 'projectName')
- 			element.value = 'Project Name';
- 		else if(element.id == 'taskName')
- 			element.value = 'Task Name';
- 		else if(element.id == 'description')
- 			element.value = 'Description';
- 	}
+ 		element.value = text;
  }

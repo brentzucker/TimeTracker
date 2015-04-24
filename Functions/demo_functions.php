@@ -825,6 +825,16 @@ function newDeveloperForm($developer)
 	echo '</form>';
 }
 
+function newProjectForm($developer)
+{
+	echo '<form action="" method="POST">';
+	clientDropDownJSenableButton($developer);
+	echo '<input type="text" class="form-control" name="project" value="Project Name" id="projectName" onfocus="clearField(\'projectName\')" onblur="blurField(\'projectName\', \'Project Name\')">';
+	echo '<textarea rows=4 name="description" value="Description" id="description" class="form-control" onfocus="clearField(\'description\')" onblur="blurField(\'description\', \'Description\')">' . 'Description' . '</textarea>';
+	echo '<input type="submit" value="Create Project" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '</form>';
+}
+
 function verifyEmail($email)
 {
 	if(strpos($email, '@') !== false && strpos($email, '.') !== false && strlen($email) > 4)
@@ -881,19 +891,31 @@ function newClientForm($developer)
 {
 	echo '<form id="developer_form" action="" method="POST">';
 	echo '<br>';
-	echo '<label>Client Name:</label><font color="red">*</font>';
+	echo '<label>Client Name:</label>';
 	echo '<br>';
-	echo '<input type="text" class="form-control" name="clientname">';
+	echo '<input type="text" class="form-control" id="clientName" name="clientname" value="Client Name" onfocus="clearField(\'clientName\')" onblur="blurField(\'clientName\', \'Client Name\')">';
 	echo '<font color="red">' . $clientError . '</font>';
 	echo '<br>';
-	echo '<label>StartDate: <font color="red">*</font>';
+	echo '<label>StartDate:</label>';
 	echo '<br>';
-	echo '<input type="date" class="form-control" name="startdate">';
+	echo '<input type="date" class="form-control" name="startdate" value="' . date('Y-m-d') . '">';
 	echo '<font color="red">' . $dateError . '</font>';
 	echo '<input type="submit" name="Submit" value="Create Client" class="btn btn-block btn-lg btn-primary">';
 	echo '<br>';
-	echo '<font color="red">* Required fields.</font>';
 	echo '</form>';
+}
+
+function newTaskForm($developer)
+{
+	jsFunctions();
+	echo '<form action="" method="POST">';
+	echo "<h2>Select a Client</h2>";
+	clientDropDownJS($developer);
+	projectDropDownJSenableButton();
+	echo '<input type="text" class="form-control" name="task" value="Task Name" id="taskName" onfocus="clearField(\'taskName\')" onblur="blurField(\'taskName\',\'Client Name\')">';
+	echo '<input type="textarea" class="form-control" name="description" value="Description" id="description" onfocus="clearField(\'description\')" onblur="blurField(\'description\', \'Description\')">';
+	echo '<input type="submit" name="Create Task" id="submit_button" class="btn btn-block btn-lg btn-primary"  disabled>';
+	echo"</form>";
 }
 
 //Convert Seconds to Formatted Time
