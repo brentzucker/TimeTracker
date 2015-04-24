@@ -350,10 +350,10 @@ function homePage()
 	$min = localtime(time(), true)['tm_min'];
 	$min = (strlen(''.$min) == 1) ? '0'.$min : $min;
 	
-	if(localtime(time(), true)['tm_hour'] > 12)	
-		echo '<p>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' pm</p>';
+	if(localtime(time(), true)['tm_hour'] >= 12)	
+		echo '<p>The current time is ' . (( localtime(time(), true)['tm_hour'] % 12 ) == 0 ? 12 : ( localtime(time(), true)['tm_hour'] % 12 )) . ":" . $min . ' pm</p>';
 	else 
-		echo '<p>The current time is ' . localtime(time(), true)['tm_hour'] % 12 . ":" . $min . ' am</p>';
+		echo '<p>The current time is ' . (( localtime(time(), true)['tm_hour'] % 12 ) == 0 ? 12 : ( localtime(time(), true)['tm_hour'] % 12 )) . ":" . $min . ' am</p>';
 	echo '</div>';
 
 	//If they have clocked in before
@@ -447,7 +447,6 @@ function newProject($developer)
 //This function creates a from that assigns a task to the developer and calls assignTask to load the data into the database
 function newTask($developer)
 {
-	jsFunctions();
 	newTaskForm($developer);
 
 	if(isset($_POST['Client_Selected']) && isset($_POST['Project_Selected']) && isset($_POST['task']) )
