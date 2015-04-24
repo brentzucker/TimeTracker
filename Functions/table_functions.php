@@ -26,6 +26,9 @@ function printTable($query, $table_headers)
 		{
 			echo '<tr>';
 			foreach($row as $column=>$value)
+				if($column == 'HoursLeft' || $column == 'HoursPurchased' || $column == 'SUM(p.HoursPurchased)' || $column == 'TimeSpent' || $column == 'SUM(t.TimeSpent)') //Every occurence of time in seconds needs to be formatted
+					echo '<td>' . secondsToFormattedTime( $row[$column] ) . '</td>';
+				else
 					echo '<td>' . $row[$column] . '</td>';
 			echo '</tr>';
 		}
@@ -54,6 +57,8 @@ function printTableTimeSheet($query, $table_headers)
 			foreach($row as $column=>$value)
 				if($column == 'TimeIn' || $column == 'TimeOut') //Remove the date from the time
 					echo '<td>' . substr($row[$column], 11, 5) . '</td>';
+				elseif($column == 'TimeSpent')
+					echo '<td>' . secondsToFormattedTime( $row[$column] ) . '</td>';
 				else
 					echo '<td>' . $row[$column] . '</td>';
 			echo '</tr>';

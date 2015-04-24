@@ -896,6 +896,20 @@ function newClientForm($developer)
 	echo '</form>';
 }
 
+//Convert Seconds to Formatted Time
+function secondsToFormattedTime($unformatted_seconds)
+{
+	$hours = (int)( $unformatted_seconds / 3600 ); 
+	$minutes = (int)( ($unformatted_seconds % 3600) / 60 );
+	$seconds = (int)( ($unformatted_seconds % 3600) % 60 );
+
+	//Format time 
+	$hours = strlen($hours) == 1 ? '0' . $hours : $hours;
+	$minutes = strlen($minutes) == 1 ? '0' . $minutes : $minutes;
+	$seconds = strlen($seconds) == 1 ? '0' . $seconds : $seconds;
+	return $hours . ':' . $minutes . ':' . $seconds;
+}
+
 //BELOW:
 //UNFINISHED -- NEEDS WORK
 

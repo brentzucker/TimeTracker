@@ -134,26 +134,29 @@ class Client
 
 	function getHoursLeft()
 	{
-		$hours = $this->getTimeInSecondsLeft() / 3600;
-		return (int)$hours;
+		$hours = (int)( $this->getTimeInSecondsLeft() / 3600 );
+
+		//Format Time
+		$hours = strlen($hours) == 1 ? '0' . $hours : $hours;
+		return $hours;
 	}
 
 	function getMinutesLeft()
 	{
-		$minutes = ($this->getTimeInSecondsLeft() % 3600) / 60;
-		if(strlen((int)$minutes) == 1)
-			return '0' . (int)$minutes;
-		else
-			return (int)$minutes;
+		$minutes = (int)( ($this->getTimeInSecondsLeft() % 3600) / 60 );
+
+		//Format Time
+		$minutes = strlen($minutes) == 1 ? '0' . $minutes : $minutes;
+		return $minutes;
 	}
 
 	function getSecondsLeft()
 	{
-		$seconds = (($this->getTimeInSecondsLeft() % 3600) % 60);
-		if(strlen((int)$seconds) == 1)
-			return '0' . (int)$seconds;
-		else
-			return (int)$seconds;
+		$seconds = (int)( ($this->getTimeInSecondsLeft() % 3600) % 60 );
+		
+		//Format Time
+		$seconds = strlen($seconds) == 1 ? '0' . $seconds : $seconds;
+		return $seconds;
 	}
 
 	function getTimeLeftFormatted()
