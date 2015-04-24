@@ -96,7 +96,7 @@ function warningExpiringContracts($minimum_days_left)
 {
 	foreach($_SESSION['Developer']->getClientList() as $client)
 		if($minimum_days_left >= $client->getContractDaysLeft())
-			echo $client->getClientname() . " has " . $client->getContractDaysLeft() . " days left on its contract.<br>";
+			echo $client->getClientname() . " has " . $client->getContractDaysLeft() . " days left.<br>";
 }
 
 //This function consumes an amount of hours and returns clients who have less hours left on their contract
@@ -104,7 +104,7 @@ function warningLowHours($minimum_time_left)
 {
 	foreach($_SESSION['Developer']->getClientList() as $client)
 		if($minimum_time_left >= $client->getHoursLeft())
-			echo $client->getClientname() . " has " . $client->getTimeLeftFormatted() . "" . " much time left on their contract.<br>";
+			echo $client->getClientname() . " has " . $client->getTimeLeftFormatted() . "" . " left.<br>";
 }
 
 /* Functions that create dropdown selectors
