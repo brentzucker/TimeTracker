@@ -419,7 +419,7 @@ function newDeveloperPage()
 	//Verify the Username, Email, and Password are valid
 	if( isset($_POST['position']) && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && verifyUsername($_POST['username']) && verifyEmail($_POST['email']) && verifyPassword($_POST['password']) )
 	{
-		$new_developer = new Developer( $_SESSION['Developer']->getTeam() , $_POST['username'], $_POST['email'], $_POST['position'], $_POST['password']);
+		$new_developer = new Developer( $_SESSION['Developer']->getTeam() , $_POST['username'], $_POST['email'], $_POST['position'], hash('ripemd128', $_POST['password']));
 		echo '<h4>' . $new_developer->getUsername() . ' has been created.</h4>';
 		return;
 	}
