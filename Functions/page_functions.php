@@ -283,11 +283,22 @@ function editTask()
 //This function prints the tables and forms and also calls functions that modify the developer to edit a record within timesheet
 function editTimeSheet()
 {
+	echo '<div class="page-header">';
+	echo '<h1>Edit Time Sheet</h1>';
 	echo '<form action="" method="POST">';
-	dateSelector();
+	dateSelectorWide();
 	echo '<br>';
 	echo '<input type="submit" class="btn btn-primary" value="Submit">';
 	echo '</form>';
+	echo '</div>';
+
+	//If the time has been updated reflect the results in the table
+	if(isset($_POST['TimeOut']))
+	{
+		//Update the developers new time out
+		$_SESSION['Developer']->updateTimeSheet($_SESSION['edit']['timelogid'], $_POST['TimeOut'] );
+		$_SESSION['edit']['timelogid'] = null;
+	}
 
 	//If a new time out has been created, update the tables
 	if((isset($_POST['startdate']) && isset($_POST['enddate'])) || (isset($_SESSION['edit']['startdate']) && isset($_SESSION['edit']['enddate']) ))
@@ -298,11 +309,11 @@ function editTimeSheet()
 			$_SESSION['edit']['enddate'] = $_POST['enddate'];
 		}
 
-		echo '<h2>' . $_SESSION['Developer']->getUsername() . '\'s Time Sheet</h2>';
+		echo '<h4>' . $_SESSION['Developer']->getUsername() . '</h4>';
 
 		echo '<form action="" method="POST">';
 		editTimeLogTableByDeveloper($_SESSION['Developer']->getUsername(), $_SESSION['edit']['startdate'], $_SESSION['edit']['enddate']);
-		echo '<input type="submit" value="Edit Time Sheet">';
+		echo '<input type="submit" value="Edit Time Sheet" class="btn btn-primary">';
 		echo '</form>';
 	}
 
@@ -314,7 +325,7 @@ function editTimeSheet()
 
 		echo '<form action="" method="POST">';
 		editTimeLogByID($_SESSION['edit']['timelogid']);
-		echo '<input type="submit" value="Edit Time Log">';
+		echo '<input type="submit" value="Edit Time Log" class="btn btn-primary">';
 		echo '</form>';
 	}
 
@@ -323,11 +334,7 @@ function editTimeSheet()
 		//The posted time out contains a "T" between the date and time. substr_replace will remove the "T" and replace it with " ""
 		$_POST['TimeOut'] = substr_replace($_POST['TimeOut'], " ", 10, 1);
 		echo '<h4>New Time Out: </h4><i>' . $_POST['TimeOut'] . '</i>';
-
-		//Update the developers new time out
-		$_SESSION['Developer']->updateTimeSheet($_SESSION['edit']['timelogid'], $_POST['TimeOut'] );
-
-		echo '<h2>The Time Sheet has been updated, Refresh to view updated sheet.</h2>';
+		echo '<h6>The Time Sheet has been updated, Refresh to view updated sheet.</h6>';
 	}
 }
 

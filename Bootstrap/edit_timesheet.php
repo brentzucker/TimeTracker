@@ -7,10 +7,12 @@ open_html("Edit Time Sheet");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
-echo '<h1>Edit Time Sheet</h1>';
+
+echo '<div class="jumbotron">';
 
 editTimeSheet();
 
+echo '</div>'; //close jumbotron
 echo '</div>';
 alertBox();
 echo '</main>';

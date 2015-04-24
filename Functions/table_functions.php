@@ -255,7 +255,7 @@ function printDevelopersAssignedToClient($client)
 //This function consumes a query and table headers and prints out the results in a table
 function printTableEditColumn($query, $table_headers)
 {
-	echo '<table class="table table-condensed table-bordered" style="text-align:left;">';
+	echo '<table class="table table-hover table-condensed table-bordered" style="text-align:left;">';
 
 	echo '<tr>';
 	foreach($table_headers as $t_h)
@@ -267,8 +267,11 @@ function printTableEditColumn($query, $table_headers)
 		while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
 		{
 			echo '<tr>';
-			foreach($row as $r)
-				echo "<td>$r</td>";
+			foreach($row as $column=>$value)
+				if($column == 'TimeSpent')
+					echo '<td>' . secondsToFormattedTime( $row[$column] ) . '</td>';
+				else
+					echo '<td>' . $row[$column] . '</td>';
 
 			echo '<td>';
 			//Print the radio button
@@ -284,9 +287,9 @@ function printTableEditColumn($query, $table_headers)
 //This function consumes a develper username, startdate, and enddate and echos an editable table for the specific developers time sheet
 function editTimeLogTableByDeveloper($developer, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TaskID=Tasks.TaskID) AND (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
 
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'Task Name', 'Time In', 'Time Out', 'Time Spent', 'Edit');
+	$table_headers = array('ID', 'Username', 'Client', 'Project', 'Task', 'Time In', 'Time Out', 'Total', 'Edit');
 
 	printTableEditColumn($query, $table_headers);
 }
@@ -329,7 +332,7 @@ function editTable($query, $table_headers)
 function editTimeLogByID($timeLogID)
 {
 	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TaskID=Tasks.TaskID AND t.ProjectID=p.ProjectID) AND t.TimeLogID='" . $timeLogID ."'";
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project Name', 'Task Name', 'Time In', 'Time Out', 'Time Spent');
+	$table_headers = array('ID', 'Username', 'Client', 'Project', 'Task', 'Time In', 'Time Out', 'Total');
 
 	editTable($query, $table_headers);
 }
