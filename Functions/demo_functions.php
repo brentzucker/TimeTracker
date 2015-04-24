@@ -276,34 +276,34 @@ function dateSelectorWide()
 
 function getClientProfile($clientName)
 {
-	echo '<h2>' . $clientName . '</h2>';
+	echo '<h3>' . $clientName . '</h3>';
 
 	//Print Client Contact information
-	echo '<h3>Contact Info</h3>';
+	echo '<h5>Contact Info</h5>';
 	printClientContactTable($clientName);
 
 	//Print Client Contract Information
-	echo '<h3>Contract Info</h3>';
-	echo '<h4>Hours Left</h4>';
+	echo '<h5>Contract Info</h5>';
+	echo '<h6>Hours Left</h6>';
 	printHoursLeftTable($clientName);
 
-	echo '<h4>Client\'s Purchases</h4>';
+	echo '<h6>Client\'s Purchases</h6>';
 	printClientsPurchasesTable($clientName);
 
 	//Projects 
-	echo '<h3>Projects</h3>';
+	echo '<h5>Projects</h5>';
 	printProjects($clientName);
 
 	//Tasks
-	echo '<h3>Tasks</h3>';
+	echo '<h5>Tasks</h5>';
 	printTasks($clientName);
 
 	//Assigned Developers
-	echo '<h3>Assigned Developers</h3>';
+	echo '<h5>Assigned Developers</h5>';
 	printDevelopersAssignedToClient($clientName);
 
 	//Grouped Developers by Time
-	echo '<h3>Developers Time Sheet</h3>';
+	echo '<h5>Developers Time Sheet</h5>';
 	printAggregatedTimeLogTableByClient($clientName,0,0);
 }
 

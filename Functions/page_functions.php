@@ -363,6 +363,8 @@ function homePage()
 		echo '<h5>You last clocked out on ' . (new DateTime($last_timeObject->getTimeOut()))->format('l F jS Y') . (new DateTime($last_timeObject->getTimeOut()))->format(' \a\t g:ia') . '.</h5>';
 		echo '<h5>You were working on ' . $last_timeObject->getClientname() . ', ' . (new Projects ($last_timeObject->getProjectId()))->getProjectName() . ', ' . (new Tasks ($last_timeObject->getTaskId()))->getTaskName() . '.</h5>';
 
+		echo '<hr>';
+
 		//Load Client Profile Page of last clock in
 		getClientProfile($last_timeObject->getClientname());
 	}
