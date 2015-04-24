@@ -24,11 +24,12 @@ require_once(__DIR__.'/../include.php');
 function jsFormDeveloperStartDateEndDate()
 {
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
-	developerDropDownJSenableButton((new Team($_SESSION['Developer']->getTeam())));
-	echo '<br />';
-	echo '<br />';
 	dateSelectorWide();
-	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '<br />';
+	echo '<br />';
+	//developerDropDownJSenableButton((new Team($_SESSION['Developer']->getTeam())));
+	developerDropDownJSsubmit((new Team($_SESSION['Developer']->getTeam())));
+	//echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 	echo '<br />';
 }
@@ -179,19 +180,14 @@ function jsFormClientProjectTaskStartDateEndDate()
 	jsFunctions();
 	
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
-
-	clientDropDownJS($_SESSION['Developer']);
-
-	projectDropDownJS();
-
-	taskDropDownJS();
-	
-	echo '<br>';
-	echo '<br>';
-
 	dateSelectorWide();
-
-	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '<br>';
+	echo '<br>';
+	clientDropDownJS($_SESSION['Developer']);
+	projectDropDownJS();
+	taskDropDownJSsubmit();
+	//taskDropDownJS();
+	//echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 }
 
@@ -240,17 +236,13 @@ function jsFormClientProjectStartDateEndDate()
 	jsFunctions();
 
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
-
-	clientDropDownJS($_SESSION['Developer']);
-
-	projectDropDownJSenableButton();
-	
-	echo '<br>';
-	echo '<br>';
-
 	dateSelectorWide();
-
-	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '<br>';
+	echo '<br>';
+	clientDropDownJS($_SESSION['Developer']);
+	projectDropDownJSsubmit();
+	//projectDropDownJSenableButton();
+	//echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 }
 
@@ -295,12 +287,13 @@ function jsFormClientStartDateEndDate()
 
 	echo '<form id="ClientProjectTaskForm" action="" method="POST">';
 
-	clientDropDownJSenableButton($_SESSION['Developer']);
-	echo '<br>';
-	echo '<br>';
 	dateSelectorWide();
+	echo '<br>';
+	echo '<br>';
+	clientDropDownJSenableButton($_SESSION['Developer']);
+	clientDropDownJSsubmit($_SESSION['Developer']);
 
-	echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
+	//echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 }
 

@@ -106,18 +106,18 @@ function clientReport()
 	
 	if(isset($_POST['Client_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<h2>' . $_POST['Client_Selected'] . ' was selected</h2>';
+		echo '<h4>' . $_POST['Client_Selected'] . '</h4>';
 
-		echo '<h3>Hours Left</h3>';
+		echo '<h6>Hours Left</h6>';
 		printHoursLeftTable($_POST['Client_Selected']);
 
-		echo '<h3>Client\'s Purchases</h3>';
+		echo '<h6>Purchase History</h6>';
 		printClientsPurchasesTable($_POST['Client_Selected']);
 
-		echo '<h3>Developers Hours</h3>';
+		echo '<h6>Developers</h6>';
 		printAggregatedTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate']);
 
-		echo '<h3>Detailed Time Sheet</h3>';
+		echo '<h6>Detailed Time Sheet</h6>';
 		printTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
@@ -190,7 +190,7 @@ function developerReports()
 
 	if(isset($_POST['Developer_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<h4>' . $_SESSION['report']['developer'] . '\'s Reports</h4>';
+		echo '<h4>' . $_SESSION['report']['developer'] . '</h4>';
 		printAggregatedTimeLogTableByDeveloper($_POST['Developer_Selected'], $_POST['startdate'], $_POST['enddate']);
 		echo '<h6>Time Sheet</h6>';
 		printTimeLogTableByDeveloper($_POST['Developer_Selected'], $_POST['startdate'], $_POST['enddate']);
@@ -330,13 +330,14 @@ function homePage()
 	/*
 	 * Keep all content in the div #page-content-wrapper
 	 */
-	
 
 	echo '<main id="page-content-wrapper">'; 
 	echo '<div class="col-lg-9 main-box">';
 
 	//Bootstrap Jumbotron
 	echo '<div class="jumbotron">';
+
+	echo '<div class="page-header">';
 	//Custom Greeting Message
 	if(localtime(time(), true)['tm_hour'] < 11 && localtime(time(), true)['tm_hour'] > 3)
 		echo '<h1>Good Morning ' . $_SESSION['Developer']->getContact()->getFirstname() . '!</h1>';
@@ -346,7 +347,7 @@ function homePage()
 		echo '<h1>Good Evening ' . $_SESSION['Developer']->getContact()->getFirstname() . '</h1>';
 	else
 		echo '<h1>Welcome back ' . $_SESSION['Developer']->getContact()->getFirstname() . '!</h1>';
-
+	
 	//If the minutes are less than 10 add a zero digit infront 
 	$min = localtime(time(), true)['tm_min'];
 	$min = (strlen(''.$min) == 1) ? '0'.$min : $min;
@@ -355,21 +356,23 @@ function homePage()
 		echo '<p>The current time is ' . (( localtime(time(), true)['tm_hour'] % 12 ) == 0 ? 12 : ( localtime(time(), true)['tm_hour'] % 12 )) . ":" . $min . ' pm</p>';
 	else 
 		echo '<p>The current time is ' . (( localtime(time(), true)['tm_hour'] % 12 ) == 0 ? 12 : ( localtime(time(), true)['tm_hour'] % 12 )) . ":" . $min . ' am</p>';
-	echo '</div>';
+	echo '</div>'; //Close page Header
 
 	//If they have clocked in before
 	if(count($_SESSION['Developer']->getTimeLog()) > 0)
 	{
 		$last_timeObject = $_SESSION['Developer']->getTimeLog()[ count($_SESSION['Developer']->getTimeLog()) - 1 ];
-		echo '<h5>You last clocked out on ' . (new DateTime($last_timeObject->getTimeOut()))->format('l F jS Y') . (new DateTime($last_timeObject->getTimeOut()))->format(' \a\t g:ia') . '.</h5>';
 		echo '<h5>You were working on ' . $last_timeObject->getClientname() . ', ' . (new Projects ($last_timeObject->getProjectId()))->getProjectName() . ', ' . (new Tasks ($last_timeObject->getTaskId()))->getTaskName() . '.</h5>';
+		echo '<h6>You last clocked out on ' . (new DateTime($last_timeObject->getTimeOut()))->format('l F jS Y') . (new DateTime($last_timeObject->getTimeOut()))->format(' \a\t g:ia') . '.</h6>';
 
 		echo '<hr>';
 
 		//Load Client Profile Page of last clock in
 		getClientProfile($last_timeObject->getClientname());
 	}
-
+	
+	echo '</div>'; //Close Jumbotron
+	
 	echo '</div>';
 
 	alertBox();
@@ -465,7 +468,7 @@ function projectReports()
 
 	if(isset($_POST['Project_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<h4>' . (new Projects($_POST['Project_Selected']))->getProjectName()  . ' was selected</h4>';
+		echo '<h4>' . (new Projects($_POST['Project_Selected']))->getProjectName()  . '</h4>';
 
 		echo '<h6>Developers Hours</h6>';
 		printAggregatedTimeLogTableByProject($_POST['Project_Selected'], $_POST['startdate'], $_POST['enddate']);
@@ -482,12 +485,12 @@ function taskReports()
 
 	if(isset($_POST['Task_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<h2>' . (new Tasks($_POST['Task_Selected']))->getTaskName()  . ' was selected</h2>';
+		echo '<h4>' . (new Tasks($_POST['Task_Selected']))->getTaskName()  . '</h4>';
 
-		echo '<h3>Developers Hours</h3>';
+		echo '<h6>Developers Hours</h6>';
 		printAggregatedTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate']);
 
-		echo '<h3>Detailed Time Sheet</h3>';
+		echo '<h6>Detailed Time Sheet</h6>';
 		printTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
