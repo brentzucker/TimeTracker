@@ -82,9 +82,9 @@ function printTimeSheetTableByTask($task)
 //This function consumes a develper username and echos the timeLog table for the specific developer
 function printTimeLogTableByDeveloper($developer, $startdate, $enddate)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.ProjectID, p.ProjectName, t.TaskID, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TaskID=Tasks.TaskID) AND (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (t.TaskID=Tasks.TaskID) AND (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID AND t.ProjectID = Tasks.ProjectID) AND t.Username='" . $developer ."'";
 
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'ProjectID', 'Project Name', 'TaskID', 'Task Name', 'Time In', 'Time Out', 'Time Spent');
+	$table_headers = array('ID', 'Username', 'Client', 'Project Name', 'Task Name', 'Time In', 'Time Out', 'Total');
 
 	printTable($query, $table_headers);
 }
@@ -92,7 +92,7 @@ function printTimeLogTableByDeveloper($developer, $startdate, $enddate)
 //This function consumes a developer username and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
 function printAggregatedTimeLogTableByDeveloper($developer, $startdate, $enddate)
 {
-	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE (t.TimeIn BETWEEN '$startdate' AND '$enddate') AND t.Username='" . $developer ."'GROUP BY t.ClientName";
+	$query = "SELECT t.Username, t.ClientName, SUM(t.TimeSpent) FROM TimeSheet t WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND t.Username='" . $developer ."'GROUP BY t.ClientName";
 
 	$table_headers = array('Username', 'Client', 'Time Spent');
 

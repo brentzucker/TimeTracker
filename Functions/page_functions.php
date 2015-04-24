@@ -192,6 +192,7 @@ function developerReports()
 	{
 		echo '<h4>' . $_SESSION['report']['developer'] . '\'s Reports</h4>';
 		printAggregatedTimeLogTableByDeveloper($_POST['Developer_Selected'], $_POST['startdate'], $_POST['enddate']);
+		echo '<h6>Time Sheet</h6>';
 		printTimeLogTableByDeveloper($_POST['Developer_Selected'], $_POST['startdate'], $_POST['enddate']);
 	}
 }
