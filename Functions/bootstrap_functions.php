@@ -103,7 +103,7 @@ _END;
 						<li><a href="edit_project.php">Edit Project</a></li>
 						<li><a href="edit_task.php">Edit Task</a></li>
 						<li><a href="delete_client.php">Delete Client</a></li>
-						<li><a href="delete_client.php">Delete Project</a></li>
+						<li><a href="delete_project.php">Delete Project</a></li>
 						<li><a href="delete_task.php">Delete Task</a></li>
 					</ul>
                 	</li>
