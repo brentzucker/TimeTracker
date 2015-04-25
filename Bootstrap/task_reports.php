@@ -23,10 +23,14 @@ open_html("Task Reports");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
+echo '<div class="jumbotron">';
+echo '<div class="page-header">';
 echo '<h1>Task Reports</h1>';
+echo '</div>';
 
 taskReports();
 
+echo '</div>';
 echo '</div>';
 
 alertBox();

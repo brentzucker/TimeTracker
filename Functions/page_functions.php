@@ -285,12 +285,13 @@ function editTimeSheet()
 {
 	echo '<div class="page-header">';
 	echo '<h1>Edit Time Sheet</h1>';
+	echo '</div>';
 	echo '<form action="" method="POST">';
 	dateSelectorWide();
 	echo '<br>';
+	echo '<br>';
 	echo '<input type="submit" class="btn btn-primary" value="Submit">';
 	echo '</form>';
-	echo '</div>';
 
 	//If the time has been updated reflect the results in the table
 	if(isset($_POST['TimeOut']))

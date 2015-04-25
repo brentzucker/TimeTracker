@@ -482,6 +482,16 @@ table {
 	margin: 0 auto!important;
 }
 
+.page-header {
+    border-bottom: 2px solid #e7e9ec!important;
+    margin: 10px 0 30px!important;
+    padding-bottom: 14px!important;
+}
+
+.select {
+	margin-left: 10px!important;
+}
+
 /*
 MEDIA QUERIES
 */

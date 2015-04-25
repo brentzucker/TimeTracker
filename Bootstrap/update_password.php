@@ -22,10 +22,14 @@ open_html("Update Password");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
+echo '<div class="jumbotron">';
+echo '<div class="page-header">';
 echo '<h1>Update Password</h1>';
+echo '</div>';
 
 updatePassword();
 
+echo '</div>';
 echo '</div>';
 
 alertBox();

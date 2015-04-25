@@ -25,11 +25,15 @@ open_html("Client Reports");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
+echo '<div class="jumbotron">';
+echo '<div class="page-header">';
 echo '<h1>Client Reports</h1>';
+echo '</div>';
 
 //This function prints out the reports tables for a client
 clientReport();
 
+echo '</div>';
 echo '</div>';
 
 alertBox();
