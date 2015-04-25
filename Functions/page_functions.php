@@ -335,7 +335,7 @@ function editTimeSheet()
 		//The posted time out contains a "T" between the date and time. substr_replace will remove the "T" and replace it with " ""
 		$_POST['TimeOut'] = substr_replace($_POST['TimeOut'], " ", 10, 1);
 		echo '<h4>New Time Out: </h4><i>' . $_POST['TimeOut'] . '</i>';
-		echo '<h6>The Time Sheet has been updated, Refresh to view updated sheet.</h6>';
+		echo '<h6>The Time Sheet has been updated.</h6>';
 	}
 }
 

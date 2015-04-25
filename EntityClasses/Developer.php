@@ -485,14 +485,32 @@ class Developer
 
 	function deleteClient($clientObject)
 	{
+		//Delete all the tasks for that Client
+		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
+			foreach($clientObject->getProjects() as $projectObject)
+				foreach( $projectObject->getTaskList() as $taskObject )
+					$developer->deleteTask($taskObject);
+
+		//Delete all Projects for that Client
+		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
+			foreach($clientObject->getProjects() as $projectObject)
+				$developer->deleteProject( $projectObject );
+
+		//Finally, delete the client 
 		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
 			$developer->unassignClient($clientObject);
 
+		
 		removeTeamAssignment( $this->getTeam() , $clientObject->getClientname() , 'Client');
 	}
 
 	function deleteProject($projectObject)
 	{
+		//Delete all the tasks for that Project
+		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
+			foreach( $projectObject->getTaskList() as $taskObject )
+				$developer->deleteTask($taskObject);
+
 		foreach( ( new Team( $this->getTeam() ) )->getDeveloperList() as $developer)
 			$developer->unassignProject($projectObject);
 

@@ -258,7 +258,7 @@ function jsFormClientProjectEnableButton()
 
 	projectDropDownJSenableButton();
 
-	echo '<input type="submit" value="submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
+	echo '<input type="submit" value="Submit" id="submit_button" class="btn btn-block btn-lg btn-primary" disabled>';
 	echo '</form>';
 }
 
