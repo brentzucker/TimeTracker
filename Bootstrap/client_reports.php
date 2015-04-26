@@ -29,6 +29,8 @@ if(isset($_POST['client']) && isset($_POST['toExcel']))
 		printClientsPurchasesTable($_POST['client'], 'csv');
 	elseif($_POST['report'] == 'AggregatedTimeLogTableByClient')
 		printAggregatedTimeLogTableByClient($_POST['client'], $_POST['startdate'], $_POST['enddate'], 'csv');
+	elseif($_POST['report'] == 'TimeLogTableByClient')
+		printTimeLogTableByClient($_POST['client'], $_POST['startdate'], $_POST['enddate'], 'csv');
 
 }
 

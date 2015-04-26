@@ -120,8 +120,9 @@ function clientReport()
 		formExportToExcel($_POST['Client_Selected'],'AggregatedTimeLogTableByClient', $_POST['startdate'], $_POST['enddate']);
 		printAggregatedTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate'], 'table');
 
-		echo '<h6>Detailed Time Sheet</h6>';
-		printTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate']);
+		echo '<h6>Time Sheet</h6>';
+		formExportToExcel($_POST['Client_Selected'],'TimeLogTableByClient', $_POST['startdate'], $_POST['enddate']);
+		printTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate'], 'table');
 	}
 }
 

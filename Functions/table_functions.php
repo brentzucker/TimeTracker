@@ -100,13 +100,16 @@ function printAggregatedTimeLogTableByDeveloper($developer, $startdate, $enddate
 }
 
 //This function consumes a client name and echos the timeLog table for the specific developer
-function printTimeLogTableByClient($client, $startdate, $enddate)
+function printTimeLogTableByClient($client, $startdate, $enddate, $type)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.TaskID=Tasks.TaskID) AND (t.ProjectID = p.ProjectID) AND t.ClientName='" . $client ."'";
 
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'Time in', 'Time Out', 'Time Spent');
+	$table_headers = array('#', 'Username', 'Client', 'Project', 'Task', 'Time in', 'Time Out', 'Time Spent');
 
-	printTable($query, $table_headers);
+	if($type == 'table')
+		printTable($query, $table_headers);
+	elseif($type == 'csv')
+		printCSV($query, $table_headers, $client.'_TimeSheet');
 }
 
 //This function consumes a client name and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
@@ -122,7 +125,7 @@ function printAggregatedTimeLogTableByClient($client, $startdate, $enddate, $typ
 	if($type == 'table')
 		printTable($query, $table_headers);
 	elseif($type == 'csv')
-		printCSV($query, $table_headers, $client.'Developers');
+		printCSV($query, $table_headers, $client.'_Developers');
 }
 
 //This function consumes a projectid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
@@ -175,7 +178,7 @@ function printHoursLeftTable($client, $type)
 	if($type == 'table')
 		printTable($query, $table_headers);
 	elseif($type == 'csv')
-		printCSV($query, $table_headers, $client.'HoursLeft');
+		printCSV($query, $table_headers, $client.'_HoursLeft');
 }
 
 function printClientsPurchasesTable($client, $type)
@@ -187,7 +190,7 @@ function printClientsPurchasesTable($client, $type)
 	if($type == 'table')
 		printTable($query, $table_headers);
 	elseif($type == 'csv')
-		printCSV($query, $table_headers, $client.'ClientsPurchases');
+		printCSV($query, $table_headers, $client.'_ClientsPurchases');
 }
 
 //This function consumes a developer username and echos an Assignment table for the specific developer
