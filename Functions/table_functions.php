@@ -163,13 +163,16 @@ function printTimeLogTableByTask($task, $startdate, $enddate)
 }
 
 //This function consumes a client name and echos a view of the ClientPurchases table
-function printHoursLeftTable($client)
+function printHoursLeftTable($client, $type)
 {
 	$query = 'SELECT p.ClientName, c.StartDate, SUM(p.HoursPurchased), COUNT(p.PurchaseDate), c.HoursLeft FROM ClientPurchases p, Client c WHERE (c.ClientName = p.ClientName) AND c.ClientName="' . $client . '"';
 
 	$table_headers = array('Client', 'Start Date', 'Hours Purchased', 'Purchases', 'Hours Left');
 
-	printTable($query, $table_headers);
+	if($type == 'table')
+		printTable($query, $table_headers);
+	elseif($type == 'csv')
+		printCSV($query, $table_headers, $client.'HoursLeft');
 }
 
 function printClientsPurchasesTable($client)
@@ -335,5 +338,51 @@ function editTimeLogByID($timeLogID)
 	$table_headers = array('ID', 'Username', 'Client', 'Project', 'Task', 'Time In', 'Time Out', 'Total');
 
 	editTable($query, $table_headers);
+}
+
+/* Below Functions print to excel (csv)
+ *
+ */
+
+//this function prevents corruption of the excel file
+function cleanData(&$str)
+{
+	$str = preg_replace("/\t/", "\\t", $str);
+	$str = preg_replace("/\r?\n/", "\\n", $str);
+	if(strstr($str, '"')) 
+		$str = '"' . str_replace('"', '""', $str) . '"';
+}
+
+//This function takes time in seconds and formats it 
+function cleanTime(&$row)
+{
+	foreach($row as $column=>$value)
+		if($column == 'HoursLeft' || $column == 'HoursPurchased' || $column == 'SUM(p.HoursPurchased)' || $column == 'TimeSpent' || $column == 'SUM(t.TimeSpent)') //Every occurence of time in seconds needs to be formatted
+			$row[$column] = secondsToFormattedTime( $row[$column] );
+}
+
+//this function can handle a single query to the database and prints the result in an excel spreadsheet
+function printCSV($query, $table_headers, $reportname)
+{
+	// filename for download
+	$filename = $reportname . "_" . date('Y-m-d') . ".csv";
+
+	header("Content-Disposition: attachment; filename=\"$filename\"");
+	header("Content-Type: text/csv");
+
+	$out = fopen("php://output", "w");
+
+	fputcsv($out, $table_headers);
+
+	if($result = db_query($query))
+		while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
+		{
+			cleanTime($row);
+			array_walk($row, 'cleanData');
+			fputcsv($out, array_values($row));
+		}
+
+	fclose($out);
+	exit;
 }
 ?>

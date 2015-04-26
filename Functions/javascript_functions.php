@@ -290,7 +290,6 @@ function jsFormClientStartDateEndDate()
 	dateSelectorWide();
 	echo '<br>';
 	echo '<br>';
-	clientDropDownJSenableButton($_SESSION['Developer']);
 	clientDropDownJSsubmit($_SESSION['Developer']);
 
 	//echo '<input id="submit_button" type="submit" value="Build Report" class="btn btn-block btn-lg btn-primary" disabled>';

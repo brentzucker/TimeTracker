@@ -21,7 +21,15 @@ session_start();
 
 isLogin();
 
+if(isset($_POST['client']) && isset($_POST['toExcel']))
+{
+	if($_POST['report'] =='HoursLeft')
+		printHoursLeftTable($_POST['client'], 'csv');
+
+}
+
 open_html("Client Reports");
+
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';

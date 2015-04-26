@@ -106,10 +106,11 @@ function clientReport()
 	
 	if(isset($_POST['Client_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<h4>' . $_POST['Client_Selected'] . '</h4>';
+		echo '<h4 class="page-header">' . $_POST['Client_Selected'] . '</h4>';
 
 		echo '<h6>Hours Left</h6>';
-		printHoursLeftTable($_POST['Client_Selected']);
+		formExportToExcel($_POST['Client_Selected'],'HoursLeft');
+		printHoursLeftTable($_POST['Client_Selected'], 'table');
 
 		echo '<h6>Purchase History</h6>';
 		printClientsPurchasesTable($_POST['Client_Selected']);

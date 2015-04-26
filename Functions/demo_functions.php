@@ -285,7 +285,7 @@ function getClientProfile($clientName)
 	//Print Client Contract Information
 	echo '<h5>Contract Info</h5>';
 	echo '<h6>Hours Left</h6>';
-	printHoursLeftTable($clientName);
+	printHoursLeftTable($clientName, 'table');
 
 	echo '<h6>Client\'s Purchases</h6>';
 	printClientsPurchasesTable($clientName);
@@ -541,9 +541,9 @@ function clockForm($developer, $taskid)
 		$developer->clockOut();
 
 	echo '<form action="" method="POST">';
-	echo '<div class="col-sm-1"></div>';
-	echo '<input type="submit" name="clockin" value="Clock In" class="col-sm-4 btn btn-success btn-lg">';
 	echo '<div class="col-sm-2"></div>';
+	echo '<input type="submit" name="clockin" value="Clock In" class="col-sm-4 btn btn-success btn-lg">';
+	echo '<div class="col-sm-1"></div>';
 	echo '<input type="submit" name="clockout" value="Clock Out" class="col-sm-4 btn btn-danger btn-lg">';
 	echo '</form>';
 }
@@ -920,6 +920,16 @@ function newTaskForm($developer)
 	echo"</form>";
 }
 
+function formExportToExcel($client, $report)
+{
+	echo '<div class="col-sm-8"></div>';
+	echo '<form action="" method="POST" class="col-sm-4">';
+	echo '<input type="submit" name="toExcel" value="Export to Excel" class="btn btn-info btn-xs">';
+	echo '<input type="hidden" name="client" value="' . $client . '">';
+	echo '<input type="hidden" name="report" value="' . $report . '">';
+	echo '</form>';
+}
+
 //Convert Seconds to Formatted Time
 function secondsToFormattedTime($unformatted_seconds)
 {
@@ -1048,34 +1058,4 @@ function delClient($session, $developer)
 /*
  * The below functions deal with printing to excel
  */
-
-//this function prevents corruption of the excel file
-function cleanData(&$str)
-{
-	$str = preg_replace("/\t/", "\\t", $str);
-	$str = preg_replace("/\r?\n/", "\\n", $str);
-	if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
-}
-//this function can handle a single query to the database and prints the result in an excel spreadsheet
-function excel($query)
-{
-	// filename for download
-	$filename = "website_data_" . date('Ymd') . ".xls";
-
-	header("Content-Disposition: attachment; filename=\"$filename\"");
-	header("Content-Type: application/vnd.ms-excel");
-
-	$flag = false;
-	$result = db_query($query) or die('Query failed!');
-	while($row = mysqli_fetch_assoc($result))
-	{
-		if(!$flag) {
-			// display field/column names as first row
-			echo implode("\t", array_keys($row))."\r\n";
-			$flag = true;
-		}
-		array_walk($row, 'cleanData');
-		echo implode("\t", array_values($row))."\r\n";
-	}
-}
 ?>
