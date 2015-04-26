@@ -18,6 +18,14 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
+if(isset($_POST['selected']) && isset($_POST['toExcel']))
+{
+	if($_POST['report'] == 'AggregatedTimeLogTableByDeveloper')
+		printAggregatedTimeLogTableByDeveloper($_POST['selected'], $_POST['startdate'], $_POST['enddate'], 'csv');
+	elseif($_POST['report'] == 'TimeSheet')
+		printTimeLogTableByDeveloper($_POST['selected'], $_POST['startdate'], $_POST['enddate'], 'csv');
+}
+
 open_html("Developer Reports");
 
 echo '<main id="page-content-wrapper">'; 
