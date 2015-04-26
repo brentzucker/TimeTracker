@@ -509,13 +509,15 @@ function taskReports()
 
 	if(isset($_POST['Task_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<h4>' . (new Tasks($_POST['Task_Selected']))->getTaskName()  . '</h4>';
+		echo '<h4 class="page-header">' . (new Tasks($_POST['Task_Selected']))->getTaskName()  . '</h4>';
 
 		echo '<h6>Developers Hours</h6>';
-		printAggregatedTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate']);
+		formExportToExcel($_POST['Task_Selected'], 'AggregatedTimeLogTableByTask', $_POST['startdate'], $_POST['enddate']);
+		printAggregatedTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate'], 'table');
 
-		echo '<h6>Detailed Time Sheet</h6>';
-		printTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate']);
+		echo '<h6>Time Sheet</h6>';
+		formExportToExcel($_POST['Task_Selected'], 'TimeSheet', $_POST['startdate'], $_POST['enddate']);
+		printTimeLogTableByTask($_POST['Task_Selected'], $_POST['startdate'], $_POST['enddate'], 'table');
 	}
 }
 

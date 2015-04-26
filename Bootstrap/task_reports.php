@@ -19,6 +19,14 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
+if(isset($_POST['selected']) && isset($_POST['toExcel']))
+{
+	if($_POST['report'] == 'AggregatedTimeLogTableByTask')
+		printAggregatedTimeLogTableByTask($_POST['selected'], $_POST['startdate'], $_POST['enddate'], 'csv');
+	elseif($_POST['report'] == 'TimeSheet')
+		printTimeLogTableByTask($_POST['selected'], $_POST['startdate'], $_POST['enddate'], 'csv');
+}
+
 open_html("Task Reports");
 
 echo '<main id="page-content-wrapper">'; 
