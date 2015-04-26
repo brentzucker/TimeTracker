@@ -110,7 +110,7 @@ function printTimeLogTableByClient($client, $startdate, $enddate)
 }
 
 //This function consumes a client name and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by client names
-function printAggregatedTimeLogTableByClient($client, $startdate, $enddate)
+function printAggregatedTimeLogTableByClient($client, $startdate, $enddate, $type)
 {
 	if($startdate != 0 && $endate != 0)
 		$query = "SELECT t.ClientName, t.Username, SUM(t.TimeSpent) FROM TimeSheet t WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND t.ClientName='" . $client ."'GROUP BY t.Username";
@@ -119,7 +119,10 @@ function printAggregatedTimeLogTableByClient($client, $startdate, $enddate)
 
 	$table_headers = array('Client', 'Username', 'Time Spent');
 
-	printTable($query, $table_headers);
+	if($type == 'table')
+		printTable($query, $table_headers);
+	elseif($type == 'csv')
+		printCSV($query, $table_headers, $client.'Developers');
 }
 
 //This function consumes a projectid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
@@ -175,13 +178,16 @@ function printHoursLeftTable($client, $type)
 		printCSV($query, $table_headers, $client.'HoursLeft');
 }
 
-function printClientsPurchasesTable($client)
+function printClientsPurchasesTable($client, $type)
 {
 	$query = 'SELECT p.ClientName, p.HoursPurchased, p.PurchaseDate FROM ClientPurchases p WHERE p.ClientName="' . $client . '"';
 
 	$table_headers = array('Client', 'Hours Purchased', 'Purchase Date');
 
-	printTable($query, $table_headers);
+	if($type == 'table')
+		printTable($query, $table_headers);
+	elseif($type == 'csv')
+		printCSV($query, $table_headers, $client.'ClientsPurchases');
 }
 
 //This function consumes a developer username and echos an Assignment table for the specific developer

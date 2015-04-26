@@ -109,14 +109,16 @@ function clientReport()
 		echo '<h4 class="page-header">' . $_POST['Client_Selected'] . '</h4>';
 
 		echo '<h6>Hours Left</h6>';
-		formExportToExcel($_POST['Client_Selected'],'HoursLeft');
+		formExportToExcel($_POST['Client_Selected'],'HoursLeft', $_POST['startdate'], $_POST['enddate']);
 		printHoursLeftTable($_POST['Client_Selected'], 'table');
 
 		echo '<h6>Purchase History</h6>';
-		printClientsPurchasesTable($_POST['Client_Selected']);
+		formExportToExcel($_POST['Client_Selected'],'ClientsPurchases', $_POST['startdate'], $_POST['enddate']);
+		printClientsPurchasesTable($_POST['Client_Selected'], 'table');
 
 		echo '<h6>Developers</h6>';
-		printAggregatedTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate']);
+		formExportToExcel($_POST['Client_Selected'],'AggregatedTimeLogTableByClient', $_POST['startdate'], $_POST['enddate']);
+		printAggregatedTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate'], 'table');
 
 		echo '<h6>Detailed Time Sheet</h6>';
 		printTimeLogTableByClient($_POST['Client_Selected'], $_POST['startdate'], $_POST['enddate']);

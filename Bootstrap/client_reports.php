@@ -23,8 +23,12 @@ isLogin();
 
 if(isset($_POST['client']) && isset($_POST['toExcel']))
 {
-	if($_POST['report'] =='HoursLeft')
+	if($_POST['report'] == 'HoursLeft')
 		printHoursLeftTable($_POST['client'], 'csv');
+	elseif($_POST['report'] == 'ClientsPurchases')
+		printClientsPurchasesTable($_POST['client'], 'csv');
+	elseif($_POST['report'] == 'AggregatedTimeLogTableByClient')
+		printAggregatedTimeLogTableByClient($_POST['client'], $_POST['startdate'], $_POST['enddate'], 'csv');
 
 }
 

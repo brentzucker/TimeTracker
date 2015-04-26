@@ -288,7 +288,7 @@ function getClientProfile($clientName)
 	printHoursLeftTable($clientName, 'table');
 
 	echo '<h6>Client\'s Purchases</h6>';
-	printClientsPurchasesTable($clientName);
+	printClientsPurchasesTable($clientName, 'table');
 
 	//Projects 
 	echo '<h5>Projects</h5>';
@@ -304,7 +304,7 @@ function getClientProfile($clientName)
 
 	//Grouped Developers by Time
 	echo '<h5>Developers Time Sheet</h5>';
-	printAggregatedTimeLogTableByClient($clientName,0,0);
+	printAggregatedTimeLogTableByClient($clientName,0,0, 'table');
 }
 
 /* Forms dependent on Developer Selection
@@ -920,13 +920,15 @@ function newTaskForm($developer)
 	echo"</form>";
 }
 
-function formExportToExcel($client, $report)
+function formExportToExcel($client, $report, $startdate, $enddate)
 {
 	echo '<div class="col-sm-8"></div>';
 	echo '<form action="" method="POST" class="col-sm-4">';
 	echo '<input type="submit" name="toExcel" value="Export to Excel" class="btn btn-info btn-xs">';
 	echo '<input type="hidden" name="client" value="' . $client . '">';
 	echo '<input type="hidden" name="report" value="' . $report . '">';
+	echo '<input type="hidden" name="startdate" value="' . $startdate . '">';
+	echo '<input type="hidden" name="enddate" value="' . $enddate . '">';
 	echo '</form>';
 }
 
