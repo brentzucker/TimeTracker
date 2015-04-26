@@ -135,23 +135,33 @@ function printAggregatedTimeLogTableByClient($client, $startdate, $enddate, $typ
 }
 
 //This function consumes a projectid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
-function printAggregatedTimeLogTableByProject($project, $startdate, $enddate)
+function printAggregatedTimeLogTableByProject($project, $startdate, $enddate, $type)
 {
 	$query = "SELECT t.ClientName, p.ProjectName , t.Username, SUM(t.TimeSpent) FROM TimeSheet t, Projects p WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."' GROUP BY t.Username";
 
 	$table_headers = array('Client', 'Project Name', 'Username', 'Time Spent');
 
-	printTable($query, $table_headers);
+	$project = (new Projects($project))->getProjectName();
+
+	if($type == 'table')
+		printTable($query, $table_headers);
+	elseif($type == 'csv')
+		printCSV($query, $table_headers, $project.'_Developers');
 }
 
 //This function consumes a projectid and echos the timeLog table for the specific project
-function printTimeLogTableByProject($project, $startdate, $enddate)
+function printTimeLogTableByProject($project, $startdate, $enddate, $type)
 {
-	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
+	$query = "SELECT t.TimeLogID, t.Username, t.ClientName, p.ProjectName, Tasks.TaskName, t.TimeIn, t.TimeOut, t.TimeSpent FROM TimeSheet t, Projects p, Tasks WHERE (cast(t.TimeIn as date) BETWEEN '$startdate' AND '$enddate') AND (t.TaskID=Tasks.TaskID) AND (t.ProjectID = p.ProjectID) AND t.ProjectID='" . $project ."'";
 
-	$table_headers = array('TimeLogID', 'Username', 'Client', 'Project', 'Time In', 'Time Out', 'Time Spent');
+	$table_headers = array('#', 'Username', 'Client', 'Project', 'Task' , 'Time In', 'Time Out', 'Time Spent');
 
-	printTable($query, $table_headers);
+	$project = (new Projects($project))->getProjectName();
+
+	if($type == 'table')
+		printTable($query, $table_headers);
+	elseif($type == 'csv')
+		printCSV($query, $table_headers, $project.'_TimeSheet');
 }
 
 //This function consumes a taskid and echos an aggregated view of the TimeSheet table with a sum of timespent and grouped by developers names
