@@ -22,9 +22,14 @@ open_html("Delete Client");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
-echo '<h1>Delete Client</h1>';
+
+echo '<div class="jumbotron">';
+
+echo '<h1 class="page-header">Delete Client</h1>';
 
 deleteClientForm();
+
+echo '</div>'; //close jumbotron
 
 echo '</div>';
 alertBox();

@@ -7,9 +7,14 @@ open_html("Edit Project");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
-echo '<h1>Edit Project</h1>';
+
+echo '<div class="jumbotron">';
+
+echo '<h1 class="page-header">Edit Project</h1>';
 
 editProject();
+
+echo '</div>'; //close jumbotron
 
 echo '</div>';
 alertBox();

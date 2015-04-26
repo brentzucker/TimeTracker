@@ -23,9 +23,14 @@ open_html("New Project");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
-echo '<h1>New Project</h1>';
+
+echo '<div class="jumbotron">';
+
+echo '<h1 class="page-header">New Project</h1>';
 
 newProject($_SESSION['Developer']);
+
+echo '</div>'; //close jumbotron
 
 echo '</div>';
 alertBox();
