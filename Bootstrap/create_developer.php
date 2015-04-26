@@ -21,9 +21,14 @@ open_html("Create Developer");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
-echo '<h2>Create Developer</h2>';
+
+echo '<div class="jumbotron">';
+
+echo '<h2 class="page-header">Create Developer</h2>';
 
 newDeveloperPage();
+
+echo '</div>'; //close jumbotron
 
 echo '</div>';
 

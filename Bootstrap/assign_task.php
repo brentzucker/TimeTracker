@@ -22,12 +22,19 @@ open_html("Assign Task");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
-echo "<h2>Assign Task</h2>";
+
+echo '<div class="jumbotron">';
+
+echo '<h2 class="page-header">Assign Task</h2>';
 
 assignTask();
 
+echo '</div>'; //close jumbotron
+
 echo '</div>';
+
 alertBox();
+
 echo '</main>';
 
 close_html();

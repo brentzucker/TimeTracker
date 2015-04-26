@@ -22,12 +22,19 @@ open_html("View All Assignments");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-9 main-box">';
-echo '<h2>View All Assignments</h2>';
+
+echo '<div class="jumbotron">';
+
+echo '<h2 class="page-header">View All Assignments</h2>';
 
 viewAllAssignments();
 
+echo '</div>'; //close jumbotron
+
 echo '</div>';
+
 alertBox();
+
 echo '</main>';
 
 close_html();
