@@ -22,19 +22,52 @@ echo '<main id="page-content-wrapper">';
 
 echo '<div class="col-sm-2"></div>'; //close centering div'; //centering
 
-echo '<div class="col-lg-8 main-box">';
+echo '<div class="col-sm-8 main-box">';
 
 echo '<div class="jumbotron">';
 
 echo '<h1 class="page-header">Time Tracker</h1>';
 
+echo '<div class="row demo-tiles">';
+
 //Login
+echo '<div class="col-sm-4">';
+echo '<div class="tile">';
+echo '<h3 class="tile-title">Login</h3>';
+echo '<a href="login.php">';
+echo '<img class="tile-image big-illustration" src="img/icons/svg/clocks.svg" alt="Watches">';
+echo '<button class="btn btn-block btn-primary">Login</button>';
+echo '</a>';
+echo '</div>'; //close tile
+echo '</div>';
 
 //Create Account
+echo '<div class="col-sm-4">';
+echo '<div class="tile">';
+echo '<h3 class="tile-title">Create Account</h3>';
+echo '<a href="create_team_account.php">';
+echo '<img class="tile-image big-illustration" src="img/icons/svg/clipboard.svg" alt="Clipboard">';
+echo '<button class="btn btn-block btn-primary">Create Account</button>';
+echo '</a>';
+echo '</div>'; //close tile
+echo '</div>';
 
 //About us
+echo '<div class="col-sm-4">';
+echo '<div class="tile">';
+echo '<h3 class="tile-title">About Us</h3>';
+echo '<a href="aboutus.php">';
+echo '<img class="tile-image big-illustration" src="img/icons/svg/map.svg" alt="Map">';
+echo '<button class="btn btn-block btn-primary">About Us</button>';
+echo '</a>';
+echo '</div>'; //close tile
+echo '</div>';
+
+echo '</div>'; //close row demo-tiles
 
 echo '</div>'; //close jumbotron
+
+echo '<div class="col-sm-2"></div>'; //close centering div'; //centering
 
 echo '</div>';
 
