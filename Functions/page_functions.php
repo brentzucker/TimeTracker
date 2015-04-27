@@ -200,7 +200,7 @@ function developerReports()
 
 	if(isset($_POST['Developer_Selected']) && isset($_POST['startdate']) && isset($_POST['enddate']))
 	{
-		echo '<h4>' . $_SESSION['report']['developer'] . '</h4>';
+		echo '<h4>' . (new Developer($_POST['Developer_Selected']))->getUsername() . '</h4>';
 
 		formExportToExcel($_POST['Developer_Selected'], 'AggregatedTimeLogTableByDeveloper', $_POST['startdate'], $_POST['enddate']);
 		printAggregatedTimeLogTableByDeveloper($_POST['Developer_Selected'], $_POST['startdate'], $_POST['enddate'], 'table');
