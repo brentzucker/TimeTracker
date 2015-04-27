@@ -164,6 +164,18 @@ CREATE TABLE `Tasks` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Team`
+--
+
+CREATE TABLE `Team` (
+  `Team` varchar(30) NOT NULL,
+  `Password` varchar(256) NOT NULL,
+  PRIMARY KEY (`Team`)
+) 
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `TeamAssignments`
 --
 
