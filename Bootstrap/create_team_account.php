@@ -27,21 +27,32 @@ elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']) )
 		echo '<h6>Team Name Taken</h6>';
 }
 
-echo '<h4>Join Team</h4>';
-echo '<form action="" method="POST">';
-echo '<label>Team Name</label>';
-echo '<input type="text" name="joinTeamName">';
-echo '<label>Team Code</label>';
-echo '<input type="password" name="joinTeamCode">';
-echo '<input type="submit" name="joinTeam" value="Join Team">';
-echo '</form>';
+formJoinTeam();
+formCreateTeam();
 
-echo '<h4>Create Team</h4>';
-echo '<form action="" method="POST">';
-echo '<label>Team Name</label>';
-echo '<input type="text" name="createTeamName">';
-echo '<label>Team Code</label>';
-echo '<input type="password" name="createTeamCode">';
-echo '<input type="submit" name="createTeam" value="Create Team">';
-echo '</form>';
+
+
+function formJoinTeam()
+{
+	echo '<h4>Join Team</h4>';
+	echo '<form action="" method="POST">';
+	echo '<label>Team Name</label>';
+	echo '<input type="text" name="joinTeamName">';
+	echo '<label>Team Code</label>';
+	echo '<input type="password" name="joinTeamCode">';
+	echo '<input type="submit" name="joinTeam" value="Join Team">';
+	echo '</form>';
+}
+
+function formCreateTeam()
+{
+	echo '<h4>Create Team</h4>';
+	echo '<form action="" method="POST">';
+	echo '<label>Team Name</label>';
+	echo '<input type="text" name="createTeamName">';
+	echo '<label>Team Code</label>';
+	echo '<input type="password" name="createTeamCode">';
+	echo '<input type="submit" name="createTeam" value="Create Team">';
+	echo '</form>';
+}
 ?>

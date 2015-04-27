@@ -72,9 +72,9 @@ function formCreateDeveloperAccount()
 function isUsernameTaken($Username)
 {
 	if( count( returnRowByUser('Developer', $Username) ) > 0 )
-		return false;
+		return true;
 	else 
-		return true; 
+		return false; 
 }
 
 ?>
