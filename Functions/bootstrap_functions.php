@@ -114,7 +114,6 @@ _END;
 						<li><a href="update_info.php">Update Info</a></li>
 						<li><a href="update_email.php">Update Email</a></li>
 						<li><a href="update_password.php">Update Password</a></li>
-						<li><a href="update_avatar.php">Update Avatar</a></li>
 						<li><a href="update_alerts.php">Update Alerts</a></li>
 						<li><a href="delete_account.php">Delete Account</a></li>
 					</ul>
