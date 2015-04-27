@@ -28,6 +28,10 @@ echo '<div class="jumbotron">';
 
 echo '<h1 class="page-header">Time Tracker</h1>';
 
+imageCarousel();
+
+echo '<br>';
+
 echo '<div class="row demo-tiles">';
 
 //Login
@@ -74,5 +78,52 @@ echo '</div>';
 echo '</main>';
 
 close_html_no_sidebar();
+
+function imageCarousel()
+{
+	echo<<<END
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div style="border-radius:5px;" class="carousel-inner" role="listbox">
+
+      <div class="item active" style="border-radius:5px;">
+        <img src="img/screenshots/ClockIn.png" alt="Clock In" width="100%" class="img-rounded img-center">
+        <div class="carousel-caption">
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="img/screenshots/ViewReports.png" alt="View Reports" width="100%" class="img-rounded img-center">
+        <div class="carousel-caption">
+        </div>
+      </div>
+    
+      <div class="item">
+        <img src="img/screenshots/AssignTask.png" alt="Assign Tasks" width="100%" class="img-rounded img-center">
+        <div class="carousel-caption">
+        </div>
+      </div>
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a style="border-radius:5px;" class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a style="border-radius:5px;" class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+END;
+}
 
 ?>
