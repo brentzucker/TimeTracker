@@ -16,22 +16,27 @@
 
 require_once(__DIR__.'/../include.php');
 
-session_start();
+open_html_no_sidebar('Time Tracker');
 
-//If submit has been pressed and its a bad login load the error otherwise load the normal page
-if(isset($_POST['submit']))
-{
-	if(!checkLogin($_POST['username'], $_POST['password']))
-	{
-		open_login("Login");
-		getWrongLoginError();
-		close_login();
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-9 main-box">';
 
-	}
-}
-else
-{	
-	open_login("Login");
-	close_login();
-}
+echo '<div class="jumbotron">';
+
+echo '<h1 class="page-header">Time Tracker</h1>';
+
+//Login
+
+//Create Account
+
+//About us
+
+echo '</div>'; //close jumbotron
+
+echo '</div>';
+
+echo '</main>';
+
+close_html_no_sidebar();
+
 ?>

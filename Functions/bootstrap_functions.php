@@ -141,6 +141,37 @@ _END;
 _END;
 }	
 
+//This function sets up the text in the sidebar and the dropdowns
+function open_html_no_sidebar($title)
+{
+	echo<<<_END
+
+	<!DOCTYPE html>
+	<html lang="en">
+
+	<head>
+
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="description" content="">
+    	<meta name="author" content="">
+    	<link rel="icon" type="image/png" href="Images/fav.png">
+
+    	<title>$title</title>
+_END;
+
+	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="css/style.css" rel="stylesheet">';
+	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="css/simple-sidebar.css" rel="stylesheet">';
+	echo '<link href="dist/css/flat-ui.css" rel="stylesheet">';
+    echo '<link href="docs/assets/css/demo.css" rel="stylesheet">';
+
+	echo '</head>';
+	echo '<body>';
+}	
+
 //This function toggles the side menu
 function close_html()
 {
@@ -148,6 +179,25 @@ function close_html()
 			</div>
 		</div>
 			<script src="dist/js/vendor/jquery.min.js"></script>
+			<script src="dist/js/flat-ui.min.js"></script>
+			<script src="docs/assets/js/application.js"></script>
+			<script src="../Javascript/dropdowns.js"></script>
+			<script src="js/jquery.js"></script>
+			<script>
+				$("#menu-toggle").click(function(e) {
+					e.preventDefault();
+					$("#wrapper").toggleClass("toggled");
+				});
+			</script>
+		</body>
+	</html>
+_END;
+}
+
+function close_html_no_sidebar()
+{
+	echo<<<_END
+	<script src="dist/js/vendor/jquery.min.js"></script>
 			<script src="dist/js/flat-ui.min.js"></script>
 			<script src="docs/assets/js/application.js"></script>
 			<script src="../Javascript/dropdowns.js"></script>
