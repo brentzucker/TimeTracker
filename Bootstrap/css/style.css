@@ -505,6 +505,10 @@ table {
 	margin: 0 auto;
 }
 
+.team-jumbo {
+	height: 600px!important;
+}
+
 /*
 MEDIA QUERIES
 */

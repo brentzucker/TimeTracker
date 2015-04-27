@@ -27,17 +27,22 @@ elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']) )
 		echo '<h6>Team Name Taken</h6>';
 }
 
-open_html_no_sidebar("Create Team");
+open_html_no_sidebar("Select A Team");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-1">';
 echo '</div>';
 echo '<div class="col-lg-10 team-box">';
-echo '<div class="jumbotron">';
-echo '<h1 class="page-header">Join or Create Team</h1>';
+echo '<div class="jumbotron team-jumbo">';
+echo '<h1 class="page-header">Select A Team</h1>';
 
+echo '<div class="col-lg-6">';
 formJoinTeam();
+echo '</div>';
+
+echo '<div class="col-lg-6">';
 formCreateTeam();
+echo '</div>';
 
 echo '</div>'; // close jumbotron
 echo '</div>';
