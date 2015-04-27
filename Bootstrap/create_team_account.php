@@ -7,7 +7,10 @@ if( isset($_POST['joinTeamName']) && isset($_POST['joinTeamCode']) )
 {
 	//check to see if credentials match
 	if( returnRowByTeam($_POST['joinTeamName'])['Password'] == hash('ripemd128', $_POST['joinTeamCode']) )
-		echo 'Succesfully Joined team';
+	{
+		$_SESSION['Team'] = $_POST['joinTeamName'];
+		header("Location:create_developer_account.php");
+	}
 	else
 		echo 'Inccorrect code or Team does not exist.';
 }
@@ -18,8 +21,7 @@ elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']) )
 	{
 		$hashed_team_code = hash('ripemd128', $_POST['createTeamCode']);
 		newTeam($_POST['createTeamName'], $hashed_team_code);
-
-		echo 'Team Created';
+		header("Location:create_developer_account.php");
 	}
 	else
 		echo '<h6>Team Name Taken</h6>';
@@ -42,6 +44,4 @@ echo '<label>Team Code</label>';
 echo '<input type="password" name="createTeamCode">';
 echo '<input type="submit" name="createTeam" value="Create Team">';
 echo '</form>';
-
-echo 'done';
 ?>
