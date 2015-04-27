@@ -170,6 +170,8 @@ _END;
 
 	echo '</head>';
 	echo '<body>';
+	echo '<div id="page-content-wrapper">';
+	echo '<div class="container-fluid">';
 }	
 
 //This function toggles the side menu
@@ -197,6 +199,8 @@ _END;
 function close_html_no_sidebar()
 {
 	echo<<<_END
+	</div>
+	</div>
 	<script src="dist/js/vendor/jquery.min.js"></script>
 			<script src="dist/js/flat-ui.min.js"></script>
 			<script src="docs/assets/js/application.js"></script>
