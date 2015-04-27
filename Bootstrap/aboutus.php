@@ -17,6 +17,7 @@
 require_once(__DIR__.'/../include.php');
 
 open_html_no_sidebar('About Time Tracker');
+navigationBarHomePage('About Us');
 
 echo '<main id="page-content-wrapper">'; 
 

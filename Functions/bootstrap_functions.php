@@ -170,8 +170,6 @@ _END;
 
 	echo '</head>';
 	echo '<body>';
-	echo '<div id="page-content-wrapper">';
-	echo '<div class="container-fluid">';
 }	
 
 //This function toggles the side menu
@@ -328,6 +326,48 @@ function close_login()
   	</body>
 </html>
 _END;
+}
+
+//Navigation bar when not logged in
+function navigationBarHomePage($active_page)
+{
+	$pages = array(
+		"Home"=>"index.php",
+		"About Us"=>"aboutus.php");
+  echo<<<END
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="index.php">TimeTracker</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+END;
+	foreach($pages as $key=>$value)
+		if($active_page == $key )
+			echo '<li style="z-index:2;background-color:#34495e;" class="active"><a href="' . $value . '">' . $key . '</a></li>';
+		else 
+			echo '<li style="z-index:2;background-color:#34495e;"><a href="' . $value . '">' . $key . '</a></li>';
+        //<li class="active"><a href="index.php">Home</a></li>
+        //<li><a href="aboutus.php">About Us</a></li>
+echo<<<END
+	</ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li style="z-index:2;background-color:#34495e;"><a href="create_team_account.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li style="z-index:2;background-color:#34495e;"><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+END;
+
+	echo '<div id="page-content-wrapper">';
+	echo '<div class="container-fluid">';
 }
 
 //this function sets up the alert box and displays the alert times

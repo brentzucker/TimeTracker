@@ -18,6 +18,8 @@ require_once(__DIR__.'/../include.php');
 
 open_html_no_sidebar('Time Tracker');
 
+navigationBarHomePage('Home');
+
 echo '<main id="page-content-wrapper">'; 
 
 echo '<div class="col-sm-2"></div>'; //close centering div'; //centering
