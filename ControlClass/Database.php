@@ -296,6 +296,12 @@ function removeTeamAssignment($Team, $ClientProjectTask, $Type)
 	db_query($sql);
 }
 
+function newTeam($Team, $Password)
+{
+	$sql = "INSERT INTO Team(Team, Password) VALUES ('$Team', '$Password')";
+	db_query($sql);
+}
+
 /* Returns a row for a Table.
  *
  */
@@ -351,6 +357,11 @@ function returnRowByTaskID($TaskID)
 {
 	//Returns TaskID, ClientName, ProjectID, TaskName, Description
 	return returnRowByNumber('Tasks', 'TaskID', $TaskID);
+}
+
+function returnRowByTeam($Team)
+{
+	return returnRow('Team', 'Team', $Team);
 }
 
 /* Returns all rows for a Table based off one Where value.
