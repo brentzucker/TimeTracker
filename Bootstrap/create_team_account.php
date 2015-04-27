@@ -27,8 +27,23 @@ elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']) )
 		echo '<h6>Team Name Taken</h6>';
 }
 
+open_html_no_sidebar("Create Team");
+
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-1">';
+echo '</div>';
+echo '<div class="col-lg-10 team-box">';
+echo '<div class="jumbotron">';
+echo '<h1 class="page-header">Join or Create Team</h1>';
+
 formJoinTeam();
 formCreateTeam();
+
+echo '</div>'; // close jumbotron
+echo '</div>';
+
+
+close_html_no_sidebar();
 
 
 
@@ -37,10 +52,12 @@ function formJoinTeam()
 	echo '<h4>Join Team</h4>';
 	echo '<form action="" method="POST">';
 	echo '<label>Team Name</label>';
-	echo '<input type="text" name="joinTeamName">';
+	echo '<input type="text" name="joinTeamName" class="form-control">';
+	echo '<br>';
 	echo '<label>Team Code</label>';
-	echo '<input type="password" name="joinTeamCode">';
-	echo '<input type="submit" name="joinTeam" value="Join Team">';
+	echo '<input type="password" name="joinTeamCode" class="form-control">';
+	echo '<br>';
+	echo '<input type="submit" name="joinTeam" value="Join Team" class="btn btn-block btn-lg btn-primary">';
 	echo '</form>';
 }
 
@@ -49,10 +66,13 @@ function formCreateTeam()
 	echo '<h4>Create Team</h4>';
 	echo '<form action="" method="POST">';
 	echo '<label>Team Name</label>';
-	echo '<input type="text" name="createTeamName">';
+	echo '<input type="text" name="createTeamName" class="form-control">';
+	echo '<br>';
 	echo '<label>Team Code</label>';
-	echo '<input type="password" name="createTeamCode">';
-	echo '<input type="submit" name="createTeam" value="Create Team">';
+	echo '<input type="password" name="createTeamCode" class="form-control">';
+	echo '<br>';
+	echo '<input type="submit" name="createTeam" value="Create Team" class="btn btn-block btn-lg btn-primary">';
 	echo '</form>';
+	echo '</div>';
 }
 ?>

@@ -492,6 +492,19 @@ table {
 	margin-left: 10px!important;
 }
 
+.team-left {
+	float: left;
+}
+
+.team-right {
+	float: right;
+}
+
+.team-box {
+	text-align: center!important;
+	margin: 0 auto;
+}
+
 /*
 MEDIA QUERIES
 */
@@ -505,3 +518,11 @@ MEDIA QUERIES
 	}
 
 }
+
+@media only screean and (max-width: 768px) {
+
+	#page-content-wrapper {
+		position: relative!important;
+	}
+
+}	
