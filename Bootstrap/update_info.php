@@ -18,6 +18,16 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
+if(isset($_POST['UpdateInfo']))
+{
+  $_SESSION['Developer']->getContact()->setFirstname($_POST['updatefirstname']);
+  $_SESSION['Developer']->getContact()->setLastname($_POST['updatelastname']);
+  $_SESSION['Developer']->getContact()->setPhone($_POST['updatephone']);
+  $_SESSION['Developer']->getContact()->setAddress($_POST['updateaddress']);
+  $_SESSION['Developer']->getContact()->setCity($_POST['updatecity']);
+  $_SESSION['Developer']->getContact()->setState($_POST['updatestate']);
+}
+
 open_html("Update Info");
 
 echo '<main id="page-content-wrapper">'; 
@@ -109,15 +119,7 @@ State:<br>
 END;
 
 if(isset($_POST['UpdateInfo']))
-{
-  $_SESSION['Developer']->getContact()->setFirstname($_POST['updatefirstname']);
-  $_SESSION['Developer']->getContact()->setLastname($_POST['updatelastname']);
-  $_SESSION['Developer']->getContact()->setPhone($_POST['updatephone']);
-  $_SESSION['Developer']->getContact()->setAddress($_POST['updateaddress']);
-  $_SESSION['Developer']->getContact()->setCity($_POST['updatecity']);
-  $_SESSION['Developer']->getContact()->setState($_POST['updatestate']);
-  echo "<h2>Info Has Been Updated</h2>";
-}
+	echo '<h4>Your information has been updated.</h4>';
 
 echo '</div>';
 echo '</div>';
