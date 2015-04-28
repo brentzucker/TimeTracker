@@ -45,100 +45,103 @@ _END;
 	echo '<link href="dist/css/flat-ui.css" rel="stylesheet">';
     echo '<link href="docs/assets/css/demo.css" rel="stylesheet">';
 
-	echo<<<_END
-	</head>
+	echo '</head>';
 
-	<body>
+	echo '<body>';
 
-    	<div id="wrapper">
+	echo '<div id="wrapper">';
 
-        	<!-- Sidebar -->
-        	<div id="sidebar-wrapper">
-            	<ul class="sidebar-nav">
-                	<li class="sidebar-brand">
-                    	<a href="home.php">
-                        	CODEC
-                    	</a>
-                	</li>
-                	<li>
-                    	<a href="home.php">Home</a>
-                	</li>
-                
-            	    <li>
-            		    <a href="clock.php">Clock In</a>
-                	</li>
-                
-                	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret green"></span></a>
-                    	<ul class="dropdown-menu">
-						<li><a href="developer_reports.php">Developer Reports</a></li>
-						<li><a href="client_reports.php">Client Reports</a></li>
-						<li><a href="project_reports.php">Project Reports</a></li>
-						<li><a href="task_reports.php">Task Reports</a></li>
-					</ul>
-                	</li>
-                
-                	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Developers<span class="caret green"></span></a>
-                    	<ul class="dropdown-menu">
-						<li><a href="create_developer.php">Create Developers</a></li>
-						<li><a href="assign_client.php">Assign Client</a></li>
-						<li><a href="assign_project.php">Assign Project</a></li>
-						<li><a href="assign_task.php">Assign Task</a></li>
-						<li><a href="unassign_client.php">Un-Assign Client</a></li>
-						<li><a href="unassign_project.php">Un-Assign Project</a></li>
-						<li><a href="unassign_task.php">Un-Assign Task</a></li>
-						<li><a href="view_assignments.php">View All Assignments</a></li>
-					</ul>
-                	</li>
-                
-                	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Clients<span class="caret green"></span></a>
-                    	<ul class="dropdown-menu">
-						<li><a href="add_hours.php">Add Purchased Hours</a></li>
-						<li><a href="new_client.php">New Client</a></li>
-						<li><a href="new_project.php">New Project</a></li>
-						<li><a href="new_task.php">New Task</a></li>
-						<li><a href="edit_client.php">Edit Client</a></li>
-						<li><a href="edit_project.php">Edit Project</a></li>
-						<li><a href="edit_task.php">Edit Task</a></li>
-						<li><a href="delete_client.php">Delete Client</a></li>
-						<li><a href="delete_project.php">Delete Project</a></li>
-						<li><a href="delete_task.php">Delete Task</a></li>
-					</ul>
-                	</li>
-                
-                	<li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account<span class="caret green"></span></a>
-                    	<ul class="dropdown-menu">
-						<li><a href="update_info.php">Update Info</a></li>
-						<li><a href="update_email.php">Update Email</a></li>
-						<li><a href="update_password.php">Update Password</a></li>
-						<li><a href="update_alerts.php">Update Alerts</a></li>
-						<li><a href="delete_account.php">Delete Account</a></li>
-					</ul>
-                	</li>
-                
-                	<li>
-                    	<a href="edit_timesheet.php">Edit Time Sheet</a>
-                	</li>
-                
-                	<li>
-                    	<a href="client_profiles.php">View Client Profiles</a>
-                	</li>
-                	
-                	<li>
-                		<a href="logout.php">Logout</a>
-                	</li>
-                
-            	</ul>
-        	</div>
-        	<!-- /#sidebar-wrapper -->
+    leftSidebar();	
         
-        	<div id="page-content-wrapper">
-				<div class="container-fluid">
-				<a href="#menu-toggle" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle">Menu</a>
-_END;
+    echo '<div id="page-content-wrapper">';
+	echo '<div class="container-fluid">';
+	echo '<a href="#menu-toggle" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle">Menu</a>';
+}
+
+function leftSidebar()
+{
+	echo '<!-- Sidebar -->';
+	echo '<div id="sidebar-wrapper">';
+	echo '<ul class="sidebar-nav">';
+	echo '<li class="sidebar-brand">';
+	echo '<a href="home.php">';
+ 	echo 'CODEC';
+	echo '</a>';
+	echo '</li>';
+	echo '<li>';
+	echo '<a href="home.php">Home</a>';
+	echo '</li>';
+
+ 	echo '<li>';
+ 	echo '<a href="clock.php">Clock In</a>';
+	echo '</li>';
+
+	echo '<li class="dropdown">';
+	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret green"></span></a>';
+	echo '<ul class="dropdown-menu">';
+	echo '<li><a href="developer_reports.php">Developer Reports</a></li>';
+	echo '<li><a href="client_reports.php">Client Reports</a></li>';
+	echo '<li><a href="project_reports.php">Project Reports</a></li>';
+	echo '<li><a href="task_reports.php">Task Reports</a></li>';
+	echo '</ul>';
+	echo '</li>';
+
+	echo '<li class="dropdown">';
+	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Developers<span class="caret green"></span></a>';
+	echo '<ul class="dropdown-menu">';
+	echo '<li><a href="create_developer.php">Create Developers</a></li>';
+	echo '<li><a href="assign_client.php">Assign Client</a></li>';
+	echo '<li><a href="assign_project.php">Assign Project</a></li>';
+	echo '<li><a href="assign_task.php">Assign Task</a></li>';
+	echo '<li><a href="unassign_client.php">Un-Assign Client</a></li>';
+	echo '<li><a href="unassign_project.php">Un-Assign Project</a></li>';
+	echo '<li><a href="unassign_task.php">Un-Assign Task</a></li>';
+	echo '<li><a href="view_assignments.php">View All Assignments</a></li>';
+	echo '</ul>';
+	echo '</li>';
+
+	echo '<li class="dropdown">';
+	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Clients<span class="caret green"></span></a>';
+	echo '<ul class="dropdown-menu">';
+	echo '<li><a href="add_hours.php">Add Purchased Hours</a></li>';
+	echo '<li><a href="new_client.php">New Client</a></li>';
+	echo '<li><a href="new_project.php">New Project</a></li>';
+	echo '<li><a href="new_task.php">New Task</a></li>';
+	echo '<li><a href="edit_client.php">Edit Client</a></li>';
+	echo '<li><a href="edit_project.php">Edit Project</a></li>';
+	echo '<li><a href="edit_task.php">Edit Task</a></li>';
+	echo '<li><a href="delete_client.php">Delete Client</a></li>';
+	echo '<li><a href="delete_project.php">Delete Project</a></li>';
+	echo '<li><a href="delete_task.php">Delete Task</a></li>';
+	echo '</ul>';
+	echo '</li>';
+
+	echo '<li class="dropdown">';
+	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account<span class="caret green"></span></a>';
+	echo '<ul class="dropdown-menu">';
+	echo '<li><a href="update_info.php">Update Info</a></li>';
+	echo '<li><a href="update_email.php">Update Email</a></li>';
+	echo '<li><a href="update_password.php">Update Password</a></li>';
+	echo '<li><a href="update_alerts.php">Update Alerts</a></li>';
+	echo '<li><a href="delete_account.php">Delete Account</a></li>';
+	echo '</ul>';
+	echo '</li>';
+
+	echo '<li>';
+	echo '<a href="edit_timesheet.php">Edit Time Sheet</a>';
+	echo '</li>';
+
+	echo '<li>';
+	echo '<a href="client_profiles.php">View Client Profiles</a>';
+	echo '</li>';
+
+	echo '<li>';
+	echo '<a href="logout.php">Logout</a>';
+	echo '</li>';
+
+	echo '</ul>';
+	echo '</div>';
+	echo '<!-- /#sidebar-wrapper -->';
 }	
 
 //This function sets up the text in the sidebar and the dropdowns
