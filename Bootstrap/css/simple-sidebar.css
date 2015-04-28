@@ -15,7 +15,7 @@
 }
 
 #wrapper-right {
-    padding-right: 0;
+    padding-right: 250px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -23,12 +23,11 @@
 }
 
 #wrapper-left.toggled {
-    padding-left: 250px;
     padding-left: 60px;
 }
 
 #wrapper-right.toggled {
-    padding-right: 250px;
+    padding-right:60px;
 }
 
 #sidebar-wrapper-left {
@@ -50,7 +49,7 @@
     z-index: 1000;
     position: fixed;
     right: 250px;
-    width: 0;
+    width: 250px;
     height: 100%;
     margin-right: -250px;
     overflow-y: auto;
@@ -66,8 +65,9 @@
     left: 60px;
 }
 
-#wrapper-right.toggled #sidebar-wrapper- {
+#wrapper-right.toggled #sidebar-wrapper-right {
     width: 250px;
+    right: 60px;
 }
 
 #page-content-wrapper {
@@ -83,7 +83,7 @@
 
 /* Sidebar Styles */
 
-.sidebar-nav-left {
+.sidebar-nav {
     position: absolute;
     top: 0;
     width: 250px;
@@ -92,49 +92,39 @@
     list-style: none;
 }
 
-.sidebar-nav-right {
-    position: absolute;
-    top: 0;
-    right:0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.sidebar-nav-left li {
+.sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
 }
 
-.sidebar-nav-left li a {
+.sidebar-nav li a {
     display: block;
     text-decoration: none;
     color: #999999;
 }
 
-.sidebar-nav-left li a:hover {
+.sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
 }
 
-.sidebar-nav-left li a:active,
-.sidebar-nav-left li a:focus {
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
     text-decoration: none;
 }
 
-.sidebar-nav-left > .sidebar-brand {
+.sidebar-nav > .sidebar-brand {
     height: 65px;
     font-size: 18px;
     line-height: 60px;
 }
 
-.sidebar-nav-left > .sidebar-brand a {
+.sidebar-nav > .sidebar-brand a {
     color: #999999;
 }
 
-.sidebar-nav-left > .sidebar-brand a:hover {
+.sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
 }

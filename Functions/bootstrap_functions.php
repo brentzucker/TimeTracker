@@ -58,15 +58,13 @@ _END;
         
     echo '<div id="page-content-wrapper">';
 	echo '<div class="container-fluid">';
-	//echo '<a href="#menu-toggle-left" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle-left">Menu</a>';
-	echo '<a href="#menu-toggle-right" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle-right">Alerts</a>';
 }
 
 function leftSidebar()
 {
 	echo '<!-- Sidebar -->';
 	echo '<div id="sidebar-wrapper-left">';
-	echo '<ul class="sidebar-nav-left">';
+	echo '<ul class="sidebar-nav sidebar-nav-left">';
 	//echo '<li><div class="col-sm-10"></div><a href="#menu-toggle-left" class="fui-list" id="menu-toggle-left"></a></li>';
 	echo '<li class="sidebar-brand">';
 	echo '<div style="width:60px;position:absolute; right:0px;"><a style="margin:0 auto;" href="#menu-toggle-left" class="fui-list" id="menu-toggle-left"></a></div>';
@@ -154,9 +152,10 @@ function rightSidebar()
 {
 	echo '<!-- Sidebar -->';
 	echo '<div id="sidebar-wrapper-right">';
-	echo '<ul class="sidebar-nav-right">';
+	echo '<ul class="sidebar-nav sidebar-nav-right">';
 	echo '<li class="sidebar-brand">';
-	echo 'Right SideBar';
+	echo '<div style="width:60px;position:absolute; left:0px;"><a href="#menu-toggle-right" class="fui-mail" id="menu-toggle-right"></a></div>';
+	echo '<a style="position:absolute; right:100px; text-align:center;" href="update_alerts.php">Alerts</a>';
 	echo '</li>';
 
  	
