@@ -14,7 +14,7 @@ if( isset($_POST['joinTeamName']) && isset($_POST['joinTeamCode']) )
 	else
 		echo 'Inccorrect code or Team does not exist.';
 }
-elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']) )
+elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']))
 {
 	//check to see if team name is taken
 	if( count(returnRowByTeam($_POST['createTeamName'])) == 0 )
@@ -28,6 +28,7 @@ elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']) )
 }
 
 open_html_no_sidebar("Select A Team");
+navigationBarHomePage('Sign Up');
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-1">';

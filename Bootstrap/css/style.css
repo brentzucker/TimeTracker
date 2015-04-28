@@ -296,57 +296,6 @@ footer a:hover
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;}
   
-.button_small a
-{ color: #FFF;
-  padding-left: 5px;
-  text-shadow: 1px 1px #000;}
-
-.form_settings
-{ margin: 15px 0 0 0;}
-
-.form_settings p
-{ padding: 0 0 4px 0;}
-
-.form_settings span
-{ float: left; 
-  width: 280px; 
-  text-align: left;
-  text-shadow: none;
-  color: #000;}
-  
-.form_settings input, .form_settings textarea
-{ padding: 2px; 
-  width: 299px; 
-  font: 100% arial; 
-  border: 1px solid #E5E5DB; 
-  background: #FFF; 
-  color: #47433F;}
-  
-.form_settings input[type="checkbox"]
-{ padding: 2px 0; 
-  width: 15px; 
-  font: 100% arial; 
-  border: 0; 
-  background: #FFF; 
-  color: #47433F;
-  margin: 28px 0;}
-
-.form_settings .submit
-{ font: 100% arial; 
-  border: 1px solid; 
-  width: 99px; 
-  margin: 0 0 0 206px; 
-  height: 26px;
-  padding: 2px 0 3px 0;
-  cursor: pointer; 
-  background: #0043A8;
-  background: -moz-linear-gradient(#43A9FF, #0043A8);
-  background: -o-linear-gradient(#43A9FF, #0043A8);
-  background: -webkit-linear-gradient(#43A9FF, #0043A8);
-  color: #FFF;
-  border-radius: 7px 7px 7px 7px;
-  -moz-border-radius: 7px 7px 7px 7px;
-  -webkit-border: 7px 7px 7px 7px;}
   
  .starter-template {
   padding: 50px 15px;
@@ -380,41 +329,6 @@ h1 {
 
 body {
   background-color: #eee;
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
-  font-weight: normal;
-}
-.form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
 .col-sm-6 {
@@ -507,6 +421,12 @@ table {
 
 .team-jumbo {
 	height: 600px!important;
+}
+
+.navbar {
+    height: auto!important;
+	width: 95%;
+	margin-top: 25px;
 }
 
 /*
