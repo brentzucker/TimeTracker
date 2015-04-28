@@ -158,6 +158,8 @@ function rightSidebar()
 	echo '<a style="position:absolute; right:100px; text-align:center;" href="update_alerts.php">Alerts</a>';
 	echo '</li>';
 
+ 	warningExpiringContracts( $_SESSION['Developer']->getDaysExpirationWarning() );
+	warningLowHours( $_SESSION['Developer']->getHoursLeftWarning() );
  	
 	echo '</ul>';
 	echo '</div>';
@@ -394,7 +396,7 @@ END;
 
 //this function sets up the alert box and displays the alert times
 function alertBox()
-{
+{/*
 	echo '<div class="col-lg-3 alert-box">';
 	echo '<h2 class="alert-header">Alerts</h2>';
 
@@ -402,7 +404,7 @@ function alertBox()
 	warningLowHours( $_SESSION['Developer']->getHoursLeftWarning() );
 		
 	echo '<h6><a href="update_alerts.php">Update Alert Settings</a></h6>';
-	echo '</div>';
+	echo '</div>';*/
 }
 
 function isLogin()

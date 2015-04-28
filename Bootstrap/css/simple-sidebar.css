@@ -129,6 +129,20 @@
     background: none;
 }
 
+.sidebar-nav .warning{
+    margin-left:0px;
+    display: block;
+    text-decoration: none;
+    color: #999999;
+    white-space: nowrap;
+}
+
+.sidebar-nav .warning:hover{
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
 @media(min-width:768px) {
     #wrapper-left {
         padding-left: 250px;
