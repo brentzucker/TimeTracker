@@ -348,15 +348,15 @@ function editTable($query, $table_headers)
 		{
 			echo '<tr>';
 			foreach($row as $k=>$v)
-			{
-				echo '<td style=\"border:1px solid black;padding:5px;\">';
 				if($k == 'TimeLogID' || $k == 'Username' || $k == 'ClientName' || $k == 'ProjectName' || $k == 'TaskName' || $k == 'TimeIn')
-					echo '<label>' . $v . '</label>';
-			}
+					echo '<td style=\"border:1px solid black;padding:5px;\"><label>' . $v . '</label></td>';
 
 			//In order to have the timeout be the default value in the datetime selector, a "T" must be before the time
+			echo '<td style=\"border:1px solid black;padding:5px;\">';
 			echo '<input type="datetime-local" name="TimeOut" min="' . substr_replace($row['TimeIn'], "T", 10, 1) . '" value="' . substr_replace($row['TimeOut'], "T", 10, 1) . '">';
-			echo '<input type="number" name="TimeSpent" value="' . $row['TimeSpent'] . '">';
+			echo '</td>';
+			echo '<td style=\"border:1px solid black;padding:5px;\">';
+			echo '<label>' . secondsToFormattedTime( $row['TimeSpent'] ) . '</label>';
 			echo '</td>';
 
 			echo '</tr>';
