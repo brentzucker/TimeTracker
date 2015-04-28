@@ -49,13 +49,15 @@ _END;
 
 	echo '<body>';
 
-	echo '<div id="wrapper">';
+	echo '<div id="wrapper-left">';
 
-    leftSidebar();	
+    leftSidebar();
+
+    //rightSidebar();
         
     echo '<div id="page-content-wrapper">';
 	echo '<div class="container-fluid">';
-	echo '<a href="#menu-toggle" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle">Menu</a>';
+	echo '<a href="#menu-toggle-left" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle-left">Menu</a>';
 }
 
 function leftSidebar()
@@ -147,8 +149,8 @@ function leftSidebar()
 function rightSidebar()
 {
 	echo '<!-- Sidebar -->';
-	echo '<div id="sidebar-wrapper-left">';
-	echo '<ul class="sidebar-nav-left">';
+	echo '<div id="sidebar-wrapper-right">';
+	echo '<ul class="sidebar-nav-right">';
 	echo '<li class="sidebar-brand">';
 	echo 'Right SideBar';
 	echo '</li>';
@@ -156,7 +158,7 @@ function rightSidebar()
  	
 	echo '</ul>';
 	echo '</div>';
-	echo '<!-- /#sidebar-wrapper-left -->';
+	echo '<!-- /#sidebar-wrapper-right -->';
 }	
 
 //This function sets up the text in the sidebar and the dropdowns
@@ -202,9 +204,9 @@ function close_html()
 			<script src="../Javascript/dropdowns.js"></script>
 			<script src="js/jquery.js"></script>
 			<script>
-				$("#menu-toggle").click(function(e) {
+				$("#menu-toggle-left").click(function(e) {
 					e.preventDefault();
-					$("#wrapper").toggleClass("toggled");
+					$("#wrapper-left").toggleClass("toggled");
 				});
 			</script>
 		</body>
@@ -223,9 +225,9 @@ function close_html_no_sidebar()
 			<script src="../Javascript/dropdowns.js"></script>
 			<script src="js/jquery.js"></script>
 			<script>
-				$("#menu-toggle").click(function(e) {
+				$("#menu-toggle-left").click(function(e) {
 					e.preventDefault();
-					$("#wrapper").toggleClass("toggled");
+					$("#wrapper-left").toggleClass("toggled");
 				});
 			</script>
 		</body>
