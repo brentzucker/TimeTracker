@@ -354,7 +354,7 @@ function homePage()
 	 */
 
 	echo '<main id="page-content-wrapper">'; 
-	echo '<div class="col-lg-9 main-box">';
+	echo '<div class="col-lg-12 main-box">';
 
 	//Bootstrap Jumbotron
 	echo '<div class="jumbotron">';
@@ -396,9 +396,7 @@ function homePage()
 	echo '</div>'; //Close Jumbotron
 	
 	echo '</div>';
-
-	alertBox();
-
+	
 	//open_footer(); Causing problems
 
 	echo '</div>';

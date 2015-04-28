@@ -15,7 +15,7 @@
 }
 
 #wrapper-right {
-    padding-right: 250px;
+    padding-right:60px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -27,7 +27,7 @@
 }
 
 #wrapper-right.toggled {
-    padding-right:60px;
+    padding-right: 250px;
 }
 
 #sidebar-wrapper-left {
@@ -48,7 +48,7 @@
 #sidebar-wrapper-right {
     z-index: 1000;
     position: fixed;
-    right: 250px;
+    right: 60px;
     width: 250px;
     height: 100%;
     margin-right: -250px;
@@ -67,7 +67,7 @@
 
 #wrapper-right.toggled #sidebar-wrapper-right {
     width: 250px;
-    right: 60px;
+    right: 250px;
 }
 
 #page-content-wrapper {
