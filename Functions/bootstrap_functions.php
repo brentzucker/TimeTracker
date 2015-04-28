@@ -65,7 +65,7 @@ function leftSidebar()
 	echo '<ul class="sidebar-nav">';
 	echo '<li class="sidebar-brand">';
 	echo '<a href="home.php">';
- 	echo 'CODEC';
+ 	echo $_SESSION['Developer']->getTeam();
 	echo '</a>';
 	echo '</li>';
 	echo '<li>';
