@@ -143,6 +143,11 @@
     background: rgba(255,255,255,0.2);
 }
 
+.sidebar-nav .left-bar-glyph{
+    position:absolute;
+    right:24px;
+}
+
 @media(min-width:768px) {
     #wrapper-left {
         padding-left: 250px;

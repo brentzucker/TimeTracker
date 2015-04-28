@@ -73,15 +73,15 @@ function leftSidebar()
 	echo '</a>';
 	echo '</li>';
 	echo '<li>';
-	echo '<a href="home.php">Home</a>';
+	echo '<a href="home.php">Home<span class="left-bar-glyph fui-home"></span></a>';
 	echo '</li>';
 
  	echo '<li>';
- 	echo '<a href="clock.php">Clock In</a>';
+ 	echo '<a href="clock.php">Clock In<span class="left-bar-glyph fui-time"></span></a>';
 	echo '</li>';
 
 	echo '<li class="dropdown">';
-	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret green"></span></a>';
+	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret green"></span><span class="left-bar-glyph fui-document"></span></a>';
 	echo '<ul class="dropdown-menu">';
 	echo '<li><a href="developer_reports.php">Developer Reports</a></li>';
 	echo '<li><a href="client_reports.php">Client Reports</a></li>';
@@ -91,7 +91,7 @@ function leftSidebar()
 	echo '</li>';
 
 	echo '<li class="dropdown">';
-	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Developers<span class="caret green"></span></a>';
+	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Developers<span class="caret green"></span><span style="top:13px;" class="left-bar-glyph glyphicon glyphicon-user"></span></a>';
 	echo '<ul class="dropdown-menu">';
 	echo '<li><a href="create_developer.php">Create Developers</a></li>';
 	echo '<li><a href="assign_client.php">Assign Client</a></li>';
@@ -105,7 +105,7 @@ function leftSidebar()
 	echo '</li>';
 
 	echo '<li class="dropdown">';
-	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Clients<span class="caret green"></span></a>';
+	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Clients<span class="caret green"></span><span class="left-bar-glyph fui-user"></span></a>';
 	echo '<ul class="dropdown-menu">';
 	echo '<li><a href="add_hours.php">Add Purchased Hours</a></li>';
 	echo '<li><a href="new_client.php">New Client</a></li>';
@@ -121,7 +121,7 @@ function leftSidebar()
 	echo '</li>';
 
 	echo '<li class="dropdown">';
-	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account<span class="caret green"></span></a>';
+	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account<span class="caret green"></span><span class="left-bar-glyph fui-lock"></span></a>';
 	echo '<ul class="dropdown-menu">';
 	echo '<li><a href="update_info.php">Update Info</a></li>';
 	echo '<li><a href="update_email.php">Update Email</a></li>';
@@ -132,15 +132,15 @@ function leftSidebar()
 	echo '</li>';
 
 	echo '<li>';
-	echo '<a href="edit_timesheet.php">Edit Time Sheet</a>';
+	echo '<a href="edit_timesheet.php">Edit Time Sheet<span class="left-bar-glyph fui-gear"></span></a>';
 	echo '</li>';
 
 	echo '<li>';
-	echo '<a href="client_profiles.php">View Client Profiles</a>';
+	echo '<a href="client_profiles.php">View Client Profiles<span class="left-bar-glyph fui-image"></span></a>';
 	echo '</li>';
 
 	echo '<li>';
-	echo '<a href="logout.php">Logout</a>';
+	echo '<a href="logout.php">Logout<span class="left-bar-glyph fui-exit"></span></a>';
 	echo '</li>';
 
 	echo '</ul>';
@@ -377,8 +377,7 @@ END;
 			echo '<li style="z-index:2;background-color:#34495e;" class="active"><a href="' . $value . '">' . $key . '</a></li>';
 		else 
 			echo '<li style="z-index:2;background-color:#34495e;"><a href="' . $value . '">' . $key . '</a></li>';
-        //<li class="active"><a href="index.php">Home</a></li>
-        //<li><a href="aboutus.php">About Us</a></li>
+
 echo<<<END
 	</ul>
       <ul class="nav navbar-nav navbar-right">
