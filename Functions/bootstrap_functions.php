@@ -69,10 +69,10 @@ function leftSidebar()
 	echo '<ul class="sidebar-nav-left">';
 	//echo '<li><div class="col-sm-10"></div><a href="#menu-toggle-left" class="fui-list" id="menu-toggle-left"></a></li>';
 	echo '<li class="sidebar-brand">';
-	echo '<a class="col-sm-9" href="home.php">';
+	echo '<a style="position:absolute; right:20px;" href="#menu-toggle-left" class="fui-list" id="menu-toggle-left"></a>';
+	echo '<a href="home.php">';
  	echo $_SESSION['Developer']->getTeam();
 	echo '</a>';
-	echo '<div class="col-sm-1"></div><a href="#menu-toggle-left" class="fui-list" id="menu-toggle-left"></a>';
 	echo '</li>';
 	echo '<li>';
 	echo '<a href="home.php">Home</a>';
