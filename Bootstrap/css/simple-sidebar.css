@@ -14,8 +14,20 @@
     transition: all 0.5s ease;
 }
 
+#wrapper-right {
+    padding-right: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
 #wrapper-left.toggled {
     padding-left: 250px;
+}
+
+#wrapper-right.toggled {
+    padding-right: 250px;
 }
 
 #sidebar-wrapper-left {
@@ -49,6 +61,10 @@
 }
 
 #wrapper-left.toggled #sidebar-wrapper-left {
+    width: 250px;
+}
+
+#wrapper-right.toggled #sidebar-wrapper-right {
     width: 250px;
 }
 
