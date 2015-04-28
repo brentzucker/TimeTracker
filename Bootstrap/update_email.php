@@ -21,7 +21,7 @@ session_start();
 open_html("Update Email");
 
 echo '<main id="page-content-wrapper">'; 
-echo '<div class="col-lg-9 main-box">';
+echo '<div class="col-lg-12 main-box">';
 echo '<div class="jumbotron">';
 echo '<div class="page-header">';
 echo '<h1>Update Email</h1>';
@@ -31,8 +31,6 @@ updateEmail();
 
 echo '</div>';
 echo '</div>';
-
-alertBox();
 
 echo '</main>';
 

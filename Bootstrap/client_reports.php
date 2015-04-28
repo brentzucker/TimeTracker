@@ -21,24 +21,23 @@ session_start();
 
 isLogin();
 
-if(isset($_POST['client']) && isset($_POST['toExcel']))
+if(isset($_POST['selected']) && isset($_POST['toExcel']))
 {
 	if($_POST['report'] == 'HoursLeft')
-		printHoursLeftTable($_POST['client'], 'csv');
+		printHoursLeftTable($_POST['selected'], 'csv');
 	elseif($_POST['report'] == 'ClientsPurchases')
-		printClientsPurchasesTable($_POST['client'], 'csv');
+		printClientsPurchasesTable($_POST['selected'], 'csv');
 	elseif($_POST['report'] == 'AggregatedTimeLogTableByClient')
-		printAggregatedTimeLogTableByClient($_POST['client'], $_POST['startdate'], $_POST['enddate'], 'csv');
+		printAggregatedTimeLogTableByClient($_POST['selected'], $_POST['startdate'], $_POST['enddate'], 'csv');
 	elseif($_POST['report'] == 'TimeLogTableByClient')
-		printTimeLogTableByClient($_POST['client'], $_POST['startdate'], $_POST['enddate'], 'csv');
-
+		printTimeLogTableByClient($_POST['selected'], $_POST['startdate'], $_POST['enddate'], 'csv');
 }
 
 open_html("Client Reports");
 
 
 echo '<main id="page-content-wrapper">'; 
-echo '<div class="col-lg-9 main-box">';
+echo '<div class="col-lg-12 main-box">';
 echo '<div class="jumbotron">';
 echo '<div class="page-header">';
 echo '<h1>Client Reports</h1>';
@@ -49,8 +48,6 @@ clientReport();
 
 echo '</div>';
 echo '</div>';
-
-alertBox();
 
 echo '</main>';
 

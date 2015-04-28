@@ -31,7 +31,7 @@ if(isset($_POST['UpdateInfo']))
 open_html("Update Info");
 
 echo '<main id="page-content-wrapper">'; 
-echo '<div class="col-lg-9 main-box">';
+echo '<div class="col-lg-12 main-box">';
 echo '<div class="jumbotron">';
 echo '<div class="page-header">';
 echo '<h1>Update Information</h1>';
@@ -123,8 +123,6 @@ if(isset($_POST['UpdateInfo']))
 
 echo '</div>';
 echo '</div>';
-
-alertBox();
 
 echo '</main>';
 

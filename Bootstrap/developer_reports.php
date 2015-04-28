@@ -29,7 +29,7 @@ if(isset($_POST['selected']) && isset($_POST['toExcel']))
 open_html("Developer Reports");
 
 echo '<main id="page-content-wrapper">'; 
-echo '<div class="col-lg-9 main-box">';
+echo '<div class="col-lg-12 main-box">';
 
 echo '<div class="jumbotron">';
 echo '<div class="page-header">';
@@ -41,8 +41,6 @@ developerReports();
 echo '</div>';
 
 echo '</div>';
-
-alertBox();
 
 echo '</main>';
 
