@@ -58,7 +58,7 @@ _END;
         
     echo '<div id="page-content-wrapper">';
 	echo '<div class="container-fluid">';
-	echo '<a href="#menu-toggle-left" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle-left">Menu</a>';
+	//echo '<a href="#menu-toggle-left" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle-left">Menu</a>';
 	echo '<a href="#menu-toggle-right" class="glyphicon glyphicon-menu-hamburger" id="menu-toggle-right">Alerts</a>';
 }
 
@@ -67,10 +67,12 @@ function leftSidebar()
 	echo '<!-- Sidebar -->';
 	echo '<div id="sidebar-wrapper-left">';
 	echo '<ul class="sidebar-nav-left">';
+	//echo '<li><div class="col-sm-10"></div><a href="#menu-toggle-left" class="fui-list" id="menu-toggle-left"></a></li>';
 	echo '<li class="sidebar-brand">';
-	echo '<a href="home.php">';
+	echo '<a class="col-sm-9" href="home.php">';
  	echo $_SESSION['Developer']->getTeam();
 	echo '</a>';
+	echo '<div class="col-sm-1"></div><a href="#menu-toggle-left" class="fui-list" id="menu-toggle-left"></a>';
 	echo '</li>';
 	echo '<li>';
 	echo '<a href="home.php">Home</a>';
