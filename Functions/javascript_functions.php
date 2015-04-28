@@ -306,7 +306,7 @@ function developerDropDownJS($Team)
 	echo '<select id="developerDropdown" onchange="getUnassignClientDropdown()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
 	echo '<option value="">Select a Developer</option>';
 	foreach($Team->getDeveloperList() as $dev)
-		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
+		echo '<option value="' . $dev->getUsername() . '">' . $dev->getUsername() . '</option>';
 	echo '</select>';
 }
 
@@ -315,7 +315,7 @@ function developerDropDownJSassignClient($Team)
 	echo '<select id="developerDropdown" onchange="getAssignClientDropdown()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
 	echo '<option value="">Select a Developer</option>';
 	foreach($Team->getDeveloperList() as $dev)
-		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
+		echo '<option value="' . $dev->getUsername() . '">' . $dev->getUsername() . '</option>';
 	echo '</select>';
 }
 
@@ -324,7 +324,7 @@ function developerDropDownJSsubmit($Team)
 	echo '<select id="developerDropdown" onchange="submitForm()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
 	echo '<option value="">Select a Developer</option>';
 	foreach($Team->getDeveloperList() as $dev)
-		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
+		echo '<option value="' . $dev->getUsername() . '">' . $dev->getUsername() . '</option>';
 	echo '</select>';
 }
 
@@ -333,7 +333,7 @@ function developerDropDownJSenableButton($Team)
 	echo '<select id="developerDropdown" onchange="enableButton()" name="Developer_Selected" class="form-control select select-primary" data-toggle="select">';
 	echo '<option value="">Select a Developer</option>';
 	foreach($Team->getDeveloperList() as $dev)
-		echo '<option value="' . $dev->getUsername() . '">' . $dev->getContact()->getFirstName() . ' ' . $dev->getContact()->getLastName() . '</option>';
+		echo '<option value="' . $dev->getUsername() . '">' . $dev->getUsername() . '</option>';
 	echo '</select>';
 }
 
