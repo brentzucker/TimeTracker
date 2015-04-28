@@ -61,8 +61,8 @@ _END;
 function leftSidebar()
 {
 	echo '<!-- Sidebar -->';
-	echo '<div id="sidebar-wrapper">';
-	echo '<ul class="sidebar-nav">';
+	echo '<div id="sidebar-wrapper-left">';
+	echo '<ul class="sidebar-nav-left">';
 	echo '<li class="sidebar-brand">';
 	echo '<a href="home.php">';
  	echo $_SESSION['Developer']->getTeam();
@@ -141,7 +141,22 @@ function leftSidebar()
 
 	echo '</ul>';
 	echo '</div>';
-	echo '<!-- /#sidebar-wrapper -->';
+	echo '<!-- /#sidebar-wrapper-left -->';
+}	
+
+function rightSidebar()
+{
+	echo '<!-- Sidebar -->';
+	echo '<div id="sidebar-wrapper-left">';
+	echo '<ul class="sidebar-nav-left">';
+	echo '<li class="sidebar-brand">';
+	echo 'Right SideBar';
+	echo '</li>';
+
+ 	
+	echo '</ul>';
+	echo '</div>';
+	echo '<!-- /#sidebar-wrapper-left -->';
 }	
 
 //This function sets up the text in the sidebar and the dropdowns
