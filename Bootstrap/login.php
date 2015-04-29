@@ -25,6 +25,7 @@ if(isset($_POST['submit']))
 	{
 		open_login("Login");
 		getWrongLoginError();
+		echo '</div>';
 		close_login();
 	}
 }

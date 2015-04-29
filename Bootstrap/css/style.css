@@ -429,6 +429,10 @@ table {
 	margin-top: 25px;
 }
 
+.close span {
+	color: #a94442!important;
+}
+
 /*
 MEDIA QUERIES
 */
@@ -443,10 +447,52 @@ MEDIA QUERIES
 
 }
 
-@media only screean and (max-width: 768px) {
+@media only screen and (max-width: 1199px) {
+
+	.team-jumbo {
+		height: 1000px !important;
+	}
+	
+	.team-top {
+		margin-bottom: 100px!important;
+	}
+
+}
+
+@media only screen and (max-width: 860px) {
+
+	.tile-title {
+		font-size: 15px!important;
+	}
+	
+	.tile .btn-block {
+		width: 115%!important;
+	}
+	
+	.tile .btn {
+		font-size: 12px!important;
+	}
+	
+	.carousel {
+		display: none!important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
 
 	#page-content-wrapper {
 		position: relative!important;
 	}
 
+	.tile-title {
+		font-size: 15px!important;
+	}
+	
+	.tile .btn {
+		font-size: 12px!important;
+	}
+	
+	.tile .btn-block {
+		width: 115%!important;
+	}
 }	

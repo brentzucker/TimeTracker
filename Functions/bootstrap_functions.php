@@ -342,8 +342,8 @@ echo<<<_END
         <input type="password" name="password" class="form-control" required>
 		<br>
         <input type="submit" name="submit" value="Login" class="btn btn-block btn-lg btn-primary">
+		<br>
       </form>
-    </div>	
 _END;
 }
 
@@ -352,6 +352,11 @@ function close_login()
 {
 	echo<<<_END
   	</body>
+	<script src="dist/js/vendor/jquery.min.js"></script>
+	<script src="dist/js/flat-ui.min.js"></script>
+	<script src="docs/assets/js/application.js"></script>
+	<script src="../Javascript/dropdowns.js"></script>
+	<script src="js/jquery.js"></script>
 </html>
 _END;
 }

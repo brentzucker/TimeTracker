@@ -22,9 +22,9 @@ navigationBarHomePage('Home');
 
 echo '<main id="page-content-wrapper">'; 
 
-echo '<div class="col-sm-2"></div>'; //close centering div'; //centering
+echo '<div class="col-lg-1"></div>'; //close centering div'; //centering
 
-echo '<div class="col-sm-8 main-box">';
+echo '<div class="col-lg-10 main-box">';
 
 echo '<div class="jumbotron">';
 

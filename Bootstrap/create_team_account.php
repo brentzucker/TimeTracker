@@ -63,7 +63,7 @@ function formJoinTeam()
 	echo '<label>Team Code</label>';
 	echo '<input type="password" name="joinTeamCode" class="form-control">';
 	echo '<br>';
-	echo '<input type="submit" name="joinTeam" value="Join Team" class="btn btn-block btn-lg btn-primary">';
+	echo '<input type="submit" name="joinTeam" value="Join Team" class="btn btn-block btn-lg btn-primary team-top">';
 	echo '</form>';
 }
 
