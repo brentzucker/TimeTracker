@@ -23,7 +23,7 @@ echo '</div>';
 echo '<div class="col-lg-10 team-box">';
 echo '<div class="jumbotron team-jumbo">';
 echo '<h1 class="page-header">Create Account</h1>';
-//echo '<h4>Join ' . $_SESSION['Team'] . '</h4>';
+echo '<h4>Join ' . $_SESSION['Team'] . '</h4>';
 
 formCreateDeveloperAccount();
 close_html_no_sidebar();

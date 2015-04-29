@@ -17,14 +17,14 @@ if( isset($_POST['joinTeamName']) && isset($_POST['joinTeamCode']) )
 elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']))
 {
 	//check to see if team name is taken
-	if( count(returnRowByTeam($_POST['createTeamName'])) == 0 )
+	if(!isTeamNameTaken())
 	{
 		$hashed_team_code = hash('ripemd128', $_POST['createTeamCode']);
 		newTeam($_POST['createTeamName'], $hashed_team_code);
+		$_SESSION['Team'] = $_POST['createTeamName'];
 		header("Location:create_developer_account.php");
 	}
-	else
-		echo '<h6>Team Name Taken</h6>';
+		
 }
 
 navigationBarHomePage('Sign Up');
@@ -51,8 +51,6 @@ echo '</div>';
 
 close_html_no_sidebar();
 
-
-
 function formJoinTeam()
 {
 	echo '<h4>Join Team</h4>';
@@ -71,7 +69,10 @@ function formCreateTeam()
 {
 	echo '<h4>Create Team</h4>';
 	echo '<form action="" method="POST">';
-	echo '<label>Team Name</label>';
+	if(!isTeamNameTaken())
+		echo '<label>Team Name</label>';
+	else
+		echo '<label style="color:red;">Team Name Taken</label>';
 	echo '<input type="text" name="createTeamName" class="form-control">';
 	echo '<br>';
 	echo '<label>Team Code</label>';
@@ -80,5 +81,13 @@ function formCreateTeam()
 	echo '<input type="submit" name="createTeam" value="Create Team" class="btn btn-block btn-lg btn-primary">';
 	echo '</form>';
 	echo '</div>';
+}
+
+function isTeamNameTaken()
+{
+	if( count(returnRowByTeam($_POST['createTeamName'])) == 0 )
+		return false;
+	else
+		return true;
 }
 ?>
