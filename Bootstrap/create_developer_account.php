@@ -3,9 +3,6 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
-navigationBarHomePage('Create Account');
-open_html_no_sidebar("Create Account");
-
 //Verify the Username, Email, and Password are valid
 if( isset($_SESSION['Team']) && isset($_POST['position']) && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && verifyUsername($_POST['username']) && verifyEmail($_POST['email']) && verifyPassword($_POST['password']) )
 {
@@ -16,6 +13,8 @@ if( isset($_SESSION['Team']) && isset($_POST['position']) && isset($_POST['usern
 	header("Location:home.php");
 }
 
+navigationBarHomePage('Create Account');
+open_html_no_sidebar("Create Account");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-1">';

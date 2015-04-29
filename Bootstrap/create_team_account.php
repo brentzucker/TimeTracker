@@ -86,10 +86,14 @@ function formCreateTeam()
 
 function isTeamNameTaken()
 {
-	if( count(returnRowByTeam($_POST['createTeamName'])) == 0 )
+	if(isset($_POST['createTeamName']))
+	{
+		if(count(returnRowByTeam($_POST['createTeamName'])) == 0 )
 		return false;
 	else
 		return true;
+	}
+	return false;
 }
 
 function isTeamCodeCorrect()
