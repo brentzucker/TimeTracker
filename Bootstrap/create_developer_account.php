@@ -12,7 +12,7 @@ if( isset($_SESSION['Team']) && isset($_POST['position']) && isset($_POST['usern
 	$new_developer = new Developer( $_SESSION['Team'] , $_POST['username'], $_POST['email'], $_POST['position'], hash('ripemd128', $_POST['password']));
 	$_SESSION['Team'] = null;
 	$_SESSION['SuperUser'] = new SuperUser();
-	$_SESSION['Developer'] = new Developer($username);
+	$_SESSION['Developer'] = new Developer($_POST['username']);
 	header("Location:home.php");
 }
 
