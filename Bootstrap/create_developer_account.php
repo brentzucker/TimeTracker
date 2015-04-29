@@ -3,6 +3,9 @@ require_once(__DIR__.'/../include.php');
 
 session_start();
 
+navigationBarHomePage('Create Account');
+open_html_no_sidebar("Create Account");
+
 //Verify the Username, Email, and Password are valid
 if( isset($_SESSION['Team']) && isset($_POST['position']) && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && verifyUsername($_POST['username']) && verifyEmail($_POST['email']) && verifyPassword($_POST['password']) )
 {
@@ -14,9 +17,16 @@ if( isset($_SESSION['Team']) && isset($_POST['position']) && isset($_POST['usern
 }
 
 
-echo '<h4>Join ' . $_SESSION['Team'] . '</h4>';
+echo '<main id="page-content-wrapper">'; 
+echo '<div class="col-lg-1">';
+echo '</div>';
+echo '<div class="col-lg-10 team-box">';
+echo '<div class="jumbotron team-jumbo">';
+echo '<h1 class="page-header">Create Account</h1>';
+//echo '<h4>Join ' . $_SESSION['Team'] . '</h4>';
 
 formCreateDeveloperAccount();
+close_html_no_sidebar();
 
 function formCreateDeveloperAccount()
 {
