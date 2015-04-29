@@ -425,6 +425,7 @@ table {
 
 .navbar {
     height: auto!important;
+    border-radius: 0px!important;
 }
 
 .close span {
