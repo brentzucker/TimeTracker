@@ -27,8 +27,8 @@ elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']))
 		echo '<h6>Team Name Taken</h6>';
 }
 
-open_html_no_sidebar("Select A Team");
 navigationBarHomePage('Sign Up');
+open_html_no_sidebar("Select A Team");
 
 echo '<main id="page-content-wrapper">'; 
 echo '<div class="col-lg-1">';

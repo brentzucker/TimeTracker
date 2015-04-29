@@ -322,10 +322,11 @@ _END;
 
 	echo '</head>';
 	echo '<body>';
+	
+	navigationBarHomePage('Log In');
 	echo '<div id="page-content-wrapper">';
 	echo '<div class="container-fluid">';
 	
-	navigationBarHomePage('Log In');
 	
     echo '<main id="page-content-wrapper">'; 
 	echo '<div class="col-lg-1">';
