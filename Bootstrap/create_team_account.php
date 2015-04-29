@@ -6,13 +6,11 @@ session_start();
 if( isset($_POST['joinTeamName']) && isset($_POST['joinTeamCode']) )
 {
 	//check to see if credentials match
-	if( returnRowByTeam($_POST['joinTeamName'])['Password'] == hash('ripemd128', $_POST['joinTeamCode']) )
+	if( isTeamCodeCorrect() )
 	{
 		$_SESSION['Team'] = $_POST['joinTeamName'];
 		header("Location:create_developer_account.php");
 	}
-	else
-		echo 'Inccorrect code or Team does not exist.';
 }
 elseif( isset($_POST['createTeamName']) && isset($_POST['createTeamCode']))
 {
@@ -58,7 +56,10 @@ function formJoinTeam()
 	echo '<label>Team Name</label>';
 	echo '<input type="text" name="joinTeamName" class="form-control">';
 	echo '<br>';
-	echo '<label>Team Code</label>';
+	if(isTeamCodeCorrect())
+		echo '<label>Team Code</label>';
+	else
+		echo '<label style="color:red;">Invalid Team Code</label>';
 	echo '<input type="password" name="joinTeamCode" class="form-control">';
 	echo '<br>';
 	echo '<input type="submit" name="joinTeam" value="Join Team" class="btn btn-block btn-lg btn-primary team-top">';
@@ -89,5 +90,13 @@ function isTeamNameTaken()
 		return false;
 	else
 		return true;
+}
+
+function isTeamCodeCorrect()
+{
+	if( returnRowByTeam($_POST['joinTeamName'])['Password'] == hash('ripemd128', $_POST['joinTeamCode']) )
+		return true;
+	else
+		return false;
 }
 ?>
