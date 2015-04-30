@@ -14,7 +14,7 @@
  4/21/15-Updated dropdown functions and looks
  */
 
-require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../../include.php');
 
 //This function creates a form for a client and adds the purchased hours to the database
 function addHours()

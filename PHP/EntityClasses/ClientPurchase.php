@@ -15,7 +15,7 @@ Modification List:
 4/10/15-Developers set up
 */
 
-require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../../include.php');
 
 //creates an array with a client's purchase information
 class ClientPurchase

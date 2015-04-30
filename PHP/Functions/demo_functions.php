@@ -14,7 +14,7 @@
  4/21/15-Updated dropdowns, merge Flat UI
  */
 
-require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../../include.php');
 
 //This function echos the links on the home page
 function echoHomePageLinks()
@@ -922,7 +922,7 @@ function newTaskForm($developer)
 
 function formExportToExcel($client, $report, $startdate, $enddate)
 {
-	echo '<div class="col-sm-8"></div>';
+	echo '<div class="col-sm-4"></div>';
 	echo '<form action="" method="POST" class="col-sm-4 excel">';
 	echo '<input type="submit" name="toExcel" value="Export to Excel" class="btn btn-info btn-xs">';
 	echo '<input type="hidden" name="selected" value="' . $client . '">';

@@ -16,27 +16,27 @@ Modification List:
 */
 
 //Database Connection
-require_once (__DIR__.'/login_config.php');
+require_once (__DIR__.'/PHP/login_config.php');
 
 //Control Class
-require_once (__DIR__.'/ControlClass/Database.php');
+require_once (__DIR__.'/PHP/ControlClass/Database.php');
 
 //Entity Classes
-require_once (__DIR__.'/EntityClasses/Client.php');
-require_once (__DIR__.'/EntityClasses/ClientContact.php');
-require_once (__DIR__.'/EntityClasses/ClientPurchase.php');
-require_once (__DIR__.'/EntityClasses/Contact.php');
-require_once (__DIR__.'/EntityClasses/Developer.php');
-require_once (__DIR__.'/EntityClasses/Projects.php');
-require_once (__DIR__.'/EntityClasses/Tasks.php');
-require_once (__DIR__.'/EntityClasses/Time.php');
-require_once (__DIR__.'/EntityClasses/SuperUser.php');
-require_once (__DIR__.'/EntityClasses/Team.php');
+require_once (__DIR__.'/PHP/EntityClasses/Client.php');
+require_once (__DIR__.'/PHP/EntityClasses/ClientContact.php');
+require_once (__DIR__.'/PHP/EntityClasses/ClientPurchase.php');
+require_once (__DIR__.'/PHP/EntityClasses/Contact.php');
+require_once (__DIR__.'/PHP/EntityClasses/Developer.php');
+require_once (__DIR__.'/PHP/EntityClasses/Projects.php');
+require_once (__DIR__.'/PHP/EntityClasses/Tasks.php');
+require_once (__DIR__.'/PHP/EntityClasses/Time.php');
+require_once (__DIR__.'/PHP/EntityClasses/SuperUser.php');
+require_once (__DIR__.'/PHP/EntityClasses/Team.php');
 
 //Functions Folder
-require_once (__DIR__.'/Functions/page_functions.php');
-require_once (__DIR__.'/Functions/javascript_functions.php');
-require_once (__DIR__.'/Functions/demo_functions.php');
-require_once (__DIR__.'/Functions/bootstrap_functions.php');
-require_once (__DIR__.'/Functions/table_functions.php');
+require_once (__DIR__.'/PHP/Functions/page_functions.php');
+require_once (__DIR__.'/PHP/Functions/javascript_functions.php');
+require_once (__DIR__.'/PHP/Functions/demo_functions.php');
+require_once (__DIR__.'/PHP/Functions/bootstrap_functions.php');
+require_once (__DIR__.'/PHP/Functions/table_functions.php');
 ?>

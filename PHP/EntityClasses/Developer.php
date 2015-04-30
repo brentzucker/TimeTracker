@@ -18,7 +18,7 @@ Modification List:
 4/15/15-Warnings for developers set up
 */
 
-require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../../include.php');
 
 //creates an array with the developer's work informationa
 class Developer

@@ -14,7 +14,7 @@
  4/21/15-Updated dropdowns, added classes to buttons and dropdowns
  */
 
-require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../../include.php');
 //PHP functions in this folder call javascript functions 
 
 /* Developer

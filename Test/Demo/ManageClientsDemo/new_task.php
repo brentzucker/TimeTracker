@@ -5,6 +5,6 @@ session_start();
 
 echo '<h1>New Task</h1>';
 
-newTaskForm("new", $_SESSION['Developer']);
+newTaskForm($_SESSION['Developer']);
 
 ?>

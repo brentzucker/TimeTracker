@@ -14,7 +14,7 @@
  4/21/15-Edit functions, merge Flat UI
  */
 
-require_once (__DIR__.'/../include.php');
+require_once (__DIR__.'/../../include.php');
 
 //This function sets up the text in the sidebar and the dropdowns
 function open_html($title)

@@ -13,10 +13,9 @@ Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories 
 4/10/15-Developers set up
-4/14/15-Can now edit the timelog out
 */
 
-require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../../include.php');
 
 class Time
 {

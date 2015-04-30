@@ -13,7 +13,7 @@ Modification List:
 4/9/15-Initial code up 
 */
 
-require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../../include.php');
 
 class SuperUser
 {

@@ -21,7 +21,7 @@ Modification List:
 4/17/15-UnassignClient updated, new function: deleteClient
 */
 
-require_once(__DIR__.'/../include.php');
+require_once(__DIR__.'/../../include.php');
 
 //Sets Default timezone.
 date_default_timezone_set('America/New_York');
