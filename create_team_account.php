@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__.'/include.php');
-=======
 /*
  Name: create_team_account.php
  Description: lets the user create a team others can join or join a premade one
