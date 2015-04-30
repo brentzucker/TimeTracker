@@ -127,7 +127,6 @@ function leftSidebar()
 	echo '<li><a href="update_email.php">Update Email</a></li>';
 	echo '<li><a href="update_password.php">Update Password</a></li>';
 	echo '<li><a href="update_alerts.php">Update Alerts</a></li>';
-	echo '<li><a href="delete_account.php">Delete Account</a></li>';
 	echo '</ul>';
 	echo '</li>';
 
