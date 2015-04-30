@@ -1,4 +1,19 @@
 <?php
+/*
+ Name: create_developer_account.php
+ Description: lets the user join a team by creating an account
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/27/15, 5/1/15)
+ Names of files accessed: include.php
+ Names of files changed:
+ Input: username(string), email(string), password (string)
+ Output: form and text
+ Error Handling: checks to make sure that the username is not taken, the email address is valid, and that the password is at least 5 characters
+ Modification List:
+ 4/27/15-Initial code up
+ 4/29/15-Styled page, error checking for username, email, and password
+ */
+
 require_once(__DIR__.'/../include.php');
 
 session_start();

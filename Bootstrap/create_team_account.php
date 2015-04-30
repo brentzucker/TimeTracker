@@ -1,4 +1,20 @@
 <?php
+/*
+ Name: create_team_account.php
+ Description: lets the user create a team others can join or join a premade one
+ Programmers: Ryan Graessle, Brent Zucker
+ Dates: (4/27/15, 5/1/15)
+ Names of files accessed: include.php
+ Names of files changed:
+ Input: team name(string), team code(string)
+ Output: form and text
+ Error Handling: checks to mae sure that the team name and code is correct or that the team name is not taken
+ Modification List:
+ 4/27/15-Initial code up
+ 4/28/15-Fixed iPad style
+ 4/29/15-Styled page, error checking
+ */
+
 require_once(__DIR__.'/../include.php');
 
 session_start();

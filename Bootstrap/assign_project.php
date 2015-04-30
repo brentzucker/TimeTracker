@@ -12,6 +12,9 @@
  Modification List:
  4/18/15-Initial code up
  4/19/15-Migrated manage developers pages
+ 4/21/15-New dropdowns
+ 4/26/15-Made jumbotron
+ 4/28/15-Removed alert box
  */
 
 require_once(__DIR__.'/../include.php');
