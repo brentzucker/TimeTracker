@@ -17,12 +17,8 @@
  4/26/15-Made jumbotron
  4/28/15-Removed alert box
  */
-<<<<<<< HEAD:create_developer.php
-require_once(__DIR__.'/include.php');
-=======
 
-require_once(__DIR__.'/../include.php');
->>>>>>> origin/master:Bootstrap/create_developer.php
+require_once(__DIR__.'/include.php');
 
 session_start();
 

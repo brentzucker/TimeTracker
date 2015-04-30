@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD:create_developer_account.php
 require_once(__DIR__.'/include.php');
 =======
 /*
@@ -16,9 +15,6 @@ require_once(__DIR__.'/include.php');
  4/27/15-Initial code up
  4/29/15-Styled page, error checking for username, email, and password
  */
-
-require_once(__DIR__.'/../include.php');
->>>>>>> origin/master:Bootstrap/create_developer_account.php
 
 session_start();
 

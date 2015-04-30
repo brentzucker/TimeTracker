@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD:create_team_account.php
 require_once(__DIR__.'/include.php');
 =======
 /*
@@ -17,9 +16,6 @@ require_once(__DIR__.'/include.php');
  4/28/15-Fixed iPad style
  4/29/15-Styled page, error checking
  */
-
-require_once(__DIR__.'/../include.php');
->>>>>>> origin/master:Bootstrap/create_team_account.php
 
 session_start();
 
