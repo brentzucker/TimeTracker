@@ -499,3 +499,36 @@ MEDIA QUERIES
 		width: 115%!important;
 	}
 }	
+
+@media only screen and (max-width: 360px) {
+
+	#page-content-wrapper {
+    	position: relative!important;
+	}
+	
+	.main-box {
+    	margin: 0 auto;
+    	right: 25%;
+    	text-align: center;
+    	width: 150%;
+	}
+	
+	.tile .btn-block {
+    	width: 100% !important;
+	}
+	
+	.team-box {
+    	right: 25%;
+    	width: 150%;
+	}
+	
+	.form-control {
+    	margin: 0 auto;
+    	width: 100% !important;
+	}
+	
+	input.btn-block[type="button"], input.btn-block[type="reset"], input.btn-block[type="submit"] {
+    	width: 100%!important;
+	}
+
+}
