@@ -42,7 +42,7 @@ echo '<div class="col-sm-4">';
 echo '<div class="tile">';
 echo '<h3 class="tile-title">Login</h3>';
 echo '<a href="login.php">';
-echo '<img class="tile-image big-illustration" src="img/icons/svg/clocks.svg" alt="Watches">';
+echo '<img class="tile-image big-illustration" src="Bootstrap/img/icons/svg/clocks.svg" alt="Watches">';
 echo '<button class="btn btn-block btn-primary">Login</button>';
 echo '</a>';
 echo '</div>'; //close tile
@@ -53,7 +53,7 @@ echo '<div class="col-sm-4">';
 echo '<div class="tile">';
 echo '<h3 class="tile-title">Create Account</h3>';
 echo '<a href="create_team_account.php">';
-echo '<img class="tile-image big-illustration" src="img/icons/svg/clipboard.svg" alt="Clipboard">';
+echo '<img class="tile-image big-illustration" src="Bootstrap/img/icons/svg/clipboard.svg" alt="Clipboard">';
 echo '<button class="btn btn-block btn-primary">Create Account</button>';
 echo '</a>';
 echo '</div>'; //close tile
@@ -64,7 +64,7 @@ echo '<div class="col-sm-4">';
 echo '<div class="tile">';
 echo '<h3 class="tile-title">About Us</h3>';
 echo '<a href="aboutus.php">';
-echo '<img class="tile-image big-illustration" src="img/icons/svg/map.svg" alt="Map">';
+echo '<img class="tile-image big-illustration" src="Bootstrap/img/icons/svg/map.svg" alt="Map">';
 echo '<button class="btn btn-block btn-primary">About Us</button>';
 echo '</a>';
 echo '</div>'; //close tile
@@ -97,19 +97,19 @@ function imageCarousel()
     <div style="border-radius:5px;" class="carousel-inner" role="listbox">
 
       <div class="item active" style="border-radius:5px;">
-        <img src="img/screenshots/ClockIn.png" alt="Clock In" width="100%" class="img-rounded img-center">
+        <img src="Bootstrap/img/screenshots/ClockIn.png" alt="Clock In" width="100%" class="img-rounded img-center">
         <div class="carousel-caption">
         </div>
       </div>
 
       <div class="item">
-        <img src="img/screenshots/ViewReports.png" alt="View Reports" width="100%" class="img-rounded img-center">
+        <img src="Bootstrap/img/screenshots/ViewReports.png" alt="View Reports" width="100%" class="img-rounded img-center">
         <div class="carousel-caption">
         </div>
       </div>
     
       <div class="item">
-        <img src="img/screenshots/AssignTask.png" alt="Assign Tasks" width="100%" class="img-rounded img-center">
+        <img src="Bootstrap/img/screenshots/AssignTask.png" alt="Assign Tasks" width="100%" class="img-rounded img-center">
         <div class="carousel-caption">
         </div>
       </div>
