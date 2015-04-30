@@ -3,7 +3,7 @@
 Name: add_hours.php
 Description: calls addHours function to add hours to a client 
 Programmers: Ryan Graessle, Brent Zucker
-Dates: (4/18/15, 
+Dates: (4/18/15, 5/1/15)
 Names of files accessed: include.php
 Names of files changed:
 Input: client (dropdown), number of hours (int), date of purchase (date)
@@ -12,6 +12,9 @@ Error Handling:
 Modification List:
 4/18/15-Initial code up 
 4/19/15-Migrated manage client pages
+4/21/15-Finished styling pages
+4/26/15-Made jumbotron
+4/28/15-Updated pages widths, removed alert box
 */
 
 require_once(__DIR__.'/include.php');

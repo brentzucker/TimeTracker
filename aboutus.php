@@ -1,17 +1,19 @@
 <?php
 /*
- Name: index.php
- Description: if login is correct to to page or load error
- Programmers: Ryan Graessle, Brent Zucker
- Dates: (4/18/15,
+ Name: aboutus.php
+ Description: the about us page tells users about TimeTracker
+ Programmers: Brent Zucker, Ryan Graessle, Tyler Land
+ Dates: (4/27/15, 5/1/15)
  Names of files accessed: include.php
  Names of files changed:
  Input:
- Output: error message (if login information is incorrect)
- Error Handling: if the user informaltion is incorrect load the error message
+ Output: text
+ Error Handling:
  Modification List:
- 4/18/15-Initial code up
- 4/19/15-Starts session
+ 4/27/15-Initial code up
+ 4/28/15-Fixed iPad style
+ 4/29/15-Menu bar styed
+ 4/30/15-Added text to the about page
  */
 
 require_once(__DIR__.'/include.php');

@@ -3,7 +3,7 @@
  Name: assign_task.php
  Description: calls assignTask function to assign a task to a developer
  Programmers: Ryan Graessle, Brent Zucker
- Dates: (4/18/15,
+ Dates: (4/18/15, 5/1/15)
  Names of files accessed: include.php
  Names of files changed:
  Input: developer (dropdown), client (dropdown), project (dropdown), task (dropdown)
@@ -12,6 +12,9 @@
  Modification List:
  4/18/15-Initial code up
  4/19/15-Migrated manage developers pages
+ 4/21/15-New dropdowns
+ 4/26/15-Made jumbotron
+ 4/28/15-Removed alert box
  */
 
 require_once(__DIR__.'/include.php');

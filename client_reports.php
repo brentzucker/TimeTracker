@@ -3,7 +3,7 @@
  Name: client_reports.php
  Description: shows the report for a certain client for user-picked dates
  Programmers: Ryan Graessle, Brent Zucker
- Dates: (4/18/15,
+ Dates: (4/18/15, 5/1/15)
  Names of files accessed: include.php
  Names of files changed:
  Input: client (dropdown), start date (date), end date (date)
@@ -13,6 +13,10 @@
  4/18/15-Initial code up
  4/19/15-Migrated reports
  4/20/15-Updated button style/updated purchased hours
+ 4/21/15-Marging Flat UI
+ 4/25/15-Added jumbotron
+ 4/26/15-Can export to Excel
+ 4/28/15-Removed alert box
 */
 
 require_once(__DIR__.'/include.php');

@@ -3,7 +3,7 @@
  Name: clock.php
  Description: the user clock in/out and shows the user their time log for that task
  Programmers: Ryan Graessle, Brent Zucker
- Dates: (4/18/15,
+ Dates: (4/18/15, 5/1/15)
  Names of files accessed: include.php
  Names of files changed:
  Input: client (dropdown), project (dropdown), task (dropdown)
@@ -13,6 +13,9 @@
  4/18/15-Initial code up
  4/19/15-Migrated reports
  4/20/15-Updated button style
+ 4/21/15-Setup clock
+ 4/24/15-Styled clock page
+ 4/28/15-Removed alert box
  */
 
 require_once(__DIR__.'/include.php');
