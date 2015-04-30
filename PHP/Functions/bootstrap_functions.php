@@ -38,12 +38,12 @@ function open_html($title)
     	<title>$title</title>
 _END;
 
-	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
-	echo '<link href="css/style.css" rel="stylesheet">';
-	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
-	echo '<link href="css/simple-sidebar.css" rel="stylesheet">';
-	echo '<link href="dist/css/flat-ui.css" rel="stylesheet">';
-    echo '<link href="docs/assets/css/demo.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/style.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/simple-sidebar.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/dist/css/flat-ui.css" rel="stylesheet">';
+    echo '<link href="Bootstrap/docs/assets/css/demo.css" rel="stylesheet">';
 
 	echo '</head>';
 
@@ -185,12 +185,12 @@ function open_html_no_sidebar($title)
     	<title>$title</title>
 _END;
 
-	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
-	echo '<link href="css/style.css" rel="stylesheet">';
-	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
-	echo '<link href="css/simple-sidebar.css" rel="stylesheet">';
-	echo '<link href="dist/css/flat-ui.css" rel="stylesheet">';
-    echo '<link href="docs/assets/css/demo.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/style.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/simple-sidebar.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/dist/css/flat-ui.css" rel="stylesheet">';
+    echo '<link href="Bootstrap/docs/assets/css/demo.css" rel="stylesheet">';
 
 	echo '</head>';
 	echo '<body>';
@@ -205,11 +205,11 @@ function close_html()
 			</div>
 			</div>
 		</div>
-			<script src="dist/js/vendor/jquery.min.js"></script>
-			<script src="dist/js/flat-ui.min.js"></script>
-			<script src="docs/assets/js/application.js"></script>
-			<script src="../Javascript/dropdowns.js"></script>
-			<script src="js/jquery.js"></script>
+			<script src="Bootstrap/dist/js/vendor/jquery.min.js"></script>
+			<script src="Bootstrap/dist/js/flat-ui.min.js"></script>
+			<script src="Bootstrap/docs/assets/js/application.js"></script>
+			<script src="Javascript/dropdowns.js"></script>
+			<script src="Bootstrap/js/jquery.js"></script>
 			<script>
 				$("#menu-toggle-left").click(function(e) {
 					e.preventDefault();
@@ -230,11 +230,11 @@ function close_html_no_sidebar()
 	echo<<<_END
 	</div>
 	</div>
-	<script src="dist/js/vendor/jquery.min.js"></script>
-			<script src="dist/js/flat-ui.min.js"></script>
-			<script src="docs/assets/js/application.js"></script>
-			<script src="../Javascript/dropdowns.js"></script>
-			<script src="js/jquery.js"></script>
+	<script src="Bootstrap/dist/js/vendor/jquery.min.js"></script>
+			<script src="Bootstrap/dist/js/flat-ui.min.js"></script>
+			<script src="Bootstrap/docs/assets/js/application.js"></script>
+			<script src="Javascript/dropdowns.js"></script>
+			<script src="Bootstrap/js/jquery.js"></script>
 		</body>
 	</html>
 _END;
@@ -312,12 +312,12 @@ echo<<<_END
 _END;
 
 
-	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
-	echo '<link href="css/style.css" rel="stylesheet">';
-	echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
-	echo '<link href="css/simple-sidebar.css" rel="stylesheet">';
-	echo '<link href="dist/css/flat-ui.css" rel="stylesheet">';
-    echo '<link href="docs/assets/css/demo.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/style.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/css/simple-sidebar.css" rel="stylesheet">';
+	echo '<link href="Bootstrap/dist/css/flat-ui.css" rel="stylesheet">';
+    echo '<link href="Bootstrap/docs/assets/css/demo.css" rel="stylesheet">';
 
 	echo '</head>';
 	echo '<body>';
@@ -352,11 +352,11 @@ function close_login()
 {
 	echo<<<_END
   	</body>
-	<script src="dist/js/vendor/jquery.min.js"></script>
-	<script src="dist/js/flat-ui.min.js"></script>
-	<script src="docs/assets/js/application.js"></script>
-	<script src="../Javascript/dropdowns.js"></script>
-	<script src="js/jquery.js"></script>
+	<script src="Bootstrap/dist/js/vendor/jquery.min.js"></script>
+	<script src="Bootstrap/dist/js/flat-ui.min.js"></script>
+	<script src="Bootstrap/docs/assets/js/application.js"></script>
+	<script src="Javascript/dropdowns.js"></script>
+	<script src="Bootstrap/js/jquery.js"></script>
 </html>
 _END;
 }
