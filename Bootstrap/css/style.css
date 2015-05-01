@@ -507,10 +507,10 @@ MEDIA QUERIES
 	}
 	
 	.main-box {
-    	margin: 0 auto;
-    	right: 25%;
-    	text-align: center;
-    	width: 150%;
+    	margin: 0 auto!important;
+    	right: 25%!important;
+    	text-align: center!important;
+    	width: 150%!important;
 	}
 	
 	.tile .btn-block {
@@ -518,8 +518,8 @@ MEDIA QUERIES
 	}
 	
 	.team-box {
-    	right: 25%;
-    	width: 150%;
+    	right: 25%!important;
+    	width: 150%!important;
 	}
 	
 	.form-control {
