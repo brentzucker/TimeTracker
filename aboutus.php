@@ -30,20 +30,20 @@ echo '<div class="col-lg-10 main-box">';
 echo '<div class="jumbotron">';
 
 echo '<h1 class="page-header">About Time Tracker</h1>';
-echo '<p>TimeTracker is a web application made for businesses to keep track of their developers, clients and projects they are working on.';
+echo '<p align="left">TimeTracker is a web application made for businesses to keep track of their developers, clients and projects they are working on.';
 
-echo '<h3>Clock In/Clock Out</h1>';
-echo '<p>TimeTracker&prime;s main feature allows you as a developer to keep track of the amount of time that you spend on a certain project.</p>';
+echo '<h3 align="left"><span class="left-bar-glyph fui-time"></span> Clock In/Clock Out</h3>';
+echo '<p align="left">TimeTracker&prime;s main feature allows you as a developer to keep track of the amount of time that you spend on a certain project.</p>';
 
-echo '<h3>Make Reports</h1>';
-echo '<p>TimeTracker allows you to build reports from time sheets. You can also choose which type of reports ranging from developer to task reports.</p>';
+echo '<h3 align="left"><span class="left-bar-glyph fui-document"></span>Make Reports</h3>';
+echo '<p align="left">TimeTracker allows you to build reports from time sheets. You can also choose which type of reports ranging from developer to task reports.</p>';
 
-echo '<h3>Manage Clients and Tasks</h1>';
-echo '<p>As a developer, you can add, edit or delete your clients, projects and tasks. You can also add hours to a client.</p>';
+echo '<h3 align="left"><span class="left-bar-glyph fui-user"></span>Manage Clients and Tasks</h3>';
+echo '<p align="left">As a developer, you can add, edit or delete your clients, projects and tasks. You can also add hours to a client.</p>';
 
-echo '<h3>Account Customization</h1>';
-echo '<p>TimeTracker allows you to customize your account. You can edit your profile infomation that includes your contact information.
-You can update your email, password and alert settings. You can also delete your account as you wish.</p>';
+echo '<h3 align="left"><span class="left-bar-glyph fui-lock"></span>Account Customization</h3>';
+echo '<p align="left">TimeTracker allows you to customize your account. You can edit your profile infomation that includes your contact information.
+You can update your email, password and alert settings.</p>';
 
 echo '</div>'; //close jumbotron
 
