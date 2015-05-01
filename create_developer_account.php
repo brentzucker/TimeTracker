@@ -1,9 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
-require_once(__DIR__.'/include.php');
-
->>>>>>> origin/master
 /*
  Name: create_developer_account.php
  Description: lets the user join a team by creating an account
