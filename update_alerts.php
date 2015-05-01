@@ -1,4 +1,18 @@
 <?php
+/*
+ Name: update_alerts.php
+ Description: alerts show when a client's contract is ending and how many hours they have on their contract
+ Programmers: Brent Zucker
+ Dates: (4/30/15, 5/1/15)
+ Names of files accessed: include.php
+ Names of files changed:
+ Input:
+ Output: text showing the hours and days until the contract is up
+ Error Handling:
+ Modification List:
+ 4/30/15-Moved file to main folder, fixed css/js links
+ */
+
 require_once(__DIR__.'/include.php');
 
 session_start();

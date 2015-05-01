@@ -1,4 +1,18 @@
 <?php
+/*
+ Name: unassign_client.php
+ Description: a client can be unassigned from a developer
+ Programmers: Brent Zucker
+ Dates: (4/30/15, 5/1/15)
+ Names of files accessed: include.php
+ Names of files changed:
+ Input: developer(dropdown), client(dropdown)
+ Output: text saying the client was unassigned
+ Error Handling:
+ Modification List:
+ 4/30/15-Moved file to main folder, fixed css/js links
+ */
+
 require_once(__DIR__.'/include.php');
 
 session_start();

@@ -3,7 +3,7 @@
  Name: new_task.php
  Description: creates a new task based off the user-entered information
  Programmers: Ryan Graessle, Brent Zucker
- Dates: (4/18/15,
+ Dates: (4/18/15, 5/1/15)
  Names of files accessed: include.php
  Names of files changed:
  Input: client (dropdown), project (downdown), task name (string), description (string)
@@ -12,6 +12,7 @@
  Modification List:
  4/18/15-Initial code up
  4/19/15-Migrated client reports
+ 4/30/15-Moved file to main folder, fixed css/js links
  */
 
 require_once(__DIR__.'/include.php');
