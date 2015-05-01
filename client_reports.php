@@ -17,6 +17,7 @@
  4/25/15-Added jumbotron
  4/26/15-Can export to Excel
  4/28/15-Removed alert box
+ 4/30/15-Moved file to main folder, fixed css/js links
 */
 
 require_once(__DIR__.'/include.php');

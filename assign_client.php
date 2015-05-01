@@ -15,6 +15,7 @@
  4/21/15-New dropdowns
  4/26/15-Made jumbotron
  4/28/15-Removed alert box
+ 4/30/15-Moved file to main folder, fixed css/js links
  */
 
 require_once(__DIR__.'/include.php');

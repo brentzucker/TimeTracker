@@ -7,13 +7,14 @@
  Names of files accessed: include.php
  Names of files changed:
  Input:
- Output: text
+ Output: text about TimeTracker
  Error Handling:
  Modification List:
  4/27/15-Initial code up
  4/28/15-Fixed iPad style
  4/29/15-Menu bar styed
  4/30/15-Added text to the about page
+ 4/30/15-Moved file to main folder, fixed css/js links
  */
 
 require_once(__DIR__.'/include.php');

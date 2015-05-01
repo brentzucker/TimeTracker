@@ -16,6 +16,7 @@
  4/21/15-Setup clock
  4/24/15-Styled clock page
  4/28/15-Removed alert box
+ 4/30/15-Moved file to main folder, fixed css/js links
  */
 
 require_once(__DIR__.'/include.php');

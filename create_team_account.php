@@ -14,6 +14,7 @@ require_once(__DIR__.'/include.php');
  4/27/15-Initial code up
  4/28/15-Fixed iPad style
  4/29/15-Styled page, error checking
+ 4/30/15-Moved file to main folder, fixed css/js links
  */
 
 session_start();

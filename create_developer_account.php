@@ -1,6 +1,4 @@
 <?php
-require_once(__DIR__.'/include.php');
-=======
 /*
  Name: create_developer_account.php
  Description: lets the user join a team by creating an account
@@ -9,13 +7,15 @@ require_once(__DIR__.'/include.php');
  Names of files accessed: include.php
  Names of files changed:
  Input: username(string), email(string), password (string)
- Output: form and text
+ Output: text and form for developer
  Error Handling: checks to make sure that the username is not taken, the email address is valid, and that the password is at least 5 characters
  Modification List:
  4/27/15-Initial code up
  4/29/15-Styled page, error checking for username, email, and password
+ 4/30/15-Moved file to main folder, fixed css/js links
  */
 
+require_once(__DIR__.'/include.php');
 session_start();
 
 //Verify the Username, Email, and Password are valid

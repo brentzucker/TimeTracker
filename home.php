@@ -3,7 +3,7 @@
  Name: home.php
  Description: home page for the web application with alerts
  Programmers: Ryan Graessle, Brent Zucker
- Dates: (4/18/15,
+ Dates: (4/18/15, 5/1/15)
  Names of files accessed: include.php
  Names of files changed:
  Input:
@@ -13,6 +13,7 @@
  4/18/15-Initial code up
  4/19/15-Shows last login time
  4/20/15-Created footer function
+ 4/30/15-Moved file to main folder, fixed css/js links
  */
 
 require_once(__DIR__.'/include.php');

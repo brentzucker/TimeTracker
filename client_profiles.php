@@ -7,13 +7,14 @@
  Names of files accessed: include.php
  Names of files changed:
  Input: client (dropdown)
- Output: form showing the client's information
+ Output: table showing the client's information
  Error Handling:
  Modification List:
  4/20/15-Initial code up
  4/21/15-Finished styling
  4/26/15-Reports can be exported to Excel
  4/28/15-Removed alert box
+ 4/30/15-Moved file to main folder, fixed css/js links
  */
 
 require_once(__DIR__.'/include.php');
