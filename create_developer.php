@@ -16,7 +16,7 @@
  4/22/15-Fixed bugs
  4/26/15-Made jumbotron
  4/28/15-Removed alert box
- 4/30/15-Moved file to main folder, fixed css/js links
+ 4/30/15-Moved file to the main folder, fixed css/js links
  */
 
 require_once(__DIR__.'/include.php');
