@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__.'/include.php');
-=======
+
 /*
  Name: create_developer_account.php
  Description: lets the user join a team by creating an account
