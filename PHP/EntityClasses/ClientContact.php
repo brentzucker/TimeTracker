@@ -13,6 +13,7 @@ Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories
 4/10/15-Developers set up
+4/30/15-Moved file to PHP folder, fixed include links
 */
 
 require_once(__DIR__.'/../../include.php');

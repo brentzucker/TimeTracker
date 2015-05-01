@@ -3,7 +3,7 @@
  Name: functions.php
  Description: sets up the labels, looks, etc of the webpage
  Programmers: Ryan Graessle, Brent Zucker
- Dates: (4/20/15,
+ Dates: (4/20/15, 5/1/15)
  Names of files accessed: include.php
  Names of files changed:
  Input:
@@ -12,6 +12,7 @@
  Modification List:
  4/20/15-Initial code up
  4/21/15-Updated dropdowns, merge Flat UI
+ 4/30/15-Moved file to PHP folder, fixed include links
  */
 
 require_once(__DIR__.'/../../include.php');

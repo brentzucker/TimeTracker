@@ -3,7 +3,7 @@
 Name: Database.php
 Description: functions for the whole application, including SQL statements, database queries, and simplifying large functions
 Programmers: Brent Zucker, Ryan Graessle, Johnathan Self 
-Dates: (3/10/15,
+Dates: (3/10/15, 5/1/15)
 Names of files accessed: include.php
 Names of files changed:
 Input:
@@ -19,6 +19,7 @@ Modification List:
 4/15/15-Edit client functions updated, created DeveloperAlerts table
 4/16/15-Team class created and TeamAssignments rely on DeveloperAssignments
 4/17/15-UnassignClient updated, new function: deleteClient
+4/30/15-Moved file to PHP folder, fixed include linkes
 */
 
 require_once(__DIR__.'/../../include.php');

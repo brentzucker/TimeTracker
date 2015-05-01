@@ -3,7 +3,7 @@
 Name: SuperUser.php
 Description: returns all of the teams, developers, clients, projects, and tasks in the database
 Programmers: Brent Zucker
-Dates: (4/9/15, 
+Dates: (4/9/15, 5/1/15)
 Names of files accessed: include.php
 Names of files changed:
 Input: 
@@ -11,6 +11,7 @@ Output:
 Error Handling:
 Modification List:
 4/9/15-Initial code up 
+4/30/15-Moved file to PHP folder, fixed include links
 */
 
 require_once(__DIR__.'/../../include.php');

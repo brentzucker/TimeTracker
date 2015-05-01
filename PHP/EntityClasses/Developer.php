@@ -3,7 +3,7 @@
 Name: Developer.php
 Description: sets up the an array with the developer's work information as well as how to handle the clock in/out functions
 Programmers: Brent Zucker
-Dates: (3/10/15,
+Dates: (3/10/15, 5/1/15)
 Names of files accessed: include.php
 Names of files changed:
 Input:
@@ -16,6 +16,7 @@ Modification List:
 4/6/15-Assign client/task
 4/10/15-Developers set up
 4/15/15-Warnings for developers set up
+4/30/15-Moved file to PHP folder, fixed include links
 */
 
 require_once(__DIR__.'/../../include.php');

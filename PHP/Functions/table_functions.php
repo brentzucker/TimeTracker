@@ -1,4 +1,18 @@
 <?php
+/*
+ Name: table_functions.php
+ Description: set up the tables and queries usd around the site
+ Programmers: Brent Zucker
+ Dates: (4/30/15, 5/1/15)
+ Names of files accessed: include.php
+ Names of files changed:
+ Input:
+ Output:
+ Error Handling:
+ Modification List:
+ 4/30/15-Moved file to PHP folder, fixed include links
+ */
+
 require_once(__DIR__.'/../../include.php');
 
 /* Print table functions

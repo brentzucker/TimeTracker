@@ -3,7 +3,7 @@
 Name: Client.php
 Description: sets up the data for the Client class, with get/set methods to access data
 Programmers: Brent Zucker
-Dates: (3/10/15, 
+Dates: (3/10/15, 5/1/15)
 Names of files accessed: include.php
 Names of files changed:
 Input: 
@@ -13,6 +13,7 @@ Modification List:
 3/10/15-Initial code up 
 3/12/15-Updated path directories 
 4/10/15-Developers set up
+4/30/15-Moved file to PHP folder, fixed include links
 */
 
 require_once(__DIR__.'/../../include.php');

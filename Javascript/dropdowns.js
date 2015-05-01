@@ -1,3 +1,18 @@
+/*
+ Name: dropdow.js
+ Description: makes the dropdowns and add their connectivity
+ Programmers: Brent Zucker
+ Dates: (4/20/15, 5/1/15)
+ Names of files accessed:
+ Names of files changed:
+ Input: 
+ Output: disables dropdown if the assignment before it is not available
+ Error Handling:
+ Modification List:
+ 4/20/15-Initial code up
+ 4/21/15-Bug fixes
+ 4/24/15-New project from JS updated
+ */
 
 /* Developer
  *
