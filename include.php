@@ -36,7 +36,7 @@ require_once (__DIR__.'/PHP/EntityClasses/Team.php');
 //Functions Folder
 require_once (__DIR__.'/PHP/Functions/page_functions.php');
 require_once (__DIR__.'/PHP/Functions/javascript_functions.php');
-require_once (__DIR__.'/PHP/Functions/demo_functions.php');
+require_once (__DIR__.'/PHP/Functions/functions.php');
 require_once (__DIR__.'/PHP/Functions/bootstrap_functions.php');
 require_once (__DIR__.'/PHP/Functions/table_functions.php');
 ?>
